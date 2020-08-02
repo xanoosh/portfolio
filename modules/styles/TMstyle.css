@@ -11,6 +11,7 @@ body {
     text-transform: uppercase;
     text-align: center;
     font-size: 80px; 
+    min-width: 891px;
   }
   h1.title::first-line{
       font-size: 70px;
