@@ -1,0 +1,92 @@
+@font-face{
+    font-family: 'Prototype';
+    src: url('../font/Prototype.ttf');
+}
+
+body {
+    font-family: 'Prototype', Fallback, sans-serif;
+  }
+
+  h1.title{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 80px; 
+  }
+  h1.title::first-line{
+      font-size: 70px;
+  }
+
+  #whole-mars, #mapContainer{
+      min-width: 891px;
+      margin: 0 auto;
+  }
+
+/*create hexagon shape start*/  
+  div.hexagon{
+      display: inline-block;
+      width: 90px;
+      height: 42px;
+      position: relative;
+      margin-left: 1px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  }
+
+  div.hexagon::before{
+      content: '';
+      position: absolute;
+      top: -32px;
+      left: 0;
+      border-left: 45px solid transparent;
+      border-right: 45px solid transparent;
+  }
+  div.hexagon::after{
+    content: '';
+    position: absolute;
+    bottom: -32px;
+    left: 0; 
+    border-left: 45px solid transparent;
+    border-right: 45px solid transparent;
+}
+
+.hexagon small{
+    color: #fff;
+    display: block;
+
+}
+
+/* colors */
+
+.mars{
+    background: #722808;
+}
+.mars::before{
+    border-bottom: 32px solid #722808;
+}
+.mars::after{
+    border-top: 32px solid #722808;
+}
+
+.water{
+    background: #364988;
+}
+.water::before{
+    border-bottom: 32px solid #364988;
+}
+.water::after{
+    border-top: 32px solid #364988;
+}
+
+
+/* hex-rows */
+
+.hex-row{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 33px;
+}
+
+/*create hexagon shape end*/ 
