@@ -37,3 +37,11 @@ function generate_map() {
 }
 
 generate_map();
+
+
+
+
+var mapHeightArr = [5, 6, 7, 8, 9, 8, 7, 6, 5];
+
+mapHeightArr.forEach((item, index) => (console.log('index ' + index + ': ' + 'item' + item)));
+mapHeightArr.forEach((item, index) => (console.log(`index ${index} : item ${item}`)));
