@@ -40,8 +40,58 @@ generate_map();
 
 
 
-
+//first iteration gonna go like that:
 var mapHeightArr = [5, 6, 7, 8, 9, 8, 7, 6, 5];
 
+/*
+At the beginning of function:
+1.select value from say 20 - 30
+2.create array length 59 (59 tiles) randomly distributing values (0/1/2) 59 times to get the desired sum of these values (20-30)
+3.create more arrays (or maybe construct an object?) to determine other tile parameters
+4.use arrays/objects to extract values in the loop (foreach and for)
+*/
+
+console.log('-------');
 mapHeightArr.forEach((item, index) => (console.log('index ' + index + ': ' + 'item' + item)));
+//inside foreach include for loop with length of current element from foreach
+console.log('-------');
 mapHeightArr.forEach((item, index) => (console.log(`index ${index} : item ${item}`)));
+
+// removing array element method
+var array = [1, 2, 3, 4]
+var item = 3
+
+var index = array.indexOf(item);
+array.splice(index, 1);
+
+console.log(array);
+
+
+
+console.log('-------');
+
+//shuffle array
+
+console.log('Array shuffle test');
+
+function shuffle(array) {
+    var m = array.length, t, i;
+
+    // While there remain elements to shuffle…
+    while (m) {
+
+        // Pick a remaining element…
+        i = Math.floor(Math.random() * m--);
+
+        // And swap it with the current element.
+        t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+    }
+
+    return array;
+}
+
+var myArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+console.log(myArray);
+console.log(shuffle(myArray));
