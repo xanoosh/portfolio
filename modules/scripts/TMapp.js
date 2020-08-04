@@ -95,3 +95,10 @@ function shuffle(array) {
 var myArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 console.log(myArray);
 console.log(shuffle(myArray));
+
+console.log('-----');
+console.log('Array remover test');
+var arrayRemoveEl = ['this', 'is', 'not', 'bullshit'];
+console.log(arrayRemoveEl);
+arrayRemoveEl.splice(arrayRemoveEl.indexOf('not'), 1);
+console.log(arrayRemoveEl);
