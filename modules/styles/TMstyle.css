@@ -3,6 +3,7 @@
     src: url('../font/Prototype.ttf');
 }
 
+
 body {
     font-family: 'Prototype', Fallback, sans-serif;
   }

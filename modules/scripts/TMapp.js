@@ -1,11 +1,8 @@
 console.log('Connection established, Sire!');
 
-
-
 colorArr = ['water', 'mars', 'mars', 'mars', 'mars', 'water', 'mars', 'mars'];
 resourcesArr1 = ['steel', 'titanium', '', 'card', 'plant', ''];
 resourcesArr2 = ['steel', '', 'titanium', '', 'card', '', 'plant', ''];
-
 
 function randomEl(arr) {
     var randomVal = Math.ceil(Math.random() * arr.length - 1);
@@ -42,6 +39,18 @@ generate_map();
 
 //first iteration gonna go like that:
 var mapHeightArr = [5, 6, 7, 8, 9, 8, 7, 6, 5];
+
+function generateMapRow(item) {
+    document.write('<div class="hex-row">');
+    for (i = 1; i <= item; i++) {
+        document.write(`<div class="hexagon ${randomEl(colorArr)}"><small> ${randomEl(resourcesArr1)} </small><small> ${randomEl(resourcesArr2)} </small></div> `);
+    }
+    document.write('</div>');
+}
+
+document.write('<div id="mapContainer" class="pt-5">');
+mapHeightArr.forEach(item => generateMapRow(item));
+document.write('/<div>');
 
 /*
 At the beginning of function:
