@@ -6,8 +6,15 @@
 
 body {
     font-family: 'Prototype', Fallback, sans-serif;
-  }
+    }
 
+    table{
+        display: none;
+    }
+
+table td, table th {
+    padding: 5px 10px;
+}
   h1.title{
     text-transform: uppercase;
     text-align: center;

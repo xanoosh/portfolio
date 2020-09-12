@@ -33,7 +33,7 @@ function generate_map() {
     document.write('</div>');
 }
 
-generate_map();
+//generate_map();
 
 
 
