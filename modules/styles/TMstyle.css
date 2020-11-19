@@ -5,6 +5,11 @@
 
 body {
   font-family: 'Prototype', Fallback, sans-serif;
+  background: url('../../pattern.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 /* table {
@@ -20,6 +25,7 @@ h1.title {
   text-align: center;
   font-size: 80px;
   min-width: 891px;
+  color: #fff;
 }
 h1.title::first-line {
   font-size: 70px;
