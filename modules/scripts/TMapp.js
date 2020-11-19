@@ -194,19 +194,10 @@ function generate_map() {
         tilesListFinal.splice(0, 1);
         let resource = resourcesListFinal[0];
         resourcesListFinal.splice(0, 1);
-        if (tile === 'mars') {
-          document.write(
-            `<div class="hexagon ${tile}" style='background: #722808;'><small style="color:white">${resource}</small></div>`
-          );
-        } else if (tile === 'water') {
-          document.write(
-            `<div class="hexagon ${tile}" style='background: #364988;'><small style="color:white">${resource}</small></div>`
-          );
-        } else {
-          document.write(
-            `<div class="hexagon ${tile}" style='background: #9c9c9c;'><small style="color:white">${resource}</small></div>`
-          );
-        }
+
+        document.write(
+          `<div class="hexagon ${tile}"><small>${resource}</small></div>`
+        );
       }
       document.write('</div>');
     }
@@ -217,19 +208,10 @@ function generate_map() {
         tilesListFinal.splice(0, 1);
         let resource = resourcesListFinal[0];
         resourcesListFinal.splice(0, 1);
-        if (tile === 'mars') {
-          document.write(
-            `<div class="hexagon ${tile}" style='background: #722808;'><small style="color:white">${resource}</small></div>`
-          );
-        } else if (tile === 'water') {
-          document.write(
-            `<div class="hexagon ${tile}" style='background: #364988;'><small style="color:white">${resource}</small></div>`
-          );
-        } else {
-          document.write(
-            `<div class="hexagon ${tile}" style='background: #9c9c9c;'><small style="color:white">${resource}</small></div>`
-          );
-        }
+
+        document.write(
+          `<div class="hexagon ${tile}"><small>${resource}</small></div>`
+        );
       }
       document.write('</div>');
     }
