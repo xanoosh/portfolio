@@ -35,17 +35,18 @@ h1.title::first-line {
 /*create hexagon shape start*/
 div.hexagon {
   display: inline-block;
-  width: 90px;
-  height: 42px;
+  width: 100px;
+  height: 120px;
+  margin-bottom: -30px;
   position: relative;
-  margin-left: 1px;
+  margin-left: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-div.hexagon::before {
+/* div.hexagon::before {
   content: '';
   position: absolute;
   top: -32px;
@@ -60,34 +61,56 @@ div.hexagon::after {
   left: 0;
   border-left: 45px solid transparent;
   border-right: 45px solid transparent;
-}
+} */
 
 .hexagon small {
+  position: absolute;
+
   color: #fff;
   display: block;
   text-align: center;
 }
 
+.hexagon img {
+}
+
 /* colors */
 
-.mars {
-  background: #722808;
+img.mars {
+  /* background-color: #722808 !important; */
+  fill: #722808;
+  -webkit-print-color-adjust: exact;
 }
+img.water {
+  /* background: #364988; */
+  fill: #364988;
+  -webkit-print-color-adjust: exact;
+}
+img.noctis {
+  /* background: #9c9c9c; */
+  fill: #9c9c9c;
+  -webkit-print-color-adjust: exact;
+}
+
+/* print optimization */
 @media print {
-  .mars {
-    background-color: #722808 !important;
+  img.mars {
+    /* background-color: #722808 !important; */
+    fill: #722808;
     -webkit-print-color-adjust: exact;
   }
-  .water {
-    background: #364988;
+  img.water {
+    /* background: #364988; */
+    fill: #364988;
     -webkit-print-color-adjust: exact;
   }
-  .noctis {
-    background: #9c9c9c;
+  img.noctis {
+    /* background: #9c9c9c; */
+    fill: #9c9c9c;
     -webkit-print-color-adjust: exact;
   }
 }
-.mars::before {
+/* .mars::before {
   border-bottom: 32px solid #722808;
 }
 .mars::after {
@@ -112,7 +135,7 @@ div.hexagon::after {
 }
 .noctis::after {
   border-top: 32px solid #9c9c9c;
-}
+} */
 
 /* hex-rows */
 
@@ -120,7 +143,8 @@ div.hexagon::after {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 33px;
+  /* margin-top: 33px; */
+  /* margin-bottom: -28px; */
 }
 
 /*create hexagon shape end*/

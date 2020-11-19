@@ -185,6 +185,9 @@ function generate_map() {
   document.write('<div id="mapContainer">');
   let val = 9;
   const doubleit = val * 2;
+  const pathm = 'modules/img/hexagonm.svg';
+  const pathn = 'modules/img/hexagonn.svg';
+  const pathw = 'modules/img/hexagonw.svg';
 
   for (let i = 0; i < doubleit; i++) {
     if (i < val && i >= 5) {
@@ -196,15 +199,15 @@ function generate_map() {
         resourcesListFinal.splice(0, 1);
         if (tile === 'mars') {
           document.write(
-            `<div class="hexagon ${tile}" style='background: #722808!important;'><small style="color:white">${resource}</small></div>`
+            `<div class="hexagon"><img src="${pathm}" class="${tile}" /><small style="color:white">${resource}</small></div>`
           );
         } else if (tile === 'water') {
           document.write(
-            `<div class="hexagon ${tile}" style='background: #364988;'><small style="color:white">${resource}</small></div>`
+            `<div class="hexagon ${tile}"><img src="${pathw}" class="${tile}" /><small style="color:white">${resource}</small></div>`
           );
         } else {
           document.write(
-            `<div class="hexagon ${tile}" style='background: #9c9c9c;'><small style="color:white">${resource}</small></div>`
+            `<div class="hexagon ${tile}"><img src="${pathn}" class="${tile}" /><small style="color:white">${resource}</small></div>`
           );
         }
       }
@@ -219,15 +222,15 @@ function generate_map() {
         resourcesListFinal.splice(0, 1);
         if (tile === 'mars') {
           document.write(
-            `<div class="hexagon ${tile}" style='background: #722808!important;'><small style="color:white">${resource}</small></div>`
+            `<div class="hexagon ${tile}"><img src="${pathm}" class="${tile}" /><small style="color:white">${resource}</small></div>`
           );
         } else if (tile === 'water') {
           document.write(
-            `<div class="hexagon ${tile}" style='background: #364988;'><small style="color:white">${resource}</small></div>`
+            `<div class="hexagon ${tile}"><img src="${pathw}" class="${tile}" /><small style="color:white">${resource}</small></div>`
           );
         } else {
           document.write(
-            `<div class="hexagon ${tile}" style='background: #9c9c9c;'><small style="color:white">${resource}</small></div>`
+            `<div class="hexagon ${tile}"><img src="${pathn}" class="${tile}" /><small style="color:white">${resource}</small></div>`
           );
         }
       }
