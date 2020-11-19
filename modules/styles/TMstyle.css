@@ -5,11 +5,6 @@
 
 body {
   font-family: 'Prototype', Fallback, sans-serif;
-  background: url('../../pattern.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
 }
 
 /* table {
