@@ -72,6 +72,20 @@ div.hexagon::after {
 .mars {
   background: #722808;
 }
+@media print {
+  .mars {
+    background-color: #722808 !important;
+    -webkit-print-color-adjust: exact;
+  }
+  .water {
+    background: #364988;
+    -webkit-print-color-adjust: exact;
+  }
+  .noctis {
+    background: #9c9c9c;
+    -webkit-print-color-adjust: exact;
+  }
+}
 .mars::before {
   border-bottom: 32px solid #722808;
 }
