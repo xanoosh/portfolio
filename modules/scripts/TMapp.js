@@ -222,9 +222,8 @@ function generate_map() {
       } else if (res === 'heat') {
         name = 'rheat';
       }
-      //console.log(`<img class="resource" src="${pathBase}/${name}.svg"/>`);
       return `<div class="resource"><img src="${pathBase}/${name}.svg"/></div>`;
-    } else if (typeof res[0] == 'string') {
+    } else if (typeof res[0] === 'string') {
       if (res[0] === 'titanium') {
         name = 'rtitanium';
       } else if (res[0] === 'steel') {
@@ -247,9 +246,6 @@ function generate_map() {
       } else if (res[1] === 'heat') {
         nameTwo = 'rheat';
       }
-      // console.log(
-      //   `ssss<img class="resource" src="${pathBase}/${name}.svg"/><img class="resource" src="${pathBase}${nameTwo}.svg"/>`
-      // );
       return `<div class="resource"><img src="${pathBase}/${name}.svg"/><img src="${pathBase}/${nameTwo}.svg"/></div>`;
     } else {
       return '';

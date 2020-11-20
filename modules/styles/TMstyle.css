@@ -3,7 +3,7 @@
   src: url('../font/Prototype.ttf');
 }
 
-body {
+* {
   font-family: 'Prototype', Fallback, sans-serif;
 }
 
@@ -13,16 +13,21 @@ h1.title {
   font-size: 75px;
   margin-bottom: 30px;
 }
+
 .main-container {
   min-width: 940px;
   margin: 0 auto;
   padding: 40px 0;
 }
-.btn-box {
-  padding-left: 10px;
+
+/* flexbox for hexagon rows */
+.hex-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-/*create hexagon shape start*/
+/* hexagon container*/
 div.hexagon {
   display: inline-block;
   width: 100px;
@@ -33,12 +38,16 @@ div.hexagon {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* for chrome */
   flex-direction: column;
 }
 
+/* resource container */
 .hexagon .resource {
   position: absolute;
 }
+
+/* resource img */
 .hexagon .resource img {
   color: #fff;
   display: inline-block;
@@ -46,52 +55,9 @@ div.hexagon {
   width: 33px;
 }
 
-.hexagon img {
-}
-
-/* colors */
-
-img.mars {
-  /* background-color: #722808 !important; */
-  fill: #722808;
-  -webkit-print-color-adjust: exact;
-}
-img.water {
-  /* background: #364988; */
-  fill: #364988;
-  -webkit-print-color-adjust: exact;
-}
-img.noctis {
-  /* background: #9c9c9c; */
-  fill: #9c9c9c;
-  -webkit-print-color-adjust: exact;
-}
-
-/* color print optimization */
-@media print {
-  img.mars {
-    /* background-color: #722808 !important; */
-    fill: #722808;
-    -webkit-print-color-adjust: exact;
-  }
-  img.water {
-    /* background: #364988; */
-    fill: #364988;
-    -webkit-print-color-adjust: exact;
-  }
-  img.noctis {
-    /* background: #9c9c9c; */
-    fill: #9c9c9c;
-    -webkit-print-color-adjust: exact;
-  }
-}
-
-/* flexbox for hexagon rows */
-
-.hex-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+/* btn container */
+.btn-box {
+  padding-left: 10px;
 }
 
 /* btn colors */
