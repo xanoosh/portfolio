@@ -26,7 +26,8 @@ h1.title::first-line {
 }
 
 #whole-mars,
-#mapContainer {
+#mapContainer,
+.container-btn {
   min-width: 930px;
   margin: 0 auto;
 }

@@ -66,6 +66,7 @@ const resourcesForMap = {
       (this.card = resourcesArray[2]),
       (this.plant = resourcesArray[3]),
       (this.heat = resourcesArray[4]);
+    delete this.aResourcesSetter;
   },
 };
 //calling its method to set final resources values
@@ -173,13 +174,13 @@ const createArrayOfTiles = function () {
 //calling a function
 createArrayOfTiles();
 
-console.log('Recources object ');
+console.log('Recources object:');
 console.table(resourcesForMap);
-console.log('array of resources for map');
-console.table(resourcesListFinal);
-console.log('Tiles object');
+console.log('Resources array for map:');
+console.log(resourcesListFinal);
+console.log('Tiles object:');
 console.table(tilesForMap);
-console.log('Array of tiles for map');
+console.log('Tiles array for map:');
 console.log(tilesListFinal);
 
 //all data prepared!
