@@ -19,39 +19,40 @@
   </head>
 
   <body>
-    <h1 class="title py-5">terraformacja<br /></h1>
+    <div class="main-container">
+      <h1 class="title">terraformacja</h1>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script>
-      //print pdf implementation
-      function printContent(el) {
-        var restorepage = document.body.innerHTML;
-        var printcontent = document.getElementById(el).innerHTML;
-        document.body.innerHTML = printcontent;
-        window.print();
-        document.body.innerHTML = restorepage;
-        //var background = document.getElementsByClassName('modal-backdrop');
-        //background
-      }
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <script>
+        //print pdf implementation
+        function printContent(el) {
+          var restorepage = document.body.innerHTML;
+          var printcontent = document.getElementById(el).innerHTML;
+          document.body.innerHTML = printcontent;
+          window.print();
+          document.body.innerHTML = restorepage;
+          //var background = document.getElementsByClassName('modal-backdrop');
+          //background
+        }
 
-      $(document).ready(function () {
-        var doc = new jsPDF();
-        var specialElementHandlers = {
-          '#pdf-content': function (element, renderer) {
-            return true;
-          },
-        };
+        $(document).ready(function () {
+          var doc = new jsPDF();
+          var specialElementHandlers = {
+            '#pdf-content': function (element, renderer) {
+              return true;
+            },
+          };
 
-        $('#btn').click(function () {
-          doc.fromHTML($('#mapContainer').html(), 15, 15, {
-            width: 170,
-            elementHandlers: specialElementHandlers,
+          $('#btn').click(function () {
+            doc.fromHTML($('#mapContainer').html(), 15, 15, {
+              width: 170,
+              elementHandlers: specialElementHandlers,
+            });
+            doc.save('terraforming.pdf');
           });
-          doc.save('terraforming.pdf');
         });
-      });
 
-      /* function doScroll() {
+        /* function doScroll() {
         $("html, body").animate(
           { scrollTop: "0" }, 1000);
         $("html, body").animate(
@@ -60,13 +61,12 @@
       setInterval(doScroll, 2000);
       doScroll();
       */
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="modules/scripts/TMapp.js"></script>
-    <div id="pdf-content"></div>
-    <div class="btn-container">
-      <div class="row justify-content-center mt-5">
+      </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <script src="modules/scripts/TMapp.js"></script>
+      <div id="pdf-content"></div>
+      <div class="row ml-0 mr-0 justify-content-center mt-5">
         <div class="btn-box">
           <button
             class="btn btn-primary mt-5 mr-2"

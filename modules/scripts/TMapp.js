@@ -109,12 +109,14 @@ const createArrayOfResources = function () {
     resourcesLength <= 48
       ? numberOfDoubleResourcesSparce
       : numberOfDoubleResourcesAbundant;
-
+  let arrayNest = [];
   while (loopLength > 0) {
     if (resourcesLength >= 34 && resourcesLength <= 48) {
       //need 6*2resources rest is one and none
       if (numberOfDoubleResourcesSparce > 0) {
-        resourcesListFinal.push(`${resourcesList[0]}, ${resourcesList[1]}`);
+        arrayNest.push(resourcesList[0], resourcesList[1]);
+        resourcesListFinal.push(arrayNest);
+        arrayNest = [];
         resourcesList.splice(0, 1);
         resourcesList.splice(0, 1);
       } else if (
@@ -129,7 +131,9 @@ const createArrayOfResources = function () {
     } else {
       //need 10*2resources rest is one and none
       if (numberOfDoubleResourcesAbundant > 0) {
-        resourcesListFinal.push(`${resourcesList[0]}, ${resourcesList[1]}`);
+        arrayNest.push(resourcesList[0], resourcesList[1]);
+        resourcesListFinal.push(arrayNest);
+        arrayNest = [];
         resourcesList.splice(0, 1);
         resourcesList.splice(0, 1);
       } else if (
@@ -184,7 +188,7 @@ createArrayOfTiles();
 console.log('Recources object:');
 console.table(resourcesForMap);
 console.log('Resources array for map:');
-console.log(resourcesListFinal);
+console.table(resourcesListFinal);
 console.log('Tiles object:');
 console.table(tilesForMap);
 console.log('Tiles array for map:');
@@ -201,6 +205,56 @@ function generate_map() {
   const pathn = 'modules/img/hexagonn.svg';
   const pathw = 'modules/img/hexagonw.svg';
 
+  //determine needed image based on data type and content
+  const pathBase = 'modules/img';
+  let name = '';
+  let nameTwo = '';
+  const imgResource = function (res) {
+    if (typeof res === 'string' && res.length !== 0) {
+      if (res === 'titanium') {
+        name = 'rtitanium';
+      } else if (res === 'steel') {
+        name = 'rsteel';
+      } else if (res === 'card') {
+        name = 'rcard';
+      } else if (res === 'plant') {
+        name = 'rplant';
+      } else if (res === 'heat') {
+        name = 'rheat';
+      }
+      //console.log(`<img class="resource" src="${pathBase}/${name}.svg"/>`);
+      return `<div class="resource"><img src="${pathBase}/${name}.svg"/></div>`;
+    } else if (typeof res[0] == 'string') {
+      if (res[0] === 'titanium') {
+        name = 'rtitanium';
+      } else if (res[0] === 'steel') {
+        name = 'rsteel';
+      } else if (res[0] === 'card') {
+        name = 'rcard';
+      } else if (res[0] === 'plant') {
+        name = 'rplant';
+      } else if (res[0] === 'heat') {
+        name = 'rheat';
+      }
+      if (res[1] === 'titanium') {
+        nameTwo = 'rtitanium';
+      } else if (res[1] === 'steel') {
+        nameTwo = 'rsteel';
+      } else if (res[1] === 'card') {
+        nameTwo = 'rcard';
+      } else if (res[1] === 'plant') {
+        nameTwo = 'rplant';
+      } else if (res[1] === 'heat') {
+        nameTwo = 'rheat';
+      }
+      // console.log(
+      //   `ssss<img class="resource" src="${pathBase}/${name}.svg"/><img class="resource" src="${pathBase}${nameTwo}.svg"/>`
+      // );
+      return `<div class="resource"><img src="${pathBase}/${name}.svg"/><img src="${pathBase}/${nameTwo}.svg"/></div>`;
+    } else {
+      return '';
+    }
+  };
   for (let i = 0; i < doubleit; i++) {
     if (i < val && i >= 5) {
       document.write('<div class="hex-row">');
@@ -211,15 +265,21 @@ function generate_map() {
         resourcesListFinal.splice(0, 1);
         if (tile === 'mars') {
           document.write(
-            `<div class="hexagon"><img src="${pathm}" class="${tile}" /><small style="color:white">${resource}</small></div>`
+            `<div class="hexagon"><img src="${pathm}" class="${tile}" />${imgResource(
+              resource
+            )}</div>`
           );
         } else if (tile === 'water') {
           document.write(
-            `<div class="hexagon ${tile}"><img src="${pathw}" class="${tile}" /><small style="color:white">${resource}</small></div>`
+            `<div class="hexagon ${tile}"><img src="${pathw}" class="${tile}" />${imgResource(
+              resource
+            )}</div>`
           );
         } else {
           document.write(
-            `<div class="hexagon ${tile}"><img src="${pathn}" class="${tile}" /><small style="color:white">${resource}</small></div>`
+            `<div class="hexagon ${tile}"><img src="${pathn}" class="${tile}" />${imgResource(
+              resource
+            )}</div>`
           );
         }
       }
@@ -234,15 +294,21 @@ function generate_map() {
         resourcesListFinal.splice(0, 1);
         if (tile === 'mars') {
           document.write(
-            `<div class="hexagon ${tile}"><img src="${pathm}" class="${tile}" /><small style="color:white">${resource}</small></div>`
+            `<div class="hexagon ${tile}"><img src="${pathm}" class="${tile}" />${imgResource(
+              resource
+            )}</div>`
           );
         } else if (tile === 'water') {
           document.write(
-            `<div class="hexagon ${tile}"><img src="${pathw}" class="${tile}" /><small style="color:white">${resource}</small></div>`
+            `<div class="hexagon ${tile}"><img src="${pathw}" class="${tile}" />${imgResource(
+              resource
+            )}</div>`
           );
         } else {
           document.write(
-            `<div class="hexagon ${tile}"><img src="${pathn}" class="${tile}" /><small style="color:white">${resource}</small></div>`
+            `<div class="hexagon ${tile}"><img src="${pathn}" class="${tile}" />${imgResource(
+              resource
+            )}</div>`
           );
         }
       }

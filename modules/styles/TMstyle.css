@@ -7,29 +7,16 @@ body {
   font-family: 'Prototype', Fallback, sans-serif;
 }
 
-/* table {
-  display: none;
-} */
-
-table td,
-table th {
-  padding: 5px 10px;
-}
 h1.title {
   text-transform: uppercase;
   text-align: center;
-  font-size: 80px;
-  min-width: 891px;
+  font-size: 75px;
+  margin-bottom: 30px;
 }
-h1.title::first-line {
-  font-size: 70px;
-}
-
-#whole-mars,
-#mapContainer,
-.btn-container {
+.main-container {
   min-width: 940px;
   margin: 0 auto;
+  padding: 40px 0;
 }
 .btn-box {
   padding-left: 10px;
@@ -49,12 +36,14 @@ div.hexagon {
   flex-direction: column;
 }
 
-.hexagon small {
+.hexagon .resource {
   position: absolute;
-
+}
+.hexagon .resource img {
   color: #fff;
-  display: block;
+  display: inline-block;
   text-align: center;
+  width: 33px;
 }
 
 .hexagon img {
