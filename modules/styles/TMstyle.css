@@ -27,9 +27,12 @@ h1.title::first-line {
 
 #whole-mars,
 #mapContainer,
-.container-btn {
-  min-width: 930px;
+.btn-container {
+  min-width: 940px;
   margin: 0 auto;
+}
+.btn-box {
+  padding-left: 10px;
 }
 
 /*create hexagon shape start*/
@@ -39,29 +42,12 @@ div.hexagon {
   height: 120px;
   margin-bottom: -30px;
   position: relative;
-  margin-left: 3px;
+  margin-left: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-
-/* div.hexagon::before {
-  content: '';
-  position: absolute;
-  top: -32px;
-  left: 0;
-  border-left: 45px solid transparent;
-  border-right: 45px solid transparent;
-}
-div.hexagon::after {
-  content: '';
-  position: absolute;
-  bottom: -32px;
-  left: 0;
-  border-left: 45px solid transparent;
-  border-right: 45px solid transparent;
-} */
 
 .hexagon small {
   position: absolute;
@@ -92,7 +78,7 @@ img.noctis {
   -webkit-print-color-adjust: exact;
 }
 
-/* print optimization */
+/* color print optimization */
 @media print {
   img.mars {
     /* background-color: #722808 !important; */
@@ -110,41 +96,37 @@ img.noctis {
     -webkit-print-color-adjust: exact;
   }
 }
-/* .mars::before {
-  border-bottom: 32px solid #722808;
-}
-.mars::after {
-  border-top: 32px solid #722808;
-}
 
-.water {
-  background: #364988;
-}
-.water::before {
-  border-bottom: 32px solid #364988;
-}
-.water::after {
-  border-top: 32px solid #364988;
-}
-
-.noctis {
-  background: #9c9c9c;
-}
-.noctis::before {
-  border-bottom: 32px solid #9c9c9c;
-}
-.noctis::after {
-  border-top: 32px solid #9c9c9c;
-} */
-
-/* hex-rows */
+/* flexbox for hexagon rows */
 
 .hex-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* margin-top: 33px; */
-  /* margin-bottom: -28px; */
 }
 
-/*create hexagon shape end*/
+/* btn colors */
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  background-color: #364988 !important;
+  outline: #364988 !important;
+  padding: 10px 15px;
+  border-radius: 0;
+  border: none;
+  font-size: 18px;
+}
+.btn-danger,
+.btn-danger:hover,
+.btn-danger:active,
+.btn-danger:visited .btn-danger:focus {
+  background-color: #722808 !important;
+  outline: #722808 !important;
+  padding: 10px 15px;
+  border-radius: 0;
+  border: none;
+  font-size: 18px;
+}
