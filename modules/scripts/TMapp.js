@@ -101,9 +101,15 @@ const createArrayOfResources = function () {
   let loopLength = 61;
   const resourcesLength = resourcesList.length;
   //console.log(resourcesList);
-  //console.log(`${resourcesLength} length of list`);
   let numberOfDoubleResourcesSparce = 6;
   let numberOfDoubleResourcesAbundant = 13;
+
+  resourcesForMap['Sum of resources'] = resourcesLength;
+  resourcesForMap['Number of tiles with double resources'] =
+    resourcesLength <= 48
+      ? numberOfDoubleResourcesSparce
+      : numberOfDoubleResourcesAbundant;
+
   while (loopLength > 0) {
     if (resourcesLength >= 34 && resourcesLength <= 48) {
       //need 6*2resources rest is one and none
@@ -112,7 +118,8 @@ const createArrayOfResources = function () {
         resourcesList.splice(0, 1);
         resourcesList.splice(0, 1);
       } else if (
-        (numberOfDoubleResourcesSparce = 0 && resourcesList.length > 0)
+        numberOfDoubleResourcesSparce === 0 &&
+        resourcesList.length > 0
       ) {
         resourcesListFinal.push(resourcesList[0]);
         resourcesList.splice(0, 1);
@@ -131,7 +138,7 @@ const createArrayOfResources = function () {
       ) {
         resourcesListFinal.push(resourcesList[0]);
         resourcesList.splice(0, 1);
-      } else if (resourcesList.length == 0) {
+      } else if (resourcesList.length === 0) {
         resourcesListFinal.push('');
       }
     }
