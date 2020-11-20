@@ -173,10 +173,14 @@ const createArrayOfTiles = function () {
 //calling a function
 createArrayOfTiles();
 
-console.log('Recources object and shuffled array of resources for map');
-console.log(resourcesForMap, resourcesListFinal);
-console.log('Tiles object and shuffled array of tiles for map');
-console.log(tilesForMap, tilesListFinal);
+console.log('Recources object ');
+console.table(resourcesForMap);
+console.log('array of resources for map');
+console.table(resourcesListFinal);
+console.log('Tiles object');
+console.table(tilesForMap);
+console.log('Array of tiles for map');
+console.log(tilesListFinal);
 
 //all data prepared!
 // use arrays: tilesListFinal and resourcesListFinal in a loop to generate the final map :)
