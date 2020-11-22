@@ -96,3 +96,9 @@ div.hexagon {
   margin-left: 10px;
   background-color: #895234 !important;
 }
+
+.disabled{
+  pointer-events: none;
+  opacity: .7;
+  cursor: not-allowed;
+}
