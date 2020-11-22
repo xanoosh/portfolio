@@ -3,8 +3,10 @@
   src: url('../font/Prototype.ttf');
 }
 
-* {
+*, *::before, *::after {
+  /* box-sizing: border-box; */
   font-family: 'Prototype', Fallback, sans-serif;
+  /* color: #4b66be; */
 }
 
 h1.title {
@@ -14,10 +16,14 @@ h1.title {
   margin-bottom: 30px;
 }
 
-.main-container {
-  min-width: 940px;
+.main-container{
+  min-width: 936px;
   margin: 0 auto;
   padding: 40px 0;
+}
+#mapContainer{
+  width:  936px;
+  margin: 0 auto;
 }
 
 /* flexbox for hexagon rows */
@@ -56,32 +62,37 @@ div.hexagon {
 }
 
 /* btn container */
+.btn-row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 80px;
+}
 .btn-box {
   padding-left: 10px;
+  display: inline;
 }
 
-/* btn colors */
+/* btn styles */
 
-.btn-primary,
-.btn-primary:hover,
-.btn-primary:active,
-.btn-primary:visited,
-.btn-primary:focus {
-  background-color: #364988 !important;
-  outline: #364988 !important;
+.btn,
+.btn:hover,
+.btn:active,
+.btn:visited,
+.btn:focus{
+  outline: none;
   padding: 10px 15px;
-  border-radius: 0;
   border: none;
   font-size: 18px;
+  color: #fff;
+  border-radius: 0;
 }
-.btn-danger,
-.btn-danger:hover,
-.btn-danger:active,
-.btn-danger:visited .btn-danger:focus {
-  background-color: #722808 !important;
-  outline: #722808 !important;
-  padding: 10px 15px;
-  border-radius: 0;
-  border: none;
-  font-size: 18px;
+
+.btn-water{
+  background-color: #4b66be !important;
+  margin-right: 10px;
+}
+.btn-mars{
+  margin-left: 10px;
+  background-color: #895234 !important;
 }
