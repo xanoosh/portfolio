@@ -22,8 +22,8 @@ h1.title {
   padding: 40px 0;
 }
 #mapContainer{
-  width:  936px;
-  margin: 0 auto;
+  /* min-width:  936px; */
+  /* margin: 0 auto; */
 }
 
 /* flexbox for hexagon rows */
