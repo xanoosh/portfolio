@@ -82,9 +82,8 @@ const resetValues = function () {
   document
     .querySelector(`.player--${activePlayer}`)
     .classList.remove('player--winner');
-  document.getElementById(
-    `name--${activePlayer}`
-  ).textContent = `Player ${activePlayer}`;
+  document.getElementById(`name--0`).textContent = `Player 1`;
+  document.getElementById(`name--1`).textContent = `Player 2`;
   currentScore = 0;
   activePlayer = 0;
   scorePlayer0El.textContent = 0;
