@@ -36,30 +36,6 @@ main {
   display: flex;
 }
 
-/* winner box */
-main h1.who-won{
-  opacity: 0;
-  pointer-events: none;
-  text-align: center;
-  position: absolute;
-  font-size: 10rem;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 99;
-  background: rgba(199, 54, 95, .4);
-  color: #fff;
-  padding: 20px;
-  transition: all .4s ease-in-out;
-}
-main.winner h1.who-won{
-  opacity: 1;
-}
-
 .player {
   flex: 50%;
   padding: 9rem;
@@ -184,6 +160,7 @@ main.winner h1.who-won{
 
 .player--winner {
   background-color: #2f2f2f;
+  color: #bf2e34;
 }
 
 .player--winner .name {
@@ -191,6 +168,77 @@ main.winner h1.who-won{
   color: #c7365f;
 }
 
-.hidden{
+.hidden {
   display: none;
+}
+/* how button */
+.btn--how {
+  top: 54.5rem;
+  font-size: 12px;
+}
+.btn::first-letter {
+  font-size: 12px;
+  display: inline;
+  margin-right: 0;
+}
+
+/* popup */
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.4);
+  pointer-events: all;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  z-index: 100;
+  cursor: pointer;
+}
+.overlay.opacity {
+  opacity: 0;
+  pointer-events: none;
+}
+.overlay .popup {
+  width: 80rem;
+  height: 40rem;
+  background: rgb(218, 175, 188);
+  border-radius: 9px;
+  padding: 30px 50px;
+  position: relative;
+  z-index: 101;
+  cursor: default;
+}
+.overlay .popup .close-popup {
+  color: #fff;
+  background: transparent;
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 40px;
+  cursor: pointer;
+}
+.overlay .popup h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+}
+.overlay .popup ul {
+  margin-left: 20px;
+}
+.overlay .popup ul li {
+  color: #333;
+  font-size: 20px;
+  list-style: square;
+  margin-bottom: 10px;
+}
+
+.overlay .popup ul li span {
+  color: #fff;
+  font-weight: 700;
 }
