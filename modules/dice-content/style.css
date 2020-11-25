@@ -113,8 +113,8 @@ main {
   cursor: pointer;
   font-weight: 400;
   transition: all 0.2s;
-
-  background-color: white;
+  white-space: nowrap;
+  /* background-color: white; */
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
 
@@ -211,6 +211,9 @@ main {
   position: relative;
   z-index: 101;
   cursor: default;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .overlay .popup .close-popup {
   color: #fff;
@@ -223,19 +226,16 @@ main {
   font-size: 40px;
   cursor: pointer;
 }
-.overlay .popup h3 {
-  font-size: 20px;
-  color: #333;
-  margin-bottom: 15px;
-}
+
 .overlay .popup ul {
   margin-left: 20px;
+  display: block;
 }
 .overlay .popup ul li {
   color: #333;
   font-size: 20px;
   list-style: square;
-  margin-bottom: 10px;
+  padding: 5px 0;
 }
 
 .overlay .popup ul li span {
