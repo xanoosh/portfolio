@@ -11,34 +11,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #242423;
 }
 
 #quiz {
-  width: 80%;
-  height: 60vh;
-  border-radius: 0.3rem;
+  width: 100%;
+  height: 100vh;
+  padding: 0px;
   background: #242423;
-  padding: 10px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: relative;
-}
-
-@media (max-width: 700px) {
-  #quiz {
-    width: 100%;
-    height: 100vh;
-    padding: 0px;
-  }
-  .answer {
-    width: 80vw !important;
-    margin-bottom: 20px;
-    height: 55px !important;
-    display: block;
-  }
 }
 
 #quiz h2 {
@@ -60,7 +44,7 @@
 
 #reset {
   position: absolute;
-  bottom: 20px;
+  bottom: 70px;
   left: 50vw - 40px;
   width: 80px;
   margin-top: 7px;
@@ -68,11 +52,12 @@
 }
 
 .answer {
-  background: rgb(36, 96, 153);
   transition: all 0.3s ease-in-out;
-  width: 100px;
-  height: 40px;
   font-size: 18px;
+  width: 80vw !important;
+  margin-bottom: 20px;
+  height: 55px !important;
+  display: block;
 }
 
 .answer.true {
@@ -85,7 +70,7 @@
 
 .scoreFinal {
   position: absolute;
-  bottom: 25px;
+  bottom: 75px;
   right: 20px;
   font-size: 17px;
 }
