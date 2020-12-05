@@ -53,6 +53,35 @@ const dataArr = [
     name: 'Pierścionek California',
     code: 'P/AZUR/139',
   },
+  {
+    name: 'Pierścionek Ażur serce',
+    code: 'P/AZUR/3',
+  },
+  {
+    name: 'Pierścionek Ażur koniczyna',
+    code: 'P/AZUR/4',
+  },
+  {
+    name: 'Pierścionek Ażur motyl',
+    code: 'P/AZUR/89',
+  },
+  {
+    name: 'Pierścionek Ażur skrzydło',
+    code: 'P/AZUR/98',
+  },
+  {
+    name: 'Pierścionek Full Love',
+    code: 'P/AZUR/FL',
+  },
+  {
+    name: 'Pierścionek Z blaszką',
+    code: 'P/BLASZKA',
+  },
+  {
+    name: 'Pierścionek Szafir Zielony',
+    code: 'P/SZ/ZC',
+  },
+  //to były wszystkie pierścionki
 ];
 
 const quizContainer = document.getElementById('quiz');
