@@ -12,6 +12,8 @@
 //Variables
 let myScore = 0;
 let maxScore = 0;
+const myScoreSpan = document.getElementById('myScore');
+
 const dataArr = [
   {
     name: 'Pierścionek zaręczynowy Zodiac',
@@ -140,6 +142,41 @@ const putNewVals = (array) => {
   quizContainer.appendChild(answerBox);
 };
 
+const makeBtnUnclickable = () => {
+  const answerBtns = document.querySelectorAll('.answer');
+  for (let i = 0; i < answerBtns.length; i++) {
+    answerBtns[i].classList.add('disabled');
+  }
+};
+const makeBorderOnCorrect = () => {
+  const answerBtns = document.querySelectorAll('.answer');
+  for (let i = 0; i < answerBtns.length; i++) {
+    answerBtns[i].classList.add('disabled');
+    if (answerBtns[i].value === 'true') {
+      answerBtns[i].classList.add('border');
+    } else {
+      continue;
+    }
+  }
+};
+
+const addClickEvents = () => {
+  const answerBtns = document.querySelectorAll('.answer');
+  for (let i = 0; i < answerBtns.length; i++) {
+    answerBtns[i].addEventListener('click', function () {
+      if (answerBtns[i].value === 'true') {
+        answerBtns[i].classList.add('true');
+        makeBtnUnclickable();
+        myScore++;
+      } else if (answerBtns[i].value === 'false') {
+        answerBtns[i].classList.add('false');
+        makeBorderOnCorrect();
+        makeBtnUnclickable();
+      }
+    });
+  }
+};
+
 //reset values on click
 const resetQuiz = () => {
   const current = [
@@ -161,24 +198,16 @@ const resetQuiz = () => {
       });
     }
   } else {
+    maxScore++;
+    myScoreSpan.innerText = Math.trunc((myScore / maxScore) * 100);
+    console.log(myScore / maxScore) * 100;
     current[0].remove();
     for (let i = 0; i < current[1].length; i++) {
       current[1][i].remove();
     }
     getFourVals();
     putNewVals(fourValArr);
-    const answerBtns = document.querySelectorAll('.answer');
-
-    for (let i = 0; i < answerBtns.length; i++) {
-      answerBtns[i].addEventListener('click', function () {
-        if (answerBtns[i].value === 'true') {
-          answerBtns[i].classList.add('true');
-          myScore++;
-        } else if (answerBtns[i].value === 'false') {
-          answerBtns[i].classList.add('false');
-        }
-      });
-    }
+    addClickEvents();
   }
 };
 
@@ -186,18 +215,7 @@ getFourVals();
 
 //reset to get it going
 resetQuiz();
-
-const answerBtns = document.querySelectorAll('.answer');
-
-for (let i = 0; i < answerBtns.length; i++) {
-  answerBtns[i].addEventListener('click', function () {
-    if (answerBtns[i].value === 'true') {
-      answerBtns[i].classList.add('true');
-    } else if (answerBtns[i].value === 'false') {
-      answerBtns[i].classList.add('false');
-    }
-  });
-}
+addClickEvents();
 
 //ŁOWCY CUDÓW => beczga
 //wykop => rosja, yt

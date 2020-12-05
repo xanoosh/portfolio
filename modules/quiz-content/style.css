@@ -43,6 +43,8 @@ button:focus {
   border-radius: 0.1rem;
   color: #fff;
   background: #333533;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #333533;
 }
 
 #reset {
@@ -76,4 +78,12 @@ button:focus {
   bottom: 75px;
   right: 20px;
   font-size: 17px;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.answer.border {
+  border: 1px solid #07c837 !important;
 }
