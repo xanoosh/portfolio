@@ -4,6 +4,9 @@
   text-transform: uppercase;
   color: #fff;
 }
+button:focus {
+  outline: none !important;
+}
 
 .container {
   height: 100vh;
