@@ -172,18 +172,106 @@ const dataKolczyki = [
   },
 ];
 
+const data1of10 = [
+  {
+    name: '3*6 czyli 18',
+    code: 'Ile nóg ma padalec?',
+  },
+  {
+    name: 'Nikt',
+    code: 'Kto mieszka w Londynie przy Downing street 10?',
+  },
+  {
+    name: 'Stuart',
+    code:
+      'Jakim imieniem Odyseusz przedstawił się oślepionemu cyklopowi polifemowi?',
+  },
+  {
+    name: 'Laskę',
+    code: 'Kogo Aleksander Dumas?',
+  },
+  {
+    name: 'Bolka i Lolka',
+    code: 'Kogo Po śmierci Dobrawy poślubił Mieszko I?',
+  },
+  {
+    name: 'Sasha Grey',
+    code: 'Jak Robinson Cruzoe nazwał swojego koziołka?',
+  },
+  {
+    name: 'Nikt. Mają rzeczy swoją miarę',
+    code: 'Kto dowodził pierwszą udaną wyprawą dookoła Pana Wojciecha?',
+  },
+  {
+    name: 'Jan Sebastian Bach',
+    code: 'Kto jest wynalazcą dynamitu?',
+  },
+  {
+    name: 'Kasjerka',
+    code: 'Kto umierając powiedział "Reszta jest milczeniem."?',
+  },
+  {
+    name: 'W chooy',
+    code: 'Ile gwiazd mieści się w kosmosie?',
+  },
+  {
+    name: 'W meczecie',
+    code: 'Gdzie meczą muzłumańskie kozy?',
+  },
+  {
+    name: 'Meskalina',
+    code: 'Co wg Kabaretu starszych panów jest dobre na wszystko?',
+  },
+  {
+    name: 'Zagrzeb',
+    code: 'Które miasto jest stolicą Zombie?',
+  },
+  {
+    name: 'Grzeszy',
+    code: 'Co robi człowiek przed spowiedzią?',
+  },
+  {
+    name: 'we wtorek',
+    code: 'Kiedy nastąpił upadek cesarstwa zachodniorzymskiego?',
+  },
+  {
+    name: 'Wyspiański',
+    code: 'Kto jest autorem robinsona cruzoe?',
+  },
+  {
+    name: 'Szwajcarsko-niemiecki lekarz Theophrastus Bombastus von Hohenheim',
+    code: 'Kto jest groźnym robo-gadem wyglądem przypominającym człowieka?',
+  },
+  {
+    name: 'Harley Davidson',
+    code: 'Kto odkrył kometę Halleya?',
+  },
+  {
+    name: 'Pluto to pies',
+    code: 'Pluton stanowi część kompani czy kompania jest częścią plutonu?',
+  },
+  {
+    name: 'Elektryczność',
+    code: 'Co jest źródłem światła w lampie LED?',
+  },
+];
+
 const dataRandom = [
   {
     name: 'Z wycieczki',
     code: 'Skąd wracają Litwini?',
   },
   {
+    name: 'Szczytnym okazaniem braku szacunku drugiemu człowiekowi',
+    code: 'Czym jest dekapitacja?',
+  },
+  {
     name: '***** ***',
     code: 'Call on me...',
   },
   {
-    name: '3*6 czyli 18',
-    code: 'Ile nóg ma padalec?',
+    name: 'Owca/Lama',
+    code: 'Więcej niż jedno zwierze to:',
   },
   {
     name: 'E-żyje',
@@ -192,6 +280,14 @@ const dataRandom = [
   {
     name: 'Żałosna imitacja wieży astronomicznej',
     code: 'Hogwart:',
+  },
+  {
+    name: 'jednym z nas',
+    code: '-Jest jednym z nas. -Czyli kim?',
+  },
+  {
+    name: 'Vera Verto',
+    code: '-Jakim zaklęciem zmieniamy zwierzęta w puchary na wódę?',
   },
 ];
 
@@ -347,6 +443,8 @@ const createDataObject = () => {
         dataArr = dataArr.concat(dataPierscionki);
       anyChecked = true;
       if (check[i].name === 'kolczyki') dataArr = dataArr.concat(dataKolczyki);
+      anyChecked = true;
+      if (check[i].name === '1of10') dataArr = dataArr.concat(data1of10);
       anyChecked = true;
       if (check[i].name === 'random') dataArr = dataArr.concat(dataRandom);
       anyChecked = true;
