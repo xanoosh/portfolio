@@ -73,26 +73,126 @@ const dataPierscionki = [
   },
 ];
 
-const dataTest = [
+const dataKolczyki = [
   {
-    name: 'TestName1',
-    code: 'TestCode1',
+    name: 'Kolczyk clover',
+    code: '148',
   },
   {
-    name: 'TestName2',
-    code: 'TestCode2',
+    name: 'Kolczyk medalik',
+    code: 'K/1/8',
+  },
+  {
+    name: 'Kolczyk eternity',
+    code: 'K/110',
+  },
+  {
+    name: 'Kolczyk biarritz',
+    code: 'K/123',
+  },
+  {
+    name: 'Kolczyk Flowers',
+    code: 'K/125',
+  },
+  {
+    name: 'Kolczyk zwierzaki',
+    code: 'K/127',
+  },
+  {
+    name: 'Kolczyk lune',
+    code: 'K/128',
+  },
+  {
+    name: 'Kolczyk north star',
+    code: 'K/134',
+  },
+  {
+    name: 'Kolczyk love',
+    code: 'K/136/love',
+  },
+  {
+    name: 'Kolczyk Olive',
+    code: 'K/143/15',
+  },
+  {
+    name: 'Kolczyk koniczyna',
+    code: 'K/2/8',
+  },
+  {
+    name: 'Kolczyk gwiazdka',
+    code: 'K/26/8',
+  },
+  {
+    name: 'Kolczyk serce',
+    code: 'K/3/8',
+  },
+  {
+    name: 'Kolczyk nieskończoność',
+    code: 'K/32/8',
+  },
+  {
+    name: 'Kolczyk miś',
+    code: 'K/41/8',
+  },
+  {
+    name: 'Kolczyk skrzydła',
+    code: 'K/98',
+  },
+  {
+    name: 'Kolczyk paw',
+    code: 'K/122',
+  },
+  {
+    name: 'Kolczyk sunshine',
+    code: 'K/azur/126',
+  },
+  // DUPLICATE
+  // {
+  //   name: 'Kolczyk North Star',
+  //   code: 'K/azur/134',
+  // },
+  {
+    name: 'Kolczyk oko proroka',
+    code: 'K/azur/137',
+  },
+  {
+    name: 'Kolczyki ażurowe california',
+    code: 'K/139',
+  },
+  {
+    name: 'Kolczyki ażurowe 3E/Serce',
+    code: 'K/azur/3E/3',
+  },
+  {
+    name: 'Kolczyk z Piórem',
+    code: 'K/m/115',
+  },
+  {
+    name: 'Kolczyk lilie XXI',
+    code: 'K/m/azur/48',
+  },
+];
+
+const dataRandom = [
+  {
+    name: 'Z wycieczki',
+    code: 'Skąd wracają Litwini?',
+  },
+  {
+    name: '***** ***',
+    code: 'Call on me...',
   },
   {
     name: 'TestName3',
     code: 'TestCode3',
   },
   {
-    name: 'TestName4',
-    code: 'TestCode4',
+    name: 'E-żyje',
+    code: 'Gdzie Twoja mamusia, Potter?',
   },
   {
-    name: 'TestName5',
-    code: 'TestCode5',
+    name: 'Żałosna imitacja wieży astronomicznej',
+    code: 'Hogwart:',
   },
 ];
 
@@ -247,7 +347,9 @@ const createDataObject = () => {
       if (check[i].name === 'pierscionki')
         dataArr = dataArr.concat(dataPierscionki);
       anyChecked = true;
-      if (check[i].name === 'test') dataArr = dataArr.concat(dataTest);
+      if (check[i].name === 'kolczyki') dataArr = dataArr.concat(dataKolczyki);
+      anyChecked = true;
+      if (check[i].name === 'random') dataArr = dataArr.concat(dataRandom);
       anyChecked = true;
     } else {
       //continue;
