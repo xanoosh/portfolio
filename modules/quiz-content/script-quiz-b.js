@@ -1,6 +1,10 @@
 'use strict';
 
+const { log } = require('console');
+
 //Variables
+
+// dodane: pierscionki, koczyki, bransoletki skórzane, bransoletki z mini.., bransoletki sztywne,
 
 const dataPierscionki = [
   {
@@ -218,7 +222,7 @@ const dataElementy = [
     code: '109',
   },
   {
-    name: 'medalik płąski',
+    name: 'medalik płaski',
     code: '111',
   },
   {
@@ -510,6 +514,56 @@ const dataElementy = [
     code: '99',
   },
 ];
+const dataBransoletkiSkora = [
+  { name: 'bransoletka skórzana czarny/czerwony', code: 'BR/SK/CZ/CZ/8' },
+  { name: 'bransoletKA skórzanA fuksja/szary', code: 'BR/SK/SZ/F/8' },
+  { name: 'bransoletKA skórzana LAMPART włos', code: 'BR/SK/LAMPART/8' },
+  { name: 'haczyki małe pozłacane do bransoletek SK', code: 'BR/HACZYKI/M/PO' },
+  { name: 'haczyki małe srebrne do bransoletek SK', code: 'BR/HACZYKI/M/SR' },
+  { name: 'klamra pozłacana 8 mm do bransoletki SK', code: 'BR/KLAMRA/8/PO' },
+  { name: 'klamra posrebrzana 8 mm do bransoletki SK', code: 'BR/KLAMRA/8/SK' },
+  { name: 'wsuwane serce 8 mm BR SK', code: 'BR/3/8/PO' },
+  { name: 'wsuwana koniczyna 8 mm BR SK', code: 'BR/4/8/PO' },
+  { name: 'wsuwane złączone serca 8 mm BR', code: 'BR/47/8/PO' },
+  { name: 'wsuwana lilijka 8 mm BR SK', code: 'BR/48/8/SR' },
+  { name: 'wsuwana podkowa 8 mm BR SK', code: 'BR/52/8/SR' },
+  { name: 'wsuwany motylek 8 mm BR SK', code: 'BR/89/8/SR' },
+  { name: 'medalik kryształ BORDO', code: 'BR/1/KR/BORDO' },
+];
+const dataBransoletkiZmini = [
+  { name: 'bransoletka gwiazdka ażur', code: 'AZUR/MINI/26/BR' },
+  { name: 'bransoletka koniczyna ażur', code: 'AZUR/MINI/4/BR' },
+  { name: 'bransoletka złączone serca', code: 'AZUR/MINI/47/BR' },
+  { name: 'bransoletka z lilijką', code: 'AZUR/MINI/48/BR' },
+];
+const dataBransoletkiSztywne = [
+  { name: 'bransoletka eternity', code: 'BRANS/110' },
+  { name: 'bransoletka paw stal', code: 'BRANS/122' },
+  { name: 'bransoletka paw nowa', code: '160/OS/BRA/AZU' },
+  { name: 'bransoletka flowers', code: 'BRANS/125' },
+  { name: 'bransoletka Lune', code: 'BRANS/128' },
+  { name: 'bransoletka z kluczem i ażurowym sercem', code: 'BRANS/132' },
+  { name: 'bransoletka łyżeczka', code: 'BRANS/135' },
+  { name: 'bransoletka nieskończoność', code: 'BRANS/32' },
+  { name: 'bransoletka skrzydła', code: 'BRANS/98' },
+  { name: 'bransoletka ażurowa California', code: 'BRANS/AZUR/139' },
+  { name: 'bransoletka Caroline ST', code: 'BRANS/CAROLINE' },
+  { name: 'bransoletka ażurowe Lune', code: 'BRANS/M/AZUR' },
+  { name: 'bransoletka Monica', code: 'BRANS/MON' },
+  { name: 'bransoletka Penelope', code: 'BRANS/PEN' },
+  { name: 'bransoletka Infinity 60 mm PO', code: 'BRANS/INFINITY/60/PO' },
+];
+
+const dataBransoletkLancuszkowe = [
+  { name: 'Bransoletka łańcuszkowa supełki', code: 'LAN/BR/SUPEL' },
+  { name: 'Bransoletka łańcuszkowa nitka', code: 'LAN/BR/NITKA' },
+  { name: 'Bransoletka łańcuszkowa wąż cienki', code: 'LAN/BR/WAZ/C' },
+  { name: 'Bransoletka łańcuszkowa wąż gruby', code: 'LAN/BR/WAZ/G' },
+  { name: 'Bransoletka łańcuszkowa cienka', code: 'LAN/BR/CIENKI' },
+  { name: 'Bransoletka łańcuszkowa kulki', code: 'LANCUSZEK/K' },
+  { name: 'łańcuszek ST Germain', code: 'LANCU/STGERM' },
+  { name: 'Bransoletka łańcuszkowa 3 kulki', code: 'LAN/BR/TROJKI' },
+];
 
 let myScore = 0;
 let maxScore = 0;
@@ -653,6 +707,18 @@ const createDataObject = () => {
       if (check[i].name === 'kolczyki') dataArr = dataArr.concat(dataKolczyki);
       anyChecked = true;
       if (check[i].name === 'elementy') dataArr = dataArr.concat(dataElementy);
+      anyChecked = true;
+      if (check[i].name === 'bransoletkiskora')
+        dataArr = dataArr.concat(dataBransoletkiSkora);
+      anyChecked = true;
+      if (check[i].name === 'bransoletkizmini')
+        dataArr = dataArr.concat(dataBransoletkiZmini);
+      anyChecked = true;
+      if (check[i].name === 'bransoletkisztywne')
+        dataArr = dataArr.concat(dataBransoletkiSztywne);
+      anyChecked = true;
+      if (check[i].name === 'bransoletkilancuszkowe')
+        dataArr = dataArr.concat(dataBransoletkLancuszkowe);
       anyChecked = true;
     } else {
       //continue;
