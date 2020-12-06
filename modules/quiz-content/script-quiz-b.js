@@ -1,7 +1,5 @@
 'use strict';
 
-const { log } = require('console');
-
 //Variables
 
 // dodane: pierscionki, koczyki, bransoletki skórzane, bransoletki z mini.., bransoletki sztywne,
