@@ -364,6 +364,7 @@ const putNewVals = (array) => {
   <button class="answer" value="${checkName(array[3].code)}">${
     array[3].name
   }</button>`;
+  answerBox.classList.add('answer-box');
   quizContainer.appendChild(heading);
   quizContainer.appendChild(answerBox);
 };
@@ -407,7 +408,7 @@ const addClickEvents = () => {
 const resetQuiz = () => {
   const current = [
     document.querySelector('#quiz h2'),
-    document.querySelectorAll('#quiz .answer'),
+    document.querySelector('.answer-box'),
   ];
   if (current[0] === null || current[0] === undefined) {
     getFourVals();
@@ -430,9 +431,7 @@ const resetQuiz = () => {
       'questionsTotal'
     ).innerText = `${myScore}/${maxScore}`;
     current[0].remove();
-    for (let i = 0; i < current[1].length; i++) {
-      current[1][i].remove();
-    }
+    current[1].remove();
     getFourVals();
     putNewVals(fourValArr);
     addClickEvents();
