@@ -272,11 +272,6 @@ const createDataObject = () => {
   const check = document.querySelectorAll('.check');
   for (let i = 0; i < check.length; i++) {
     if (check[i].checked === true) {
-      if (check[i].name === 'pierscionki')
-        dataArr = dataArr.concat(dataPierscionki);
-      anyChecked = true;
-      if (check[i].name === 'kolczyki') dataArr = dataArr.concat(dataKolczyki);
-      anyChecked = true;
       if (check[i].name === '1of10') dataArr = dataArr.concat(data1of10);
       anyChecked = true;
       if (check[i].name === 'random') dataArr = dataArr.concat(dataRandom);
