@@ -299,7 +299,7 @@ const dataElementy = [
   },
   {
     name: 'kolekcja luck',
-    code: '150',
+    code: '152',
   },
   {
     name: 'zawieszka płaska cross',
@@ -322,7 +322,7 @@ const dataElementy = [
     code: '23',
   },
   {
-    name: 'kłodka',
+    name: 'kłódka',
     code: '24',
   },
   {

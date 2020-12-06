@@ -145,7 +145,6 @@ let dataArr = [];
 const quizContainer = document.getElementById('quiz');
 const resetBtn = document.getElementById('reset');
 const answerBtn = document.getElementById('answer');
-
 let fourValArr = [];
 
 //Functions
@@ -236,6 +235,7 @@ const addClickEvents = () => {
 
 //reset values on click
 const resetQuiz = () => {
+  quizContainer.classList.add('animate');
   const current = [
     document.querySelector('#quiz h2'),
     document.querySelector('.answer-box'),
@@ -254,6 +254,8 @@ const resetQuiz = () => {
         }
       });
     }
+    quizContainer.classList.toggle('animate');
+    quizContainer.classList.toggle('animate');
   } else {
     maxScore++;
     myScoreSpan.innerText = Math.trunc((myScore / maxScore) * 100);
@@ -265,8 +267,14 @@ const resetQuiz = () => {
     getFourVals();
     putNewVals(fourValArr);
     addClickEvents();
+    quizContainer.classList.toggle('animate');
+    console.log(quizContainer);
+    quizContainer.classList.toggle('animate');
+    console.log(quizContainer);
   }
+  setTimeout(resetQuiz, 7000);
 };
+//
 let anyChecked = false;
 const createDataObject = () => {
   const check = document.querySelectorAll('.check');
@@ -288,6 +296,7 @@ const createDataObject = () => {
     getFourVals();
     resetQuiz();
     addClickEvents();
+    //quizContainer.classList.add('animate');
   }
 };
 
