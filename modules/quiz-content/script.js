@@ -75,84 +75,83 @@ const dataPierscionki = [
 
 const dataKolczyki = [
   {
-    name: 'Kolczyk clover',
+    name: 'Kolczyki clover',
     code: '148',
   },
   {
-    name: 'Kolczyk medalik',
+    name: 'Kolczyki medalik',
     code: 'K/1/8',
   },
   {
-    name: 'Kolczyk eternity',
+    name: 'Kolczyki eternity',
     code: 'K/110',
   },
   {
-    name: 'Kolczyk biarritz',
+    name: 'Kolczyki biarritz',
     code: 'K/123',
   },
   {
-    name: 'Kolczyk Flowers',
+    name: 'Kolczyki Flowers',
     code: 'K/125',
   },
   {
-    name: 'Kolczyk zwierzaki',
+    name: 'Kolczyki zwierzaki',
     code: 'K/127',
   },
   {
-    name: 'Kolczyk lune',
+    name: 'Kolczyki lune',
     code: 'K/128',
   },
   {
-    name: 'Kolczyk north star',
+    name: 'Kolczyki north star',
     code: 'K/134',
   },
   {
-    name: 'Kolczyk love',
+    name: 'Kolczyki love',
     code: 'K/136/love',
   },
   {
-    name: 'Kolczyk Olive',
+    name: 'Kolczyki Olive',
     code: 'K/143/15',
   },
   {
-    name: 'Kolczyk koniczyna',
+    name: 'Kolczyki koniczyna',
     code: 'K/2/8',
   },
   {
-    name: 'Kolczyk gwiazdka',
+    name: 'Kolczyki gwiazdka',
     code: 'K/26/8',
   },
   {
-    name: 'Kolczyk serce',
+    name: 'Kolczyki serce',
     code: 'K/3/8',
   },
   {
-    name: 'Kolczyk nieskończoność',
+    name: 'Kolczyki nieskończoność',
     code: 'K/32/8',
   },
   {
-    name: 'Kolczyk miś',
+    name: 'Kolczyki miś',
     code: 'K/41/8',
   },
   {
-    name: 'Kolczyk skrzydła',
+    name: 'Kolczyki skrzydła',
     code: 'K/98',
   },
   {
-    name: 'Kolczyk paw',
+    name: 'Kolczyki paw',
     code: 'K/122',
   },
   {
-    name: 'Kolczyk sunshine',
+    name: 'Kolczyki sunshine',
     code: 'K/azur/126',
   },
-  // DUPLICATE
-  // {
-  //   name: 'Kolczyk North Star',
-  //   code: 'K/azur/134',
-  // },
   {
-    name: 'Kolczyk oko proroka',
+    name: 'Kolczyki ażurowe North Star',
+    code: 'K/azur/134',
+  },
+  {
+    name: 'Kolczyki oko proroka',
     code: 'K/azur/137',
   },
   {
@@ -164,11 +163,11 @@ const dataKolczyki = [
     code: 'K/azur/3E/3',
   },
   {
-    name: 'Kolczyk z Piórem',
+    name: 'Kolczyki z Piórem',
     code: 'K/m/115',
   },
   {
-    name: 'Kolczyk lilie XXI',
+    name: 'Kolczyki lilie XXI',
     code: 'K/m/azur/48',
   },
 ];
@@ -183,8 +182,8 @@ const dataRandom = [
     code: 'Call on me...',
   },
   {
-    name: 'TestName3',
-    code: 'TestCode3',
+    name: '3*6 czyli 18',
+    code: 'Ile nóg ma padalec?',
   },
   {
     name: 'E-żyje',
