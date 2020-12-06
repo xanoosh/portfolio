@@ -248,11 +248,15 @@ const data1of10 = [
   },
   {
     name: 'Pluto to pies',
-    code: 'Pluton stanowi część kompani czy kompania jest częścią plutonu?',
+    code: 'Pluton stanowi część kompanii czy kompania jest częścią plutonu?',
   },
   {
     name: 'Elektryczność',
     code: 'Co jest źródłem światła w lampie LED?',
+  },
+  {
+    name: 'Trzymają w ręce takie lampki no i nam świecą',
+    code: 'Czy planetoidy są źródłami światła?',
   },
 ];
 

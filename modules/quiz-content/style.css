@@ -55,10 +55,10 @@ button:focus {
 
 .answer {
   transition: all 0.3s ease-in-out;
-  font-size: 18px;
+  font-size: 16px;
   width: 80vw !important;
   margin-bottom: 20px;
-  height: 55px !important;
+  padding: 10px 25px;
   display: block;
 }
 
