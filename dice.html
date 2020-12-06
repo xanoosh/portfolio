@@ -4,7 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="modules/dice-content/style.css" />
+    <!--css versioning using js random number-->
+    <script>
+      document.write(
+        ` <link rel="stylesheet" href="modules/dice-content/style.css?v=${
+          Math.trunc(Math.random() * 10000) + 1
+        }" />`
+      );
+    </script>
+    <!-- <link rel="stylesheet" href="modules/dice-content/style.css" /> -->
     <title>Dice Game</title>
   </head>
   <body>

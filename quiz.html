@@ -7,7 +7,15 @@
     <style>
       @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
     </style>
-    <link rel="stylesheet" href="modules/quiz-content/style.css" />
+    <!--css versioning using js random number-->
+    <script>
+      document.write(
+        `<link rel="stylesheet" href="modules/quiz-content/style.css?v=${
+          Math.trunc(Math.random() * 10000) + 1
+        }" />`
+      );
+    </script>
+    <!-- <link rel="stylesheet" href="modules/quiz-content/style.css?v=1" /> -->
     <title>Quiz</title>
   </head>
   <body>

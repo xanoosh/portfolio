@@ -8,7 +8,18 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!--css versioning using js random number-->
+    <script>
+      document.write(
+        ` <link rel="stylesheet" href="modules/styles/TMstyle.css?v=${
+          Math.trunc(Math.random() * 10000) + 1
+        }" />`
+      );
+    </script>
     <link rel="stylesheet" href="modules/styles/TMstyle.css" />
     <!--JS PDF library-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
