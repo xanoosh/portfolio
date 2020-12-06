@@ -108,6 +108,15 @@ const dataRandom = [
     code: 'Więcej niż jedno zwierze to:',
   },
   {
+    name: 'Jak księciunio',
+    code: 'Jak upije się menel za 2 złote?',
+  },
+  {
+    name: 'Chema mie najczęściej interesuje, nie podoba mi się!',
+    code: 'Co pana najbardziej denerwuje?',
+  },
+  //hari pota
+  {
     name: 'E-żyje',
     code: 'Gdzie Twoja mamusia, Potter?',
   },
@@ -116,12 +125,74 @@ const dataRandom = [
     code: 'Hogwart:',
   },
   {
+    name: 'Brawa',
+    code: 'Co Dumbledore chce przed rozpoczęciem uczty?',
+  },
+  {
+    name: 'Nie!',
+    code: 'No, a ty ciągle tutaj?',
+  },
+  {
+    name: 'Raz nie a raz nie. Wiesz, i tak miałem szczęście.',
+    code: 'Bardzo cię boli, Draco?',
+  },
+  {
+    name: 'Przykro mi z powodu twojego ojca chrzestnego.',
+    code: 'Co zawsze powtarza matka Luny Lovegood?',
+  },
+  {
+    name: 'Neville.',
+    code: 'Musicie sobie wyobrazić kształt, który jest zabawny, na przykład...',
+  },
+  {
+    name: 'Ty zostań i usuń troche kamieni, ja idę szukać Ginny.',
+    code: 'Dobra i co teraz?',
+  },
+  {
     name: 'jednym z nas',
     code: '-Jest jednym z nas. -Czyli kim?',
   },
   {
     name: 'Vera Verto',
     code: '-Jakim zaklęciem zmieniamy zwierzęta w puchary na wódę?',
+  },
+  {
+    name: 'peter pettigrew jest i pozostaje nadal... ojcem Harrego',
+    code: 'Co jest najgorsze?',
+  },
+  {
+    name: 'Gamoń',
+    code: 'kto się obudził?',
+  },
+  {
+    name: 'Potafił zmienić gwizdek w gwizdek, ewentualnie odwrotnie.',
+    code: 'Co ,wg Alastora Moodiego potrafił cedric diggory w wieku harrego?',
+  },
+  {
+    name: 'To zwyły, tępy osiłek.',
+    code: 'Kim jest fleur delacour?',
+  },
+  {
+    name: 'To orzech wskrzeszenia, przywołujący jednorożca zza grobu.',
+    code: 'Czym było trzecie insygnium śmierci?',
+  },
+  {
+    name: 'Dobrze znam nasze przepisy, Severusie.',
+    code: 'Zrzucamy bakłażany, smażymy z dwóch stron',
+  },
+  {
+    name: 'Sam-wiesz-kto, po tym jak Dumbledore zabił tego biedaka Cedrica.',
+    code: 'Kto polecił pani Figg mieć oko na Harrego?',
+  },
+  {
+    name: 'Super, harry!',
+    code:
+      'W szkole, gdy kumpel umiera na waszych oczach... wiecie jak to jest.',
+  },
+  {
+    name: 'Postanowili się zabić',
+    code:
+      'Co postanowili potterowie, gdy znaleźli się w śmiertelnym niebezpieczeństwie?',
   },
 ];
 
