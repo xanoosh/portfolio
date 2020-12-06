@@ -37,6 +37,7 @@ button:focus {
   background: #333533;
   transition: all 0.3s ease-in-out;
   border: 1px solid #333533;
+  cursor: pointer;
 }
 
 #reset,
@@ -100,6 +101,7 @@ button:focus {
 
 .disabled {
   pointer-events: none;
+  cursor: default;
 }
 
 .hidden {
