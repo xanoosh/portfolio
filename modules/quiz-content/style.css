@@ -49,10 +49,10 @@ button:focus {
 #reset,
 #create {
   position: absolute;
-  bottom: 70px;
-  width: 80px;
+  bottom: 75px;
+  width: 100px;
   margin-top: 7px;
-  padding: 8px 14px;
+  padding: 12px 20px;
 }
 
 .check {
