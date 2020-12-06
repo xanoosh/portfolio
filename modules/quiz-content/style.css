@@ -98,6 +98,12 @@ button:focus {
   flex-direction: column;
   z-index: 3;
 }
+.starter #create {
+  z-index: 5;
+}
+.starter.hidden #create {
+  z-index: -1;
+}
 
 .disabled {
   pointer-events: none;
