@@ -40,19 +40,18 @@ button:focus {
 }
 
 #quiz.animate::before {
-  animation: width-animation 7s linear infinite;
+  animation: width-animation 8s linear infinite;
 }
 
 #quiz h2 {
-  width: 100;
+  width: 100vw;
   font-size: 32px;
-  padding: 0 10px;
+  /* padding-left: 10px;
+  padding-right: 10px; */
   text-align: center;
   align-self: start;
   /* position: absolute; */
   margin-bottom: 30px;
-  left: 0;
-  right: 0;
   color: #fff;
 }
 @media (max-width: 700px) {

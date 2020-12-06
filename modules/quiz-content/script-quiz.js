@@ -268,11 +268,9 @@ const resetQuiz = () => {
     putNewVals(fourValArr);
     addClickEvents();
     quizContainer.classList.toggle('animate');
-    console.log(quizContainer);
     quizContainer.classList.toggle('animate');
-    console.log(quizContainer);
   }
-  setTimeout(resetQuiz, 7000);
+  setTimeout(resetQuiz, 8000);
 };
 //
 let anyChecked = false;
