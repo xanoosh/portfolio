@@ -115,6 +115,9 @@ const dataRandom = [
     name: 'Chema mie najczęściej interesuje, nie podoba mi się!',
     code: 'Co pana najbardziej denerwuje?',
   },
+];
+
+const dataHarry = [
   //hari pota
   {
     name: 'E-żyje',
@@ -350,6 +353,8 @@ const createDataObject = () => {
   for (let i = 0; i < check.length; i++) {
     if (check[i].checked === true) {
       if (check[i].name === '1of10') dataArr = dataArr.concat(data1of10);
+      anyChecked = true;
+      if (check[i].name === 'harry') dataArr = dataArr.concat(dataHarry);
       anyChecked = true;
       if (check[i].name === 'random') dataArr = dataArr.concat(dataRandom);
       anyChecked = true;
