@@ -1,22 +1,10 @@
 'use strict';
 
-/*
-1.object with parameters code - name
-2.get 3 random paramenters
-3.display 1 parameter code as h2 (append)
-4.display 3 answers (names) as input/radio or whatever - one of them is true
-5.button with click event - check selected if true show correct! else show u fucked up
-6. reset button event create new values
-*/
-
 //Variables
-let myScore = 0;
-let maxScore = 0;
-const myScoreSpan = document.getElementById('myScore');
 
-const dataArr = [
+const dataPierscionki = [
   {
-    name: 'Pierścionek zaręczynowy Zodiac',
+    name: 'Pierścionek Zodiac',
     code: '155/',
   },
   {
@@ -83,8 +71,47 @@ const dataArr = [
     name: 'Pierścionek Szafir Zielony',
     code: 'P/SZ/ZC',
   },
-  //to były wszystkie pierścionki
 ];
+
+const dataTest = [
+  {
+    name: 'TestName1',
+    code: 'TestCode1',
+  },
+  {
+    name: 'TestName2',
+    code: 'TestCode2',
+  },
+  {
+    name: 'TestName3',
+    code: 'TestCode3',
+  },
+  {
+    name: 'TestName4',
+    code: 'TestCode4',
+  },
+  {
+    name: 'TestName5',
+    code: 'TestCode5',
+  },
+];
+
+const dataX = [
+  {
+    name: 'x',
+    code: 'x',
+  },
+  {
+    name: 'x',
+    code: 'x',
+  },
+];
+
+let myScore = 0;
+let maxScore = 0;
+const myScoreSpan = document.getElementById('myScore');
+
+let dataArr = [];
 
 const quizContainer = document.getElementById('quiz');
 const resetBtn = document.getElementById('reset');
@@ -200,7 +227,9 @@ const resetQuiz = () => {
   } else {
     maxScore++;
     myScoreSpan.innerText = Math.trunc((myScore / maxScore) * 100);
-    console.log(myScore / maxScore) * 100;
+    document.getElementById(
+      'questionsTotal'
+    ).innerText = `${myScore}/${maxScore}`;
     current[0].remove();
     for (let i = 0; i < current[1].length; i++) {
       current[1][i].remove();
@@ -210,12 +239,35 @@ const resetQuiz = () => {
     addClickEvents();
   }
 };
+let anyChecked = false;
+const createDataObject = () => {
+  const check = document.querySelectorAll('.check');
+  for (let i = 0; i < check.length; i++) {
+    if (check[i].checked === true) {
+      console.log(`${check[i].name} was checked!`);
+      if (check[i].name === 'pierscionki')
+        dataArr = dataArr.concat(dataPierscionki);
+      anyChecked = true;
+      if (check[i].name === 'test') dataArr = dataArr.concat(dataTest);
+      anyChecked = true;
+    } else {
+      //continue;
+    }
+  }
+  if (anyChecked === false) {
+    alert('Check at least one value');
+  } else {
+    document.querySelector('.starter').classList.add('hidden');
+    //call when object is dataObject is created
+    getFourVals();
+    resetQuiz();
+    addClickEvents();
+  }
+};
 
-getFourVals();
+const btnCreate = document.getElementById('create');
 
-//reset to get it going
-resetQuiz();
-addClickEvents();
+btnCreate.addEventListener('click', createDataObject);
 
 //ŁOWCY CUDÓW => beczga
 //wykop => rosja, yt

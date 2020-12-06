@@ -11,11 +11,25 @@
     <title>quiz Basi</title>
   </head>
   <body>
-    <div class="container">
-      <div id="quiz">
-        <button onclick="resetQuiz()" id="reset">Next</button>
-        <h3 class="scoreFinal">Score: <span id="myScore">0</span>%</h3>
+    <div id="quiz">
+      <div class="starter">
+        <div class="boxes">
+          <div>
+            <input type="checkbox" class="check" name="pierscionki" checked />
+            <label for="pierscionki">Pierścionki</label>
+          </div>
+          <div>
+            <input type="checkbox" class="check" name="test" checked />
+            <label for="test">Test</label>
+          </div>
+        </div>
+        <button id="create">Start</button>
       </div>
+      <button onclick="resetQuiz()" id="reset">Next</button>
+      <h3 class="scoreFinal"><span id="myScore">0</span>%</h3>
+      <h3 class="scorePoint">
+        <span id="questionsTotal">0/0</span>
+      </h3>
     </div>
 
     <script src="modules/quiz-content/script.js"></script>
