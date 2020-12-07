@@ -50,6 +50,20 @@ const rollDice = function () {
   } else {
     switchPlayer();
   }
+  //dice animate function
+  diceEl.animate(
+    [
+      { transform: 'rotate(10deg)' },
+      { transform: 'rotate(-10deg)' },
+      { transform: 'rotate(10deg)' },
+      { transform: 'rotate(-10deg)' },
+      { transform: 'rotate(0deg)' },
+    ],
+    {
+      duration: 300,
+      iterations: 1,
+    }
+  );
 };
 
 //score hold function

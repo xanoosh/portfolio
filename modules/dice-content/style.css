@@ -55,6 +55,30 @@ main {
   font-weight: 300;
   margin-bottom: 1rem;
 }
+.name:after {
+  content: '';
+  background: url('dice-6.png') center no-repeat;
+  background-size: cover;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 12px;
+  left: -40px;
+  z-index: 10;
+  opacity: 0;
+}
+.name:before {
+  content: '';
+  background: url('dice-6.png') center no-repeat;
+  background-size: cover;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 12px;
+  right: -38px;
+  z-index: 10;
+  opacity: 0;
+}
 
 .score {
   font-size: 8rem;
@@ -73,7 +97,11 @@ main {
   font-weight: 400;
 }
 
-.player--active .current {
+.player .current {
+  opacity: 0;
+}
+
+.player.player--active .current {
   opacity: 1;
 }
 
@@ -152,9 +180,9 @@ main {
 
 .dice {
   position: absolute;
-  left: 50%;
+  left: 45%;
   top: 16.5rem;
-  transform: translateX(-50%);
+  /* transform: translateX(-50%); */
   height: 10rem;
   box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
 }
@@ -167,6 +195,13 @@ main {
 .player--winner .name {
   font-weight: 700;
   color: #c7365f;
+}
+
+.player--winner .name::after {
+  opacity: 1;
+}
+.player--winner .name::before {
+  opacity: 1;
 }
 
 .hidden {
