@@ -333,6 +333,7 @@ const putNewVals = (array) => {
   //append html from threValArr
   const heading = document.createElement('h2');
   const questionNumber = document.createElement('p');
+  questionNumber.classList.add('question-number');
   heading.innerHTML = `${array[0].code}`;
   questionNumber.innerHTML = `${maxScore + 1}.`;
   shuffleArray(array);
@@ -447,7 +448,7 @@ restartBtn.addEventListener('click', function () {
   myScore = 0;
   maxScore = 0;
   document.querySelector('#quiz h2').remove();
-  document.querySelector('#quiz p').remove();
+  document.querySelector('#quiz .question-number').remove();
   document.querySelector('.answer-box').remove();
   //document.querySelector('#quiz h2').style.opacity = 0;
   //document.querySelector('#quiz .answer-box').style.opacity = 0;
