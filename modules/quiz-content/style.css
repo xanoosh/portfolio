@@ -83,6 +83,7 @@ html body #quiz #winning-screen.bg {
 }
 #quiz p {
   width: 100%;
+  font-weight: bold;
   text-align: center;
   align-self: start;
   font-size: 18px;
