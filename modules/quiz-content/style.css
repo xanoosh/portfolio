@@ -92,8 +92,8 @@ html body #quiz #winning-screen.bg {
   #quiz h2 {
     font-size: 22px !important;
   }
-  #quiz h2::first-line {
-    font-size: 10px;
+  #quiz p {
+    font-size: 11px;
   }
 }
 
