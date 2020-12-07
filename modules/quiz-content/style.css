@@ -40,7 +40,34 @@ button:focus {
 }
 
 #quiz.animate::before {
-  animation: width-animation 8s linear infinite;
+  animation: width-animation 9s linear infinite;
+}
+
+#winning-screen {
+  background: #242423;
+  /* transition: all 0.3s ease-in-out; */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 3;
+}
+#winning-screen h1 {
+  text-align: center;
+  line-height: 50px;
+}
+#winning-screen h1::first-line {
+  font-size: 50px;
+}
+
+html body #quiz #winning-screen.bg {
+  background: #242423 !important;
+  opacity: 1 !important;
 }
 
 #quiz h2 {
@@ -54,9 +81,19 @@ button:focus {
   margin-bottom: 30px;
   color: #fff;
 }
+#quiz p {
+  width: 100%;
+  text-align: center;
+  align-self: start;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
 @media (max-width: 700px) {
   #quiz h2 {
     font-size: 22px !important;
+  }
+  #quiz h2::first-line {
+    font-size: 10px;
   }
 }
 
@@ -71,7 +108,8 @@ button:focus {
 }
 
 #reset,
-#create {
+#create,
+#restart {
   position: absolute;
   bottom: 75px;
   width: 100px;
@@ -145,8 +183,8 @@ button:focus {
 }
 
 .hidden {
-  pointer-events: none;
-  opacity: 0;
+  pointer-events: none !important;
+  opacity: 0 !important;
 }
 
 .answer.border {

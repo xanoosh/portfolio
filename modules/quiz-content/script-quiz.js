@@ -249,7 +249,9 @@ const getFourVals = () => {
 const putNewVals = (array) => {
   //append html from threValArr
   const heading = document.createElement('h2');
+  const questionNumber = document.createElement('p');
   heading.innerHTML = `${array[0].code}`;
+  questionNumber.innerHTML = `${maxScore + 1}.`;
   shuffleArray(array);
   const answerBox = document.createElement('div');
   const checkName = (name) => (heading.innerHTML === name ? true : false);
@@ -267,6 +269,7 @@ const putNewVals = (array) => {
     array[3].name
   }</button>`;
   answerBox.classList.add('answer-box');
+  quizContainer.appendChild(questionNumber);
   quizContainer.appendChild(heading);
   quizContainer.appendChild(answerBox);
 };
@@ -306,12 +309,13 @@ const addClickEvents = () => {
   }
 };
 
-//reset values on click
+//reset question and button in a loop
 const resetQuiz = () => {
   quizContainer.classList.add('animate');
   const current = [
     document.querySelector('#quiz h2'),
     document.querySelector('.answer-box'),
+    document.querySelector('#quiz p'),
   ];
   if (current[0] === null || current[0] === undefined) {
     getFourVals();
@@ -332,22 +336,64 @@ const resetQuiz = () => {
   } else {
     maxScore++;
     myScoreSpan.innerText = Math.trunc((myScore / maxScore) * 100);
-    document.getElementById(
-      'questionsTotal'
-    ).innerText = `${myScore}/${maxScore}`;
+    document.getElementById('questionsTotal').innerText = `${myScore}/20`;
     current[0].remove();
     current[1].remove();
+    current[2].remove();
     getFourVals();
     putNewVals(fourValArr);
     addClickEvents();
     quizContainer.classList.toggle('animate');
     quizContainer.classList.toggle('animate');
   }
-  setTimeout(resetQuiz, 8000);
+  maxScore === 20 ? winFunction() : setTimeout(resetQuiz, 9000);
 };
+
+const restartBtn = document.getElementById('restart');
+console.log(restartBtn);
+
+restartBtn.addEventListener('click', function () {
+  myScore = 0;
+  maxScore = 0;
+  document.querySelector('#quiz h2').remove();
+  document.querySelector('#quiz p').remove();
+  document.querySelector('.answer-box').remove();
+  //document.querySelector('#quiz h2').style.opacity = 0;
+  //document.querySelector('#quiz .answer-box').style.opacity = 0;
+  document.querySelector('#quiz .scoreFinal').style.opacity = 0;
+  document.querySelector('#quiz .scorePoint').style.opacity = 0;
+  winningScreen.classList.toggle('hidden');
+  document.querySelector('.starter').classList.remove('hidden');
+  document.querySelector('#winning-screen h1').remove();
+  clearTimeout(setTimeout(resetQuiz, 8000));
+  // winningScreen.classList.toggle('bg');
+});
+
+const winningScreen = document.getElementById('winning-screen');
+const winFunction = () => {
+  // winningScreen.classList.toggle('bg');
+  winningScreen.classList.toggle('hidden');
+  quizContainer.classList.toggle('animate');
+  const finalScore = Math.trunc((myScore / maxScore) * 100);
+  const messageWin = document.createElement('h1');
+  if (finalScore <= 50) {
+    messageWin.innerHTML = `${finalScore}%<br/>Try watching more youtube videos`;
+  } else if (finalScore <= 60 && finalScore > 50) {
+    messageWin.innerHTML = `${finalScore}%<br/>Not Bad!`;
+  } else if (finalScore > 60 && finalScore <= 80) {
+    messageWin.innerHTML = `${finalScore}%<br/>Very nice!`;
+  } else if (finalScore > 80 && finalScore < 100) {
+    messageWin.innerHTML = `${finalScore}%<br/>Wow!`;
+  } else {
+    messageWin.innerHTML = `${finalScore}%<br/>Dobre!`;
+  }
+  winningScreen.appendChild(messageWin);
+};
+
 //
 let anyChecked = false;
 const createDataObject = () => {
+  dataArr = [];
   const check = document.querySelectorAll('.check');
   for (let i = 0; i < check.length; i++) {
     if (check[i].checked === true) {
@@ -365,11 +411,15 @@ const createDataObject = () => {
     alert('Check at least one value');
   } else {
     document.querySelector('.starter').classList.add('hidden');
-    //call when object is dataObject is created
+    myScoreSpan.innerText = 0;
+    document.getElementById('questionsTotal').innerText = `0/20`;
     getFourVals();
     resetQuiz();
     addClickEvents();
-    //quizContainer.classList.add('animate');
+    // document.querySelector('#quiz h2').style.opacity = 1;
+    // document.querySelector('#quiz .answer-box').style.opacity = 1;
+    document.querySelector('#quiz .scoreFinal').style.opacity = 1;
+    document.querySelector('#quiz .scorePoint').style.opacity = 1;
   }
 };
 
