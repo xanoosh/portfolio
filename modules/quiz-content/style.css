@@ -62,7 +62,9 @@ button:focus {
   line-height: 50px;
 }
 #winning-screen h1::first-line {
-  font-size: 50px;
+  font-size: 55px;
+  color: #07c837;
+  padding-bottom: 20px;
 }
 
 html body #quiz #winning-screen.bg {
