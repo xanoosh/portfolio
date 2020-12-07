@@ -88,6 +88,42 @@ const data1of10 = [
     name: 'Trzymają w ręce takie lampki no i nam świecą',
     code: 'Czy planetoidy są źródłami światła?',
   },
+  {
+    name: 'trzy',
+    code: 'Ile razy szatan ograł jezusa w hokeju na trawie?',
+  },
+  {
+    name: 'Z ropy naftowej',
+    code: 'Z którego surowca mineralnego jest produkowana coca-cola?',
+  },
+  {
+    name: 'żerują na liściach, a ich larwy żerują na korzeniach',
+    code: 'Czy pan jacek, pan arkadiusz i pan wociech są szkodnikami?',
+  },
+  {
+    name: 'Raczej nie...',
+    code: 'Kto jest założycielem zamościa? Ja?',
+  },
+  {
+    name: 'Edward Rydz-Śmigły',
+    code: 'kto dowodził armią gotów w roku 410?',
+  },
+  {
+    name: 'Węże mają tak krótkie łapki że nie mają zdolności chodzenia',
+    code: 'Czy węże potrafią chodzić?',
+  },
+  {
+    name: 'drogę do domu',
+    code: 'Co zgubił kopciuszek podczas ucieczki z balu?',
+  },
+  {
+    name: '312',
+    code: 'Ile dni ma sierpień? (Można się pomylic o rok)',
+  },
+  {
+    name: 'Harrison Ford',
+    code: 'Kto widnieje w herbie warszawy?',
+  },
 ];
 
 const dataRandom = [
@@ -163,6 +199,18 @@ const dataHarry = [
     code: 'Co jest najgorsze?',
   },
   {
+    name: 'tak',
+    code: 'Czy harry wie jak to jest, gdy się tak leży codziennie?',
+  },
+  {
+    name: 'Kim jestem?',
+    code: 'Posłuchaj "tylko harry", jesteś czarodziejem',
+  },
+  {
+    name: 'Jaasne',
+    code: 'Ron tu był? nic mu nie jest? Hermiona żyje?',
+  },
+  {
     name: 'Gamoń',
     code: 'kto się obudził?',
   },
@@ -195,6 +243,10 @@ const dataHarry = [
     name: 'Postanowili się zabić',
     code:
       'Co postanowili potterowie, gdy znaleźli się w śmiertelnym niebezpieczeństwie?',
+  },
+  {
+    name: 'Dziewięć!',
+    code: 'Ile artur wesley miał interwencji w nocy?',
   },
 ];
 
