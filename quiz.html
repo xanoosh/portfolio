@@ -46,7 +46,13 @@
         <span id="questionsTotal">0/30</span>
       </h3>
     </div>
-
-    <script src="modules/quiz-content/script-quiz.js"></script>
+    <script>
+      document.write(
+        `<script src="modules/quiz-content/script-quiz.js?v="${
+          Math.trunc(Math.random() * 10000) + 1
+        }"><\/script>`
+      );
+    </script>
+    <!-- <script src="modules/quiz-content/script-quiz.js"></script> -->
   </body>
 </html>
