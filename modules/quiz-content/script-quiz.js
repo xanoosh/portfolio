@@ -118,7 +118,6 @@ const dataRandom = [
 ];
 
 const dataHarry = [
-  //hari pota
   {
     name: 'E-żyje',
     code: 'Gdzie Twoja mamusia, Potter?',
@@ -169,7 +168,7 @@ const dataHarry = [
   },
   {
     name: 'Potafił zmienić gwizdek w gwizdek, ewentualnie odwrotnie.',
-    code: 'Co ,wg Alastora Moodiego potrafił cedric diggory w wieku harrego?',
+    code: 'Co, wg Alastora Moodiego potrafił cedric diggory w wieku harrego?',
   },
   {
     name: 'To zwyły, tępy osiłek.',
