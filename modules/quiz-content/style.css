@@ -28,8 +28,18 @@ button:focus {
     width: 100%;
   }
 }
+#quiz .timer {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 0%;
+  background: #07c837;
+  animation: width-animation 9s linear infinite;
+}
 
-#quiz::before {
+/* #quiz::before {
   content: '';
   position: absolute;
   top: 0;
@@ -41,7 +51,7 @@ button:focus {
 
 #quiz.animate::before {
   animation: width-animation 9s linear infinite;
-}
+} */
 
 #winning-screen {
   background: #242423;
@@ -57,14 +67,18 @@ button:focus {
   flex-direction: column;
   z-index: 3;
 }
-#winning-screen h1 {
+#winning-screen h1 p {
   text-align: center;
-  line-height: 50px;
+  line-height: 45px;
+  font-size: 30px;
 }
-#winning-screen h1::first-line {
-  font-size: 55px;
+#winning-screen h1 span {
+  text-align: center;
+  line-height: 70px;
+  font-size: 60px;
   color: #07c837;
-  padding-bottom: 20px;
+  padding-bottom: 80px;
+  display: block;
 }
 
 html body #quiz #winning-screen.bg {
@@ -84,20 +98,13 @@ html body #quiz #winning-screen.bg {
   color: #fff;
 }
 #quiz p {
+  margin-top: -50px;
   width: 100%;
   font-weight: bold;
   text-align: center;
   align-self: start;
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-@media (max-width: 700px) {
-  #quiz h2 {
-    font-size: 22px !important;
-  }
-  #quiz p {
-    font-size: 11px;
-  }
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 #quiz button {
@@ -114,7 +121,7 @@ html body #quiz #winning-screen.bg {
 #create,
 #restart {
   position: absolute;
-  bottom: 75px;
+  bottom: 50px;
   width: 100px;
   margin-top: 7px;
   padding: 12px 20px;
@@ -131,6 +138,29 @@ html body #quiz #winning-screen.bg {
   margin-bottom: 20px;
   padding: 10px 15px;
   display: block;
+}
+
+@media (max-width: 700px) {
+  #quiz h2 {
+    font-size: 22px !important;
+  }
+  #quiz p {
+    font-size: 14px;
+  }
+  #quiz .answer {
+    font-size: 14px;
+  }
+}
+@media (max-width: 450px) {
+  #quiz h2 {
+    font-size: 18px !important;
+  }
+  #quiz p {
+    font-size: 11px;
+  }
+  #quiz .answer {
+    font-size: 12px;
+  }
 }
 
 .answer-box {

@@ -124,6 +124,34 @@ const data1of10 = [
     name: 'Harrison Ford',
     code: 'Kto widnieje w herbie warszawy?',
   },
+  {
+    name: 'Matematykę',
+    code: 'Co należy kuć, póki gorące?',
+  },
+  {
+    name: 'Reymont',
+    code: 'Co władysław robi w budowlance?',
+  },
+  {
+    name: 'Wąż',
+    code: 'Jakie zwierze zawsze spada na 4 łapy?',
+  },
+  {
+    name: 'Siano',
+    code: 'Dokończ powiedzenie. Jaka praca, takie...',
+  },
+  {
+    name: 'Doopie',
+    code: 'W wierszu jana brzechwy, tytułowy leń siedzi na...',
+  },
+  {
+    name: '0',
+    code: 'W jakim wieku urodził się Kazimierz Przerwa-tetmajer?',
+  },
+  {
+    name: 'Musztardą',
+    code: 'Czym żywił się minotaur zamknięty w labiryncie?',
+  },
 ];
 
 const dataRandom = [
@@ -261,6 +289,9 @@ const dataX = [
   },
 ];
 
+//variable for time value
+let timeOutVar = '';
+
 let myScore = 0;
 let maxScore = 0;
 const myScoreSpan = document.getElementById('myScore');
@@ -307,19 +338,12 @@ const putNewVals = (array) => {
   shuffleArray(array);
   const answerBox = document.createElement('div');
   const checkName = (name) => (heading.innerHTML === name ? true : false);
-  answerBox.innerHTML = `
-  <button class="answer" value="${checkName(array[0].code)}">${
-    array[0].name
-  }</button>
-  <button class="answer" value="${checkName(array[1].code)}">${
-    array[1].name
-  }</button>
-  <button class="answer"value="${checkName(array[2].code)}">${
-    array[2].name
-  }</button>
-  <button class="answer" value="${checkName(array[3].code)}">${
-    array[3].name
-  }</button>`;
+
+  for (let i = 0; i < array.length; i++) {
+    answerBox.innerHTML += `<button class="answer" value="${checkName(
+      array[i].code
+    )}">${array[i].name}</button>`;
+  }
   answerBox.classList.add('answer-box');
   quizContainer.appendChild(questionNumber);
   quizContainer.appendChild(heading);
@@ -344,6 +368,17 @@ const makeBorderOnCorrect = () => {
   }
 };
 
+const toggleTimer = () => {
+  const exist = document.querySelector('.timer');
+  if (exist === null || exist === undefined) {
+    const timer = document.createElement('div');
+    timer.classList.add('timer');
+    quizContainer.appendChild(timer);
+  } else {
+    document.querySelector('.timer').remove();
+  }
+};
+
 const addClickEvents = () => {
   const answerBtns = document.querySelectorAll('.answer');
   for (let i = 0; i < answerBtns.length; i++) {
@@ -361,9 +396,13 @@ const addClickEvents = () => {
   }
 };
 
+//const animate = () => {};
+
 //reset question and button in a loop
 const resetQuiz = () => {
-  quizContainer.classList.add('animate');
+  // timeOutVar = setTimeout(resetQuiz, 9000);
+  clearTimeout(timeOutVar);
+  //quizContainer.classList.add('animate');
   const current = [
     document.querySelector('#quiz h2'),
     document.querySelector('.answer-box'),
@@ -383,8 +422,8 @@ const resetQuiz = () => {
         }
       });
     }
-    quizContainer.classList.toggle('animate');
-    quizContainer.classList.toggle('animate');
+    toggleTimer();
+    toggleTimer();
   } else {
     maxScore++;
     myScoreSpan.innerText = Math.trunc((myScore / maxScore) * 100);
@@ -395,10 +434,10 @@ const resetQuiz = () => {
     getFourVals();
     putNewVals(fourValArr);
     addClickEvents();
-    quizContainer.classList.toggle('animate');
-    quizContainer.classList.toggle('animate');
+    toggleTimer();
+    toggleTimer();
   }
-  maxScore === 20 ? winFunction() : setTimeout(resetQuiz, 9000);
+  maxScore === 20 ? winFunction() : (timeOutVar = setTimeout(resetQuiz, 9000));
 };
 
 const restartBtn = document.getElementById('restart');
@@ -417,7 +456,7 @@ restartBtn.addEventListener('click', function () {
   winningScreen.classList.toggle('hidden');
   document.querySelector('.starter').classList.remove('hidden');
   document.querySelector('#winning-screen h1').remove();
-  clearTimeout(setTimeout(resetQuiz, 8000));
+  clearTimeout(timeOutVar);
   // winningScreen.classList.toggle('bg');
 });
 
@@ -425,11 +464,11 @@ const winningScreen = document.getElementById('winning-screen');
 const winFunction = () => {
   // winningScreen.classList.toggle('bg');
   winningScreen.classList.toggle('hidden');
-  quizContainer.classList.toggle('animate');
+  toggleTimer();
   const finalScore = Math.trunc((myScore / maxScore) * 100);
   const messageWin = document.createElement('h1');
   if (finalScore <= 50) {
-    messageWin.innerHTML = `${finalScore}%<br/>Try watching more youtube videos`;
+    messageWin.innerHTML = `<span>${finalScore}%</span><p>Try watching more youtube videos</p>`;
   } else if (finalScore <= 60 && finalScore > 50) {
     messageWin.innerHTML = `${finalScore}%<br/>Not Bad!`;
   } else if (finalScore > 60 && finalScore <= 80) {
@@ -473,6 +512,7 @@ const createDataObject = () => {
     document.querySelector('#quiz .scoreFinal').style.opacity = 1;
     document.querySelector('#quiz .scorePoint').style.opacity = 1;
   }
+  toggleTimer();
 };
 
 const btnCreate = document.getElementById('create');
