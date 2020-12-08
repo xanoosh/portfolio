@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script>
+      document.write(
+        `<link rel="stylesheet" href="modules/rest-content/style.css?v=${
+          Math.trunc(Math.random() * 10000) + 1
+        }" />`
+      );
+    </script>
+    <title>Quiz</title>
+  </head>
+  <body>
+    <div id="quiz">
+      <div id="winning-screen" class="hidden">
+        <button id="restart">Restart</button>
+      </div>
+      <div class="starter">
+        <div class="boxes">
+          <div>
+            <label for="category">Category:</label>
+            <select name="category" id="category">
+              <option value="">All</option>
+              <option value="&category=9">General Knowledge</option>
+              <option value="&category=10">Books</option>
+              <option value="&category=11">Film</option>
+              <option value="&category=12">Music</option>
+              <option value="&category=15">Video Games</option>
+              <option value="&category=17">Science & Nature</option>
+              <option value="&category=18">Computers</option>
+              <option value="&category=20">Mythology</option>
+              <option value="&category=23">History</option>
+              <option value="&category=26">Celebrities</option>
+              <option value="&category=29">Comics</option>
+              <option value="&category=31">Anime & Manga</option>
+              <option value="&category=32">Cartoon & Animation</option>
+            </select>
+          </div>
+          <div>
+            <label for="difficulty">Difficulty</label>:</label>
+            <select name="difficulty" id="difficulty">
+              <option value="">All</option>
+              <option value="&difficulty=easy">Easy</option>
+              <option value="&difficulty=medium">Medium</option>
+              <option value="&difficulty=hard">Hard</option>
+            </select>
+          </div>
+          <div>
+           <label for="amount">Number of questions:</label>:</label>
+            <select name="amount" id="amount">
+              <option value="amount=20">20</option>
+              <option value="amount=10">10</option>
+              <option value="amount=40">40</option>
+              <option value="amount=50">50</option>
+            </select>
+          </div>
+        </div>
+        <button id="create">Start</button>
+      </div>
+      <button onclick="resetQuiz()" id="reset">Next</button>
+      <h3 class="scoreFinal"><span id="myScore">0</span>%</h3>
+      <h3 class="scorePoint">
+        <span id="questionsTotal">0/30</span>
+      </h3>
+    </div>
+    <script>
+      document.write(
+        `<script src="modules/rest-content/script-rest.js?v="${
+          Math.trunc(Math.random() * 10000) + 1
+        }"><\/script>`
+      );
+    </script>
+  </body>
+</html>
