@@ -3,6 +3,7 @@
   font-family: 'JetBrains Mono', monospace;
   text-transform: uppercase;
   color: #fff;
+  box-sizing: border-box;
 }
 button:focus {
   outline: none !important;
@@ -36,7 +37,7 @@ button:focus {
   height: 5px;
   width: 0%;
   background: #07c837;
-  animation: width-animation 9s linear infinite;
+  animation: width-animation 12s linear infinite;
 }
 
 #winning-screen {
@@ -75,6 +76,7 @@ html body #quiz #winning-screen.bg {
 #quiz h2 {
   width: 100vw;
   font-size: 32px;
+  padding: 0 10px;
   /* padding-left: 10px;
   padding-right: 10px; */
   text-align: center;
@@ -103,7 +105,7 @@ html body #quiz #winning-screen.bg {
   cursor: pointer;
 }
 
-#reset,
+#next,
 #create,
 #restart {
   position: absolute;
@@ -111,6 +113,25 @@ html body #quiz #winning-screen.bg {
   width: 100px;
   margin-top: 7px;
   padding: 12px 20px;
+  transition: all 3s ease-in-out;
+}
+@keyframes flicker {
+  0% {
+    color: #fff;
+  }
+  33% {
+    color: #07c837;
+  }
+  66% {
+    color: #fff;
+  }
+  99% {
+    color: #07c837;
+  }
+}
+
+#quiz #create.loading {
+  animation: flicker 3s ease-in-out;
 }
 
 .check {
@@ -208,4 +229,48 @@ html body #quiz #winning-screen.bg {
 
 .answer.border {
   border: 1px solid #07c837 !important;
+}
+
+/* select styling */
+.select {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 5px 20px;
+}
+.select-selected {
+  background-color: DodgerBlue;
+}
+.select label {
+  display: flex;
+  align-items: center;
+}
+.select select {
+  background: #333533;
+  position: relative;
+  padding: 5px 3px;
+  border: 1px solid #fff;
+}
+.select select:after {
+  position: absolute;
+  content: '';
+  z-index: 10;
+}
+
+@media (min-width: 440px) {
+  .select select {
+    width: 170px;
+  }
+  .select label {
+    width: 220px;
+    padding-right: 20px;
+  }
+}
+@media (max-width: 439px) {
+  .select select,
+  .select label {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
