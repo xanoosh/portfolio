@@ -155,6 +155,28 @@ html body #quiz #winning-screen.bg {
     font-size: 14px;
   }
   #quiz .answer {
+    font-size: 15px;
+  }
+}
+@media (max-width: 600px) {
+  #quiz h2 {
+    font-size: 20px !important;
+  }
+  #quiz p {
+    font-size: 13px;
+  }
+  #quiz .answer {
+    font-size: 14px;
+  }
+}
+@media (max-width: 500px) {
+  #quiz h2 {
+    font-size: 19px !important;
+  }
+  #quiz p {
+    font-size: 12px;
+  }
+  #quiz .answer {
     font-size: 14px;
   }
 }
@@ -166,7 +188,7 @@ html body #quiz #winning-screen.bg {
     font-size: 11px;
   }
   #quiz .answer {
-    font-size: 12px;
+    font-size: 13px;
   }
 }
 
