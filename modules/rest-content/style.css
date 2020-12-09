@@ -132,6 +132,7 @@ html body #quiz #winning-screen.bg {
 
 #quiz #create.loading {
   animation: flicker 3s ease-in-out;
+  pointer-events: none;
 }
 
 .check {
@@ -149,7 +150,18 @@ html body #quiz #winning-screen.bg {
 
 @media (max-width: 700px) {
   #quiz h2 {
-    font-size: 22px !important;
+    font-size: 23px !important;
+  }
+  #quiz p {
+    font-size: 15px;
+  }
+  #quiz .answer {
+    font-size: 16px;
+  }
+}
+@media (max-width: 600px) {
+  #quiz h2 {
+    font-size: 21px !important;
   }
   #quiz p {
     font-size: 14px;
@@ -158,7 +170,7 @@ html body #quiz #winning-screen.bg {
     font-size: 15px;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   #quiz h2 {
     font-size: 20px !important;
   }
@@ -169,27 +181,45 @@ html body #quiz #winning-screen.bg {
     font-size: 14px;
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 400px) {
   #quiz h2 {
-    font-size: 19px !important;
+    font-size: 18px !important;
   }
   #quiz p {
     font-size: 12px;
   }
   #quiz .answer {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 340px) {
   #quiz h2 {
-    font-size: 18px !important;
+    font-size: 17px !important;
   }
   #quiz p {
-    font-size: 11px;
+    font-size: 12px;
   }
   #quiz .answer {
     font-size: 13px;
   }
+}
+
+.boxes {
+  position: relative;
+}
+.boxes:after {
+  content: 'Error fetching data. Please try different configuration.';
+  position: absolute;
+  font-size: 15px;
+  top: -100px;
+  left: 20px;
+  color: #e3272d;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+.boxes.alert::after {
+  top: -65px;
+  opacity: 1;
 }
 
 .answer-box {

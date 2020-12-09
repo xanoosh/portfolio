@@ -1,7 +1,6 @@
 'use strict';
 
 const quizContainer = document.getElementById('quiz');
-
 //full questions array
 let quizArray = [];
 //API url
@@ -16,6 +15,8 @@ const myScoreSpan = document.getElementById('myScore');
 const winningScreen = document.getElementById('winning-screen');
 //button reset whole game
 const restartBtn = document.getElementById('restart');
+//box for select
+const boxes = document.querySelector('.boxes');
 //variable for time value
 let timeOutVar = '';
 //iterate through quiz
@@ -24,7 +25,8 @@ let loopIteration = 0;
 let myScore = 0;
 //how many questions
 let numberOfQuestions = 0;
-
+//current Api response
+let myResponse = {};
 // function for retrieving data from API
 const fetchApi = () => {
   //reset url value on function call
@@ -33,16 +35,15 @@ const fetchApi = () => {
   const category = document.getElementById('category').value;
   const difficulty = document.getElementById('difficulty').value;
   quizUrl = `https://opentdb.com/api.php?${amount}${category}${difficulty}&type=multiple`;
-
   const request = async () => {
     const response = await fetch(quizUrl);
     const json = await response.json();
     console.log(json);
+    myResponse = json;
     quizArray = await json.results;
   };
   request();
 };
-
 //create or remove timer bar
 const toggleTimer = () => {
   const exist = document.querySelector('.timer');
@@ -54,7 +55,6 @@ const toggleTimer = () => {
     document.querySelector('.timer').remove();
   }
 };
-
 //array shuffle function
 const shuffleArray = function (array) {
   let m = array.length,
@@ -68,7 +68,6 @@ const shuffleArray = function (array) {
   }
   return array;
 };
-
 //create question&answer nodes
 const gameLoop = (arrayEl) => {
   toggleTimer();
@@ -94,7 +93,6 @@ const gameLoop = (arrayEl) => {
   addClickEvents();
   timeOutVar = setTimeout(gameReset, 12000);
 };
-
 //reset values after loop iteration
 const gameReset = () => {
   toggleTimer();
@@ -111,7 +109,6 @@ const gameReset = () => {
   quizArray.shift();
   quizArray.length === 0 ? gameEnd() : gameLoop(quizArray[0]);
 };
-
 const gameEnd = () => {
   clearTimeout(timeOutVar);
   winningScreen.classList.toggle('hidden');
@@ -122,21 +119,38 @@ const gameEnd = () => {
   } else if (finalScore <= 50 && finalScore > 40) {
     messageWin.innerHTML = `<span>${finalScore}%</span><p>getting better</p>`;
   } else if (finalScore <= 60 && finalScore > 50) {
-    messageWin.innerHTML = `${finalScore}%<br/>Not Bad!`;
+    messageWin.innerHTML = `<span>${finalScore}%</span><p>Not Bad!</p>`;
   } else if (finalScore > 60 && finalScore <= 80) {
-    messageWin.innerHTML = `${finalScore}%<br/>Very nice!`;
+    messageWin.innerHTML = `<span>${finalScore}%</span><p>Very nice!</p>`;
   } else if (finalScore > 80 && finalScore < 100) {
-    messageWin.innerHTML = `${finalScore}%<br/>Wow!`;
+    messageWin.innerHTML = `<span>${finalScore}%</span><p>Wow!</p>`;
   } else {
-    messageWin.innerHTML = `${finalScore}%<br/>Dobre!`;
+    messageWin.innerHTML = `<span>${finalScore}%</span><p>Dobre!</p>`;
   }
   winningScreen.appendChild(messageWin);
 };
-
-const gameNew = () => {
-  console.log('gonna reset some values');
+const alertResponse = () => {
+  boxes.classList.add('alert');
+  quizArray = [];
+  quizUrl = '';
+  loopIteration = 0;
+  myScore = 0;
+  numberOfQuestions = 0;
+  initBtn.innerText = 'Start';
+  initBtn.classList.toggle('loading');
 };
-
+const gameNew = () => {
+  winningScreen.querySelector('h1').remove();
+  quizArray = [];
+  quizUrl = '';
+  loopIteration = 0;
+  myScore = 0;
+  numberOfQuestions = 0;
+  initBtn.innerText = 'Start';
+  initBtn.classList.toggle('loading');
+  winningScreen.classList.toggle('hidden');
+  document.querySelector('.starter').classList.toggle('hidden');
+};
 //click events for quiz answers
 const addClickEvents = () => {
   const answerBtns = document.querySelectorAll('.answer');
@@ -160,25 +174,24 @@ const addClickEvents = () => {
   }
 };
 
-//New set of questions on click
 nextBtn.addEventListener('click', gameReset);
-
 restartBtn.addEventListener('click', gameNew);
 
 //create new quizArray on click
 initBtn.addEventListener('click', async () => {
+  if (boxes.classList.contains('alert')) boxes.classList.remove('alert');
   fetchApi();
   initBtn.innerText = 'Loading';
-  initBtn.classList.add('loading');
+  initBtn.classList.toggle('loading');
   await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-  numberOfQuestions = quizArray.length;
-  document.querySelector('.starter').classList.add('hidden');
-  console.log('Loaded data:');
-  console.log(quizArray);
-  //setTimeout(console.log(quizArray), 3000);
-  gameLoop(quizArray[0]);
+  if (myResponse.response_code !== 0) {
+    alertResponse();
+  } else {
+    numberOfQuestions = quizArray.length;
+    document.querySelector('.starter').classList.toggle('hidden');
+    console.log('Loaded data:');
+    console.log(quizArray);
+    //setTimeout(console.log(quizArray), 3000);
+    gameLoop(quizArray[0]);
+  }
 });
-
-//To do:
-// -reset values in gameNew function to
-// -handle API errors (no data Available in alert box or something)
