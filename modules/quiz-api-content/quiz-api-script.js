@@ -1,35 +1,23 @@
 'use strict';
 
 const quizContainer = document.getElementById('quiz');
-//full questions array
 let quizArray = [];
-//API url
 let quizUrl = '';
-//Initialize btn
-const initBtn = document.getElementById('create');
-//btn next question
-const nextBtn = document.getElementById('next');
-//score tracker during game
-const myScoreSpan = document.getElementById('myScore');
-//final score container
-const winningScreen = document.getElementById('winning-screen');
-//button reset whole game
-const restartBtn = document.getElementById('restart');
-//box for select
-const boxes = document.querySelector('.boxes');
-//variable for time value
+let fetchResponse = {};
 let timeOutVar = '';
-//iterate through quiz
 let loopIteration = 0;
-//score container
 let myScore = 0;
-//how many questions
 let numberOfQuestions = 0;
-//current Api response
-let myResponse = {};
+const initBtn = document.getElementById('create');
+const nextBtn = document.getElementById('next');
+const myScoreSpan = document.getElementById('myScore');
+const winningScreen = document.getElementById('winning-screen');
+const restartBtn = document.getElementById('restart');
+const boxes = document.querySelector('.boxes');
+const questionsTotal = document.getElementById('questions-total');
+
 // function for retrieving data from API
 const fetchApi = () => {
-  //reset url value on function call
   quizUrl = '';
   const amount = document.getElementById('amount').value;
   const category = document.getElementById('category').value;
@@ -39,7 +27,7 @@ const fetchApi = () => {
     const response = await fetch(quizUrl);
     const json = await response.json();
     console.log(json);
-    myResponse = json;
+    fetchResponse = json;
     quizArray = await json.results;
   };
   request();
@@ -114,18 +102,23 @@ const gameEnd = () => {
   winningScreen.classList.toggle('hidden');
   const finalScore = Math.trunc((myScore / numberOfQuestions) * 100);
   const messageWin = document.createElement('h1');
-  if (finalScore <= 40) {
-    messageWin.innerHTML = `<span>${finalScore}%</span><p>keep practising</p>`;
+  const mesGen = (m) => `<span>${finalScore}%</span><p>${m}</p>`;
+  if (finalScore <= 30) {
+    messageWin.innerHTML = mesGen('keep practising');
+  } else if (finalScore <= 40 && finalScore > 30) {
+    messageWin.innerHTML = mesGen('ok');
   } else if (finalScore <= 50 && finalScore > 40) {
-    messageWin.innerHTML = `<span>${finalScore}%</span><p>getting better</p>`;
+    messageWin.innerHTML = mesGen('getting better');
   } else if (finalScore <= 60 && finalScore > 50) {
-    messageWin.innerHTML = `<span>${finalScore}%</span><p>Not Bad!</p>`;
-  } else if (finalScore > 60 && finalScore <= 80) {
-    messageWin.innerHTML = `<span>${finalScore}%</span><p>Very nice!</p>`;
-  } else if (finalScore > 80 && finalScore < 100) {
-    messageWin.innerHTML = `<span>${finalScore}%</span><p>Wow!</p>`;
+    messageWin.innerHTML = mesGen('Not Bad!');
+  } else if (finalScore <= 70 && finalScore > 60) {
+    messageWin.innerHTML = mesGen('Good!');
+  } else if (finalScore <= 80 && finalScore > 70) {
+    messageWin.innerHTML = mesGen('Very nice!');
+  } else if (finalScore < 100 && finalScore > 80) {
+    messageWin.innerHTML = mesGen('Wow!');
   } else {
-    messageWin.innerHTML = `<span>${finalScore}%</span><p>Dobre!</p>`;
+    mesGen('Epic Win');
   }
   winningScreen.appendChild(messageWin);
 };
@@ -162,6 +155,7 @@ const addClickEvents = () => {
           btn.classList.add('disabled');
         });
         myScore++;
+        questionsTotal.innerText = `${myScore}/${numberOfQuestions}`;
         myScoreSpan.innerText = Math.trunc((myScore / numberOfQuestions) * 100);
       } else if (answerBtns[i].value === 'false') {
         answerBtns[i].classList.add('false');
@@ -184,10 +178,11 @@ initBtn.addEventListener('click', async () => {
   initBtn.innerText = 'Loading';
   initBtn.classList.toggle('loading');
   await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-  if (myResponse.response_code !== 0) {
+  if (fetchResponse.response_code !== 0) {
     alertResponse();
   } else {
     numberOfQuestions = quizArray.length;
+    questionsTotal.innerText = `0/${numberOfQuestions}`;
     document.querySelector('.starter').classList.toggle('hidden');
     console.log('Loaded data:');
     console.log(quizArray);
