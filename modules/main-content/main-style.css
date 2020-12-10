@@ -1,3 +1,26 @@
 body {
   overflow-x: hidden;
 }
+nav {
+  height: 10vh;
+}
+
+section:first-of-type {
+  min-height: 90vh;
+}
+
+.list-group {
+  border-radius: 0;
+}
+
+.list-group-item.active {
+  /* background: #000;
+  border: 1px solid #000; */
+}
+
+.tab-content .tab-pane:first-letter {
+  font-size: 30px;
+  font-weight: 600;
+  color: #0d6efd;
+  padding-right: 5px;
+}
