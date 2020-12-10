@@ -182,15 +182,17 @@ initBtn.addEventListener('click', async () => {
   await new Promise((resolve, reject) => setTimeout(resolve, 3000));
   if (!window.navigator.onLine) {
     alertResponse('url');
-  } else if (window.navigator.onLine && fetchResponse.response_code !== 0) {
-    alertResponse('data');
   } else {
-    numberOfQuestions = quizArray.length;
-    questionsTotal.innerText = `0/${numberOfQuestions}`;
-    document.querySelector('.starter').classList.toggle('hidden');
-    console.log('Loaded data:');
-    console.log(quizArray);
-    //setTimeout(console.log(quizArray), 3000);
-    gameLoop(quizArray[0]);
+    if (window.navigator.onLine && fetchResponse.response_code !== 0) {
+      alertResponse('data');
+    } else {
+      numberOfQuestions = quizArray.length;
+      questionsTotal.innerText = `0/${numberOfQuestions}`;
+      document.querySelector('.starter').classList.toggle('hidden');
+      console.log('Loaded data:');
+      console.log(quizArray);
+      //setTimeout(console.log(quizArray), 3000);
+      gameLoop(quizArray[0]);
+    }
   }
 });
