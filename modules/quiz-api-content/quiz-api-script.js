@@ -180,19 +180,17 @@ initBtn.addEventListener('click', async () => {
   initBtn.innerText = 'Loading';
   initBtn.classList.toggle('loading');
   await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-  if (!window.navigator.onLine) {
-    alertResponse('url');
+  if (fetchResponse.response_code === 1) {
+    alertResponse('data');
+  } else if (fetchResponse.response_code === 0) {
+    numberOfQuestions = quizArray.length;
+    questionsTotal.innerText = `0/${numberOfQuestions}`;
+    document.querySelector('.starter').classList.toggle('hidden');
+    console.log('Loaded data:');
+    console.log(quizArray);
+    gameLoop(quizArray[0]);
   } else {
-    if (window.navigator.onLine && fetchResponse.response_code !== 0) {
-      alertResponse('data');
-    } else {
-      numberOfQuestions = quizArray.length;
-      questionsTotal.innerText = `0/${numberOfQuestions}`;
-      document.querySelector('.starter').classList.toggle('hidden');
-      console.log('Loaded data:');
-      console.log(quizArray);
-      //setTimeout(console.log(quizArray), 3000);
-      gameLoop(quizArray[0]);
-    }
+    alertResponse('url');
   }
+  fetchResponse = {};
 });
