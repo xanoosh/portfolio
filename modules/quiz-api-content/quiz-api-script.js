@@ -180,7 +180,7 @@ initBtn.addEventListener('click', async () => {
   initBtn.innerText = 'Loading';
   initBtn.classList.toggle('loading');
   await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-  if (fetchResponse.response_code === undefined) {
+  if (!window.navigator.onLine) {
     alertResponse('url');
   } else if (fetchResponse.response_code !== 0) {
     alertResponse('data');
