@@ -182,7 +182,7 @@ initBtn.addEventListener('click', async () => {
   await new Promise((resolve, reject) => setTimeout(resolve, 3000));
   if (!window.navigator.onLine) {
     alertResponse('url');
-  } else if (fetchResponse.response_code !== 0) {
+  } else if (window.navigator.onLine && fetchResponse.response_code !== 0) {
     alertResponse('data');
   } else {
     numberOfQuestions = quizArray.length;
