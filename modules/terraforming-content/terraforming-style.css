@@ -1,9 +1,11 @@
 @font-face {
   font-family: 'Prototype';
-  src: url('../font/Prototype.ttf');
+  src: url('font/Prototype.ttf');
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   /* box-sizing: border-box; */
   font-family: 'Prototype', Fallback, sans-serif;
   /* color: #4b66be; */
@@ -16,12 +18,12 @@ h1.title {
   margin-bottom: 30px;
 }
 
-.main-container{
+.main-container {
   min-width: 936px;
   margin: 0 auto;
   padding: 40px 0;
 }
-#mapContainer{
+#mapContainer {
   /* min-width:  936px; */
   /* margin: 0 auto; */
 }
@@ -62,7 +64,7 @@ div.hexagon {
 }
 
 /* btn container */
-.btn-row{
+.btn-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -79,7 +81,7 @@ div.hexagon {
 .btn:hover,
 .btn:active,
 .btn:visited,
-.btn:focus{
+.btn:focus {
   outline: none;
   padding: 10px 15px;
   border: none;
@@ -88,17 +90,17 @@ div.hexagon {
   border-radius: 0;
 }
 
-.btn-water{
+.btn-water {
   background-color: #4b66be !important;
   margin-right: 10px;
 }
-.btn-mars{
+.btn-mars {
   margin-left: 10px;
   background-color: #895234 !important;
 }
 
-.disabled{
+.disabled {
   pointer-events: none;
-  opacity: .7;
+  opacity: 0.7;
   cursor: not-allowed;
 }
