@@ -217,7 +217,21 @@ html body #quiz #winning-screen.bg {
   opacity: 0;
   transition: all 0.3s ease-in-out;
 }
+.boxes:before {
+  content: 'Error fetching data. Please check your internet connection.';
+  position: absolute;
+  font-size: 15px;
+  top: -100px;
+  left: 20px;
+  color: #e3272d;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
 .boxes.alert::after {
+  top: -65px;
+  opacity: 1;
+}
+.boxes.conn-err::before {
   top: -65px;
   opacity: 1;
 }

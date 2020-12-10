@@ -122,8 +122,10 @@ const gameEnd = () => {
   }
   winningScreen.appendChild(messageWin);
 };
-const alertResponse = () => {
-  boxes.classList.add('alert');
+const alertResponse = (message) => {
+  message === 'url'
+    ? boxes.classList.add('conn-err')
+    : boxes.classList.add('alert');
   quizArray = [];
   quizUrl = '';
   loopIteration = 0;
@@ -173,13 +175,15 @@ restartBtn.addEventListener('click', gameNew);
 
 //create new quizArray on click
 initBtn.addEventListener('click', async () => {
-  if (boxes.classList.contains('alert')) boxes.classList.remove('alert');
+  boxes.classList.remove('alert', 'conn-err');
   fetchApi();
   initBtn.innerText = 'Loading';
   initBtn.classList.toggle('loading');
   await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-  if (fetchResponse.response_code !== 0) {
-    alertResponse();
+  if (fetchResponse.response_code === undefined) {
+    alertResponse('url');
+  } else if (fetchResponse.response_code !== 0) {
+    alertResponse('data');
   } else {
     numberOfQuestions = quizArray.length;
     questionsTotal.innerText = `0/${numberOfQuestions}`;
