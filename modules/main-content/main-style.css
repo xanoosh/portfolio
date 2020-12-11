@@ -1,9 +1,9 @@
 body {
   overflow-x: hidden;
 }
-nav {
+/* nav {
   height: 10vh;
-}
+} */
 
 section:first-of-type {
   min-height: 90vh;
