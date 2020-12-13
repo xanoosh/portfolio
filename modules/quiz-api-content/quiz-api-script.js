@@ -79,7 +79,7 @@ const gameLoop = (arrayEl) => {
   quizContainer.appendChild(heading);
   quizContainer.appendChild(answerBox);
   addClickEvents();
-  timeOutVar = setTimeout(gameReset, 12000);
+  timeOutVar = setTimeout(gameReset, 15000);
 };
 //reset values after loop iteration
 const gameReset = () => {

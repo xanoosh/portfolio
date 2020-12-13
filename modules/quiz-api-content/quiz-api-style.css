@@ -37,7 +37,7 @@ button:focus {
   height: 5px;
   width: 0%;
   background: #07c837;
-  animation: width-animation 12s linear infinite;
+  animation: width-animation 15s linear infinite;
 }
 
 #winning-screen {
