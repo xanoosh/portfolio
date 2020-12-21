@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
+    </style>
+    <script>
+      document.write(
+        `<link rel="stylesheet" href="modules/recipe-api-content/recipe-api-style.css?v=${
+          Math.trunc(Math.random() * 10000) + 1
+        }" />`
+      );
+    </script>
+    <title>Recipe project</title>
+  </head>
+  <body>
+    <div id="content">
+      <h2>Click to get your recipe</h2>
+      <button id="init">Get recipe</button>
+    </div>
+    <script>
+      document.write(
+        `<script src="modules/recipe-api-content/recipe-api-script.js?v="${
+          Math.trunc(Math.random() * 10000) + 1
+        }"><\/script>`
+      );
+    </script>
+  </body>
+</html>
