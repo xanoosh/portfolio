@@ -1,6 +1,7 @@
 'use strict';
 
 const board = document.getElementById('board');
+const winningScreen = document.getElementById('win');
 const arrayBase = [
   'one',
   'two',
@@ -72,6 +73,15 @@ arrayBase.forEach((color) => {
 function checkColors() {
   const flipped = [];
   const memos = board.querySelectorAll('.memo');
+  // //toggle click event
+  // memos.forEach((memo) => {
+  //   memo.removeEventListener('click', function () {
+  //     if (!memo.classList.contains('done')) {
+  //       el.classList.toggle('flip');
+  //       checkColors();
+  //     }
+  //   });
+  // });
   memos.forEach((memo) => {
     if (memo.classList.contains('flip') && !memo.classList.contains('done'))
       flipped.push(memo);
@@ -95,11 +105,24 @@ function checkColors() {
       });
     }, 500);
   }
-}
+  let progress = [];
+  memos.forEach((memo) => {
+    if (memo.classList.contains('done')) {
+      progress.push(memo);
+    }
+  });
 
-AOS.init();
-let delayVal = 200;
-document.querySelectorAll(`[data-aos='fade-up']`).forEach((el) => {
-  el.setAttribute('data-aos-delay', delayVal);
-  delayVal += 100;
-});
+  if (progress.length === 16) {
+    winningScreen.classList.toggle('hidden');
+    winningScreen.classList.toggle('winanimation');
+  }
+  // //toggle click event
+  // memos.forEach((memo) => {
+  //   if (!memo.classList.contains('done')) {
+  //     memo.addEventListener('click', function () {
+  //       // memo.classList.toggle('flip');
+  //       checkColors();
+  //     });
+  //   }
+  // });
+}

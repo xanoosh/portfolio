@@ -6,6 +6,7 @@ body {
   overflow-x: hidden;
   height: 100vh;
   margin: 0;
+  /* background: #fff; */
 }
 
 #board {
@@ -15,6 +16,7 @@ body {
   width: 100vw;
   height: 100vh;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .memo {
@@ -24,6 +26,59 @@ body {
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   transition: all 0.3s ease-in-out;
   transform-style: preserve-3d;
+}
+
+#win {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#win h1 {
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+@keyframes win-animation {
+  0% {
+    background: #ffbc42ff;
+  }
+  14% {
+    background: #ec674eff;
+  }
+  28% {
+    background: #d81159ff;
+  }
+  42% {
+    background: #8f2d56ff;
+  }
+  66% {
+    background: #58586bff;
+  }
+  80% {
+    background: #218380ff;
+  }
+  94% {
+    background: #4aabafff;
+  }
+  100% {
+    background: #73d2deff;
+  }
+}
+
+#win.winanimation {
+  animation: win-animation 0.8s ease-in infinite;
+}
+
+.hidden {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .memo.flip {
@@ -42,7 +97,7 @@ body {
   backface-visibility: hidden;
   content: '';
   display: block;
-  background: rgb(187, 198, 209);
+  background: #d8dee3;
 }
 
 .memo::after {
@@ -64,26 +119,26 @@ body {
 /* memo field colors */
 
 .memo.one::after {
-  background-color: #355070ff;
+  background: #ffbc42ff;
 }
 .memo.two::after {
-  background-color: #515575ff;
+  background: #ec674eff;
 }
 .memo.three::after {
-  background-color: #6d597aff;
+  background: #d81159ff;
 }
 .memo.four::after {
-  background-color: #b56576ff;
+  background: #8f2d56ff;
 }
 .memo.five::after {
-  background-color: #cd6873ff;
+  background: #58586bff;
 }
 .memo.six::after {
-  background-color: #e56b6fff;
+  background: #218380ff;
 }
 .memo.seven::after {
-  background-color: #e88c7dff;
+  background: #4aabafff;
 }
 .memo.eight::after {
-  background-color: #eaac8bff;
+  background: #73d2deff;
 }
