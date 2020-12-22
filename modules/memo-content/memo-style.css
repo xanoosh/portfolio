@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  height: 100vh;
+  margin: 0;
+}
+
+#board {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  flex-wrap: wrap;
+}
+
+.memo {
+  width: 25vw;
+  height: 25vh;
+  border: 1px solid #fff;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  transition: all 0.3s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.memo.flip {
+  transform: rotateY(180deg);
+}
+
+.memo.done::after {
+  color: white;
+}
+
+.memo::before {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  content: '';
+  display: block;
+  background: rgb(187, 198, 209);
+}
+
+.memo::after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  color: transparent;
+  content: 'done';
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotateY(180deg);
+  transition: all 0.5s ease-in-out;
+}
+
+/* memo field colors */
+
+.memo.one::after {
+  background-color: #355070ff;
+}
+.memo.two::after {
+  background-color: #515575ff;
+}
+.memo.three::after {
+  background-color: #6d597aff;
+}
+.memo.four::after {
+  background-color: #b56576ff;
+}
+.memo.five::after {
+  background-color: #cd6873ff;
+}
+.memo.six::after {
+  background-color: #e56b6fff;
+}
+.memo.seven::after {
+  background-color: #e88c7dff;
+}
+.memo.eight::after {
+  background-color: #eaac8bff;
+}
