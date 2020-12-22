@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
@@ -44,6 +45,8 @@ body {
   color: #ffffff;
   text-transform: uppercase;
   text-align: center;
+  font-size: 25px;
+  font-weight: 300;
 }
 
 @keyframes win-animation {
@@ -108,7 +111,8 @@ body {
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
   color: transparent;
-  content: 'done';
+  content: '\2713';
+  font-size: 25px;
   text-transform: uppercase;
   display: flex;
   justify-content: center;
