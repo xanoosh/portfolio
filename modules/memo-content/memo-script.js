@@ -73,15 +73,15 @@ arrayBase.forEach((color) => {
 function checkColors() {
   const flipped = [];
   const memos = board.querySelectorAll('.memo');
-  // //toggle click event
-  // memos.forEach((memo) => {
-  //   memo.removeEventListener('click', function () {
-  //     if (!memo.classList.contains('done')) {
-  //       el.classList.toggle('flip');
-  //       checkColors();
-  //     }
-  //   });
-  // });
+  //toggle click event
+  memos.forEach((memo) => {
+    memo.removeEventListener('click', function () {
+      // if (!memo.classList.contains('done')) {
+      // el.classList.toggle('flip');
+      // checkColors();
+      // }
+    });
+  });
   memos.forEach((memo) => {
     if (memo.classList.contains('flip') && !memo.classList.contains('done'))
       flipped.push(memo);

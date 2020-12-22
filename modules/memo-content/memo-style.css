@@ -69,7 +69,7 @@ body {
     background: #218380ff;
   }
   94% {
-    background: #4aabafff;
+    background: #eebcbe;
   }
   100% {
     background: #73d2deff;
@@ -142,7 +142,7 @@ body {
   background: #218380ff;
 }
 .memo.seven::after {
-  background: #4aabafff;
+  background: #eebcbe;
 }
 .memo.eight::after {
   background: #73d2deff;
