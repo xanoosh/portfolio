@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
+    </style>
+    <!--css versioning using js random number-->
+    <script>
+      document.write(
+        `<link rel="stylesheet" href="modules/memo-wiesio-content/memo-wiesio-style.css?v=${
+          Math.trunc(Math.random() * 10000) + 1
+        }" />`
+      );
+    </script>
+    <title>Wiesio game</title>
+  </head>
+  <body>
+    <div id="board">
+      <div id="win" class="hidden">
+        <h1>Kalendarz w drodze :)</h1>
+      </div>
+    </div>
+    <script>
+      document.write(
+        `<script src="modules/memo-wiesio-content/memo-wiesio-script.js?v="${
+          Math.trunc(Math.random() * 10000) + 1
+        }"><\/script>`
+      );
+    </script>
+  </body>
+</html>

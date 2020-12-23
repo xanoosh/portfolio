@@ -86,6 +86,8 @@ function checkColors() {
     if (memo.classList.contains('flip') && !memo.classList.contains('done'))
       flipped.push(memo);
   });
+  console.log(flipped);
+  console.log(flipped[0].classList);
   if (
     flipped.length === 2 &&
     flipped[0].classList[1] === flipped[1].classList[1]
@@ -112,6 +114,7 @@ function checkColors() {
 
   if (progress.length === 16) {
     winningScreen.classList.toggle('hidden');
+    winningScreen.classList.toggle('winanimation');
   }
   // //toggle click event
   // memos.forEach((memo) => {
