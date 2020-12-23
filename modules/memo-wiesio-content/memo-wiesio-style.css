@@ -14,20 +14,34 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw;
+  height: 100vh; */
+  width: 100%;
   flex-wrap: wrap;
   position: relative;
 }
 
 .memo {
-  width: 25vw;
-  height: 25vh;
+  width: 24vw;
+  height: 24vw;
   border: 1px solid #fff;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   transition: all 0.3s ease-in-out;
   transform-style: preserve-3d;
+  margin-bottom: 0.5vw;
 }
+/* @media (min-width: 500px) and (max-width: 1200px) {
+  .memo {
+    width: 25%;
+    height: 25vh;
+  }
+}
+@media (max-width: 499px) {
+  .memo {
+    width: 50%;
+    height: 12.5vh;
+  }
+} */
 
 #win {
   position: absolute;
