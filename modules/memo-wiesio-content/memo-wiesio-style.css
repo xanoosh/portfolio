@@ -53,6 +53,17 @@ body {
   font-weight: 300;
 }
 
+#win button {
+  border: none;
+  background: #fdc500;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 0;
+  position: absolute;
+  top: 10vh;
+  text-transform: uppercase;
+}
+
 .hidden {
   opacity: 0 !important;
   pointer-events: none !important;
@@ -69,12 +80,6 @@ body {
 .memo.done::after {
   color: white;
 }
-/* #board .memo.done::before {
-  backface-visibility: visible;
-  -webkit-backface-visibility: visible; 
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 10;
-} */
 
 .memo::before {
   position: absolute;
