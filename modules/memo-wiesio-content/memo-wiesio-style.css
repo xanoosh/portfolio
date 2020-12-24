@@ -58,6 +58,10 @@ body {
   pointer-events: none !important;
 }
 
+.memo.done {
+  /* border: 1px solid red; */
+}
+
 .memo.flip {
   transform: rotateY(180deg);
 }
@@ -91,12 +95,9 @@ body {
   -webkit-backface-visibility: hidden; /* Safari */
   backface-visibility: hidden;
   color: transparent;
-  content: '';
-  font-size: 25px;
+  content: '\2713';
+  font-size: 15px;
   text-transform: uppercase;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   transform: rotateY(180deg);
   transition: all 0.5s ease-in-out;
 }
