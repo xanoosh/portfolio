@@ -105,6 +105,8 @@ body {
   text-transform: uppercase;
   transform: rotateY(180deg);
   transition: all 0.5s ease-in-out;
+  display: flex;
+  justify-content: center;
 }
 
 /* memo field colors */
