@@ -1,6 +1,8 @@
 'use strict';
 
 const main = document.getElementById('main');
+const sidebar = document.getElementById('sidebar');
+const list = document.getElementById('list');
 const init = document.getElementById('init');
 const apiKey = '&apiKey=2499488283dd4cf184a49913669669df';
 let ingredientsArr = [];
@@ -35,16 +37,31 @@ const createList = async () => {
     paragraph.innerHTML = element.id;
     const container = document.createElement('div');
     container.classList.add('single');
-    main.appendChild(container);
+    list.appendChild(container);
     container.appendChild(image);
     container.appendChild(heading);
     container.appendChild(paragraph);
   });
 };
 
-function initialize() {
+function showHide(classname) {
+  let time = 0;
+  const toggleClass = (el) => {
+    setTimeout(el.classList.toggle('show'), time);
+    time += 200;
+    console.log(`timeout is ${time}ms`);
+  };
+  const nodes = document.getElementsByClassName(`${classname}`);
+  for (const node of nodes) {
+    toggleClass(node);
+  }
+}
+
+async function initialize() {
   fetchApi();
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   createList();
+  setTimeout(showHide('single'), 2000);
 }
 
 //onclick get recipe
