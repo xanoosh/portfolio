@@ -114,6 +114,7 @@ const addIngredient = function () {
   element.innerText = `${newName}, `;
   element.setAttribute('value', newName);
   usedIngredients.appendChild(element);
+  element.addEventListener('click', element.remove);
 };
 
 const listOfIngredients = document.querySelectorAll('#ingredientsList button');
@@ -125,6 +126,7 @@ for (const el of listOfIngredients) {
 const listOfUsedIngredients = document.querySelectorAll(
   '#usedIngredients span'
 );
+
 for (const el of listOfUsedIngredients) {
   el.addEventListener('click', el.remove);
 }
