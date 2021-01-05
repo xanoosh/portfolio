@@ -17,8 +17,14 @@ const createUrl = (mode) => {
   fetchResponse = {};
   if (mode === 'list') {
     //get data from form:
-    const ingredients = '?ingredients=apples,+flour,+sugar';
-    const numOfIngredients = '&number=2';
+    let ingString = '';
+    const ingNodes = document.querySelectorAll('#usedIngredients span');
+    ingNodes.forEach((node) => {
+      ingString += `${node.getAttribute('value')},`;
+    });
+    console.log(ingString);
+    const ingredients = `?ingredients=${ingString}`;
+    const numOfIngredients = '&number=5';
     dataUrl = `https://api.spoonacular.com/recipes/findByIngredients${ingredients}${numOfIngredients}&${apiKey}`;
   } else {
     //get data from buttons:
@@ -81,6 +87,36 @@ const createModal = async () => {
   modal.appendChild(summary);
   modal.appendChild(link);
 };
+
+// adding ingredients to form data:
+
+const usedIngredients = document.getElementById('usedIngredients');
+
+const addIngredient = function () {
+  const newName = this.innerText;
+  const element = document.createElement('span');
+  element.innerText = `${newName}, `;
+  element.setAttribute('value', newName);
+  usedIngredients.appendChild(element);
+};
+
+const listOfIngredients = document.querySelectorAll('#ingredientsList button');
+for (const el of listOfIngredients) {
+  el.addEventListener('click', addIngredient.bind(el));
+}
+
+//remove span on click
+const listOfUsedIngredients = document.querySelectorAll(
+  '#usedIngredients span'
+);
+for (const el of listOfUsedIngredients) {
+  el.addEventListener('click', el.remove);
+}
+// //remove span on click
+// function remove() {
+//   var element = this;
+//   element.remove();
+// }
 
 function showHide(classname) {
   const toggleClass = (el) => {
