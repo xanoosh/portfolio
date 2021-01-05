@@ -75,6 +75,12 @@ const createModal = async () => {
   //create modal with data
   const modal = document.createElement('div');
   modal.classList.add('modal');
+  //close modal
+  const close = document.createElement('p');
+  close.classList.add('modal-close');
+  close.innerHTML = '&times;';
+  const modalContent = document.createElement('div');
+  modalContent.classList.add('modal-content');
   const link = document.createElement('a');
   // do something with fetchResponse object
   link.href = fetchResponse.sourceUrl;
@@ -83,9 +89,19 @@ const createModal = async () => {
   link.classList.add('link');
   const summary = document.createElement('p');
   summary.innerHTML = fetchResponse.summary;
+  summary.classList.add('summary');
   overlay.appendChild(modal);
-  modal.appendChild(summary);
-  modal.appendChild(link);
+  modal.appendChild(close);
+  modal.appendChild(modalContent);
+  modalContent.appendChild(summary);
+  modalContent.appendChild(link);
+  const removeModal = () => {
+    modal.remove();
+  };
+  close.addEventListener('click', () => {
+    overlay.classList.toggle('hidden');
+    setTimeout(removeModal, 400);
+  });
 };
 
 // adding ingredients to form data:
@@ -131,17 +147,33 @@ function showHide(classname) {
     toggleClass(overlay);
   }
 }
+
+//loading animation:
+const toggleLoader = (parent) => {
+  let element = document.getElementById('loading');
+  if (element !== null && element !== undefined) {
+    element.remove();
+  } else {
+    element = document.createElement('div');
+    element.id = 'loading';
+    parent.appendChild(element);
+  }
+};
 // create a list of recipes:
 async function initializeList() {
+  // console.log();
+  toggleLoader(this.parentNode);
   createUrl('list');
   fetchApi();
   await new Promise((resolve) => setTimeout(resolve, 3000));
   createList();
   setTimeout(list.classList.remove('hidden'), 4000);
   resetApi();
+  toggleLoader(this.parentNode);
 }
 // create a single recipe modal:
 async function initializeRecipe() {
+  toggleLoader(this.parentNode);
   let thisId = this.value;
   createUrl(thisId);
   console.log(dataUrl);
@@ -150,6 +182,7 @@ async function initializeRecipe() {
   createModal();
   setTimeout(showHide('modal'), 2000);
   resetApi();
+  toggleLoader(this.parentNode);
 }
 
 //onclick get recipe
