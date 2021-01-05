@@ -20,7 +20,7 @@ button:focus {
 
 #main {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   padding: 0px;
   background: #242423;
   display: flex;
@@ -93,6 +93,8 @@ button:focus {
   padding: 20px 30px;
   flex-grow: 1;
   transition: all 0.3s ease-in-out;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 #list .single {
