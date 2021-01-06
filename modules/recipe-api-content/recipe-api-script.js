@@ -6,8 +6,10 @@ const list = document.getElementById('list');
 const init = document.getElementById('init');
 const overlay = document.getElementById('overlay');
 const numOfRecipesInput = document.getElementById('numOfRecipes');
-const allUsedCheckbox = document.getElementById('allUsed');
-const ingredientsDataCheckbox = document.getElementById('ingredientsData');
+// const allUsedCheckbox = document.getElementById('allUsed');
+// const ingredientsDataCheckbox = document.getElementById('ingredientsData');
+const radioMin = document.getElementById('radioMin');
+const radioMax = document.getElementById('radioMax');
 //ja
 // const apiKey = 'apiKey=2499488283dd4cf184a49913669669df';
 //basia
@@ -23,21 +25,24 @@ const createUrl = (mode) => {
   fetchResponse = {};
   if (mode === 'list') {
     //get data from form:
-    let ingString = '';
+    let ingredients = '';
     const ingNodes = document.querySelectorAll('#usedIngredients span');
     ingNodes.forEach((node) => {
-      ingString += `${node.getAttribute('value')},`;
+      ingredients += `${node.getAttribute('value')},`;
     });
-    const ingredients = `?includeIngredients=${ingString}`;
-    const allUsed = allUsedCheckbox.checked
-      ? `&sort=min-missing-ingredients&sortDirection=desc`
-      : '';
-    const ingData = ingredientsDataCheckbox.checked
-      ? `&fillIngredients=true`
-      : '';
+    // const ingredients = `?includeIngredients=${ingString}`;
+    // const allUsed = allUsedCheckbox.checked
+    //   ? `&sort=min-missing-ingredients&sortDirection=desc`
+    //   : '';
+    // const ingData = ingredientsDataCheckbox.checked
+    //   ? `&fillIngredients=true`
+    //   : '';
+
+    // const allUsed = allUsedCheckbox.checked ? `&ranking=1` : `&ranking=2`;
+    const minOrMax = radioMax.checked ? radioMax.value : radioMin.value;
     const howMany = `&number=${Number(numOfRecipesInput.value)}`;
-    dataUrl = `https://api.spoonacular.com/recipes/complexSearch${ingredients}${allUsed}&addRecipeInformation=true${ingData}${howMany}&${apiKey}`;
-    console.log(ingString);
+    dataUrl = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}${minOrMax}${howMany}&${apiKey}`;
+    // dataUrl = `https://api.spoonacular.com/recipes/complexSearch?includeIngredients=${ingredients}${allUsed}&addRecipeInformation=true${ingData}${howMany}&${apiKey}`;
     console.log(dataUrl);
   } else {
     //get data from buttons:
@@ -51,7 +56,7 @@ const fetchApi = () => {
     const json = await response.json();
     console.log(json);
     fetchResponse = json;
-    ingredientsArr = await json.results;
+    ingredientsArr = await json;
   };
   request();
 };
@@ -177,7 +182,7 @@ const listOfUsedIngredients = document.querySelectorAll(
 for (const el of listOfUsedIngredients) {
   el.addEventListener('click', el.remove);
 }
-// //remove span on click
+// //remove span on click (and validate if ingredient is used or not)
 // function remove() {
 //   var element = this;
 //   element.remove();
