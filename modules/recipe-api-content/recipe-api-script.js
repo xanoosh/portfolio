@@ -7,6 +7,7 @@ const init = document.getElementById('init');
 const overlay = document.getElementById('overlay');
 const numOfRecipesInput = document.getElementById('numOfRecipes');
 const allUsedCheckbox = document.getElementById('allUsed');
+const ingredientsDataCheckbox = document.getElementById('ingredientsData');
 const apiKey = 'apiKey=2499488283dd4cf184a49913669669df';
 let ingredientsArr = [];
 let fetchResponse = {};
@@ -28,8 +29,11 @@ const createUrl = (mode) => {
     const allUsed = allUsedCheckbox.checked
       ? `&sort=min-missing-ingredients&sortDirection=desc`
       : '';
+    const ingData = ingredientsDataCheckbox.checked
+      ? `&fillIngredients=true`
+      : '';
     const howMany = `&number=${Number(numOfRecipesInput.value)}`;
-    dataUrl = `https://api.spoonacular.com/recipes/complexSearch${ingredients}${allUsed}&addRecipeInformation=true&fillIngredients=true${howMany}&${apiKey}`;
+    dataUrl = `https://api.spoonacular.com/recipes/complexSearch${ingredients}${allUsed}&addRecipeInformation=true${ingData}${howMany}&${apiKey}`;
     console.log(ingString);
     console.log(dataUrl);
   } else {
