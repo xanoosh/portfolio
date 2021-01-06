@@ -8,7 +8,10 @@ const overlay = document.getElementById('overlay');
 const numOfRecipesInput = document.getElementById('numOfRecipes');
 const allUsedCheckbox = document.getElementById('allUsed');
 const ingredientsDataCheckbox = document.getElementById('ingredientsData');
-const apiKey = 'apiKey=2499488283dd4cf184a49913669669df';
+//ja
+// const apiKey = 'apiKey=2499488283dd4cf184a49913669669df';
+//basia
+const apiKey = 'apiKey=17e683fbee834404b444c00c9c865f5d ';
 let ingredientsArr = [];
 let fetchResponse = {};
 let dataUrl = '';
