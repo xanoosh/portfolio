@@ -5,6 +5,8 @@ const sidebar = document.getElementById('sidebar');
 const list = document.getElementById('list');
 const init = document.getElementById('init');
 const overlay = document.getElementById('overlay');
+const numOfRecipesInput = document.getElementById('numOfRecipes');
+const allUsedCheckbox = document.getElementById('allUsed');
 const apiKey = 'apiKey=2499488283dd4cf184a49913669669df';
 let ingredientsArr = [];
 let fetchResponse = {};
@@ -22,10 +24,14 @@ const createUrl = (mode) => {
     ingNodes.forEach((node) => {
       ingString += `${node.getAttribute('value')},`;
     });
+    const ingredients = `?includeIngredients=${ingString}`;
+    const allUsed = allUsedCheckbox.checked
+      ? `&sort=min-missing-ingredients&sortDirection=desc`
+      : '';
+    const howMany = `&number=${Number(numOfRecipesInput.value)}`;
+    dataUrl = `https://api.spoonacular.com/recipes/complexSearch${ingredients}${allUsed}&addRecipeInformation=true&fillIngredients=true${howMany}&${apiKey}`;
     console.log(ingString);
-    const ingredients = `?ingredients=${ingString}`;
-    const numOfIngredients = '&number=5';
-    dataUrl = `https://api.spoonacular.com/recipes/findByIngredients${ingredients}${numOfIngredients}&${apiKey}`;
+    console.log(dataUrl);
   } else {
     //get data from buttons:
     dataUrl = `https://api.spoonacular.com/recipes/${mode}/information?${apiKey}`;
@@ -38,7 +44,7 @@ const fetchApi = () => {
     const json = await response.json();
     console.log(json);
     fetchResponse = json;
-    ingredientsArr = await json;
+    ingredientsArr = await json.results;
   };
   request();
 };
@@ -50,6 +56,14 @@ const resetApi = () => {
 };
 
 const createList = async () => {
+  //remove existing if exists
+  const oldList = document.querySelectorAll('.single');
+  if (oldList !== null || oldList !== undefined) {
+    oldList.forEach((oldElement) => {
+      oldElement.remove();
+    });
+    list.classList.toggle('hidden');
+  }
   ingredientsArr.forEach((element) => {
     const image = document.createElement('img');
     image.src = element.image;
@@ -66,6 +80,32 @@ const createList = async () => {
     list.appendChild(container);
     container.appendChild(image);
     container.appendChild(heading);
+    if (
+      element.missedIngredients !== undefined &&
+      element.missedIngredients.length !== 0
+    ) {
+      const missed = document.createElement('p');
+      missed.classList.add('info');
+      let missedHtml = '<b>Need to buy:</b> ';
+      element.missedIngredients.forEach((item) => {
+        missedHtml += `${item.name}, `;
+      });
+      missed.innerHTML = missedHtml;
+      container.appendChild(missed);
+    }
+    if (
+      element.unusedIngredients !== undefined &&
+      element.unusedIngredients.length !== 0
+    ) {
+      const unused = document.createElement('p');
+      unused.classList.add('info');
+      let unusedHtml = '<b>Not used:</b> ';
+      element.unusedIngredients.forEach((item) => {
+        unusedHtml += `${item.name}, `;
+      });
+      unused.innerHTML = unusedHtml;
+      container.appendChild(unused);
+    }
     container.appendChild(button);
     button.addEventListener('click', initializeRecipe);
   });
@@ -167,7 +207,7 @@ async function initializeList() {
   toggleLoader(this.parentNode);
   createUrl('list');
   fetchApi();
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise((resolve) => setTimeout(resolve, 4000));
   createList();
   setTimeout(list.classList.remove('hidden'), 4000);
   resetApi();
@@ -180,9 +220,9 @@ async function initializeRecipe() {
   createUrl(thisId);
   console.log(dataUrl);
   fetchApi();
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise((resolve) => setTimeout(resolve, 4000));
   createModal();
-  setTimeout(showHide('modal'), 2000);
+  setTimeout(showHide('modal'), 4000);
   resetApi();
   toggleLoader(this.parentNode);
 }

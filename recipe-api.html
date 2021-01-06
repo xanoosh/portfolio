@@ -20,6 +20,13 @@
     <div id="main">
       <div id="overlay" class="hidden"></div>
       <div id="sidebar">
+        <div id="formData">
+          <input type="number" id="numOfRecipes" min="1" max="15" value="10" />
+          <label>Number of recipes</label>
+          <br />
+          <input type="checkbox" id="allUsed" checked />
+          <label>Try to limit ingredients</label>
+        </div>
         <div id="ingredientsList">
           <h3>All ingredients:</h3>
           <!-- <button value="14412">Water</button>
@@ -43,12 +50,11 @@
           <h3>My ingredients:</h3>
           <small>(click to remove)</small>
           <span value="water">Water, </span>
-          <span value="flour">Flour, </span>
           <span value="salt">Salt, </span>
           <span value="sugar">Sugar, </span>
         </div>
-        <h2>Click to get your recipe</h2>
-        <button id="init">Get recipe</button>
+        <h2>Generate list</h2>
+        <button id="init">Get recipes</button>
       </div>
       <div id="list" class="hidden"></div>
     </div>
