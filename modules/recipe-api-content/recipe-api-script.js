@@ -11,9 +11,9 @@ const numOfRecipesInput = document.getElementById('numOfRecipes');
 const radioMin = document.getElementById('radioMin');
 const radioMax = document.getElementById('radioMax');
 //ja
-// const apiKey = 'apiKey=2499488283dd4cf184a49913669669df';
+const apiKey = 'apiKey=2499488283dd4cf184a49913669669df';
 //basia
-const apiKey = 'apiKey=17e683fbee834404b444c00c9c865f5d ';
+// const apiKey = 'apiKey=17e683fbee834404b444c00c9c865f5d ';
 let ingredientsArr = [];
 let fetchResponse = {};
 let dataUrl = '';
@@ -117,7 +117,6 @@ const createList = async () => {
 };
 
 const createModal = async () => {
-  //create modal with data
   const modal = document.createElement('div');
   modal.classList.add('modal');
   //close modal
@@ -171,6 +170,22 @@ const createModal = async () => {
   modalContent.appendChild(summaryTitle);
   modalContent.appendChild(summarySmall);
   modalContent.appendChild(summary);
+  //optional instructions
+  if (fetchResponse.instructions) {
+    const instructionsTitle = document.createElement('h3');
+    const instructions = document.createElement('span');
+    const instructionsSmall = summarySmall.cloneNode(true);
+    instructionsTitle.innerText = 'Instructions';
+    instructionsTitle.classList.add('instructions');
+    instructions.innerHTML = fetchResponse.instructions;
+    modalContent.appendChild(instructionsTitle);
+    modalContent.appendChild(instructionsSmall);
+    modalContent.appendChild(instructions);
+
+    instructions.addEventListener('click', () => {
+      instructions.classList.toggle('show');
+    });
+  }
   modalContent.appendChild(link);
   //close modal event
   const removeModal = () => {
