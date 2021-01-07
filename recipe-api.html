@@ -53,31 +53,54 @@
         </div>
         <div id="ingredientsList">
           <h3>All ingredients:</h3>
-          <button>water</button>
-          <button>flour</button>
-          <button>salt</button>
-          <button>sugar</button>
-          <button>apple</button>
-          <button>baking powder</button>
-          <button>banana</button>
-          <button>rice</button>
-          <button>beans</button>
-          <button>beef</button>
-          <button>bread</button>
-          <button>broccoli</button>
-          <button>chocolate</button>
-          <button>butter</button>
-          <button>cheese</button>
-          <button>anchovies</button>
+          <div class="group-bar">
+            <div class="group-item">
+              <button class="bar active" value="meat">Meat</button>
+            </div>
+            <div class="group-item">
+              <button class="bar" value="fruits">Fruits</button>
+            </div>
+            <div class="group-item">
+              <button class="bar" value="vegetables">Vegetables</button>
+            </div>
+            <div class="group-item">
+              <button class="bar" value="other">Other</button>
+            </div>
+          </div>
+          <div class="group-ingredients">
+            <div class="group meat active">
+              <button>beef</button>
+            </div>
+            <div class="group fruits">
+              <button>apple</button>
+              <button>banana</button>
+            </div>
+            <div class="group vegetables">
+              <button>beans</button>
+              <button>broccoli</button>
+              <button>anchovies</button>
+            </div>
+            <div class="group other">
+              <button>water</button>
+              <button>baking powder</button>
+              <button>rice</button>
+              <button>flour</button>
+              <button>salt</button>
+              <button>sugar</button>
+              <button>bread</button>
+              <button>chocolate</button>
+              <button>butter</button>
+              <button>cheese</button>
+            </div>
+          </div>
         </div>
         <div id="usedIngredients">
           <h3>My ingredients:</h3>
-          <small>(click to remove)</small>
+          <small class="arrow">click to remove</small>
           <span value="water">Water, </span>
           <span value="salt">Salt, </span>
           <span value="sugar">Sugar, </span>
         </div>
-        <h2>Generate list</h2>
         <button id="init">Get recipes</button>
       </div>
       <div id="list" class="hidden"></div>

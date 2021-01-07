@@ -1,9 +1,17 @@
+/* general */
+
 * {
   margin: 0;
   font-family: 'JetBrains Mono', monospace;
   color: #fff;
   box-sizing: border-box;
 }
+
+.hidden {
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
 button {
   transition: all 0.3s ease-in-out;
   font-size: 16px;
@@ -18,6 +26,28 @@ button:focus {
   outline: none !important;
 }
 
+small {
+  display: block;
+  opacity: 0.7;
+  margin-bottom: 10px;
+}
+
+small.arrow {
+  position: relative;
+  margin-left: 13px;
+}
+small.arrow::before {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  z-index: 10;
+  border: 4px solid transparent;
+  border-top: 6px solid #fff;
+  top: 6px;
+  left: -13px;
+}
+
 #main {
   width: 100%;
   height: 100vh;
@@ -29,58 +59,50 @@ button:focus {
   position: relative;
 }
 
+/* sidebar */
+
 #sidebar {
-  padding: 10px 5px;
+  padding: 10px 15px;
   width: 30vw;
   min-height: 100vh;
   border-right: 2px solid #07c837;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
+}
+#sidebar button#init {
+  margin-top: 20px;
 }
 
-#sidebar h2 {
-  padding: 0 10px;
-  text-align: center;
-  align-self: start;
-  margin: 20px 0 35px 0;
-  color: #fff;
-  width: 100%;
-  position: relative;
-}
-#sidebar h2::after {
-  content: '';
-  width: 0;
-  height: 0;
-  position: absolute;
-  border: 7px solid transparent;
-  border-top: 7px solid white;
-  bottom: -20px;
-  left: 47%;
-}
 #sidebar h3 {
   margin-bottom: 10px;
 }
 
 #sidebar #ingredientsList,
 #sidebar #usedIngredients {
-  padding: 10px;
+  padding: 10px 0;
   text-align: left;
   width: 100%;
 }
 
-#sidebar #ingredientsList button {
-  font-size: 13px;
-  padding: 5px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  display: inline-block;
+#formData {
+  padding: 10px 0;
+  width: 100%;
 }
 
-small {
-  display: block;
-  opacity: 0.7;
+#formData input {
   margin-bottom: 10px;
+}
+
+#formData input[type='number'] {
+  background: transparent;
+  border: none;
+  width: 45px;
+  font-size: 17px;
+}
+
+#formData label {
+  font-size: 14px;
 }
 
 #sidebar #usedIngredients span {
@@ -90,6 +112,69 @@ small {
 #sidebar #usedIngredients span:hover {
   color: #07c837;
 }
+
+/* grouping ingredients */
+
+#sidebar #ingredientsList button {
+  font-size: 13px;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  display: inline-block;
+  background: transparent;
+  border: 1px solid #07c807;
+}
+
+#sidebar #ingredientsList .group-bar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#sidebar #ingredientsList .group-bar .group-item {
+  flex: 0 0 50%;
+  display: flex;
+  align-items: center;
+  padding-right: 5px;
+}
+#sidebar #ingredientsList .group-bar .group-item button {
+  width: 100%;
+  border-radius: 0;
+  pointer-events: all;
+}
+#sidebar #ingredientsList .group-bar .group-item button.active {
+  background: #07c807;
+  pointer-events: none;
+}
+
+#sidebar #ingredientsList .group-ingredients {
+  position: relative;
+  height: 150px;
+  border-left: 1px solid #07c837;
+}
+
+#sidebar #ingredientsList .group-ingredients .group {
+  opacity: 0;
+  pointer-events: none;
+  overflow-y: auto;
+  position: absolute;
+  left: 10px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+#sidebar #ingredientsList .group-ingredients .group.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#sidebar #ingredientsList .group-ingredients button.used {
+  background: #07c807;
+}
+
+/* list */
 
 #list {
   padding: 20px 30px;
@@ -127,10 +212,8 @@ small {
   margin-bottom: 25px;
 }
 
-.hidden {
-  pointer-events: none !important;
-  opacity: 0 !important;
-}
+/* modal with overlay */
+
 #overlay {
   position: absolute;
   top: 0;
@@ -227,27 +310,8 @@ small {
   text-decoration: none;
 }
 
-#formData {
-  padding: 10px;
-  width: 100%;
-}
-
-#formData input {
-  margin-bottom: 10px;
-}
-
-#formData input[type='number'] {
-  background: transparent;
-  border: none;
-  width: 45px;
-  font-size: 17px;
-}
-
-#formData label {
-  font-size: 14px;
-}
-
 /* loader */
+
 #loading {
   height: 0;
   font-size: 30px;
@@ -278,6 +342,9 @@ small {
   }
 }
 
+#sidebar #loading {
+  margin: 0 0 0 50px;
+}
 .single #loading {
   margin: -10px 0 10px 30px;
 }

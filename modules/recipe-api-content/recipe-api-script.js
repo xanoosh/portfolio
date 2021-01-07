@@ -134,7 +134,8 @@ const createModal = async () => {
   const summaryTitle = document.createElement('h3');
   summaryTitle.innerText = 'Summary';
   const summarySmall = document.createElement('small');
-  summarySmall.innerText = '( click to expand )';
+  summarySmall.innerText = 'click to expand';
+  summarySmall.classList.add('arrow');
   const summary = document.createElement('span');
   summary.innerHTML = fetchResponse.summary;
   summary.classList.add('summary');
@@ -198,7 +199,9 @@ const addIngredient = function () {
   element.addEventListener('click', element.remove);
 };
 
-const listOfIngredients = document.querySelectorAll('#ingredientsList button');
+const listOfIngredients = document.querySelectorAll(
+  '#ingredientsList .group-ingredients button'
+);
 for (const el of listOfIngredients) {
   el.addEventListener('click', addIngredient.bind(el));
 }
@@ -216,6 +219,31 @@ for (const el of listOfUsedIngredients) {
 //   var element = this;
 //   element.remove();
 // }
+
+//show/hide categories of ingredients:
+
+const barButtons = document.querySelectorAll('.bar');
+//all group-ingredients children (groups)
+const ingredientGroups = document.querySelectorAll('.group-ingredients .group');
+
+const selectGroup = function () {
+  barButtons.forEach((button) => {
+    button.classList.remove('active');
+  });
+  this.classList.add('active');
+  ingredientGroups.forEach((group) => {
+    if (group.classList.contains(this.value)) {
+      group.classList.add('active');
+    } else {
+      group.classList.remove('active');
+    }
+  });
+};
+for (const button of barButtons) {
+  button.addEventListener('click', selectGroup);
+}
+
+//toggle hidden
 
 function showHide(classname) {
   const toggleClass = (el) => {
