@@ -153,12 +153,13 @@ small {
   pointer-events: all;
   opacity: 1;
   background: #242423;
-  padding: 40px 35px;
+  padding: 45px 15px;
 }
 .modal-content {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+  padding: 0 15px;
 }
 .modal-content h3 {
   margin-bottom: 10px;
@@ -177,17 +178,29 @@ small {
 .modal-content ul li {
   margin-bottom: 5px;
 }
-.modal p.summary {
-  line-height: 27px;
+.modal-content span.summary {
+  line-height: 30px;
   margin-bottom: 15px;
+  width: 70%;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.modal .modal-content span.summary.show {
+  width: 100%;
+  overflow: initial;
+  white-space: unset;
 }
 .modal p.modal-close {
   margin-bottom: 0;
   position: absolute;
   top: 0;
   right: 0;
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 45px;
   z-index: 101;
   color: #fff;
   font-size: 30px;

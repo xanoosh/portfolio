@@ -134,12 +134,15 @@ const createModal = async () => {
   const modalContent = document.createElement('div');
   modalContent.classList.add('modal-content');
   const link = document.createElement('a');
-  // do something with fetchResponse object
   link.href = fetchResponse.sourceUrl;
   link.target = '_blank';
   link.innerText = 'Full recipe';
   link.classList.add('link');
-  const summary = document.createElement('p');
+  const summaryTitle = document.createElement('h3');
+  summaryTitle.innerText = 'Summary';
+  const summarySmall = document.createElement('small');
+  summarySmall.innerText = '( click to expand )';
+  const summary = document.createElement('span');
   summary.innerHTML = fetchResponse.summary;
   summary.classList.add('summary');
   const title = document.createElement('h3');
@@ -149,36 +152,43 @@ const createModal = async () => {
   modal.appendChild(modalContent);
   modalContent.appendChild(title);
   //dish type
-  const dishTypes = document.createElement('small');
-  if (fetchResponse.dishTypes.length > 1) {
-    let dishText = '';
-    fetchResponse.dishTypes.forEach((type) => {
-      dishText += `${type}/`;
-    });
-    dishTypes.innerText = `(${dishText.slice(0, -1)})`;
-  } else {
-    dishTypes.innerText = `(${fetchResponse.dishTypes[0]})`;
+  if (fetchResponse.dishTypes.length !== 0) {
+    const dishTypes = document.createElement('small');
+    if (fetchResponse.dishTypes.length > 1) {
+      let dishText = '';
+      fetchResponse.dishTypes.forEach((type) => {
+        dishText += `${type}/`;
+      });
+      dishTypes.innerText = `(${dishText.slice(0, -1)})`;
+    } else {
+      dishTypes.innerText = `(${fetchResponse.dishTypes[0]})`;
+    }
+    modalContent.appendChild(dishTypes);
   }
-  modalContent.appendChild(dishTypes);
   //list of ingredients
   if (fetchResponse.extendedIngredients) {
     const ingredientList = document.createElement('ul');
     ingredientList.innerHTML = `<h4>Ingredients list:</h4>`;
     fetchResponse.extendedIngredients.forEach((element) => {
-      console.log(element);
-      console.log(element.name);
       ingredientList.innerHTML += `<li>${element.name}</li>`;
     });
     modalContent.appendChild(ingredientList);
   }
+  modalContent.appendChild(summaryTitle);
+  modalContent.appendChild(summarySmall);
   modalContent.appendChild(summary);
   modalContent.appendChild(link);
+  //close modal event
   const removeModal = () => {
     modal.remove();
   };
   close.addEventListener('click', () => {
     overlay.classList.toggle('hidden');
     setTimeout(removeModal, 400);
+  });
+  //show/hide summary data
+  summary.addEventListener('click', () => {
+    summary.classList.toggle('show');
   });
 };
 
