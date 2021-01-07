@@ -142,9 +142,35 @@ const createModal = async () => {
   const summary = document.createElement('p');
   summary.innerHTML = fetchResponse.summary;
   summary.classList.add('summary');
+  const title = document.createElement('h3');
+  title.innerText = fetchResponse.title;
   overlay.appendChild(modal);
   modal.appendChild(close);
   modal.appendChild(modalContent);
+  modalContent.appendChild(title);
+  //dish type
+  const dishTypes = document.createElement('small');
+  if (fetchResponse.dishTypes.length > 1) {
+    let dishText = '';
+    fetchResponse.dishTypes.forEach((type) => {
+      dishText += `${type}/`;
+    });
+    dishTypes.innerText = `(${dishText.slice(0, -1)})`;
+  } else {
+    dishTypes.innerText = `(${fetchResponse.dishTypes[0]})`;
+  }
+  modalContent.appendChild(dishTypes);
+  //list of ingredients
+  if (fetchResponse.extendedIngredients) {
+    const ingredientList = document.createElement('ul');
+    ingredientList.innerHTML = `<h4>Ingredients list:</h4>`;
+    fetchResponse.extendedIngredients.forEach((element) => {
+      console.log(element);
+      console.log(element.name);
+      ingredientList.innerHTML += `<li>${element.name}</li>`;
+    });
+    modalContent.appendChild(ingredientList);
+  }
   modalContent.appendChild(summary);
   modalContent.appendChild(link);
   const removeModal = () => {

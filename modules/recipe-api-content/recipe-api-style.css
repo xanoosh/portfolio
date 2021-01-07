@@ -149,7 +149,7 @@ small {
   top: 20vh;
   left: 32vw;
   height: 60vh;
-  width: 50vw;
+  width: 60vw;
   pointer-events: all;
   opacity: 1;
   background: #242423;
@@ -159,6 +159,23 @@ small {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+}
+.modal-content h3 {
+  margin-bottom: 10px;
+}
+.modal-content ul {
+  list-style-type: square;
+  width: 80%;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #07c837;
+}
+.modal-content ul h4 {
+  margin: 0 0 8px -15px;
+}
+.modal-content ul li {
+  margin-bottom: 5px;
 }
 .modal p.summary {
   line-height: 27px;
