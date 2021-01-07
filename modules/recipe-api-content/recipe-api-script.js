@@ -17,6 +17,7 @@ const apiKey = 'apiKey=17e683fbee834404b444c00c9c865f5d ';
 let ingredientsArr = [];
 let fetchResponse = {};
 let dataUrl = '';
+let usedIngredientsArr = [];
 
 // construct url for API call
 const createUrl = (mode) => {
@@ -24,25 +25,17 @@ const createUrl = (mode) => {
   ingredientsArr = [];
   fetchResponse = {};
   if (mode === 'list') {
-    //get data from form:
+    usedIngredientsArr = [];
     let ingredients = '';
     const ingNodes = document.querySelectorAll('#usedIngredients span');
     ingNodes.forEach((node) => {
       ingredients += `${node.getAttribute('value')},`;
+      usedIngredientsArr.push(node.getAttribute('value'));
     });
-    // const ingredients = `?includeIngredients=${ingString}`;
-    // const allUsed = allUsedCheckbox.checked
-    //   ? `&sort=min-missing-ingredients&sortDirection=desc`
-    //   : '';
-    // const ingData = ingredientsDataCheckbox.checked
-    //   ? `&fillIngredients=true`
-    //   : '';
-
-    // const allUsed = allUsedCheckbox.checked ? `&ranking=1` : `&ranking=2`;
+    console.log(usedIngredientsArr);
     const minOrMax = radioMax.checked ? radioMax.value : radioMin.value;
     const howMany = `&number=${Number(numOfRecipesInput.value)}`;
     dataUrl = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}${minOrMax}${howMany}&${apiKey}`;
-    // dataUrl = `https://api.spoonacular.com/recipes/complexSearch?includeIngredients=${ingredients}${allUsed}&addRecipeInformation=true${ingData}${howMany}&${apiKey}`;
     console.log(dataUrl);
   } else {
     //get data from buttons:
