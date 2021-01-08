@@ -21,34 +21,27 @@
       <div id="overlay" class="hidden"></div>
       <div id="sidebar">
         <div id="formData">
-          <input type="number" id="numOfRecipes" min="1" max="15" value="10" />
+          <input type="number" id="numOfRecipes" min="1" max="15" value="5" />
           <label for="numOfRecipes">Number of recipes</label>
           <br />
-          <!-- <input type="checkbox" id="allUsed" checked />
-          <label>Zero waste mode</label>
-          <br />
-          <input type="checkbox" id="ingredientsData" checked />
-          <label>More ingredients data</label>
-          <br />
-          <small>(this may limit results)</small> -->
+          <div>
+            <input
+              type="radio"
+              id="radioMin"
+              name="option"
+              value="&ranking=2"
+              checked
+            />
+            <label for="radioMin">Minimize missing ingredients</label>
+          </div>
           <div>
             <input
               type="radio"
               id="radioMax"
               name="option"
               value="&ranking=1"
-              checked
             />
             <label for="radioMax">Maximize used ingredients</label>
-          </div>
-          <div>
-            <input
-              type="radio"
-              name="option"
-              value="&ranking=2"
-              id="radioMin"
-            />
-            <label for="radioMin">Minimize missing ingredients</label>
           </div>
         </div>
         <div id="ingredientsList">
@@ -70,15 +63,31 @@
           <div class="group-ingredients">
             <div class="group meat active">
               <button>beef</button>
+              <button>chicken</button>
+              <button>pork</button>
+              <button>turkey</button>
+              <button>lamb</button>
+              <button>salmon</button>
+              <button>anchovies</button>
             </div>
             <div class="group fruits">
               <button>apple</button>
               <button>banana</button>
+              <button>strawberry</button>
+              <button>orange</button>
+              <button>watermelon</button>
+              <button>lemon</button>
+              <button>avocado</button>
             </div>
             <div class="group vegetables">
               <button>beans</button>
+              <button>carrot</button>
+              <button>Potato</button>
+              <button>Tomato</button>
+              <button>onion</button>
               <button>broccoli</button>
-              <button>anchovies</button>
+              <button>mushroom</button>
+              <button>lettuce</button>
             </div>
             <div class="group other">
               <button>water</button>
@@ -96,7 +105,7 @@
         </div>
         <div id="usedIngredients">
           <h3>My ingredients:</h3>
-          <small class="arrow">click to remove</small>
+          <small class="arrow">click below to remove</small>
           <span value="water">water, </span><span value="salt">salt, </span
           ><span value="sugar">sugar</span>
         </div>

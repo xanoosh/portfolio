@@ -123,6 +123,7 @@ small.arrow::before {
   display: inline-block;
   background: transparent;
   border: 1px solid #07c807;
+  margin-right: 5px;
 }
 
 #sidebar #ingredientsList .group-bar {
@@ -135,7 +136,6 @@ small.arrow::before {
   flex: 0 0 50%;
   display: flex;
   align-items: center;
-  padding-right: 5px;
 }
 #sidebar #ingredientsList .group-bar .group-item button {
   width: 100%;
@@ -171,7 +171,8 @@ small.arrow::before {
 }
 
 #sidebar #ingredientsList .group-ingredients button.used {
-  background: #07c807;
+  opacity: 0.3;
+  pointer-events: none;
 }
 
 /* list */
@@ -182,7 +183,7 @@ small.arrow::before {
   max-width: 68vw;
   transition: all 0.3s ease-in-out;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 #list .single {

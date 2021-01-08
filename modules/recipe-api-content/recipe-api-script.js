@@ -130,7 +130,7 @@ const createModal = async () => {
   const summaryTitle = document.createElement('h3');
   summaryTitle.innerText = 'Summary';
   const summarySmall = document.createElement('small');
-  summarySmall.innerText = 'click to expand';
+  summarySmall.innerText = 'click below to expand';
   summarySmall.classList.add('arrow');
   const summary = document.createElement('span');
   summary.innerHTML = fetchResponse.summary;
@@ -180,7 +180,9 @@ const createModal = async () => {
     modalContent.appendChild(instructions);
 
     instructions.addEventListener('click', () => {
-      instructions.classList.toggle('show');
+      if (!instructions.classList.contains('show')) {
+        instructions.classList.add('show');
+      }
     });
   }
   modalContent.appendChild(link);
@@ -194,12 +196,25 @@ const createModal = async () => {
   });
   //show/hide summary data
   summary.addEventListener('click', () => {
-    summary.classList.toggle('show');
+    if (!summary.classList.contains('show')) {
+      summary.classList.add('show');
+    }
   });
 };
 
 // adding ingredients to form data:
-// validate with usedIngredientsSet
+
+const checkIfUsed = function () {
+  listOfIngredients.forEach((ingredient) => {
+    if (usedIngredientsSet.has(ingredient.textContent)) {
+      ingredient.classList.add('used');
+    } else {
+      ingredient.classList.remove('used');
+    }
+  });
+};
+checkIfUsed();
+
 const removeIngredient = function () {
   let nodeBefore = this.previousElementSibling;
   if (this.nextElementSibling) {
@@ -210,6 +225,7 @@ const removeIngredient = function () {
     this.remove();
     usedIngredientsSet.delete(this.getAttribute('value'));
   }
+  checkIfUsed();
   console.log(usedIngredientsSet);
 };
 const addIngredient = function () {
@@ -225,10 +241,10 @@ const addIngredient = function () {
     element.addEventListener('click', removeIngredient);
     console.log(usedIngredientsSet);
   }
+  checkIfUsed();
 };
 
 for (const el of listOfUsedIngredients) {
-  // console.log(el);
   el.addEventListener('click', removeIngredient);
 }
 for (const el of listOfIngredients) {
