@@ -142,7 +142,7 @@ const createModal = async () => {
   modal.appendChild(modalContent);
   modalContent.appendChild(title);
   //dish type
-  if (fetchResponse.dishTypes.length !== 0) {
+  if (fetchResponse.dishTypes && fetchResponse.dishTypes.length !== 0) {
     const dishTypes = document.createElement('small');
     if (fetchResponse.dishTypes.length > 1) {
       let dishText = '';
