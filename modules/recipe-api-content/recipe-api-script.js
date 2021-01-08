@@ -23,11 +23,26 @@ const listOfUsedIngredients = document.querySelectorAll(
   '#usedIngredients span'
 );
 const usedIngredientsSet = new Set();
+const scrollers = document.querySelectorAll('.scroll');
 
 //set initial values of set
 listOfUsedIngredients.forEach((ingredient) => {
   usedIngredientsSet.add(ingredient.getAttribute('value'));
 });
+
+//scroll animation for mobile
+const scrollToEl = function () {
+  console.log(this);
+  const target = document.getElementById(this.value);
+  target.scrollIntoView({
+    block: 'start',
+    behavior: 'smooth',
+  });
+};
+for (const button of scrollers) {
+  button.addEventListener('click', scrollToEl);
+}
+console.log(scrollers);
 
 // construct url for API call
 const createUrl = (mode) => {
@@ -78,7 +93,7 @@ const createList = async () => {
     button.value = element.id;
     const container = document.createElement('div');
     container.classList.add('single');
-    // container.classList.add('hidden');
+
     list.appendChild(container);
     container.appendChild(image);
     container.appendChild(heading);
