@@ -6,33 +6,36 @@ const list = document.getElementById('list');
 const init = document.getElementById('init');
 const overlay = document.getElementById('overlay');
 const numOfRecipesInput = document.getElementById('numOfRecipes');
-// const allUsedCheckbox = document.getElementById('allUsed');
-// const ingredientsDataCheckbox = document.getElementById('ingredientsData');
 const radioMin = document.getElementById('radioMin');
 const radioMax = document.getElementById('radioMax');
 //ja
 const apiKey = 'apiKey=2499488283dd4cf184a49913669669df';
 //basia
 // const apiKey = 'apiKey=17e683fbee834404b444c00c9c865f5d ';
-let ingredientsArr = [];
+let responseArr = [];
 let fetchResponse = {};
 let dataUrl = '';
-let usedIngredientsArr = [];
+const usedIngredients = document.getElementById('usedIngredients');
+const listOfIngredients = document.querySelectorAll(
+  '#ingredientsList .group-ingredients button'
+);
+const listOfUsedIngredients = document.querySelectorAll(
+  '#usedIngredients span'
+);
+const usedIngredientsSet = new Set();
+
+//set initial values of set
+listOfUsedIngredients.forEach((ingredient) => {
+  usedIngredientsSet.add(ingredient.getAttribute('value'));
+});
 
 // construct url for API call
 const createUrl = (mode) => {
   dataUrl = '';
-  ingredientsArr = [];
+  responseArr = [];
   fetchResponse = {};
   if (mode === 'list') {
-    usedIngredientsArr = [];
-    let ingredients = '';
-    const ingNodes = document.querySelectorAll('#usedIngredients span');
-    ingNodes.forEach((node) => {
-      ingredients += `${node.getAttribute('value')},`;
-      usedIngredientsArr.push(node.getAttribute('value'));
-    });
-    console.log(usedIngredientsArr);
+    let ingredients = [...usedIngredientsSet].join(',');
     const minOrMax = radioMax.checked ? radioMax.value : radioMin.value;
     const howMany = `&number=${Number(numOfRecipesInput.value)}`;
     dataUrl = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}${minOrMax}${howMany}&${apiKey}`;
@@ -49,15 +52,9 @@ const fetchApi = () => {
     const json = await response.json();
     console.log(json);
     fetchResponse = json;
-    ingredientsArr = await json;
+    responseArr = await json;
   };
   request();
-};
-
-const resetApi = () => {
-  ingredientsArr = [];
-  fetchResponse = {};
-  dataUrl = '';
 };
 
 const createList = async () => {
@@ -69,7 +66,7 @@ const createList = async () => {
     });
     list.classList.toggle('hidden');
   }
-  ingredientsArr.forEach((element) => {
+  responseArr.forEach((element) => {
     const image = document.createElement('img');
     image.src = element.image;
     const heading = document.createElement('h3');
@@ -202,41 +199,43 @@ const createModal = async () => {
 };
 
 // adding ingredients to form data:
-
-const usedIngredients = document.getElementById('usedIngredients');
-
+// validate with usedIngredientsSet
+const removeIngredient = function () {
+  let nodeBefore = this.previousElementSibling;
+  if (this.nextElementSibling) {
+    this.remove();
+    usedIngredientsSet.delete(this.getAttribute('value'));
+  } else if (nodeBefore.className !== 'arrow') {
+    nodeBefore.textContent = nodeBefore.textContent.slice(0, -2);
+    this.remove();
+    usedIngredientsSet.delete(this.getAttribute('value'));
+  }
+  console.log(usedIngredientsSet);
+};
 const addIngredient = function () {
   const newName = this.innerText;
-  const element = document.createElement('span');
-  element.innerText = `${newName}, `;
-  element.setAttribute('value', newName);
-  usedIngredients.appendChild(element);
-  element.addEventListener('click', element.remove);
+  if (!usedIngredientsSet.has(newName)) {
+    usedIngredientsSet.add(newName);
+    const element = document.createElement('span');
+    element.innerText = `${newName}, `;
+    element.setAttribute('value', newName);
+    usedIngredients.appendChild(element);
+    element.previousElementSibling.textContent += `, `;
+    element.textContent = usedIngredients.lastChild.textContent.slice(0, -2);
+    element.addEventListener('click', removeIngredient);
+    console.log(usedIngredientsSet);
+  }
 };
 
-const listOfIngredients = document.querySelectorAll(
-  '#ingredientsList .group-ingredients button'
-);
-for (const el of listOfIngredients) {
-  el.addEventListener('click', addIngredient.bind(el));
-}
-
-//remove span on click
-const listOfUsedIngredients = document.querySelectorAll(
-  '#usedIngredients span'
-);
-
 for (const el of listOfUsedIngredients) {
-  el.addEventListener('click', el.remove);
+  // console.log(el);
+  el.addEventListener('click', removeIngredient);
 }
-// //remove span on click (and validate if ingredient is used or not)
-// function remove() {
-//   var element = this;
-//   element.remove();
-// }
+for (const el of listOfIngredients) {
+  el.addEventListener('click', addIngredient);
+}
 
 //show/hide categories of ingredients:
-
 const barButtons = document.querySelectorAll('.bar');
 //all group-ingredients children (groups)
 const ingredientGroups = document.querySelectorAll('.group-ingredients .group');
@@ -294,7 +293,6 @@ async function initializeList() {
   await new Promise((resolve) => setTimeout(resolve, 4000));
   createList();
   setTimeout(list.classList.remove('hidden'), 4000);
-  resetApi();
   toggleLoader(this.parentNode);
 }
 // create a single recipe modal:
@@ -307,7 +305,6 @@ async function initializeRecipe() {
   await new Promise((resolve) => setTimeout(resolve, 4000));
   createModal();
   setTimeout(showHide('modal'), 4000);
-  resetApi();
   toggleLoader(this.parentNode);
 }
 
