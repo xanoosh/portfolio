@@ -133,7 +133,7 @@ small.arrow::before {
 }
 
 #sidebar #ingredientsList .group-bar .group-item {
-  flex: 0 0 50%;
+  flex: 0 0 33.33333333333%;
   display: flex;
   align-items: center;
 }
