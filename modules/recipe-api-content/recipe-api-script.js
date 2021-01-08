@@ -324,13 +324,23 @@ const toggleLoader = (parent) => {
 // create a list of recipes:
 async function initializeList() {
   // console.log();
-  toggleLoader(this.parentNode);
+  if (window.innerWidth > 560) {
+    toggleLoader(this.parentNode);
+  } else {
+    overlay.classList.toggle('hidden');
+    toggleLoader(overlay);
+  }
   createUrl('list');
   fetchApi();
   await new Promise((resolve) => setTimeout(resolve, 4000));
   createList();
   setTimeout(list.classList.remove('hidden'), 4000);
-  toggleLoader(this.parentNode);
+  if (window.innerWidth > 560) {
+    toggleLoader(this.parentNode);
+  } else {
+    overlay.classList.toggle('hidden');
+    toggleLoader(overlay);
+  }
 }
 // create a single recipe modal:
 async function initializeRecipe() {

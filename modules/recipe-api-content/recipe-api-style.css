@@ -382,6 +382,12 @@ small.arrow::before {
   margin: -10px 0 10px 30px;
 }
 
+#overlay #loading {
+  height: unset;
+  font-size: 80px;
+  width: 80px;
+}
+
 /* breakpoints mid and mobile */
 
 @media (max-width: 1200px) {
@@ -401,6 +407,7 @@ small.arrow::before {
   #sidebar {
     width: 100vw;
     padding: 10px 15px;
+    border: none;
   }
   #sidebar #ingredientsList {
     height: 45vh;
