@@ -33,6 +33,12 @@ listOfUsedIngredients.forEach((ingredient) => {
 //scroll animation for mobile
 const scrollToEl = function () {
   console.log(this);
+  if (this.textContent !== 'Back') {
+    document.querySelector('#list .scroll').classList.remove('hidden');
+  } else {
+    this.classList.add('hidden');
+  }
+
   const target = document.getElementById(this.value);
   target.scrollIntoView({
     block: 'start',

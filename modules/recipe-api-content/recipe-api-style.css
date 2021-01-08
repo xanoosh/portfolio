@@ -35,6 +35,7 @@ small {
   display: block;
   opacity: 0.7;
   margin-bottom: 10px;
+  word-break: break-all;
 }
 
 small.arrow {
@@ -236,7 +237,7 @@ small.arrow::before {
 /* modal with overlay */
 
 #overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -246,10 +247,13 @@ small.arrow::before {
   opacity: 1;
   transition: all 0.3s ease-in-out;
   z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal {
-  position: absolute;
+  position: relative;
   top: 20vh;
   left: 32vw;
   height: 60vh;
@@ -424,5 +428,12 @@ small.arrow::before {
   #list button.scroll {
     opacity: 1;
     pointer-events: all;
+  }
+  #overlay .modal {
+    top: unset;
+    left: unset;
+    width: 85vw;
+    height: 75vh;
+    padding: 40px 10px;
   }
 }
