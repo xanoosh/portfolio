@@ -254,10 +254,8 @@ small.arrow::before {
 
 .modal {
   position: relative;
-  top: 20vh;
-  left: 32vw;
-  height: 60vh;
-  width: 60vw;
+  height: 70vh;
+  width: 70vw;
   pointer-events: all;
   opacity: 1;
   background: #242423;
