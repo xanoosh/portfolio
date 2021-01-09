@@ -16,19 +16,22 @@ let responseArr = [];
 let fetchResponse = {};
 let dataUrl = '';
 const usedIngredients = document.getElementById('usedIngredients');
+const ingredientsWindow = document.getElementById('ingredientsWindow');
 const listOfIngredients = document.querySelectorAll(
   '#ingredientsList .group-ingredients button'
 );
 const listOfUsedIngredients = document.querySelectorAll(
-  '#usedIngredients span'
+  '#usedIngredients #ingredientsWindow span'
 );
 const usedIngredientsSet = new Set();
 const scrollers = document.querySelectorAll('.scroll');
-
 //set initial values of set
 listOfUsedIngredients.forEach((ingredient) => {
   usedIngredientsSet.add(ingredient.getAttribute('value'));
 });
+// tablist variables
+const barButtons = document.querySelectorAll('.bar');
+const ingredientGroups = document.querySelectorAll('.group-ingredients .group');
 
 //scroll animation for mobile
 const scrollToEl = function () {
@@ -116,19 +119,19 @@ const createList = async () => {
       missed.innerHTML = missedHtml;
       container.appendChild(missed);
     }
-    if (
-      element.unusedIngredients !== undefined &&
-      element.unusedIngredients.length !== 0
-    ) {
-      const unused = document.createElement('p');
-      unused.classList.add('info');
-      let unusedHtml = '<b>Not used:</b> ';
-      element.unusedIngredients.forEach((item) => {
-        unusedHtml += `${item.name}, `;
-      });
-      unused.innerHTML = unusedHtml;
-      container.appendChild(unused);
-    }
+    // if (
+    //   element.unusedIngredients !== undefined &&
+    //   element.unusedIngredients.length !== 0
+    // ) {
+    //   const unused = document.createElement('p');
+    //   unused.classList.add('info');
+    //   let unusedHtml = '<b>Not used:</b> ';
+    //   element.unusedIngredients.forEach((item) => {
+    //     unusedHtml += `${item.name}, `;
+    //   });
+    //   unused.innerHTML = unusedHtml;
+    //   container.appendChild(unused);
+    // }
     container.appendChild(button);
     button.addEventListener('click', initializeRecipe);
   });
@@ -207,15 +210,10 @@ const createModal = async () => {
     });
   }
   modalContent.appendChild(link);
-  //close modal event
-  const removeModal = () => {
-    modal.remove();
-  };
   close.addEventListener('click', () => {
     overlay.classList.toggle('hidden');
-    setTimeout(removeModal, 400);
+    setTimeout(this.remove, 400);
   });
-  //show/hide summary data
   summary.addEventListener('click', () => {
     if (!summary.classList.contains('show')) {
       summary.classList.add('show');
@@ -223,8 +221,7 @@ const createModal = async () => {
   });
 };
 
-// adding ingredients to form data:
-
+// adding ingredients to set + validation:
 const checkIfUsed = function () {
   listOfIngredients.forEach((ingredient) => {
     if (usedIngredientsSet.has(ingredient.textContent)) {
@@ -235,7 +232,6 @@ const checkIfUsed = function () {
   });
 };
 checkIfUsed();
-
 const removeIngredient = function () {
   let nodeBefore = this.previousElementSibling;
   if (this.nextElementSibling) {
@@ -247,7 +243,6 @@ const removeIngredient = function () {
     usedIngredientsSet.delete(this.getAttribute('value'));
   }
   checkIfUsed();
-  console.log(usedIngredientsSet);
 };
 const addIngredient = function () {
   const newName = this.innerText;
@@ -256,11 +251,10 @@ const addIngredient = function () {
     const element = document.createElement('span');
     element.innerText = `${newName}, `;
     element.setAttribute('value', newName);
-    usedIngredients.appendChild(element);
+    ingredientsWindow.appendChild(element);
     element.previousElementSibling.textContent += `, `;
-    element.textContent = usedIngredients.lastChild.textContent.slice(0, -2);
+    element.textContent = ingredientsWindow.lastChild.textContent.slice(0, -2);
     element.addEventListener('click', removeIngredient);
-    console.log(usedIngredientsSet);
   }
   checkIfUsed();
 };
@@ -271,12 +265,7 @@ for (const el of listOfUsedIngredients) {
 for (const el of listOfIngredients) {
   el.addEventListener('click', addIngredient);
 }
-
-//show/hide categories of ingredients:
-const barButtons = document.querySelectorAll('.bar');
-//all group-ingredients children (groups)
-const ingredientGroups = document.querySelectorAll('.group-ingredients .group');
-
+//tablist mechanizm
 const selectGroup = function () {
   barButtons.forEach((button) => {
     button.classList.remove('active');
@@ -293,9 +282,7 @@ const selectGroup = function () {
 for (const button of barButtons) {
   button.addEventListener('click', selectGroup);
 }
-
 //toggle hidden
-
 function showHide(classname) {
   const toggleClass = (el) => {
     el.classList.toggle('hidden');
@@ -309,7 +296,6 @@ function showHide(classname) {
     toggleClass(overlay);
   }
 }
-
 //loading animation:
 const toggleLoader = (parent) => {
   let element = document.getElementById('loading');
@@ -323,24 +309,15 @@ const toggleLoader = (parent) => {
 };
 // create a list of recipes:
 async function initializeList() {
-  // console.log();
-  if (window.innerWidth > 560) {
-    toggleLoader(this.parentNode);
-  } else {
-    overlay.classList.toggle('hidden');
-    toggleLoader(overlay);
-  }
+  overlay.classList.toggle('hidden');
+  toggleLoader(overlay);
   createUrl('list');
   fetchApi();
   await new Promise((resolve) => setTimeout(resolve, 4000));
   createList();
   setTimeout(list.classList.remove('hidden'), 4000);
-  if (window.innerWidth > 560) {
-    toggleLoader(this.parentNode);
-  } else {
-    overlay.classList.toggle('hidden');
-    toggleLoader(overlay);
-  }
+  overlay.classList.toggle('hidden');
+  toggleLoader(overlay);
 }
 // create a single recipe modal:
 async function initializeRecipe() {

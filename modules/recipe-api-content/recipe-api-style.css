@@ -75,9 +75,15 @@ small.arrow::before {
   display: flex;
   flex-direction: column;
   align-items: start;
+  position: relative;
 }
 #sidebar button#init {
   margin-top: 20px;
+  /* border: 1px solid #07c837; */
+  position: absolute;
+  z-index: 10;
+  bottom: 5px;
+  right: 20px;
 }
 
 #sidebar h3 {
@@ -93,8 +99,8 @@ small.arrow::before {
 #sidebar #ingredientsList {
   height: 42vh;
 }
-#sidebar #usedIngredients {
-  height: 20vh;
+#sidebar #usedIngredients #ingredientsWindow {
+  height: 15vh;
   overflow-y: auto;
 }
 #sidebar #formData {
@@ -201,10 +207,12 @@ small.arrow::before {
 }
 #list button.scroll {
   position: fixed;
-  bottom: 25px;
+  top: 25px;
   right: 20px;
   opacity: 0;
   pointer-events: none;
+  background: #242423;
+  border: 1px solid #07c837;
 }
 
 #list .single {
@@ -391,7 +399,9 @@ small.arrow::before {
 @media (max-width: 1200px) {
   #sidebar {
     width: 40vw;
-    /* padding: 10px 10px 10px 5px; */
+  }
+  #list {
+    max-width: 60vw;
   }
   #formData label {
     font-size: 10px;

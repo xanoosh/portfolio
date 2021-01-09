@@ -21,7 +21,7 @@
       <div id="overlay" class="hidden"></div>
       <div id="sidebar">
         <div id="formData">
-          <input type="number" id="numOfRecipes" min="1" max="15" value="5" />
+          <input type="number" id="numOfRecipes" min="1" max="15" value="3" />
           <label for="numOfRecipes">Number of recipes</label>
           <br />
           <div>
@@ -128,8 +128,10 @@
         <div id="usedIngredients">
           <h3>Used ingredients:</h3>
           <small class="arrow">click below to remove</small>
-          <span value="water">water, </span><span value="salt">salt, </span
-          ><span value="sugar">sugar</span>
+          <div id="ingredientsWindow">
+            <span value="water">water, </span><span value="salt">salt, </span
+            ><span value="sugar">sugar</span>
+          </div>
         </div>
         <button value="list" id="init" class="scroll">Get recipes</button>
       </div>
