@@ -21,7 +21,7 @@ const listOfIngredients = document.querySelectorAll(
   '#ingredientsList .group-ingredients button'
 );
 const listOfUsedIngredients = document.querySelectorAll(
-  '#usedIngredients #ingredientsWindow span'
+  '#usedIngredients #ingredientsWindow button'
 );
 const usedIngredientsSet = new Set();
 const scrollers = document.querySelectorAll('.scroll');
@@ -210,9 +210,9 @@ const createModal = async () => {
     });
   }
   modalContent.appendChild(link);
-  close.addEventListener('click', () => {
+  close.addEventListener('click', function () {
     overlay.classList.toggle('hidden');
-    setTimeout(this.remove, 400);
+    setTimeout(this.parentElement.remove(), 400);
   });
   summary.addEventListener('click', () => {
     if (!summary.classList.contains('show')) {
@@ -234,26 +234,25 @@ const checkIfUsed = function () {
 checkIfUsed();
 const removeIngredient = function () {
   let nodeBefore = this.previousElementSibling;
-  if (this.nextElementSibling) {
+  console.log(nodeBefore);
+  if (this.nextElementSibling || this.previousElementSibling) {
     this.remove();
     usedIngredientsSet.delete(this.getAttribute('value'));
-  } else if (nodeBefore.className !== 'arrow') {
-    nodeBefore.textContent = nodeBefore.textContent.slice(0, -2);
-    this.remove();
-    usedIngredientsSet.delete(this.getAttribute('value'));
-  }
+  } //else if (nodeBefore === 'arrow') {
+  //   this.remove();
+  //   usedIngredientsSet.delete(this.getAttribute('value'));
+  // }
   checkIfUsed();
 };
 const addIngredient = function () {
   const newName = this.innerText;
   if (!usedIngredientsSet.has(newName)) {
     usedIngredientsSet.add(newName);
-    const element = document.createElement('span');
-    element.innerText = `${newName}, `;
-    element.setAttribute('value', newName);
+    const element = document.createElement('button');
+    element.innerText = `${newName}`;
+    // element.setAttribute('value', newName);
+    element.value = newName;
     ingredientsWindow.appendChild(element);
-    element.previousElementSibling.textContent += `, `;
-    element.textContent = ingredientsWindow.lastChild.textContent.slice(0, -2);
     element.addEventListener('click', removeIngredient);
   }
   checkIfUsed();
@@ -297,31 +296,30 @@ function showHide(classname) {
   }
 }
 //loading animation:
-const toggleLoader = (parent) => {
+const toggleLoader = () => {
+  overlay.classList.toggle('hidden');
   let element = document.getElementById('loading');
   if (element !== null && element !== undefined) {
     element.remove();
   } else {
     element = document.createElement('div');
     element.id = 'loading';
-    parent.appendChild(element);
+    overlay.appendChild(element);
   }
 };
 // create a list of recipes:
 async function initializeList() {
-  overlay.classList.toggle('hidden');
-  toggleLoader(overlay);
+  toggleLoader();
   createUrl('list');
   fetchApi();
   await new Promise((resolve) => setTimeout(resolve, 4000));
   createList();
   setTimeout(list.classList.remove('hidden'), 4000);
-  overlay.classList.toggle('hidden');
-  toggleLoader(overlay);
+  toggleLoader();
 }
 // create a single recipe modal:
 async function initializeRecipe() {
-  toggleLoader(this.parentNode);
+  toggleLoader();
   let thisId = this.value;
   createUrl(thisId);
   console.log(dataUrl);
@@ -329,7 +327,7 @@ async function initializeRecipe() {
   await new Promise((resolve) => setTimeout(resolve, 4000));
   createModal();
   setTimeout(showHide('modal'), 4000);
-  toggleLoader(this.parentNode);
+  toggleLoader();
 }
 
 //onclick get recipe

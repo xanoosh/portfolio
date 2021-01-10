@@ -102,7 +102,11 @@ small.arrow::before {
 #sidebar #usedIngredients #ingredientsWindow {
   height: 15vh;
   overflow-y: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
+
 #sidebar #formData {
   padding: 10px 0;
   width: 100%;
@@ -124,17 +128,10 @@ small.arrow::before {
   font-size: 14px;
 }
 
-#sidebar #usedIngredients span {
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-#sidebar #usedIngredients span:hover {
-  color: #07c837;
-}
-
 /* grouping ingredients */
 
-#sidebar #ingredientsList button {
+#sidebar #ingredientsList button,
+#sidebar #usedIngredients #ingredientsWindow button {
   font-size: 13px;
   padding: 5px;
   border-radius: 5px;
@@ -143,6 +140,7 @@ small.arrow::before {
   background: transparent;
   border: 1px solid #07c807;
   margin-right: 5px;
+  max-height: 29px;
 }
 
 #sidebar #ingredientsList .group-bar {
@@ -182,6 +180,9 @@ small.arrow::before {
   top: 0;
   bottom: 0;
   transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 #sidebar #ingredientsList .group-ingredients .group.active {
@@ -406,7 +407,8 @@ small.arrow::before {
   #formData label {
     font-size: 10px;
   }
-  #sidebar #ingredientsList button {
+  #sidebar #ingredientsList button,
+  #sidebar #usedIngredients #ingredientsWindow button {
     padding: 4px;
   }
 }
@@ -429,11 +431,16 @@ small.arrow::before {
   #sidebar #ingredientsList .group-ingredients {
     height: 120px;
   }
+  #sidebar #ingredientsList .group-ingredients button,
+  #sidebar #usedIngredients #ingredientsWindow button {
+    margin-bottom: 3px;
+  }
 
   #formData label {
     font-size: 12px;
   }
-  #sidebar #ingredientsList button {
+  #sidebar #ingredientsList button,
+  #sidebar #usedIngredients #ingredientsWindow button {
     padding: 5px;
   }
   #list {
