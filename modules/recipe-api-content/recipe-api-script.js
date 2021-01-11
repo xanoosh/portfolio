@@ -35,7 +35,6 @@ const ingredientGroups = document.querySelectorAll('.group-ingredients .group');
 
 //scroll animation for mobile
 const scrollToEl = function () {
-  console.log(this);
   if (this.textContent !== 'Back') {
     document.querySelector('#list .scroll').classList.remove('hidden');
   } else {
@@ -51,7 +50,6 @@ const scrollToEl = function () {
 for (const button of scrollers) {
   button.addEventListener('click', scrollToEl);
 }
-console.log(scrollers);
 
 // construct url for API call
 const createUrl = (mode) => {
@@ -233,18 +231,18 @@ const checkIfUsed = function () {
 };
 checkIfUsed();
 const removeIngredient = function () {
-  let nodeBefore = this.previousElementSibling;
-  console.log(nodeBefore);
   if (this.nextElementSibling || this.previousElementSibling) {
     this.remove();
     usedIngredientsSet.delete(this.getAttribute('value'));
-  } //else if (nodeBefore === 'arrow') {
-  //   this.remove();
-  //   usedIngredientsSet.delete(this.getAttribute('value'));
-  // }
+  } else {
+    this.remove();
+    usedIngredientsSet.delete(this.getAttribute('value'));
+    init.classList.add('inactive');
+  }
   checkIfUsed();
 };
 const addIngredient = function () {
+  init.classList.remove('inactive');
   const newName = this.innerText;
   if (!usedIngredientsSet.has(newName)) {
     usedIngredientsSet.add(newName);
