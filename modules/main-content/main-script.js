@@ -11,7 +11,7 @@ document.querySelectorAll(`[data-aos='fade-up']`).forEach((el) => {
 //type.js setup
 const options = {
   strings: [
-    'Hello there!^2500',
+    'Hello there!^2000',
     'I am a web developer from Warsaw^1500',
     'Drzej to gej :)',
   ],

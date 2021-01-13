@@ -103,15 +103,16 @@ function checkColors() {
       });
     }, 500);
   }
-  let progress = [];
+  let myProgress = [];
   memos.forEach((memo) => {
     if (memo.classList.contains('done')) {
-      progress.push(memo);
+      myProgress.push(memo);
     }
   });
 
-  if (progress.length === 16) {
+  if (myProgress.length === 16) {
     winningScreen.classList.toggle('hidden');
+    winningScreen.classList.toggle('winanimation');
   }
   // //toggle click event
   // memos.forEach((memo) => {
