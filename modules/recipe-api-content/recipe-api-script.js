@@ -186,6 +186,32 @@ const createModal = async () => {
     });
     modalContent.appendChild(ingredientList);
   }
+  //checkList - meal type
+  const checkList = document.createElement('ul');
+  let checkListInner = '';
+  const checkInLi = '<i>&#10004;</i>';
+  checkList.classList.add('checkList');
+  const vegetarian = fetchResponse.vegetarian;
+  const vegan = fetchResponse.vegan;
+  const glutenFree = fetchResponse.glutenFree;
+  const dairyFree = fetchResponse.dairyFree;
+  if (vegetarian && vegetarian === true) {
+    checkListInner += `<li>${checkInLi} Vegetarian</li>`;
+  }
+  if (vegan && vegan === true) {
+    checkListInner += `<li>${checkInLi} Vegan</li>`;
+  }
+  if (glutenFree && glutenFree === true) {
+    checkListInner += `<li>${checkInLi} Gluten Free</li>`;
+  }
+  if (dairyFree && dairyFree === true) {
+    checkListInner += `<li>${checkInLi} Dairy Free</li>`;
+  }
+  checkList.innerHTML = checkListInner;
+  if (checkListInner.length > 0) {
+    modalContent.appendChild(checkList);
+  }
+  //summary
   modalContent.appendChild(summaryTitle);
   modalContent.appendChild(summarySmall);
   modalContent.appendChild(summary);

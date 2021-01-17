@@ -300,6 +300,16 @@ small.arrow::before {
   border-top: 1px solid #07c837;
   border-bottom: 1px solid #07c837;
 }
+.modal-content ul.checkList {
+  list-style: none;
+  padding-left: 0;
+  border-top: none;
+  padding-top: 0;
+}
+.modal-content ul.checkList li i {
+  color: #07c837;
+}
+
 .modal-content ul h4 {
   margin: 0 0 8px -15px;
 }
