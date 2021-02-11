@@ -102,7 +102,7 @@ small.arrow::before {
   width: 100%;
 }
 #sidebar #ingredientsList {
-  height: 42vh;
+  height: 50vh;
 }
 #sidebar #usedIngredients #ingredientsWindow {
   height: 15vh;
@@ -115,7 +115,7 @@ small.arrow::before {
 #sidebar #formData {
   padding: 10px 0;
   width: 100%;
-  height: 18vh;
+  height: 14vh;
 }
 
 #formData input {
@@ -473,4 +473,55 @@ small.arrow::before {
     height: 75vh;
     padding: 40px 10px;
   }
+}
+
+/* search input styles */
+
+.autocomplete-container {
+  max-height: 250px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.autocomplete-container .autocomplete-input {
+  padding: 10px;
+  width: 100%;
+  background: #242423;
+  color: #fff;
+  border: 1px solid #07c837;
+}
+.autocomplete-container .autocomplete-input:focus {
+  border: 1px solid #fff;
+}
+
+.autocomplete-container .autocomplete-list {
+  width: 100%;
+  /* max-height: 30vh;
+  overflow-y: auto; */
+  position: relative;
+}
+
+.autocomplete-container .autocomplete-list ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.autocomplete-container .autocomplete-list ul li {
+  border: 1px solid #fff;
+  border-top: none;
+  padding: 10px;
+  cursor: pointer;
+  background: #242423;
+  color: #fff;
+}
+.autocomplete-container .autocomplete-list ul li:hover {
+  background: #07c837;
+  color: #fff;
+  border-color: #07c837;
 }

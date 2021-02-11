@@ -354,5 +354,85 @@ async function initializeRecipe() {
   toggleLoader();
 }
 
+//search input
+let searchInputArray = [];
+let autoList = [];
+//list of all ingredients to use
+
+function updateSearchData() {
+  searchInputArray = [];
+  const dataButtons = document.querySelectorAll(
+    '#ingredientsList .group-ingredients button:not(.used)'
+  );
+  dataButtons.forEach((ingredient) => {
+    // console.log(ingredient);
+    searchInputArray.push(ingredient.innerText);
+  });
+  searchInputArray.sort();
+}
+
+updateSearchData();
+
+//copied start
+
+const searchInput = document.querySelector('.autocomplete-input');
+const searchList = document.querySelector('.autocomplete-list');
+
+function createSearchList() {
+  const elExists = searchList.querySelector('ul');
+  if (elExists !== null) {
+    elExists.remove();
+  }
+  const text = this.value;
+  autoList = [];
+  updateSearchData();
+  if (text.length > 0) {
+    let counter = 0;
+    let arrValue = 0;
+    while (counter < 5 && arrValue < searchInputArray.length) {
+      if (
+        searchInputArray[arrValue].toLowerCase().startsWith(text.toLowerCase())
+      ) {
+        autoList.push(searchInputArray[arrValue]);
+        counter++;
+      }
+      arrValue++;
+    }
+  }
+  if (autoList.length > 0) {
+    const suggestions = document.createElement('ul');
+    autoList.forEach((el) => {
+      suggestions.innerHTML += `<li>${el}</li>`;
+    });
+    searchList.appendChild(suggestions);
+    const listElements = searchList.querySelectorAll('li');
+    listElements.forEach((el) => {
+      el.addEventListener('click', hideList);
+      el.addEventListener('click', addIngredient);
+    });
+    // document.addEventListener('click', function (event) {
+    //   const isClickInside = suggestions.contains(event.target);
+    //   if (!isClickInside) {
+    //     hideList();
+    //     //the click was outside the specifiedElement, do something
+    //   } else {
+    //     // createSearchList();
+    //   }
+    // });
+  }
+}
+
+function hideList() {
+  const element = searchList.querySelector('ul');
+  if (element !== null) {
+    searchList.querySelector('ul').remove();
+    searchInput.value = '';
+  }
+}
+
+//create list below input:
+searchInput.addEventListener('input', createSearchList);
+searchInput.addEventListener('click', createSearchList);
+
 //onclick get recipe
 init.addEventListener('click', initializeList);

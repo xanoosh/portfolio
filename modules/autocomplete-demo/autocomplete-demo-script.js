@@ -225,6 +225,7 @@ const testData = [
   'Zimbabwe',
 ];
 let autoList = [];
+let autoListFinal = [];
 //dom stuff
 const container = document.querySelector('.autocomplete-container');
 const input = container.querySelector('.autocomplete-input');
@@ -233,24 +234,22 @@ const list = container.querySelector('.autocomplete-list');
 input.addEventListener('input', function () {
   //remove current suggestions:
   const elExists = list.querySelector('ul');
-  console.log(elExists);
   if (elExists !== null) {
     elExists.remove();
   }
   const text = this.value;
   autoList = [];
-  console.log(text.toLowerCase());
   //filter through array
   testData.forEach((el) => {
     if (text.length > 0 && el.toLowerCase().startsWith(text.toLowerCase())) {
       autoList.push(el);
     }
   });
-  console.log(autoList);
 
   if (autoList.length > 0) {
+    autoListFinal = autoList.sort().slice(0, 5);
     const suggestions = document.createElement('ul');
-    autoList.forEach((el) => {
+    autoListFinal.forEach((el) => {
       suggestions.innerHTML += `<li>${el}</li>`;
     });
     list.appendChild(suggestions);
@@ -263,10 +262,13 @@ input.addEventListener('input', function () {
 
 function useElement() {
   const el = document.querySelector('h3');
-  if (el !== null) {
+  const currentList = list.querySelector('ul');
+  if (el !== null && currentList !== null) {
     el.remove();
+    currentList.remove();
   }
   const paragraph = document.createElement('h3');
   paragraph.innerText = this.innerText;
+  paragraph.style.textAlign = 'center';
   container.appendChild(paragraph);
 }
