@@ -436,3 +436,12 @@ searchInput.addEventListener('click', createSearchList);
 
 //onclick get recipe
 init.addEventListener('click', initializeList);
+
+//workaround virtual keyboard on mobile (content jumping) :
+
+function toggleFix() {
+  const body = document.querySelector('body');
+  body.classList.toggle('fix');
+}
+searchInput.addEventListener('focus', toggleFix);
+searchInput.addEventListener('blur', toggleFix);
