@@ -7,22 +7,6 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 560px) {
-  body.fix {
-    position: relative !important;
-    /* width: 100%; */
-  }
-  body.fix #sidebar #formData {
-    height: auto !important;
-  }
-  body.fix #sidebar #ingredientsList {
-    height: auto !important;
-  }
-  body.fix #sidebar #usedIngredients {
-    display: none !important;
-  }
-}
-
 @media (max-width: 400px) {
   #sidebar #usedIngredients #ingredientsWindow {
     height: 10vh;
