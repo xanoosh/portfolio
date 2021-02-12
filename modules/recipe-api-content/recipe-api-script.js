@@ -6,7 +6,11 @@ const sidebar = document.getElementById('sidebar');
 const list = document.getElementById('list');
 const init = document.getElementById('init');
 const overlay = document.getElementById('overlay');
-const numOfRecipesInput = document.getElementById('numOfRecipes');
+// const numOfRecipesInput = document.getElementById('numOfRecipes');
+const numValue = document.getElementById('num-val');
+const numLess = document.getElementById('num-less');
+const numMore = document.getElementById('num-more');
+
 const radioMin = document.getElementById('radioMin');
 const radioMax = document.getElementById('radioMax');
 //ja
@@ -34,6 +38,18 @@ listOfUsedIngredients.forEach((ingredient) => {
 const barButtons = document.querySelectorAll('.bar');
 const ingredientGroups = document.querySelectorAll('.group-ingredients .group');
 
+//number of recipes input change
+numLess.addEventListener('click', () => {
+  if (Number(numValue.innerText) > 1) {
+    numValue.innerText = Number(numValue.innerText) - 1;
+  }
+});
+numMore.addEventListener('click', () => {
+  if (Number(numValue.innerText) < 15) {
+    numValue.innerText = Number(numValue.innerText) + 1;
+  }
+});
+
 //scroll animation for mobile
 const scrollToEl = function () {
   if (this.textContent !== 'Back') {
@@ -60,7 +76,8 @@ const createUrl = (mode) => {
   if (mode === 'list') {
     let ingredients = [...usedIngredientsSet].join(',');
     const minOrMax = radioMax.checked ? radioMax.value : radioMin.value;
-    const howMany = `&number=${Number(numOfRecipesInput.value)}`;
+    // const howMany = `&number=${Number(numOfRecipesInput.value)}`;
+    const howMany = `&number=${Number(numValue.innerText)}`;
     dataUrl = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredients}${minOrMax}${howMany}&${apiKey}`;
     console.log(dataUrl);
   } else {
@@ -420,9 +437,6 @@ function hideList() {
     searchList.querySelector('ul').remove();
     searchInput.value = '';
   }
-  // if (body.classList.hasClass('fix')) {
-  //   body.classList.remove('fix');
-  // }
 }
 
 //create list below input:
@@ -436,5 +450,6 @@ init.addEventListener('click', initializeList);
 function toggleFix() {
   body.classList.toggle('fix');
 }
+
 searchInput.addEventListener('focus', toggleFix);
 searchInput.addEventListener('blur', toggleFix);
