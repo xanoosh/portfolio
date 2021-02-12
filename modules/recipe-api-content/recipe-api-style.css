@@ -167,6 +167,7 @@ small.arrow::before {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-right: -5px;
 }
 
 #sidebar #ingredientsList .group-bar .group-item {
