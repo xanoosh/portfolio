@@ -1,5 +1,6 @@
 'use strict';
 
+const body = document.querySelector('body');
 const main = document.getElementById('main');
 const sidebar = document.getElementById('sidebar');
 const list = document.getElementById('list');
@@ -410,15 +411,6 @@ function createSearchList() {
       el.addEventListener('click', hideList);
       el.addEventListener('click', addIngredient);
     });
-    // document.addEventListener('click', function (event) {
-    //   const isClickInside = suggestions.contains(event.target);
-    //   if (!isClickInside) {
-    //     hideList();
-    //     //the click was outside the specifiedElement, do something
-    //   } else {
-    //     // createSearchList();
-    //   }
-    // });
   }
 }
 
@@ -428,6 +420,9 @@ function hideList() {
     searchList.querySelector('ul').remove();
     searchInput.value = '';
   }
+  // if (body.classList.hasClass('fix')) {
+  //   body.classList.remove('fix');
+  // }
 }
 
 //create list below input:
@@ -438,9 +433,7 @@ searchInput.addEventListener('click', createSearchList);
 init.addEventListener('click', initializeList);
 
 //workaround virtual keyboard on mobile (content jumping) :
-
 function toggleFix() {
-  const body = document.querySelector('body');
   body.classList.toggle('fix');
 }
 searchInput.addEventListener('focus', toggleFix);

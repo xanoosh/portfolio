@@ -12,10 +12,6 @@
     position: relative !important;
     /* width: 100%; */
   }
-  body.fix #sidebar {
-    margin: 10px 15px;
-  }
-
   body.fix #sidebar #formData {
     height: auto !important;
   }
@@ -135,7 +131,7 @@ small.arrow::before {
 #sidebar #formData {
   padding: 10px 0;
   width: 100%;
-  height: 14vh;
+  height: 16vh;
 }
 
 #formData input {
@@ -455,7 +451,7 @@ small.arrow::before {
     border: none;
   }
   #sidebar #ingredientsList {
-    height: 45vh;
+    height: 52vh;
   }
   #sidebar #ingredientsList .group-bar {
     margin-bottom: 10px;
@@ -474,6 +470,11 @@ small.arrow::before {
   #formData label {
     font-size: 12px;
   }
+
+  #sidebar #usedIngredients #ingredientsWindow {
+    width: 60%;
+  }
+
   #sidebar #ingredientsList button,
   #sidebar #usedIngredients #ingredientsWindow button {
     padding: 5px;
