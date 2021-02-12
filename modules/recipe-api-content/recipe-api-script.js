@@ -390,7 +390,7 @@ function createSearchList() {
   if (text.length > 0) {
     let counter = 0;
     let arrValue = 0;
-    while (counter < 5 && arrValue < searchInputArray.length) {
+    while (counter < 4 && arrValue < searchInputArray.length) {
       if (
         searchInputArray[arrValue].toLowerCase().startsWith(text.toLowerCase())
       ) {
