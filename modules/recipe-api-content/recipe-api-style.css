@@ -23,6 +23,12 @@
   }
 }
 
+@media (max-width: 400px) {
+  #sidebar #usedIngredients #ingredientsWindow {
+    height: 10vh;
+  }
+}
+
 body #main {
   background: #242423;
   overflow: hidden;
@@ -86,7 +92,7 @@ small.arrow::before {
 #sidebar {
   padding: 10px 15px;
   width: 30vw;
-  min-height: 100vh;
+  height: 100vh;
   border-right: 2px solid #07c837;
   display: flex;
   flex-direction: column;
@@ -118,7 +124,8 @@ small.arrow::before {
   width: 100%;
 }
 #sidebar #ingredientsList {
-  height: 50vh;
+  /* height: 50vh; */
+  height: auto;
 }
 #sidebar #usedIngredients #ingredientsWindow {
   height: 15vh;
@@ -131,7 +138,8 @@ small.arrow::before {
 #sidebar #formData {
   padding: 10px 0;
   width: 100%;
-  height: 16vh;
+  /* height: 16vh; */
+  height: auto;
 }
 
 #formData input {
@@ -451,7 +459,8 @@ small.arrow::before {
     border: none;
   }
   #sidebar #ingredientsList {
-    height: 52vh;
+    /* height: 52vh; */
+    height: auto;
   }
   #sidebar #ingredientsList .group-bar {
     margin-bottom: 10px;
