@@ -4,9 +4,27 @@
 
 #board {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
   height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+#table {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player-container {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.player-container h3 {
+  margin-right: 20px;
 }
 
 .card-container {
@@ -62,4 +80,18 @@
 .card-container.show p:last-of-type {
   font-size: 24px;
   margin: 0;
+}
+
+button#run {
+  cursor: pointer;
+  padding: 10px 30px;
+  border: 2px solid #242423;
+  color: #242423;
+  text-transform: uppercase;
+  background: #fff;
+  transition: all 0.3s ease-in-out;
+}
+button#run:hover {
+  background: #242423;
+  color: #fff;
 }
