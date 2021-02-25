@@ -84,6 +84,9 @@ pickedCards.forEach((hand) => {
     cardSymbol.innerHTML = myCard.symbol;
     const cardValue = document.createElement('p');
     cardValue.innerHTML = myCard.value;
+    if (myCard.symbol === '♦' || myCard.symbol === '♥') {
+      hand.classList.add('red');
+    }
     hand.appendChild(cardValue);
     hand.appendChild(cardSymbol);
     //remove card from fullDeck
@@ -97,7 +100,6 @@ pickedCards.forEach((hand) => {
 function symulation() {
   //shuffle cards
   shuffleArray(fullDeck);
-  console.log(fullDeck);
   //get players hand to array
   const playerHand = [];
   pickedCards.forEach((card) => {

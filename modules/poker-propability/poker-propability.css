@@ -70,7 +70,9 @@
 .card-container.show {
   background: #fff;
 }
-
+.card-container.show.red p {
+  color: #f60002;
+}
 .card-container.show p {
   text-align: center;
   margin-top: 15px;
@@ -78,7 +80,7 @@
   margin-bottom: 0;
 }
 .card-container.show p:last-of-type {
-  font-size: 24px;
+  font-size: 26px;
   margin: 0;
 }
 
