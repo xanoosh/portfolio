@@ -17,15 +17,28 @@ const valuesOfCards = [
   '3',
   '2',
 ];
-const valuesOfSets = {
-  poker: 7,
-  fourOfTheKind: 6,
-  fullHouse: 5,
-  flush: 4,
-  straight: 3,
-  threeOfTheKind: 2,
-  pair: 1,
-};
+// const valuesOfSets = {
+//   poker: 8,
+//   fourOfTheKind: 7,
+//   fullHouse: 6,
+//   flush: 5,
+//   straight: 4,
+//   threeOfTheKind: 3,
+//   twoPairs: 2,
+//   onePair: 1,
+//   highCard: 0,
+// };
+const valuesOfSets = [
+  'highCard',
+  'onePair',
+  'twoPairs',
+  'threeOfTheKind',
+  'straight',
+  'flush',
+  'fullHouse',
+  'fourOfTheKind',
+  'poker',
+];
 const straights = [
   ['10', 'J', 'Q', 'K', 'A'],
   ['9', '10', 'J', 'Q', 'K'],
@@ -38,6 +51,11 @@ const straights = [
   ['2', '3', '4', '5', '6'],
   ['A', '2', '3', '4', '5'],
 ];
+
+let playerOneScore = 0;
+let playerTwoScore = 0;
+let draw = 0;
+let gamesPlayed = 0;
 
 const pickedCards = document.querySelectorAll('.player-one .card-container');
 const run = document.getElementById('run');
@@ -107,7 +125,7 @@ function checkStraight(arr) {
   });
   for (const straight of straights) {
     if (straight.every((i) => valuesArr.includes(i))) {
-      console.log(straight);
+      // console.log(straight);
       result = {
         value: 'straight',
         rank: straights.length - straights.indexOf(straight),
@@ -167,6 +185,62 @@ function checkFlush(arr) {
   return result;
 }
 
+//get specific set for player
+function getPlayerSet(cards, player) {
+  if (checkStraight(cards)) {
+    if (checkFlush(cards)) {
+      player.value = 'poker';
+      player.rank = checkStraight(cards).rank;
+    }
+  } else if (
+    checkSameValues(cards) &&
+    checkSameValues(cards).value === 'fourOfTheKind'
+  ) {
+    player.value = checkSameValues(cards).value;
+    player.rank = checkSameValues(cards).rank;
+  } else if (
+    checkSameValues(cards) &&
+    checkSameValues(cards).value === 'fullHouse'
+  ) {
+    player.value = checkSameValues(cards).value;
+    player.rank = checkSameValues(cards).rank;
+  } else if (checkFlush(cards)) {
+    player.value = checkFlush(cards).value;
+    player.rank = checkFlush(cards).symbol;
+  } else if (checkStraight(cards)) {
+    // checkStraight(playerOneSet);
+    player.value = checkStraight(cards).value;
+    player.rank = checkStraight(cards).rank;
+  } else if (checkSameValues(cards)) {
+    player.value = checkSameValues(cards).value;
+    player.rank = checkSameValues(cards).rank;
+  } else {
+    highCard(cards);
+    player.value = 'highCard';
+    player.rank = highCard(cards);
+  }
+  return player;
+}
+
+function comparePlayers(arr) {
+  if (arr.length === 2) {
+    const playerOne = arr[0].value;
+    const playerTwo = arr[1].value;
+    if (valuesOfSets.indexOf(playerOne) > valuesOfSets.indexOf(playerTwo)) {
+      //playerOne wins
+      playerOneScore++;
+    } else if (
+      valuesOfSets.indexOf(playerOne) < valuesOfSets.indexOf(playerTwo)
+    ) {
+      //playerTwo wins
+      playerTwoScore++;
+    } else {
+      draw++;
+    }
+  }
+  gamesPlayed++;
+}
+
 // console.log(fullDeck);
 function symulation() {
   //shuffle cards
@@ -181,67 +255,65 @@ function symulation() {
       value,
     });
   });
-  console.log(
-    `player 1 hand: ${playerHand[0].value} ${playerHand[0].symbol}, ${playerHand[1].value} ${playerHand[1].symbol}`
-  );
+  // console.log(
+  //   `player 1 hand: ${playerHand[0].value} ${playerHand[0].symbol}, ${playerHand[1].value} ${playerHand[1].symbol}`
+  // );
   //get second player hand to array
   const [one, two, ...rest] = fullDeck;
   const secondPlayerHand = [one, two];
-  console.log(
-    `player 2 hand: ${secondPlayerHand[0].value} ${secondPlayerHand[0].symbol}, ${secondPlayerHand[1].value} ${secondPlayerHand[1].symbol}`
-  );
+  // console.log(
+  //   `player 2 hand: ${secondPlayerHand[0].value} ${secondPlayerHand[0].symbol}, ${secondPlayerHand[1].value} ${secondPlayerHand[1].symbol}`
+  // );
   //get table cards array
   const [flopOne, flopTwo, flopThree, turn, river, ...unused] = rest;
   const tableCards = [flopOne, flopTwo, flopThree, turn, river];
-  console.log(
-    `Cards On Table: ${tableCards[0].value} ${tableCards[0].symbol},${tableCards[1].value} ${tableCards[1].symbol},${tableCards[2].value} ${tableCards[2].symbol},${tableCards[3].value} ${tableCards[3].symbol},${tableCards[4].value} ${tableCards[4].symbol} `
-  );
+  // console.log(
+  //   `Cards On Table: ${tableCards[0].value} ${tableCards[0].symbol},${tableCards[1].value} ${tableCards[1].symbol},${tableCards[2].value} ${tableCards[2].symbol},${tableCards[3].value} ${tableCards[3].symbol},${tableCards[4].value} ${tableCards[4].symbol} `
+  // );
 
   const playerOneSet = tableCards.concat(playerHand);
   // const playerOneSet = testDeck;
   const playerTwoSet = tableCards.concat(secondPlayerHand);
-
+  // console.log('Player one set:');
+  // console.table(playerOneSet);
+  //function for getting specific card set of a player
   const playerOne = {
     value: '',
     rank: 0,
   };
-  console.log('Player one set:');
-  console.table(playerOneSet);
-  if (checkStraight(playerOneSet)) {
-    if (checkFlush(playerOneSet)) {
-      playerOne.value = 'poker';
-      playerOne.rank = checkStraight(playerOneSet).rank;
-    }
-  } else if (
-    checkSameValues(playerOneSet) &&
-    (checkSameValues(playerOneSet).value === 'fullHouse' ||
-      checkSameValues(playerOneSet).value === 'fourOfTheKind')
-  ) {
-    playerOne.value = checkSameValues(playerOneSet).value;
-    // playerOne.rank = checkStraight(playerOneSet).symbol;
-  } else if (checkFlush(playerOneSet)) {
-    playerOne.value = checkFlush(playerOneSet).value;
-    playerOne.rank = checkFlush(playerOneSet).symbol;
-  } else if (checkStraight(playerOneSet)) {
-    // checkStraight(playerOneSet);
-    playerOne.value = checkStraight(playerOneSet).value;
-    playerOne.rank = checkStraight(playerOneSet).rank;
-  } else if (checkSameValues(playerOneSet)) {
-    playerOne.value = checkSameValues(playerOneSet);
-  } else {
-    highCard(playerOneSet);
-    playerOne.value = 'highCard';
-    playerOne.rank = highCard(playerOneSet);
-  }
-  console.log(playerOne);
-  return playerOne;
+  const playerTwo = {
+    value: '',
+    rank: 0,
+  };
+  const playerOneObj = getPlayerSet(playerOneSet, playerOne);
+  const playerTwoObj = getPlayerSet(playerTwoSet, playerTwo);
+  const result = [playerOneObj, playerTwoObj];
+  // console.log(result);
+  comparePlayers(result);
+  return result[0].value;
 }
 
-run.addEventListener('click', symulation);
+function countprobability() {
+  playerOneScore = 0;
+  playerTwoScore = 0;
+  draw = 0;
+  gamesPlayed = 0;
+  let i = 100000;
+  while (i > 0) {
+    symulation();
+    i--;
+  }
+  console.log(`Player One won ${(playerOneScore / gamesPlayed) * 100}%`);
+  console.log(`Player Two won ${(playerTwoScore / gamesPlayed) * 100}%`);
+  console.log(`Draw happened ${(draw / gamesPlayed) * 100}% of the time`);
+}
+
+run.addEventListener('click', countprobability);
 //count propability of winning based on current cards and number of players
 // ????
 
 function checkSameValues(arr) {
+  let result = false;
   //get values array from card list
   const valuesArr = [];
   arr.forEach((el) => {
@@ -265,49 +337,57 @@ function checkSameValues(arr) {
       });
     }
   });
-  // console.table(duplicates);
-  //determine specific set
-  //and return it with an object
   for (const el of duplicates) {
     if (el.count === 4) {
-      // console.log(`fourOfTheKind, ${el.value}`);
-      return `fourOfTheKind, ${el.value}`;
+      const value = 'fourOfTheKind';
+      const rank = el.value;
+      result = { value, rank };
+      return result;
     } else if (el.count === 3) {
       const checker = new Set(valuesArr);
       //case full:
-      // console.log(checker.size);
       if (checker.size <= 4) {
-        // console.log(`Full House, ${el.value}`);
-        return `Full House, ${el.value}`;
+        const value = 'fullHouse';
+        const rank = el.value;
+        result = { value, rank };
+        return result;
       } else {
-        // console.log(`threeOfTheKind, ${el.value}`);
-        return `threeOfTheKind, ${el.value}`;
+        const value = 'threeOfTheKind';
+        const rank = el.value;
+        result = { value, rank };
+        return result;
       }
     }
     //pair/pairs
     else if (el.count === 2) {
       const checker = new Set(valuesArr);
-      // console.log(checker.size);
       if (checker.size === 4) {
-        // console.log(`three pairs, ${el.value}`);
-        return `three pairs, ${el.value}`;
+        // need to determine best pairs
+        const value = 'twoPairs';
+        const rank = el.value;
+        result = { value, rank };
+        return result;
       } else if (checker.size <= 5) {
-        // console.log(`two pairs, ${el.value}`);
-        return `two pairs, ${el.value}`;
+        // need to determine best pairs here too
+        const value = 'twoPairs';
+        const rank = el.value;
+        result = { value, rank };
+        return result;
       } else {
-        // console.log(`one pair, ${el.value}`);
-
-        return `one pair, ${el.value}`;
+        const value = 'onePair';
+        const rank = el.value;
+        result = { value, rank };
+        return result;
       }
+    } else {
+      continue;
     }
-    // else {
-    //   return true;
-    // }
   }
+  return result;
 }
 
 // test data:
-// shuffleArray(fullDeck);
+shuffleArray(fullDeck);
 const [jeden, dwa, trzy, cztery, piec, szesc, siedem, ...reszta] = fullDeck;
 
 const testDeck = [jeden, dwa, trzy, cztery, piec, szesc, siedem];
