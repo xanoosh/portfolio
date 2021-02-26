@@ -12,6 +12,10 @@
         }" />`
       );
     </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <title>Poker probability</title>
   </head>
   <body>
@@ -25,17 +29,23 @@
       </div>
       <div class="player-container player-one">
         <h3>Player 1</h3>
-        <div class="card-container"></div>
-        <div class="card-container"></div>
+        <div class="hand">
+          <div class="card-container"></div>
+          <div class="card-container"></div>
+        </div>
+        <p id="player-one-odds"></p>
       </div>
       <div class="player-container">
         <h3>Player 2</h3>
-        <div class="card-container"></div>
-        <div class="card-container"></div>
+        <div class="hand">
+          <div class="card-container"></div>
+          <div class="card-container"></div>
+        </div>
+        <p id="player-two-odds"></p>
       </div>
-
+      <p id="draw-odds"></p>
       <div>
-        <button id="run">Run</button>
+        <button id="run" class="hidden">Run</button>
       </div>
     </div>
     <script>

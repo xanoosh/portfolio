@@ -113,6 +113,15 @@ pickedCards.forEach((hand) => {
     if (index > -1) {
       fullDeck.splice(index, 1);
     }
+    let showBtn = 0;
+    pickedCards.forEach((card) => {
+      if (card.classList.contains('show')) {
+        showBtn++;
+      }
+    });
+    if (showBtn === 2) {
+      run.classList.remove('hidden');
+    }
   });
 });
 
@@ -304,6 +313,16 @@ function countprobability() {
     i--;
   }
   console.log(`Player One won ${(playerOneScore / gamesPlayed) * 100}%`);
+  document.getElementById('player-one-odds').innerText = `Win: ${
+    (playerOneScore / gamesPlayed) * 100
+  }%`;
+  document.getElementById('player-two-odds').innerText = `Win: ${
+    (playerOneScore / gamesPlayed) * 100
+  }%`;
+
+  document.getElementById('draw-odds').innerText = `Draw: ${
+    (playerOneScore / gamesPlayed) * 100
+  }%`;
   console.log(`Player Two won ${(playerTwoScore / gamesPlayed) * 100}%`);
   console.log(`Draw happened ${(draw / gamesPlayed) * 100}% of the time`);
 }
