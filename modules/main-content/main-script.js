@@ -13,7 +13,7 @@ const options = {
   strings: [
     'Hello there!^2000',
     'I am a web developer from Warsaw^1500',
-    'Drzej to gej :)',
+    'Hope you enjoy my projects :)',
   ],
   typeSpeed: 60,
 };
