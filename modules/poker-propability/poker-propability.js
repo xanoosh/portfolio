@@ -17,7 +17,7 @@ const valuesOfCards = [
   'Q',
   'K',
 ];
-const values = {
+const valuesOfSets = {
   poker: 7,
   fourOfTheKind: 6,
   fullHouse: 5,
@@ -26,17 +26,29 @@ const values = {
   threeOfTheKind: 2,
   pair: 1,
 };
-const straights = {
-  first: [10, 11, 12, 13, 1],
-  second: [9, 10, 11, 12, 13],
-  third: [8, 9, 10, 11, 12],
-  forth: [7, 8, 9, 10, 11],
-  fith: [6, 7, 8, 9, 10],
-  sixth: [5, 6, 7, 8, 9],
-  seventh: [4, 5, 6, 7, 8],
-  eighth: [3, 4, 5, 6, 7],
-  ninth: [2, 3, 4, 5, 6],
-};
+// const straights = {
+//   one: [10, 11, 12, 13, 1],
+//   two: [9, 10, 11, 12, 13],
+//   three: [8, 9, 10, 11, 12],
+//   four: [7, 8, 9, 10, 11],
+//   five: [6, 7, 8, 9, 10],
+//   six: [5, 6, 7, 8, 9],
+//   seven: [4, 5, 6, 7, 8],
+//   eight: [3, 4, 5, 6, 7],
+//   nine: [2, 3, 4, 5, 6],
+// };
+const straights = [
+  ['A', '2', '3', '4', '5'],
+  ['2', '3', '4', '5', '6'],
+  ['3', '4', '5', '6', '7'],
+  ['4', '5', '6', '7', '8'],
+  ['5', '6', '7', '8', '9'],
+  ['6', '7', '8', '9', '10'],
+  ['7', '8', '9', '10', 'J'],
+  ['8', '9', '10', 'J', 'Q'],
+  ['9', '10', 'J', 'Q', 'K'],
+  ['10', 'J', 'Q', 'K', 'A'],
+];
 
 const pickedCards = document.querySelectorAll('.player-one .card-container');
 const run = document.getElementById('run');
@@ -97,6 +109,17 @@ pickedCards.forEach((hand) => {
   });
 });
 
+function checkStraight(arr) {
+  let checker = false;
+  straights.forEach((straight) => {
+    if (arr.every((i) => straight.includes(i))) {
+      checker = straights.indexOf(straight) + 1;
+    }
+  });
+  console.log(checker);
+  return checker;
+}
+
 function symulation() {
   //shuffle cards
   shuffleArray(fullDeck);
@@ -126,6 +149,14 @@ function symulation() {
     `Cards On Table: ${tableCards[0].value} ${tableCards[0].symbol},${tableCards[1].value} ${tableCards[1].symbol},${tableCards[2].value} ${tableCards[2].symbol},${tableCards[3].value} ${tableCards[3].symbol},${tableCards[4].value} ${tableCards[4].symbol} `
   );
   //compare
+
+  //comparing two arrays:
+  //needle.every((i) => haystack.includes(i))
+
+  const playerOneSet = tableCards.concat(playerHand);
+  const playerTwoSet = tableCards.concat(secondPlayerHand);
+  console.log(playerOneSet);
+  console.log(playerTwoSet);
 }
 
 run.addEventListener('click', symulation);
