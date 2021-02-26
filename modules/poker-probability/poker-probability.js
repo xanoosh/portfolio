@@ -317,11 +317,11 @@ function countprobability() {
     (playerOneScore / gamesPlayed) * 100
   }%`;
   document.getElementById('player-two-odds').innerText = `Win: ${
-    (playerOneScore / gamesPlayed) * 100
+    (playerTwoScore / gamesPlayed) * 100
   }%`;
 
   document.getElementById('draw-odds').innerText = `Draw: ${
-    (playerOneScore / gamesPlayed) * 100
+    (draw / gamesPlayed) * 100
   }%`;
   console.log(`Player Two won ${(playerTwoScore / gamesPlayed) * 100}%`);
   console.log(`Draw happened ${(draw / gamesPlayed) * 100}% of the time`);
