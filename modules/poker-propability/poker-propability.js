@@ -173,20 +173,53 @@ function checkSameValues(arr) {
     valuesArr.push(el.value);
   });
   //get duplicated values
-  // const duplicates = new Map();
   const duplicates = [];
   valuesArr.forEach(function (x) {
-    duplicates[x] = (duplicates[x] || 0) + 1;
+    if (duplicates.some((el) => el.value === x)) {
+      duplicates.some((el) => {
+        if (el.value === x) {
+          el.count++;
+        }
+      });
+    } else {
+      const value = x;
+      const count = 1;
+      duplicates.push({
+        value,
+        count,
+      });
+    }
   });
-  console.log(duplicates);
+  console.table(duplicates);
+  //determine specific set
+  //and return it with an object
+  duplicates.every((el) => {
+    if (el.count === 4) {
+      console.log(`fourOfTheKind, ${el.value}`);
+      return false;
+    } else if (el.count === 3) {
+      const checker = new Set(valuesArr);
+      //case full:
+      // console.log(checker.size);
+      if (checker.size <= 4) {
+        console.log(`Full House, ${el.value}`);
+        return false;
+      } else {
+        console.log(`threeOfTheKind, ${el.value}`);
+        return false;
+      }
+    }
+    //pair/pairs
+    else if (el.count === 2) {
+      const checker = new Set(valuesArr);
+      console.log(checker.size);
+      if (checker.size <= 5) {
+        console.log(`two pairs, ${el.value}`);
+        return false;
+      } else {
+        console.log(`one pair, ${el.value}`);
+        return false;
+      }
+    }
+  });
 }
-
-//testing
-const testArr = ['Q', 'K', '10', 'J', '10', 'Q', 'Q'];
-const duplicates = [];
-testArr.forEach(function (x) {
-  console.log([x, (duplicates[x] || 0) + 1]);
-  duplicates[x] = (duplicates[x] || 0) + 1;
-});
-
-//remove lower values
