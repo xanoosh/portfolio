@@ -3,19 +3,19 @@
 //Variables
 const symbolsOfCards = ['♣', '♦', '♥', '♠'];
 const valuesOfCards = [
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
-  '7',
-  '8',
-  '9',
-  '10',
-  'J',
-  'Q',
-  'K',
   'A',
+  'K',
+  'Q',
+  'J',
+  '10',
+  '9',
+  '8',
+  '7',
+  '6',
+  '5',
+  '4',
+  '3',
+  '2',
 ];
 const valuesOfSets = {
   poker: 7,
@@ -116,11 +116,10 @@ function checkStraight(arr) {
       checker = straights.indexOf(straight) + 1;
     }
   });
-  console.log(checker);
   return checker;
 }
 
-console.log(fullDeck);
+// console.log(fullDeck);
 
 function symulation() {
   //shuffle cards
@@ -150,21 +149,18 @@ function symulation() {
   console.log(
     `Cards On Table: ${tableCards[0].value} ${tableCards[0].symbol},${tableCards[1].value} ${tableCards[1].symbol},${tableCards[2].value} ${tableCards[2].symbol},${tableCards[3].value} ${tableCards[3].symbol},${tableCards[4].value} ${tableCards[4].symbol} `
   );
-  //compare
-
-  //comparing two arrays:
-  //needle.every((i) => haystack.includes(i))
 
   const playerOneSet = tableCards.concat(playerHand);
   const playerTwoSet = tableCards.concat(secondPlayerHand);
-  console.log(playerOneSet);
-  console.log(playerTwoSet);
+  // console.log(playerOneSet);
+  // console.log(playerTwoSet);
 
   const playerOne = {
     value: '',
     rank: 0,
   };
-
+  console.log('Player one set:');
+  console.table(playerOneSet);
   if (checkStraight(playerOneSet)) {
     if (checkFlush(playerOneSet)) {
       playerOne.value = 'poker';
@@ -180,15 +176,19 @@ function symulation() {
   } else if (checkFlush(playerOneSet)) {
     playerOne.value = checkFlush(playerOneSet);
   } else if (checkStraight(playerOneSet)) {
-    checkStraight(playerOneSet);
+    // checkStraight(playerOneSet);
+    console.log('straight');
     playerOne.value = 'straight';
     playerOne.rank = checkStraight(playerOneSet).value;
   } else if (checkSameValues(playerOneSet)) {
     playerOne.value = checkSameValues(playerOneSet);
   } else {
-    playerOne.value = 'highCardooo';
+    console.log('highCard?');
+    highCard(playerOneSet);
+    playerOne.value = 'highCard';
     playerOne.rank = highCard(playerOneSet);
   }
+  console.log(playerOne);
   return playerOne;
 }
 
@@ -220,7 +220,7 @@ function checkSameValues(arr) {
       });
     }
   });
-  console.table(duplicates);
+  // console.table(duplicates);
   //determine specific set
   //and return it with an object
   duplicates.every((el) => {
@@ -242,7 +242,7 @@ function checkSameValues(arr) {
     //pair/pairs
     else if (el.count === 2) {
       const checker = new Set(valuesArr);
-      console.log(checker.size);
+      // console.log(checker.size);
       if (checker.size === 4) {
         // console.log(`three pairs, ${el.value}`);
         return `three pairs, ${el.value}`;
@@ -253,9 +253,10 @@ function checkSameValues(arr) {
         // console.log(`one pair, ${el.value}`);
         return `one pair, ${el.value}`;
       }
-    } else {
-      return true;
     }
+    // else {
+    //   return true;
+    // }
   });
 }
 
@@ -270,7 +271,7 @@ function checkFlush(arr) {
   symbolsArr.forEach(function (x) {
     if (symbols.some((el) => el.symbol === x)) {
       symbols.some((el) => {
-        if (el.value === x) {
+        if (el.symbol === x) {
           el.count++;
         }
       });
@@ -283,20 +284,35 @@ function checkFlush(arr) {
       });
     }
   });
-  if (symbols.length === 2) {
-    result = {
-      value: 'flush',
-    };
-  }
+
+  symbols.forEach((symbol) => {
+    if (symbol.count >= 5) {
+      result = {
+        value: 'flush',
+        symbol: symbol.symbol,
+      };
+    }
+  });
   return result;
 }
 
 //find highest card
 function highCard(arr) {
-  valuesOfCards.forEach((el) => {
-    if (arr.indexOf(el)) {
-      const result = el;
-      return result;
-    }
+  const valuesArr = [];
+  arr.forEach((el) => {
+    valuesArr.push(el.value);
   });
+  // console.log(valuesArr);
+  for (const card of valuesOfCards) {
+    if (valuesArr.indexOf(card) !== -1) {
+      return card;
+    }
+  }
 }
+
+// test data:
+shuffleArray(fullDeck);
+const [jeden, dwa, trzy, cztery, tiec, szesc, siedem, ...reszta] = fullDeck;
+
+const testDeck = [jeden, dwa, trzy, cztery, tiec];
+console.table([jeden, dwa, trzy, cztery, tiec, szesc, siedem]);
