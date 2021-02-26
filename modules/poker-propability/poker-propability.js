@@ -3,7 +3,6 @@
 //Variables
 const symbolsOfCards = ['♣', '♦', '♥', '♠'];
 const valuesOfCards = [
-  'A',
   '2',
   '3',
   '4',
@@ -16,6 +15,7 @@ const valuesOfCards = [
   'J',
   'Q',
   'K',
+  'A',
 ];
 const valuesOfSets = {
   poker: 7,
@@ -159,7 +159,37 @@ function symulation() {
   const playerTwoSet = tableCards.concat(secondPlayerHand);
   console.log(playerOneSet);
   console.log(playerTwoSet);
-  checkSameValues(playerOneSet);
+
+  const playerOne = {
+    value: '',
+    rank: 0,
+  };
+
+  if (checkStraight(playerOneSet)) {
+    if (checkFlush(playerOneSet)) {
+      playerOne.value = 'poker';
+      playerOne.rank = checkStraight(playerOneSet).value;
+    }
+  } else if (
+    checkSameValues(playerOneSet) &&
+    (checkSameValues(playerOneSet).value === 'fullHouse' ||
+      checkSameValues(playerOneSet).value === 'fourOfTheKind')
+  ) {
+    playerOne.value = checkSameValues(playerOneSet).value;
+    playerOne.rank = checkStraight(playerOneSet).symbol;
+  } else if (checkFlush(playerOneSet)) {
+    playerOne.value = checkFlush(playerOneSet);
+  } else if (checkStraight(playerOneSet)) {
+    checkStraight(playerOneSet);
+    playerOne.value = 'straight';
+    playerOne.rank = checkStraight(playerOneSet).value;
+  } else if (checkSameValues(playerOneSet)) {
+    playerOne.value = checkSameValues(playerOneSet);
+  } else {
+    playerOne.value = 'highCardooo';
+    playerOne.rank = highCard(playerOneSet);
+  }
+  return playerOne;
 }
 
 run.addEventListener('click', symulation);
@@ -195,31 +225,78 @@ function checkSameValues(arr) {
   //and return it with an object
   duplicates.every((el) => {
     if (el.count === 4) {
-      console.log(`fourOfTheKind, ${el.value}`);
-      return false;
+      // console.log(`fourOfTheKind, ${el.value}`);
+      return `fourOfTheKind, ${el.value}`;
     } else if (el.count === 3) {
       const checker = new Set(valuesArr);
       //case full:
       // console.log(checker.size);
       if (checker.size <= 4) {
-        console.log(`Full House, ${el.value}`);
-        return false;
+        // console.log(`Full House, ${el.value}`);
+        return `Full House, ${el.value}`;
       } else {
-        console.log(`threeOfTheKind, ${el.value}`);
-        return false;
+        // console.log(`threeOfTheKind, ${el.value}`);
+        return `threeOfTheKind, ${el.value}`;
       }
     }
     //pair/pairs
     else if (el.count === 2) {
       const checker = new Set(valuesArr);
       console.log(checker.size);
-      if (checker.size <= 5) {
-        console.log(`two pairs, ${el.value}`);
-        return false;
+      if (checker.size === 4) {
+        // console.log(`three pairs, ${el.value}`);
+        return `three pairs, ${el.value}`;
+      } else if (checker.size <= 5) {
+        // console.log(`two pairs, ${el.value}`);
+        return `two pairs, ${el.value}`;
       } else {
-        console.log(`one pair, ${el.value}`);
-        return false;
+        // console.log(`one pair, ${el.value}`);
+        return `one pair, ${el.value}`;
       }
+    } else {
+      return true;
+    }
+  });
+}
+
+//check for flush
+function checkFlush(arr) {
+  let result = false;
+  const symbolsArr = [];
+  arr.forEach((el) => {
+    symbolsArr.push(el.symbol);
+  });
+  const symbols = [];
+  symbolsArr.forEach(function (x) {
+    if (symbols.some((el) => el.symbol === x)) {
+      symbols.some((el) => {
+        if (el.value === x) {
+          el.count++;
+        }
+      });
+    } else {
+      const symbol = x;
+      const count = 1;
+      symbols.push({
+        symbol,
+        count,
+      });
+    }
+  });
+  if (symbols.length === 2) {
+    result = {
+      value: 'flush',
+    };
+  }
+  return result;
+}
+
+//find highest card
+function highCard(arr) {
+  valuesOfCards.forEach((el) => {
+    if (arr.indexOf(el)) {
+      const result = el;
+      return result;
     }
   });
 }
