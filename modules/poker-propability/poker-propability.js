@@ -120,6 +120,8 @@ function checkStraight(arr) {
   return checker;
 }
 
+console.log(fullDeck);
+
 function symulation() {
   //shuffle cards
   shuffleArray(fullDeck);
@@ -157,8 +159,34 @@ function symulation() {
   const playerTwoSet = tableCards.concat(secondPlayerHand);
   console.log(playerOneSet);
   console.log(playerTwoSet);
+  checkSameValues(playerOneSet);
 }
 
 run.addEventListener('click', symulation);
 //count propability of winning based on current cards and number of players
 // ????
+
+function checkSameValues(arr) {
+  //get values array from card list
+  const valuesArr = [];
+  arr.forEach((el) => {
+    valuesArr.push(el.value);
+  });
+  //get duplicated values
+  // const duplicates = new Map();
+  const duplicates = [];
+  valuesArr.forEach(function (x) {
+    duplicates[x] = (duplicates[x] || 0) + 1;
+  });
+  console.log(duplicates);
+}
+
+//testing
+const testArr = ['Q', 'K', '10', 'J', '10', 'Q', 'Q'];
+const duplicates = [];
+testArr.forEach(function (x) {
+  console.log([x, (duplicates[x] || 0) + 1]);
+  duplicates[x] = (duplicates[x] || 0) + 1;
+});
+
+//remove lower values
