@@ -60,8 +60,8 @@
 }
 
 .card-container {
-  width: 50px;
-  height: 80px;
+  width: 60px;
+  height: 90px;
   align-items: center;
   background: #242423;
   border: 1px solid #242423;
@@ -77,8 +77,8 @@
 }
 .card-container:after {
   position: absolute;
-  top: 30px;
-  left: 15px;
+  top: 35px;
+  left: 20px;
   width: 20px;
   height: 20px;
   display: flex;
@@ -87,8 +87,7 @@
   border-radius: 50%;
   background: #fff;
   content: '+';
-  font-weight: bold;
-  font-size: 22px;
+  font-size: 20px;
   z-index: 1;
 }
 .card-container:last-of-type {
@@ -116,6 +115,17 @@
   margin: 0;
 }
 
+@media (max-width: 768px) {
+  .card-container.show p {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  .card-container.show p:last-of-type {
+    font-size: 22px;
+    margin: 0;
+  }
+}
+
 button#run {
   cursor: pointer;
   padding: 10px 30px;
@@ -124,6 +134,7 @@ button#run {
   text-transform: uppercase;
   background: #fff;
   transition: all 0.3s ease-in-out;
+  margin-bottom: 10vh;
 }
 button#run:hover {
   background: #242423;
