@@ -79,6 +79,23 @@ function createDeck() {
 //call it
 createDeck();
 
+//convert letters to values
+function valuesFromStrings(string) {
+  if (string === '2') return 2;
+  if (string === '3') return 3;
+  if (string === '4') return 4;
+  if (string === '5') return 5;
+  if (string === '6') return 6;
+  if (string === '7') return 7;
+  if (string === '8') return 8;
+  if (string === '9') return 9;
+  if (string === '10') return 10;
+  if (string === 'J') return 11;
+  if (string === 'Q') return 12;
+  if (string === 'K') return 13;
+  if (string === 'A') return 14;
+}
+
 //shuffle function
 const shuffleArray = function (array) {
   let m = array.length,
@@ -233,16 +250,44 @@ function getPlayerSet(cards, player) {
 
 function comparePlayers(arr) {
   if (arr.length === 2) {
-    const playerOne = arr[0].value;
-    const playerTwo = arr[1].value;
-    if (valuesOfSets.indexOf(playerOne) > valuesOfSets.indexOf(playerTwo)) {
+    const playerOne = arr[0];
+    const playerTwo = arr[1];
+    if (
+      valuesOfSets.indexOf(playerOne.value) >
+      valuesOfSets.indexOf(playerTwo.value)
+    ) {
       //playerOne wins
       playerOneScore++;
     } else if (
-      valuesOfSets.indexOf(playerOne) < valuesOfSets.indexOf(playerTwo)
+      valuesOfSets.indexOf(playerOne.value) <
+      valuesOfSets.indexOf(playerTwo.value)
     ) {
       //playerTwo wins
       playerTwoScore++;
+    } else if (
+      valuesFromStrings(playerOne.rank) > valuesFromStrings(playerTwo.rank)
+    ) {
+      playerOneScore++;
+    } else if (
+      valuesFromStrings(playerOne.rank) < valuesFromStrings(playerTwo.rank)
+    ) {
+      playerTwoScore++;
+    } else if (
+      playerOne.value === 'twoPairs' ||
+      playerOne.value === 'fullHouse'
+    ) {
+      if (
+        valuesFromStrings(playerOne.rankSecond) >
+        valuesFromStrings(playerTwo.rankSecond)
+      ) {
+        playerOneScore++;
+      }
+      if (
+        valuesFromStrings(playerOne.rankSecond) <
+        valuesFromStrings(playerTwo.rankSecond)
+      ) {
+        playerTwoScore++;
+      }
     } else {
       draw++;
     }
@@ -313,16 +358,19 @@ function countprobability() {
     i--;
   }
   console.log(`Player One won ${(playerOneScore / gamesPlayed) * 100}%`);
-  document.getElementById('player-one-odds').innerText = `Win: ${
-    (playerOneScore / gamesPlayed) * 100
-  }%`;
-  document.getElementById('player-two-odds').innerText = `Win: ${
-    (playerTwoScore / gamesPlayed) * 100
-  }%`;
+  document.getElementById('player-one-odds').innerText = `Win ~ ${(
+    (playerOneScore / gamesPlayed) *
+    100
+  ).toFixed(2)}%`;
+  document.getElementById('player-two-odds').innerText = `Win ~ ${(
+    (playerTwoScore / gamesPlayed) *
+    100
+  ).toFixed(2)}%`;
 
-  document.getElementById('draw-odds').innerText = `Draw: ${
-    (draw / gamesPlayed) * 100
-  }%`;
+  document.getElementById('draw-odds').innerText = `Draw ~ ${(
+    (draw / gamesPlayed) *
+    100
+  ).toFixed(2)}%`;
   console.log(`Player Two won ${(playerTwoScore / gamesPlayed) * 100}%`);
   console.log(`Draw happened ${(draw / gamesPlayed) * 100}% of the time`);
 }
@@ -356,6 +404,22 @@ function checkSameValues(arr) {
       });
     }
   });
+  //sorting starts
+  duplicates.sort(function (a, b) {
+    let keyA = valuesFromStrings(a.value);
+    let keyB = valuesFromStrings(b.value);
+    if (keyA > keyB) return -1;
+    if (keyA < keyB) return 1;
+    return 0;
+  });
+  duplicates.sort(function (a, b) {
+    let keyA = a.count;
+    let keyB = b.count;
+    if (keyA > keyB) return -1;
+    if (keyA < keyB) return 1;
+    return 0;
+  });
+  // sorting ends
   for (const el of duplicates) {
     if (el.count === 4) {
       const value = 'fourOfTheKind';
@@ -368,7 +432,8 @@ function checkSameValues(arr) {
       if (checker.size <= 4) {
         const value = 'fullHouse';
         const rank = el.value;
-        result = { value, rank };
+        const rankSecond = duplicates[1].value;
+        result = { value, rank, rankSecond };
         return result;
       } else {
         const value = 'threeOfTheKind';
@@ -376,21 +441,13 @@ function checkSameValues(arr) {
         result = { value, rank };
         return result;
       }
-    }
-    //pair/pairs
-    else if (el.count === 2) {
+    } else if (el.count === 2) {
       const checker = new Set(valuesArr);
-      if (checker.size === 4) {
-        // need to determine best pairs
+      if (checker.size <= 5) {
         const value = 'twoPairs';
         const rank = el.value;
-        result = { value, rank };
-        return result;
-      } else if (checker.size <= 5) {
-        // need to determine best pairs here too
-        const value = 'twoPairs';
-        const rank = el.value;
-        result = { value, rank };
+        const rankSecond = duplicates[1].value;
+        result = { value, rank, rankSecond };
         return result;
       } else {
         const value = 'onePair';
@@ -410,4 +467,36 @@ shuffleArray(fullDeck);
 const [jeden, dwa, trzy, cztery, piec, szesc, siedem, ...reszta] = fullDeck;
 
 const testDeck = [jeden, dwa, trzy, cztery, piec, szesc, siedem];
-// console.table([jeden, dwa, trzy, cztery, piec, szesc, siedem]);
+const testPoker = [
+  { symbol: '♦', value: '10' },
+  { symbol: '♦', value: 'Q' },
+  { symbol: '♦', value: 'K' },
+  { symbol: '♦', value: 'J' },
+  { symbol: '♦', value: 'A' },
+  { symbol: '♦', value: '8' },
+  { symbol: '♦', value: '9' },
+];
+
+const testFull = [
+  { symbol: '♠', value: '2' },
+  { symbol: '♥', value: 'Q' },
+  { symbol: '♦', value: 'J' },
+  { symbol: '♣', value: 'J' },
+  { symbol: '♦', value: 'Q' },
+  { symbol: '♥', value: '2' },
+  { symbol: '♠', value: 'Q' },
+];
+
+const testPairs = [
+  { symbol: '♠', value: '2' },
+  { symbol: '♥', value: '5' },
+  { symbol: '♥', value: '2' },
+  { symbol: '♣', value: 'J' },
+  { symbol: '♣', value: 'Q' },
+  { symbol: '♠', value: '5' },
+  { symbol: '♦', value: 'Q' },
+];
+// const symbolsOfCards = ['♣', '♦', '♥', '♠'];
+// console.table(testDeck);
+
+checkSameValues(testPairs);
