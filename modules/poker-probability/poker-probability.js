@@ -174,6 +174,7 @@ function valuesFromStrings(string) {
   if (string === 'Q') return 12;
   if (string === 'K') return 13;
   if (string === 'A') return 14;
+  return string;
 }
 //shuffle
 const shuffleArray = function (array) {
@@ -522,42 +523,3 @@ function checkSameValues(arr) {
   }
   return result;
 }
-
-// test data:
-shuffleArray(fullDeck);
-const [jeden, dwa, trzy, cztery, piec, szesc, siedem, ...reszta] = fullDeck;
-
-const testDeck = [jeden, dwa, trzy, cztery, piec, szesc, siedem];
-const testPoker = [
-  { symbol: '♦', value: '10' },
-  { symbol: '♦', value: 'Q' },
-  { symbol: '♦', value: 'K' },
-  { symbol: '♦', value: 'J' },
-  { symbol: '♦', value: 'A' },
-  { symbol: '♦', value: '8' },
-  { symbol: '♦', value: '9' },
-];
-
-const testFull = [
-  { symbol: '♠', value: '2' },
-  { symbol: '♥', value: 'Q' },
-  { symbol: '♦', value: 'J' },
-  { symbol: '♣', value: 'J' },
-  { symbol: '♦', value: 'Q' },
-  { symbol: '♥', value: '2' },
-  { symbol: '♠', value: 'Q' },
-];
-
-const testPairs = [
-  { symbol: '♠', value: '2' },
-  { symbol: '♥', value: '5' },
-  { symbol: '♥', value: '2' },
-  { symbol: '♣', value: 'J' },
-  { symbol: '♣', value: 'Q' },
-  { symbol: '♠', value: '5' },
-  { symbol: '♦', value: 'Q' },
-];
-// const symbolsOfCards = ['♣', '♦', '♥', '♠'];
-// console.table(testDeck);
-
-// checkSameValues(testPairs);
