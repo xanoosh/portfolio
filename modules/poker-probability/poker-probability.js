@@ -1,7 +1,7 @@
 'use strict';
 
 //Variables
-const symbolsOfCards = ['♣', '♦', '♥', '♠'];
+const symbolsOfCards = ['♣', '♦', '♠', '♥'];
 const valuesOfCards = [
   'A',
   'K',
@@ -76,9 +76,75 @@ function createDeck() {
     });
   });
 }
-//call it
-createDeck();
+//card list event listener
+const cardList = document.getElementById('card-list');
+function addFromList() {
+  const target = document.querySelector('.clicked');
+  const value = this.childNodes[0].innerHTML;
+  const symbol = this.childNodes[1].innerHTML;
+  //find object in full deck
+  fullDeck.forEach((card) => {
+    if (card.symbol === symbol && card.value === value) {
+      console.log(card, fullDeck.indexOf(card));
+      fullDeck.splice(fullDeck.indexOf(card), 1);
+    }
+  });
+  this.remove();
+  const cardValue = document.createElement('p');
+  const cardSymbol = document.createElement('p');
+  cardValue.innerHTML = value;
+  cardSymbol.innerHTML = symbol;
+  if (symbol === '♦' || symbol === '♥') {
+    target.classList.add('red');
+  }
+  target.classList.add('show');
+  let showBtn = 0;
+  console.log(showBtn);
+  pickedCards.forEach((card) => {
+    if (card.classList.contains('show')) {
+      showBtn++;
+    }
+  });
+  if (showBtn === 2) {
+    run.classList.remove('hidden');
+  }
+  console.log(showBtn);
+  target.appendChild(cardValue);
+  target.appendChild(cardSymbol);
+  target.classList.toggle('clicked');
+  target.removeEventListener('click', openList);
+  cardList.classList.toggle('show');
+  // updateCardList();
+}
+//add deck to card list
+function updateCardList() {
+  if (document.querySelectorAll('card-container-small' !== null)) {
+    document.querySelectorAll('card-container-small').forEach((el) => {
+      el.remove();
+    });
+  } else if (document.querySelector('card-container-small') !== null) {
+    document.querySelector('card-container-small').remove();
+  }
+  fullDeck.forEach((card) => {
+    const newCard = document.createElement('div');
+    const value = document.createElement('p');
+    const symbol = document.createElement('p');
+    newCard.classList.add('card-container-small');
+    value.innerHTML = card.value;
+    symbol.innerHTML = card.symbol;
+    if (card.symbol === '♦' || card.symbol === '♥') {
+      newCard.classList.add('red');
+    }
+    newCard.addEventListener('click', addFromList);
+    cardList.appendChild(newCard);
+    newCard.appendChild(value);
+    newCard.appendChild(symbol);
+  });
+}
 
+//call them
+createDeck();
+updateCardList();
 //convert letters to values
 function valuesFromStrings(string) {
   if (string === '2') return 2;
@@ -110,36 +176,14 @@ const shuffleArray = function (array) {
   return array;
 };
 
-//click - show card and remoe it from deck
+//click - show card list
+
+function openList() {
+  this.classList.toggle('clicked');
+  cardList.classList.toggle('show');
+}
 pickedCards.forEach((hand) => {
-  hand.addEventListener('click', function () {
-    hand.classList.toggle('show');
-    //get card from deck
-    const myCard = fullDeck[Math.floor(Math.random() * fullDeck.length)];
-    const cardSymbol = document.createElement('p');
-    cardSymbol.innerHTML = myCard.symbol;
-    const cardValue = document.createElement('p');
-    cardValue.innerHTML = myCard.value;
-    if (myCard.symbol === '♦' || myCard.symbol === '♥') {
-      hand.classList.add('red');
-    }
-    hand.appendChild(cardValue);
-    hand.appendChild(cardSymbol);
-    //remove card from fullDeck
-    const index = fullDeck.indexOf(myCard);
-    if (index > -1) {
-      fullDeck.splice(index, 1);
-    }
-    let showBtn = 0;
-    pickedCards.forEach((card) => {
-      if (card.classList.contains('show')) {
-        showBtn++;
-      }
-    });
-    if (showBtn === 2) {
-      run.classList.remove('hidden');
-    }
-  });
+  hand.addEventListener('click', openList);
 });
 
 //card sets getting Functions
