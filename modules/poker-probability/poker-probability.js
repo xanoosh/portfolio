@@ -278,6 +278,7 @@ function getPlayerSet(cards, player) {
   ) {
     player.value = checkSameValues(cards).value;
     player.rank = checkSameValues(cards).rank;
+    player.rankSecond = checkSameValues(cards).rankSecond;
   } else if (checkFlush(cards)) {
     player.value = checkFlush(cards).value;
     player.rank = checkFlush(cards).symbol;
@@ -288,6 +289,9 @@ function getPlayerSet(cards, player) {
   } else if (checkSameValues(cards)) {
     player.value = checkSameValues(cards).value;
     player.rank = checkSameValues(cards).rank;
+    if (checkSameValues(cards).rankSecond !== undefined) {
+      player.rankSecond = checkSameValues(cards).rankSecond;
+    }
   } else {
     highCard(cards);
     player.value = 'highCard';
@@ -395,17 +399,40 @@ function symulation() {
   const playerOne = {
     value: '',
     rank: 0,
+    rankSecond: 0,
   };
   const playerTwo = {
     value: '',
     rank: 0,
+    rankSecond: 0,
   };
   const playerOneObj = getPlayerSet(playerOneSet, playerOne);
+  // console.log('playerOneObj');
+  // console.log(playerOneObj);
   const playerTwoObj = getPlayerSet(playerTwoSet, playerTwo);
+  // console.log('playerTwoObj');
+  // console.log(playerTwoObj);
   const result = [playerOneObj, playerTwoObj];
   // console.log(result);
+  //testing data
+  // const testResult = [
+  //   {
+  //     value: 'straight',
+  //     rank: '10',
+  //     // rankSecond: 'J',
+  //   },
+  //   {
+  //     value: 'highCard',
+  //     rank: 'A',
+  //     // rankSecond: '3',
+  //   },
+  // ];
+  // console.log(fullDeck);
+  // comparePlayers(testResult);
   comparePlayers(result);
-  return result[0].value;
+  // console.log(result);
+  // return result[0].value;
+  // return testResult;
 }
 
 function countprobability() {
@@ -486,7 +513,8 @@ function checkSameValues(arr) {
     if (el.count === 4) {
       const value = 'fourOfTheKind';
       const rank = el.value;
-      result = { value, rank };
+      const rankSecond = duplicates[1].value;
+      result = { value, rank, rankSecond };
       return result;
     } else if (el.count === 3) {
       const checker = new Set(valuesArr);
@@ -500,7 +528,8 @@ function checkSameValues(arr) {
       } else {
         const value = 'threeOfTheKind';
         const rank = el.value;
-        result = { value, rank };
+        const rankSecond = duplicates[1].value;
+        result = { value, rank, rankSecond };
         return result;
       }
     } else if (el.count === 2) {
@@ -510,11 +539,13 @@ function checkSameValues(arr) {
         const rank = el.value;
         const rankSecond = duplicates[1].value;
         result = { value, rank, rankSecond };
+        // console.log(result);
         return result;
       } else {
         const value = 'onePair';
         const rank = el.value;
-        result = { value, rank };
+        const rankSecond = duplicates[1].value;
+        result = { value, rank, rankSecond };
         return result;
       }
     } else {
