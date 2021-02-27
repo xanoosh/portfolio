@@ -354,27 +354,15 @@ function symulation() {
       value,
     });
   });
-  // console.log(
-  //   `player 1 hand: ${playerHand[0].value} ${playerHand[0].symbol}, ${playerHand[1].value} ${playerHand[1].symbol}`
-  // );
   //get second player hand to array
   const [one, two, ...rest] = fullDeck;
   const secondPlayerHand = [one, two];
-  // console.log(
-  //   `player 2 hand: ${secondPlayerHand[0].value} ${secondPlayerHand[0].symbol}, ${secondPlayerHand[1].value} ${secondPlayerHand[1].symbol}`
-  // );
   //get table cards array
   const [flopOne, flopTwo, flopThree, turn, river, ...unused] = rest;
   const tableCards = [flopOne, flopTwo, flopThree, turn, river];
-  // console.log(
-  //   `Cards On Table: ${tableCards[0].value} ${tableCards[0].symbol},${tableCards[1].value} ${tableCards[1].symbol},${tableCards[2].value} ${tableCards[2].symbol},${tableCards[3].value} ${tableCards[3].symbol},${tableCards[4].value} ${tableCards[4].symbol} `
-  // );
-
   const playerOneSet = tableCards.concat(playerHand);
   // const playerOneSet = testDeck;
   const playerTwoSet = tableCards.concat(secondPlayerHand);
-  // console.log('Player one set:');
-  // console.table(playerOneSet);
   //function for getting specific card set of a player
   const playerOne = {
     value: '',
@@ -397,7 +385,7 @@ function countprobability() {
   playerTwoScore = 0;
   draw = 0;
   gamesPlayed = 0;
-  let i = 100000;
+  let i = 10000;
   while (i > 0) {
     symulation();
     i--;
