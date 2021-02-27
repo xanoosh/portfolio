@@ -41,6 +41,8 @@ const straights = [
   ['A', '2', '3', '4', '5'],
 ];
 const additionalPlayers = [
+  ['one', 1],
+  ['two', 2],
   ['three', 3],
   ['four', 4],
   ['five', 5],
@@ -50,6 +52,19 @@ const additionalPlayers = [
   ['nine', 9],
   ['ten', 10],
 ];
+const playerScores = [
+  { player: 1, score: 0, draw: 0 },
+  { player: 2, score: 0, draw: 0 },
+  { player: 3, score: 0, draw: 0 },
+  { player: 4, score: 0, draw: 0 },
+  { player: 5, score: 0, draw: 0 },
+  { player: 6, score: 0, draw: 0 },
+  { player: 7, score: 0, draw: 0 },
+  { player: 8, score: 0, draw: 0 },
+  { player: 9, score: 0, draw: 0 },
+  { player: 10, score: 0, draw: 0 },
+];
+
 const cardList = document.getElementById('card-list');
 const pickedCards = document.querySelectorAll('.card-container.active');
 const table = document.getElementById('table');
@@ -305,8 +320,7 @@ function comparePlayers(arr) {
     const playerOne = arr[0];
     const playerTwo = arr[1];
     if (
-      valuesOfSets.indexOf(playerOne.value) >
-      valuesOfSets.indexOf(playerTwo.value)
+      valuesOfSets.indexOf(arr[0].value) > valuesOfSets.indexOf(arr[1].value)
     ) {
       //playerOne wins
       playerOneScore++;
@@ -400,11 +414,13 @@ function symulation() {
     value: '',
     rank: 0,
     rankSecond: 0,
+    player: 1,
   };
   const playerTwo = {
     value: '',
     rank: 0,
     rankSecond: 0,
+    player: 2,
   };
   const playerOneObj = getPlayerSet(playerOneSet, playerOne);
   // console.log('playerOneObj');
@@ -430,6 +446,7 @@ function symulation() {
   // console.log(fullDeck);
   // comparePlayers(testResult);
   comparePlayers(result);
+  // compareMultiple(result);
   // console.log(result);
   // return result[0].value;
   // return testResult;
@@ -440,7 +457,7 @@ function countprobability() {
   playerTwoScore = 0;
   draw = 0;
   gamesPlayed = 0;
-  let i = 10000;
+  let i = 10;
   while (i > 0) {
     symulation();
     i--;
@@ -554,3 +571,104 @@ function checkSameValues(arr) {
   }
   return result;
 }
+
+function compareMultiple(arr) {
+  let result = {
+    value: 'highCard',
+  };
+  let arrStoreSets = [];
+  let arrStoreRanks = [];
+  let arrStoreSecondRanks = [];
+  //first condition (Set value)
+  arr.forEach((el) => {
+    if (valuesOfSets.indexOf(result.value) < valuesOfSets.indexOf(el.value)) {
+      result = el;
+    }
+  });
+  arr.forEach((el) => {
+    if (el.value === result.value) {
+      arrStoreSets.push(el);
+    }
+  });
+  if (arrStoreSets.length === 1) {
+    console.log(result);
+    //change score for player in playerScores
+    return result;
+  }
+  //second condition (Rank value)
+  result = arrStoreSets[0];
+  arrStoreSets.forEach((el) => {
+    if (valuesFromStrings(result.rank) < valuesFromStrings(el.rank)) {
+      playerScores.find((x) => x.player === result.player).score++;
+      result = el;
+    }
+  });
+  arrStoreSets.forEach((el) => {
+    if (valuesFromStrings(result.rank) === valuesFromStrings(el.rank)) {
+      arrStoreRanks.push(el);
+    }
+  });
+  if (arrStoreRanks.length === 1) {
+    playerScores.find((x) => x.player === result.player).score++;
+    return result;
+  }
+  //third condition (rankSecond value)
+  result = arrStoreRanks[0];
+  arrStoreRanks.forEach((el) => {
+    if (
+      valuesFromStrings(result.rankSecond) < valuesFromStrings(el.rankSecond)
+    ) {
+      result = el;
+    }
+  });
+  arrStoreRanks.forEach((el) => {
+    if (
+      valuesFromStrings(result.rankSecond) === valuesFromStrings(el.rankSecond)
+    ) {
+      arrStoreSecondRanks.push(el);
+    }
+  });
+  if (arrStoreSecondRanks.length === 1) {
+    playerScores.find((x) => x.player === result.player).score++;
+    return result;
+  }
+  //last condition (draw for multiple players)
+  arrStoreSecondRanks.forEach((el) => {
+    playerScores.find((x) => x.player === el.player).draw++;
+  });
+  // return result;
+}
+
+const testResult = [
+  {
+    value: 'highCard',
+    rank: '10',
+    rankSecond: 'J',
+    player: 1,
+  },
+  {
+    value: 'twoPairs',
+    rank: 'A',
+    rankSecond: '4',
+    player: 2,
+  },
+  {
+    value: 'onePair',
+    rank: 'A',
+    rankSecond: '3',
+    player: 3,
+  },
+  {
+    value: 'twoPairs',
+    rank: 'A',
+    rankSecond: '4',
+    player: 4,
+  },
+  {
+    value: 'highCard',
+    rank: 'A',
+    rankSecond: '3',
+    player: 5,
+  },
+];
+compareMultiple(testResult);
