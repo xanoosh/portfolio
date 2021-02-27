@@ -457,7 +457,7 @@ function countprobability() {
   playerTwoScore = 0;
   draw = 0;
   gamesPlayed = 0;
-  let i = 10;
+  let i = 10000;
   while (i > 0) {
     symulation();
     i--;
