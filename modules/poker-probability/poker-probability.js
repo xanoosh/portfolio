@@ -317,20 +317,21 @@ function comparePlayers(arr) {
     ) {
       playerTwoScore++;
     } else if (
-      playerOne.value === 'twoPairs' ||
-      playerOne.value === 'fullHouse'
+      valuesFromStrings(playerOne.rankSecond) &&
+      valuesFromStrings(playerTwo.rankSecond)
     ) {
       if (
         valuesFromStrings(playerOne.rankSecond) >
         valuesFromStrings(playerTwo.rankSecond)
       ) {
         playerOneScore++;
-      }
-      if (
+      } else if (
         valuesFromStrings(playerOne.rankSecond) <
         valuesFromStrings(playerTwo.rankSecond)
       ) {
         playerTwoScore++;
+      } else {
+        draw++;
       }
     } else {
       draw++;
