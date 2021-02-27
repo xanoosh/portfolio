@@ -17,17 +17,6 @@ const valuesOfCards = [
   '3',
   '2',
 ];
-// const valuesOfSets = {
-//   poker: 8,
-//   fourOfTheKind: 7,
-//   fullHouse: 6,
-//   flush: 5,
-//   straight: 4,
-//   threeOfTheKind: 3,
-//   twoPairs: 2,
-//   onePair: 1,
-//   highCard: 0,
-// };
 const valuesOfSets = [
   'highCard',
   'onePair',
@@ -51,18 +40,28 @@ const straights = [
   ['2', '3', '4', '5', '6'],
   ['A', '2', '3', '4', '5'],
 ];
-
+const additionalPlayers = [
+  ['three', 3],
+  ['four', 4],
+  ['five', 5],
+  ['six', 6],
+  ['seven', 7],
+  ['eight', 8],
+  ['nine', 9],
+  ['ten', 10],
+];
+const cardList = document.getElementById('card-list');
+const pickedCards = document.querySelectorAll('.card-container.active');
+const table = document.getElementById('table');
+const run = document.getElementById('run');
 let playerOneScore = 0;
 let playerTwoScore = 0;
 let draw = 0;
 let gamesPlayed = 0;
-
-const pickedCards = document.querySelectorAll('.player-one .card-container');
-const run = document.getElementById('run');
 let fullDeck = [];
 let usedDeck = [];
-// clubs (♣), diamonds (♦), hearts (♥), and spades (♠).
 
+//functions
 //create deck of all cards:
 function createDeck() {
   fullDeck = [];
@@ -76,47 +75,7 @@ function createDeck() {
     });
   });
 }
-//card list event listener
-const cardList = document.getElementById('card-list');
-function addFromList() {
-  const target = document.querySelector('.clicked');
-  const value = this.childNodes[0].innerHTML;
-  const symbol = this.childNodes[1].innerHTML;
-  //find object in full deck
-  fullDeck.forEach((card) => {
-    if (card.symbol === symbol && card.value === value) {
-      console.log(card, fullDeck.indexOf(card));
-      fullDeck.splice(fullDeck.indexOf(card), 1);
-    }
-  });
-  this.remove();
-  const cardValue = document.createElement('p');
-  const cardSymbol = document.createElement('p');
-  cardValue.innerHTML = value;
-  cardSymbol.innerHTML = symbol;
-  if (symbol === '♦' || symbol === '♥') {
-    target.classList.add('red');
-  }
-  target.classList.add('show');
-  let showBtn = 0;
-  console.log(showBtn);
-  pickedCards.forEach((card) => {
-    if (card.classList.contains('show')) {
-      showBtn++;
-    }
-  });
-  if (showBtn === 2) {
-    run.classList.remove('hidden');
-  }
-  console.log(showBtn);
-  target.appendChild(cardValue);
-  target.appendChild(cardSymbol);
-  target.classList.toggle('clicked');
-  target.removeEventListener('click', openList);
-  cardList.classList.toggle('show');
-  // updateCardList();
-}
-//add deck to card list
+//current deck to card list
 function updateCardList() {
   if (document.querySelectorAll('card-container-small' !== null)) {
     document.querySelectorAll('card-container-small').forEach((el) => {
@@ -141,10 +100,65 @@ function updateCardList() {
     newCard.appendChild(symbol);
   });
 }
-
-//call them
+//initialize deck and list
 createDeck();
 updateCardList();
+//card list event listener
+function addFromList() {
+  const target = document.querySelector('.clicked');
+  const value = this.childNodes[0].innerHTML;
+  const symbol = this.childNodes[1].innerHTML;
+  //find object in full deck
+  fullDeck.forEach((card) => {
+    if (card.symbol === symbol && card.value === value) {
+      console.log(card);
+      fullDeck.splice(fullDeck.indexOf(card), 1);
+    }
+  });
+  this.remove();
+  const cardValue = document.createElement('p');
+  const cardSymbol = document.createElement('p');
+  cardValue.innerHTML = value;
+  cardSymbol.innerHTML = symbol;
+  if (symbol === '♦' || symbol === '♥') {
+    target.classList.add('red');
+  }
+  target.classList.add('show');
+  let showBtn = 0;
+  pickedCards.forEach((card) => {
+    if (card.classList.contains('show')) {
+      showBtn++;
+    }
+  });
+  if (showBtn === 2) {
+    run.classList.remove('hidden');
+    //add full table
+    const tableCards = table.querySelectorAll('.card-container');
+    tableCards.forEach((card) => {
+      card.classList.add('active');
+      card.addEventListener('click', openList);
+    });
+  }
+  // if (showBtn === 2 /*and flop is not partially added*/) {
+  //   run.classList.remove('hidden');
+  //   //add flop
+  // }
+
+  target.appendChild(cardValue);
+  target.appendChild(cardSymbol);
+  target.classList.toggle('clicked');
+  target.removeEventListener('click', openList);
+  cardList.classList.toggle('show');
+}
+//event listener - show card list
+function openList() {
+  this.classList.toggle('clicked');
+  cardList.classList.toggle('show');
+}
+pickedCards.forEach((hand) => {
+  hand.addEventListener('click', openList);
+});
+
 //convert letters to values
 function valuesFromStrings(string) {
   if (string === '2') return 2;
@@ -161,8 +175,7 @@ function valuesFromStrings(string) {
   if (string === 'K') return 13;
   if (string === 'A') return 14;
 }
-
-//shuffle function
+//shuffle
 const shuffleArray = function (array) {
   let m = array.length,
     t,
@@ -175,16 +188,6 @@ const shuffleArray = function (array) {
   }
   return array;
 };
-
-//click - show card list
-
-function openList() {
-  this.classList.toggle('clicked');
-  cardList.classList.toggle('show');
-}
-pickedCards.forEach((hand) => {
-  hand.addEventListener('click', openList);
-});
 
 //card sets getting Functions
 function checkStraight(arr) {
@@ -355,11 +358,35 @@ function symulation() {
     });
   });
   //get second player hand to array
-  const [one, two, ...rest] = fullDeck;
-  const secondPlayerHand = [one, two];
+  const [secondOne, secondTwo, ...rest] = fullDeck;
+  const secondPlayerHand = [secondOne, secondTwo];
   //get table cards array
-  const [flopOne, flopTwo, flopThree, turn, river, ...unused] = rest;
-  const tableCards = [flopOne, flopTwo, flopThree, turn, river];
+  const [one, two, three, four, five, ...unused] = rest;
+  //check if there are cards on the table
+  const tableCards = [];
+  table.querySelectorAll('.card-container').forEach((card) => {
+    if (card.classList.contains('show')) {
+      const value = card.querySelector('p:first-of-type').innerHTML;
+      const symbol = card.querySelector('p:last-of-type').innerHTML;
+      tableCards.push({
+        symbol,
+        value,
+      });
+    }
+  });
+  if (tableCards.length === 0) {
+    tableCards = [one, two, three, four, five];
+  } else if (tableCards.length === 1) {
+    tableCards.concat([one, two, three, four]);
+  } else if (tableCards.length === 2) {
+    tableCards.concat([one, two, three]);
+  } else if (tableCards.length === 3) {
+    tableCards.concat([one, two]);
+  } else if (tableCards.length === 4) {
+    tableCards.push(one);
+  } else {
+    //no need to do anything
+  }
   const playerOneSet = tableCards.concat(playerHand);
   // const playerOneSet = testDeck;
   const playerTwoSet = tableCards.concat(secondPlayerHand);

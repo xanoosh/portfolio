@@ -98,6 +98,13 @@
   margin-top: 5px;
   height: 20px;
 }
+
+.other-players {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 #draw-odds {
   height: 22px;
   font-size: 20px;
