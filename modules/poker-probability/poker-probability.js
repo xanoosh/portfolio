@@ -65,10 +65,14 @@ const playerScores = [
   { player: 10, score: 0, draw: 0 },
 ];
 
+let numberOfPlayers = 2;
+const otherPlayers = document.getElementById('other-players');
 const cardList = document.getElementById('card-list');
 const pickedCards = document.querySelectorAll('.card-container.active');
 const table = document.getElementById('table');
-const run = document.getElementById('run');
+const btnAdd = document.getElementById('add');
+const btnRemove = document.getElementById('remove');
+const btnRun = document.getElementById('run');
 let playerOneScore = 0;
 let playerTwoScore = 0;
 let draw = 0;
@@ -118,6 +122,42 @@ function updateCardList() {
 //initialize deck and list
 createDeck();
 updateCardList();
+
+function addPlayer() {
+  if (numberOfPlayers < 10) {
+    const player = additionalPlayers[numberOfPlayers];
+    console.log(player[0], player[1]);
+    const playerName = player[0];
+    const playerNum = player[1];
+    const playerContainer = document.createElement('div');
+    playerContainer.classList.add('player-container');
+    const heading = document.createElement('h3');
+    heading.innerText = `Player ${playerNum}`;
+    const winP = document.createElement('p');
+    // winP.classList.add(`player-${playerName}-win`);
+    winP.id = `player-${playerName}-win`;
+    const drawP = document.createElement('p');
+    // drawP.classList.add(`player-${playerName}-draw`);
+    drawP.id = `player-${playerName}-draw`;
+    otherPlayers.appendChild(playerContainer);
+    playerContainer.appendChild(heading);
+    playerContainer.appendChild(winP);
+    playerContainer.appendChild(drawP);
+    numberOfPlayers++;
+  }
+}
+
+function removePlayer() {
+  if (numberOfPlayers > 2) {
+    const player = additionalPlayers[numberOfPlayers - 2];
+    console.log(player[0], player[1]);
+    otherPlayers.removeChild(otherPlayers.lastChild);
+    numberOfPlayers--;
+  }
+}
+btnAdd.addEventListener('click', addPlayer);
+btnRemove.addEventListener('click', removePlayer);
+
 //card list event listener
 function addFromList() {
   const target = document.querySelector('.clicked');
@@ -146,7 +186,7 @@ function addFromList() {
     }
   });
   if (showBtn === 2) {
-    run.classList.remove('hidden');
+    btnRun.classList.remove('hidden');
     //add full table
     const tableCards = table.querySelectorAll('.card-container');
     tableCards.forEach((card) => {
@@ -214,7 +254,6 @@ function checkStraight(arr) {
   });
   for (const straight of straights) {
     if (straight.every((i) => valuesArr.includes(i))) {
-      // console.log(straight);
       result = {
         value: 'straight',
         rank: straights.length - straights.indexOf(straight),
@@ -222,6 +261,7 @@ function checkStraight(arr) {
       break;
     }
   }
+  console.log(valuesArr);
   return result;
 }
 
@@ -423,11 +463,15 @@ function symulation() {
     player: 2,
   };
   const playerOneObj = getPlayerSet(playerOneSet, playerOne);
-  // console.log('playerOneObj');
-  // console.log(playerOneObj);
+  console.log('playerOneObj');
+  console.log(playerOneObj);
+  console.log('playerOneSet');
+  console.log(playerOneSet);
   const playerTwoObj = getPlayerSet(playerTwoSet, playerTwo);
-  // console.log('playerTwoObj');
-  // console.log(playerTwoObj);
+  console.log('playerTwoObj');
+  console.log(playerTwoObj);
+  console.log('playerTwoSet');
+  console.log(playerTwoSet);
   const result = [playerOneObj, playerTwoObj];
   // console.log(result);
   //testing data
@@ -445,9 +489,10 @@ function symulation() {
   // ];
   // console.log(fullDeck);
   // comparePlayers(testResult);
-  comparePlayers(result);
-  // compareMultiple(result);
-  // console.log(result);
+  // comparePlayers(result);
+  compareMultiple(result);
+  // compareMultiple(testResult);
+  console.log(result);
   // return result[0].value;
   // return testResult;
 }
@@ -456,31 +501,48 @@ function countprobability() {
   playerOneScore = 0;
   playerTwoScore = 0;
   draw = 0;
-  gamesPlayed = 0;
-  let i = 10000;
+  // gamesPlayed = 0;
+  let i = 10;
   while (i > 0) {
     symulation();
     i--;
   }
-  console.log(`Player One won ${(playerOneScore / gamesPlayed) * 100}%`);
-  document.getElementById('player-one-odds').innerText = `Win ~ ${(
-    (playerOneScore / gamesPlayed) *
-    100
-  ).toFixed(2)}%`;
-  document.getElementById('player-two-odds').innerText = `Win ~ ${(
-    (playerTwoScore / gamesPlayed) *
-    100
-  ).toFixed(2)}%`;
+  // console.log(`Player One won ${(playerOneScore / gamesPlayed) * 100}%`);
+  // document.getElementById('player-one-win').innerText = `Win ~ ${(
+  //   (playerOneScore / gamesPlayed) *
+  //   100
+  // ).toFixed(2)}%`;
+  // document.getElementById('player-two-win').innerText = `Win ~ ${(
+  //   (playerTwoScore / gamesPlayed) *
+  //   100
+  // ).toFixed(2)}%`;
 
-  document.getElementById('draw-odds').innerText = `Draw ~ ${(
-    (draw / gamesPlayed) *
-    100
-  ).toFixed(2)}%`;
-  console.log(`Player Two won ${(playerTwoScore / gamesPlayed) * 100}%`);
-  console.log(`Draw happened ${(draw / gamesPlayed) * 100}% of the time`);
+  // document.getElementById('draw-odds').innerText = `Draw ~ ${(
+  //   (draw / gamesPlayed) *
+  //   100
+  // ).toFixed(2)}%`;
+  // console.log(`Player Two won ${(playerTwoScore / gamesPlayed) * 100}%`);
+  // console.log(`Draw happened ${(draw / gamesPlayed) * 100}% of the time`);
+
+  //multiplayer solution start
+  for (let i = 0; i < numberOfPlayers; i++) {
+    const wins = playerScores[i].score;
+    const draws = playerScores[i].draw;
+    const name = additionalPlayers[i][0];
+    console.log(`${name} wins: ${wins} draws: ${draws}`);
+    document.getElementById(`player-${name}-win`).innerText = `Win ~ ${(
+      (wins / gamesPlayed) *
+      100
+    ).toFixed(2)}%`;
+    document.getElementById(`player-${name}-draw`).innerText = `Draw ~ ${(
+      (draws / gamesPlayed) *
+      100
+    ).toFixed(2)}%`;
+  }
+  //multiplayer solution end
 }
 
-run.addEventListener('click', countprobability);
+btnRun.addEventListener('click', countprobability);
 //count propability of winning based on current cards and number of players
 // ????
 
@@ -573,6 +635,7 @@ function checkSameValues(arr) {
 }
 
 function compareMultiple(arr) {
+  gamesPlayed++;
   let result = {
     value: 'highCard',
   };
@@ -591,15 +654,13 @@ function compareMultiple(arr) {
     }
   });
   if (arrStoreSets.length === 1) {
-    console.log(result);
-    //change score for player in playerScores
+    playerScores.find((x) => x.player === result.player).score++;
     return result;
   }
   //second condition (Rank value)
   result = arrStoreSets[0];
   arrStoreSets.forEach((el) => {
     if (valuesFromStrings(result.rank) < valuesFromStrings(el.rank)) {
-      playerScores.find((x) => x.player === result.player).score++;
       result = el;
     }
   });
@@ -671,4 +732,4 @@ const testResult = [
     player: 5,
   },
 ];
-compareMultiple(testResult);
+// compareMultiple(testResult);
