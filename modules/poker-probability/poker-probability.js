@@ -363,7 +363,7 @@ function symulation() {
   //get table cards array
   const [one, two, three, four, five, ...unused] = rest;
   //check if there are cards on the table
-  const tableCards = [];
+  let tableCards = [];
   table.querySelectorAll('.card-container').forEach((card) => {
     if (card.classList.contains('show')) {
       const value = card.querySelector('p:first-of-type').innerHTML;
@@ -377,11 +377,11 @@ function symulation() {
   if (tableCards.length === 0) {
     tableCards = [one, two, three, four, five];
   } else if (tableCards.length === 1) {
-    tableCards.concat([one, two, three, four]);
+    tableCards = [one, two, three, four];
   } else if (tableCards.length === 2) {
-    tableCards.concat([one, two, three]);
+    tableCards = [one, two, three];
   } else if (tableCards.length === 3) {
-    tableCards.concat([one, two]);
+    tableCards = [one, two];
   } else if (tableCards.length === 4) {
     tableCards.push(one);
   } else {
@@ -480,6 +480,7 @@ function checkSameValues(arr) {
     return 0;
   });
   // sorting ends
+  // console.log(duplicates);
   for (const el of duplicates) {
     if (el.count === 4) {
       const value = 'fourOfTheKind';
@@ -559,4 +560,4 @@ const testPairs = [
 // const symbolsOfCards = ['♣', '♦', '♥', '♠'];
 // console.table(testDeck);
 
-checkSameValues(testPairs);
+// checkSameValues(testPairs);
