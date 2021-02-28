@@ -371,7 +371,7 @@ function symulation() {
   });
 
   //get table cards array
-  const [one, two, three, four, five, ...unused] = fullDeck;
+  let [one, two, three, four, five, ...unused] = fullDeck;
   //check if there are cards on the table
   let tableCards = [];
   table.querySelectorAll('.card-container').forEach((card) => {
@@ -387,13 +387,17 @@ function symulation() {
   if (tableCards.length === 0) {
     tableCards = [one, two, three, four, five];
   } else if (tableCards.length === 1) {
-    tableCards = [one, two, three, four];
+    tableCards = tableCards.concat([one, two, three, four]);
+    unused.push(five);
   } else if (tableCards.length === 2) {
-    tableCards = [one, two, three];
+    tableCards = tableCards.concat([one, two, three]);
+    unused = unused.concat([four, five]);
   } else if (tableCards.length === 3) {
-    tableCards = [one, two];
+    tableCards = tableCards.concat([one, two]);
+    unused = unused.concat([three, four, five]);
   } else if (tableCards.length === 4) {
     tableCards.push(one);
+    unused = unused.concat([two, three, four, five]);
   } else {
     //no need to do anything
   }
