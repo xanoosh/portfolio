@@ -117,9 +117,11 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  height: 120px;
+  overflow-y: auto;
 }
 #other-players .player-container {
-  flex: 0 0 20%;
+  flex: 0 0 33.33333333333%;
   border-right: 1px solid #000;
   padding: 5px;
   margin-top: 10px;
@@ -130,6 +132,8 @@
 #other-players .player-container p {
   /* background: red; */
   font-size: 13px;
+  height: 15px;
+  margin-bottom: 5px;
 }
 #draw-odds {
   height: 22px;
