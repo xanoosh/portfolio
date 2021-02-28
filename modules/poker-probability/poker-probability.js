@@ -315,44 +315,48 @@ function checkFlush(arr) {
 }
 
 //get specific set for player
-function getPlayerSet(cards, player) {
-  if (checkStraight(cards)) {
-    if (checkFlush(cards)) {
-      player.value = 'poker';
-      player.rank = checkStraight(cards).rank;
-    }
+function getPlayerSet(cards, playernum) {
+  const result = {
+    value: '',
+    rank: '',
+    rankSecond: '',
+    player: playernum,
+  };
+  if (checkStraight(cards) && checkFlush(cards)) {
+    result.value = 'poker';
+    result.rank = checkStraight(cards).rank;
   } else if (
     checkSameValues(cards) &&
     checkSameValues(cards).value === 'fourOfTheKind'
   ) {
-    player.value = checkSameValues(cards).value;
-    player.rank = checkSameValues(cards).rank;
+    result.value = checkSameValues(cards).value;
+    result.rank = checkSameValues(cards).rank;
   } else if (
     checkSameValues(cards) &&
     checkSameValues(cards).value === 'fullHouse'
   ) {
-    player.value = checkSameValues(cards).value;
-    player.rank = checkSameValues(cards).rank;
-    player.rankSecond = checkSameValues(cards).rankSecond;
+    result.value = checkSameValues(cards).value;
+    result.rank = checkSameValues(cards).rank;
+    result.rankSecond = checkSameValues(cards).rankSecond;
   } else if (checkFlush(cards)) {
-    player.value = checkFlush(cards).value;
-    player.rank = checkFlush(cards).symbol;
+    result.value = checkFlush(cards).value;
+    result.rank = checkFlush(cards).symbol;
   } else if (checkStraight(cards)) {
     // checkStraight(playerOneSet);
-    player.value = checkStraight(cards).value;
-    player.rank = checkStraight(cards).rank;
+    result.value = checkStraight(cards).value;
+    result.rank = checkStraight(cards).rank;
   } else if (checkSameValues(cards)) {
-    player.value = checkSameValues(cards).value;
-    player.rank = checkSameValues(cards).rank;
+    result.value = checkSameValues(cards).value;
+    result.rank = checkSameValues(cards).rank;
     if (checkSameValues(cards).rankSecond !== undefined) {
-      player.rankSecond = checkSameValues(cards).rankSecond;
+      result.rankSecond = checkSameValues(cards).rankSecond;
     }
   } else {
     highCard(cards);
-    player.value = 'highCard';
-    player.rank = highCard(cards);
+    result.value = 'highCard';
+    result.rank = highCard(cards);
   }
-  return player;
+  return result;
 }
 
 function comparePlayers(arr) {
@@ -448,31 +452,46 @@ function symulation() {
   }
   const playerOneSet = tableCards.concat(playerHand);
   // const playerOneSet = testDeck;
-  const playerTwoSet = tableCards.concat(secondPlayerHand);
+  // const playerTwoSet = tableCards.concat(secondPlayerHand);
   //function for getting specific card set of a player
-  const playerOne = {
-    value: '',
-    rank: 0,
-    rankSecond: 0,
-    player: 1,
-  };
-  const playerTwo = {
-    value: '',
-    rank: 0,
-    rankSecond: 0,
-    player: 2,
-  };
-  const playerOneObj = getPlayerSet(playerOneSet, playerOne);
-  console.log('playerOneObj');
-  console.log(playerOneObj);
-  console.log('playerOneSet');
-  console.log(playerOneSet);
-  const playerTwoObj = getPlayerSet(playerTwoSet, playerTwo);
-  console.log('playerTwoObj');
-  console.log(playerTwoObj);
-  console.log('playerTwoSet');
-  console.log(playerTwoSet);
-  const result = [playerOneObj, playerTwoObj];
+  // const playerOne = {
+  //   value: '',
+  //   rank: 0,
+  //   rankSecond: 0,
+  //   player: 1,
+  // };
+  // const playerTwo = {
+  //   value: '',
+  //   rank: 0,
+  //   rankSecond: 0,
+  //   player: 2,
+  // };
+  const currentDeck = [...fullDeck];
+  const result = [];
+  //loop for multiple players start
+  for (let i = 1; i <= numberOfPlayers; i++) {
+    if (i === 1) {
+      result.push(getPlayerSet(playerOneSet, i));
+    } else {
+      const set = [currentDeck.shift(), currentDeck.shift()];
+      result.push(getPlayerSet(set, i));
+    }
+  }
+  //loop for multiple players end
+  // const playerOneObj = getPlayerSet(playerOneSet, 1);
+  // const playerOneObj = getPlayerSet(testCardSet, playerOne);
+  // console.log('playerOneObj');
+  // console.log(playerOneObj);
+  // console.log('playerOneSet');
+  // console.log(playerOneSet);
+  // const playerTwoObj = getPlayerSet(playerTwoSet, 2);
+  // console.log('playerTwoObj');
+  // console.log(playerTwoObj);
+  // console.log('playerTwoSet');
+  // console.log(playerTwoSet);
+
+  // const result = [playerOneObj, playerTwoObj];
+
   // console.log(result);
   //testing data
   // const testResult = [
@@ -502,7 +521,7 @@ function countprobability() {
   playerTwoScore = 0;
   draw = 0;
   // gamesPlayed = 0;
-  let i = 10;
+  let i = 2;
   while (i > 0) {
     symulation();
     i--;
@@ -699,6 +718,16 @@ function compareMultiple(arr) {
   });
   // return result;
 }
+
+// const testCardSet = [
+//   { symbol: '♦', value: '6' },
+//   { symbol: '♦', value: '8' },
+//   { symbol: '♦', value: '9' },
+//   { symbol: '♦', value: '2' },
+//   { symbol: '♦', value: 'J' },
+//   { symbol: '♦', value: '4' },
+//   { symbol: '♦', value: 'Q' },
+// ];
 
 const testResult = [
   {
