@@ -261,7 +261,7 @@ function checkStraight(arr) {
       break;
     }
   }
-  console.log(valuesArr);
+  // console.log(valuesArr);
   return result;
 }
 
@@ -474,7 +474,10 @@ function symulation() {
       result.push(getPlayerSet(playerOneSet, i));
     } else {
       const set = [currentDeck.shift(), currentDeck.shift()];
-      result.push(getPlayerSet(set, i));
+      console.log(`player ${i} has:`);
+      console.log(tableCards.concat(set));
+      console.log(getPlayerSet(tableCards.concat(set), i));
+      result.push(getPlayerSet(tableCards.concat(set), i));
     }
   }
   //loop for multiple players end
@@ -511,7 +514,7 @@ function symulation() {
   // comparePlayers(result);
   compareMultiple(result);
   // compareMultiple(testResult);
-  console.log(result);
+  // console.log(result);
   // return result[0].value;
   // return testResult;
 }
@@ -521,7 +524,7 @@ function countprobability() {
   playerTwoScore = 0;
   draw = 0;
   // gamesPlayed = 0;
-  let i = 2;
+  let i = 1;
   while (i > 0) {
     symulation();
     i--;
