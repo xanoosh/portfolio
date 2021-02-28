@@ -245,19 +245,42 @@ const shuffleArray = function (array) {
 function checkStraight(arr) {
   let result = false;
   const valuesArr = [];
+  //checkFlush() of five cards (exclude )
   arr.forEach((el) => {
     valuesArr.push(el.value);
   });
   for (const straight of straights) {
     if (straight.every((i) => valuesArr.includes(i))) {
-      result = {
-        value: 'straight',
-        rank: straights.length - straights.indexOf(straight),
-      };
-      break;
+      const pokerTest = [];
+      arr.forEach((el) => {
+        // console.log(el.value);
+        // console.log(straight);
+        if (straight.includes(el.value)) {
+          pokerTest.push(el);
+        }
+      });
+      if (checkFlush(pokerTest)) {
+        result = {
+          value: 'poker',
+          rank: straights.length - straights.indexOf(straight),
+        };
+        break;
+      } else {
+        continue;
+      }
     }
   }
-  // console.log(valuesArr);
+  if (!result) {
+    for (const straight of straights) {
+      if (straight.every((i) => valuesArr.includes(i))) {
+        result = {
+          value: 'straight',
+          rank: straights.length - straights.indexOf(straight),
+        };
+        break;
+      }
+    }
+  }
   return result;
 }
 
@@ -318,8 +341,8 @@ function getPlayerSet(cards, playernum) {
     rankSecond: '',
     player: playernum,
   };
-  if (checkStraight(cards) && checkFlush(cards)) {
-    result.value = 'poker';
+  if (checkStraight(cards) && checkStraight(cards).value === 'poker') {
+    result.value = checkStraight(cards).value;
     result.rank = checkStraight(cards).rank;
   } else if (
     checkSameValues(cards) &&
@@ -430,7 +453,9 @@ function symulation() {
       result.push(getPlayerSet(tableCards.concat(hand), i));
     }
   }
+
   compareMultiple(result);
+  // compareMultiple(testResult);
 }
 
 function countprobability() {
@@ -617,26 +642,16 @@ function compareMultiple(arr) {
   // return result;
 }
 
-// const testCardSet = [
-//   { symbol: '♦', value: '6' },
-//   { symbol: '♦', value: '8' },
-//   { symbol: '♦', value: '9' },
-//   { symbol: '♦', value: '2' },
-//   { symbol: '♦', value: 'J' },
-//   { symbol: '♦', value: '4' },
-//   { symbol: '♦', value: 'Q' },
-// ];
-
 // const testResult = [
 //   {
-//     value: 'highCard',
+//     value: 'poker',
 //     rank: '10',
-//     rankSecond: 'J',
+//     rankSecond: 0,
 //     player: 1,
 //   },
 //   {
-//     value: 'twoPairs',
-//     rank: 'A',
+//     value: 'poker',
+//     rank: '9',
 //     rankSecond: '4',
 //     player: 2,
 //   },
@@ -660,3 +675,13 @@ function compareMultiple(arr) {
 //   },
 // ];
 // compareMultiple(testResult);
+
+// const testCardSet = [
+//   { symbol: '♦', value: '9' },
+//   { symbol: '♣', value: '2' },
+//   { symbol: '♣', value: 'K' },
+//   { symbol: '♦', value: 'A' },
+//   { symbol: '♣', value: 'J' },
+//   { symbol: '♣', value: '10' },
+//   { symbol: '♣', value: 'Q' },
+// ];

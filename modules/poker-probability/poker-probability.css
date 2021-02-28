@@ -117,7 +117,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  height: 120px;
+  height: 110px;
   overflow-y: auto;
 }
 #other-players .player-container {
