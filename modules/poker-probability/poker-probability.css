@@ -121,13 +121,15 @@
 #other-players .player-container {
   flex: 0 0 20%;
   border-right: 1px solid #000;
-  padding: 10px;
+  padding: 5px;
+  margin-top: 10px;
 }
 #other-players .player-container h3 {
-  font-size: 18px;
+  font-size: 16px;
 }
 #other-players .player-container p {
   /* background: red; */
+  font-size: 13px;
 }
 #draw-odds {
   height: 22px;

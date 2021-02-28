@@ -194,10 +194,6 @@ function addFromList() {
       card.addEventListener('click', openList);
     });
   }
-  // if (showBtn === 2 /*and flop is not partially added*/) {
-  //   run.classList.remove('hidden');
-  //   //add flop
-  // }
 
   target.appendChild(cardValue);
   target.appendChild(cardSymbol);
@@ -359,53 +355,6 @@ function getPlayerSet(cards, playernum) {
   return result;
 }
 
-function comparePlayers(arr) {
-  if (arr.length === 2) {
-    const playerOne = arr[0];
-    const playerTwo = arr[1];
-    if (
-      valuesOfSets.indexOf(arr[0].value) > valuesOfSets.indexOf(arr[1].value)
-    ) {
-      //playerOne wins
-      playerOneScore++;
-    } else if (
-      valuesOfSets.indexOf(playerOne.value) <
-      valuesOfSets.indexOf(playerTwo.value)
-    ) {
-      //playerTwo wins
-      playerTwoScore++;
-    } else if (
-      valuesFromStrings(playerOne.rank) > valuesFromStrings(playerTwo.rank)
-    ) {
-      playerOneScore++;
-    } else if (
-      valuesFromStrings(playerOne.rank) < valuesFromStrings(playerTwo.rank)
-    ) {
-      playerTwoScore++;
-    } else if (
-      valuesFromStrings(playerOne.rankSecond) &&
-      valuesFromStrings(playerTwo.rankSecond)
-    ) {
-      if (
-        valuesFromStrings(playerOne.rankSecond) >
-        valuesFromStrings(playerTwo.rankSecond)
-      ) {
-        playerOneScore++;
-      } else if (
-        valuesFromStrings(playerOne.rankSecond) <
-        valuesFromStrings(playerTwo.rankSecond)
-      ) {
-        playerTwoScore++;
-      } else {
-        draw++;
-      }
-    } else {
-      draw++;
-    }
-  }
-  gamesPlayed++;
-}
-
 // console.log(fullDeck);
 function symulation() {
   //shuffle cards
@@ -420,11 +369,9 @@ function symulation() {
       value,
     });
   });
-  //get second player hand to array
-  const [secondOne, secondTwo, ...rest] = fullDeck;
-  const secondPlayerHand = [secondOne, secondTwo];
+
   //get table cards array
-  const [one, two, three, four, five, ...unused] = rest;
+  const [one, two, three, four, five, ...unused] = fullDeck;
   //check if there are cards on the table
   let tableCards = [];
   table.querySelectorAll('.card-container').forEach((card) => {
@@ -451,72 +398,35 @@ function symulation() {
     //no need to do anything
   }
   const playerOneSet = tableCards.concat(playerHand);
-  // const playerOneSet = testDeck;
-  // const playerTwoSet = tableCards.concat(secondPlayerHand);
-  //function for getting specific card set of a player
-  // const playerOne = {
-  //   value: '',
-  //   rank: 0,
-  //   rankSecond: 0,
-  //   player: 1,
-  // };
-  // const playerTwo = {
-  //   value: '',
-  //   rank: 0,
-  //   rankSecond: 0,
-  //   player: 2,
-  // };
-  const currentDeck = [...fullDeck];
+  const currentDeck = [...unused];
   const result = [];
   //loop for multiple players start
   for (let i = 1; i <= numberOfPlayers; i++) {
     if (i === 1) {
       result.push(getPlayerSet(playerOneSet, i));
+      // console.log(`player ${i} hand:`);
+      // console.log(playerHand);
+      // console.log(`player ${i} deck:`);
+      // console.log(tableCards);
+      // console.log(`player ${i} full set:`);
+      // console.log(playerOneSet);
+      // console.log(`player ${i} result:`);
+      // console.log(getPlayerSet(playerOneSet, i));
     } else {
-      const set = [currentDeck.shift(), currentDeck.shift()];
-      console.log(`player ${i} has:`);
-      console.log(tableCards.concat(set));
-      console.log(getPlayerSet(tableCards.concat(set), i));
-      result.push(getPlayerSet(tableCards.concat(set), i));
+      const hand = [currentDeck[0], currentDeck[1]];
+      currentDeck.splice([0, 1], 2);
+      // console.log(`player ${i} hand:`);
+      // console.log(hand);
+      // console.log(`player ${i} deck:`);
+      // console.log(tableCards);
+      // console.log(`player ${i} full set:`);
+      // console.log(tableCards.concat(hand));
+      // console.log(`player ${i} result:`);
+      // console.log(getPlayerSet(tableCards.concat(hand), i));
+      result.push(getPlayerSet(tableCards.concat(hand), i));
     }
   }
-  //loop for multiple players end
-  // const playerOneObj = getPlayerSet(playerOneSet, 1);
-  // const playerOneObj = getPlayerSet(testCardSet, playerOne);
-  // console.log('playerOneObj');
-  // console.log(playerOneObj);
-  // console.log('playerOneSet');
-  // console.log(playerOneSet);
-  // const playerTwoObj = getPlayerSet(playerTwoSet, 2);
-  // console.log('playerTwoObj');
-  // console.log(playerTwoObj);
-  // console.log('playerTwoSet');
-  // console.log(playerTwoSet);
-
-  // const result = [playerOneObj, playerTwoObj];
-
-  // console.log(result);
-  //testing data
-  // const testResult = [
-  //   {
-  //     value: 'straight',
-  //     rank: '10',
-  //     // rankSecond: 'J',
-  //   },
-  //   {
-  //     value: 'highCard',
-  //     rank: 'A',
-  //     // rankSecond: '3',
-  //   },
-  // ];
-  // console.log(fullDeck);
-  // comparePlayers(testResult);
-  // comparePlayers(result);
   compareMultiple(result);
-  // compareMultiple(testResult);
-  // console.log(result);
-  // return result[0].value;
-  // return testResult;
 }
 
 function countprobability() {
@@ -529,24 +439,6 @@ function countprobability() {
     symulation();
     i--;
   }
-  // console.log(`Player One won ${(playerOneScore / gamesPlayed) * 100}%`);
-  // document.getElementById('player-one-win').innerText = `Win ~ ${(
-  //   (playerOneScore / gamesPlayed) *
-  //   100
-  // ).toFixed(2)}%`;
-  // document.getElementById('player-two-win').innerText = `Win ~ ${(
-  //   (playerTwoScore / gamesPlayed) *
-  //   100
-  // ).toFixed(2)}%`;
-
-  // document.getElementById('draw-odds').innerText = `Draw ~ ${(
-  //   (draw / gamesPlayed) *
-  //   100
-  // ).toFixed(2)}%`;
-  // console.log(`Player Two won ${(playerTwoScore / gamesPlayed) * 100}%`);
-  // console.log(`Draw happened ${(draw / gamesPlayed) * 100}% of the time`);
-
-  //multiplayer solution start
   for (let i = 0; i < numberOfPlayers; i++) {
     const wins = playerScores[i].score;
     const draws = playerScores[i].draw;
@@ -561,7 +453,6 @@ function countprobability() {
       100
     ).toFixed(2)}%`;
   }
-  //multiplayer solution end
 }
 
 btnRun.addEventListener('click', countprobability);
@@ -732,36 +623,36 @@ function compareMultiple(arr) {
 //   { symbol: '♦', value: 'Q' },
 // ];
 
-const testResult = [
-  {
-    value: 'highCard',
-    rank: '10',
-    rankSecond: 'J',
-    player: 1,
-  },
-  {
-    value: 'twoPairs',
-    rank: 'A',
-    rankSecond: '4',
-    player: 2,
-  },
-  {
-    value: 'onePair',
-    rank: 'A',
-    rankSecond: '3',
-    player: 3,
-  },
-  {
-    value: 'twoPairs',
-    rank: 'A',
-    rankSecond: '4',
-    player: 4,
-  },
-  {
-    value: 'highCard',
-    rank: 'A',
-    rankSecond: '3',
-    player: 5,
-  },
-];
+// const testResult = [
+//   {
+//     value: 'highCard',
+//     rank: '10',
+//     rankSecond: 'J',
+//     player: 1,
+//   },
+//   {
+//     value: 'twoPairs',
+//     rank: 'A',
+//     rankSecond: '4',
+//     player: 2,
+//   },
+//   {
+//     value: 'onePair',
+//     rank: 'A',
+//     rankSecond: '3',
+//     player: 3,
+//   },
+//   {
+//     value: 'twoPairs',
+//     rank: 'A',
+//     rankSecond: '4',
+//     player: 4,
+//   },
+//   {
+//     value: 'highCard',
+//     rank: 'A',
+//     rankSecond: '3',
+//     player: 5,
+//   },
+// ];
 // compareMultiple(testResult);
