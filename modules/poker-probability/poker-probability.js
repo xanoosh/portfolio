@@ -65,7 +65,7 @@ const playerScores = [
   { player: 10, score: 0, draw: 0 },
 ];
 
-let numberOfPlayers = 2;
+let numberOfPlayers = 4;
 const otherPlayers = document.getElementById('other-players');
 const cardList = document.getElementById('card-list');
 const pickedCards = document.querySelectorAll('.card-container.active');
