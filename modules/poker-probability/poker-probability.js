@@ -131,6 +131,7 @@ function addPlayer() {
     const playerNum = player[1];
     const playerContainer = document.createElement('div');
     playerContainer.classList.add('player-container');
+    // playerContainer.classList.add(playerName);
     const heading = document.createElement('h3');
     heading.innerText = `Player ${playerNum}`;
     const winP = document.createElement('p');
@@ -150,8 +151,9 @@ function addPlayer() {
 function removePlayer() {
   if (numberOfPlayers > 2) {
     const player = additionalPlayers[numberOfPlayers - 2];
+    const allPlayers = otherPlayers.querySelectorAll('.player-container');
     console.log(player[0], player[1]);
-    otherPlayers.removeChild(otherPlayers.lastChild);
+    allPlayers[allPlayers.length - 1].remove();
     numberOfPlayers--;
   }
 }
