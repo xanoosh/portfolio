@@ -191,6 +191,9 @@ function resetAll() {
     }
     card.removeEventListener('click', openList);
   });
+  if (!btnRun.classList.contains('hidden')) {
+    btnRun.classList.add('hidden');
+  }
 }
 btnAdd.addEventListener('click', addPlayer);
 btnRemove.addEventListener('click', removePlayer);
