@@ -68,14 +68,13 @@ const playerScores = [
 let numberOfPlayers = 4;
 const otherPlayers = document.getElementById('other-players');
 const cardList = document.getElementById('card-list');
+const allCards = document.getElementById('all-cards');
 const pickedCards = document.querySelectorAll('.card-container.active');
 const table = document.getElementById('table');
 const btnAdd = document.getElementById('add');
 const btnRemove = document.getElementById('remove');
 const btnRun = document.getElementById('run');
-let playerOneScore = 0;
-let playerTwoScore = 0;
-let draw = 0;
+const btnReset = document.getElementById('reset');
 let gamesPlayed = 0;
 let fullDeck = [];
 let usedDeck = [];
@@ -114,7 +113,7 @@ function updateCardList() {
       newCard.classList.add('red');
     }
     newCard.addEventListener('click', addFromList);
-    cardList.appendChild(newCard);
+    allCards.appendChild(newCard);
     newCard.appendChild(value);
     newCard.appendChild(symbol);
   });
@@ -126,19 +125,15 @@ updateCardList();
 function addPlayer() {
   if (numberOfPlayers < 10) {
     const player = additionalPlayers[numberOfPlayers];
-    console.log(player[0], player[1]);
     const playerName = player[0];
     const playerNum = player[1];
     const playerContainer = document.createElement('div');
     playerContainer.classList.add('player-container');
-    // playerContainer.classList.add(playerName);
     const heading = document.createElement('h3');
     heading.innerText = `Player ${playerNum}`;
     const winP = document.createElement('p');
-    // winP.classList.add(`player-${playerName}-win`);
     winP.id = `player-${playerName}-win`;
     const drawP = document.createElement('p');
-    // drawP.classList.add(`player-${playerName}-draw`);
     drawP.id = `player-${playerName}-draw`;
     otherPlayers.appendChild(playerContainer);
     playerContainer.appendChild(heading);
@@ -147,19 +142,59 @@ function addPlayer() {
     numberOfPlayers++;
   }
 }
-
 function removePlayer() {
   if (numberOfPlayers > 2) {
     const player = additionalPlayers[numberOfPlayers - 2];
     const allPlayers = otherPlayers.querySelectorAll('.player-container');
-    console.log(player[0], player[1]);
     allPlayers[allPlayers.length - 1].remove();
     numberOfPlayers--;
   }
 }
+function resetAll() {
+  gamesPlayed = 0;
+  fullDeck = [];
+  usedDeck = [];
+  createDeck();
+  allCards.textContent = '';
+  btnAdd.classList.remove('disabled');
+  btnRemove.classList.remove('disabled');
+  updateCardList();
+  pickedCards.forEach((card) => {
+    card.textContent = '';
+    if (card.classList.contains('show')) {
+      card.classList.remove('show');
+      card.addEventListener('click', openList);
+      card.classList.add('active');
+    }
+  });
+  document.getElementById('player-one-win').textContent = '';
+  document.getElementById('player-one-draw').textContent = '';
+  playerScores.forEach((obj) => {
+    obj.score = 0;
+    obj.draw = 0;
+  });
+  otherPlayers.textContent = '';
+  numberOfPlayers = 1;
+  let i = 1;
+  while (i < 4) {
+    addPlayer();
+    i++;
+  }
+  const tableCards = table.querySelectorAll('.card-container');
+  tableCards.forEach((card) => {
+    card.textContent = '';
+    if (card.classList.contains('active')) {
+      card.classList.remove('active');
+    }
+    if (card.classList.contains('show')) {
+      card.classList.remove('show');
+    }
+    card.removeEventListener('click', openList);
+  });
+}
 btnAdd.addEventListener('click', addPlayer);
 btnRemove.addEventListener('click', removePlayer);
-
+btnReset.addEventListener('click', resetAll);
 //card list event listener
 function addFromList() {
   const target = document.querySelector('.clicked');
@@ -461,10 +496,14 @@ function symulation() {
 }
 
 function countprobability() {
-  playerOneScore = 0;
-  playerTwoScore = 0;
-  draw = 0;
-  // gamesPlayed = 0;
+  document.querySelectorAll('.card-container').forEach((el) => {
+    if (el.classList.contains('active')) {
+      el.classList.remove('active');
+      el.removeEventListener('click', openList);
+    }
+  });
+  btnAdd.classList.add('disabled');
+  btnRemove.classList.add('disabled');
   let i = 10000;
   while (i > 0) {
     symulation();
