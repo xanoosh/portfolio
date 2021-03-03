@@ -49,8 +49,8 @@
   opacity: 1;
 }
 #board #card-list .card-container-small {
-  width: 35px;
-  height: 70px;
+  width: 55px;
+  height: 85px;
   cursor: pointer;
   margin: 5px;
   background: #fff;
@@ -66,13 +66,17 @@
   opacity: 0.7;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 576px) {
   #board #card-list .card-container-small p:first-of-type {
     font-size: 16px;
     margin-bottom: 3px;
   }
   #board #card-list .card-container-small p:last-of-type {
     font-size: 17px;
+  }
+  #board #card-list .card-container-small {
+    width: 35px;
+    height: 70px;
   }
 }
 
