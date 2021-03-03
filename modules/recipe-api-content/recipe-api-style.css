@@ -303,7 +303,9 @@ div#num-more::before {
 }
 
 #list .single img {
-  width: 170px;
+  /* width: 170px; */
+  height: 125px;
+  width: auto;
   margin-bottom: 7px;
 }
 #list .single h3 {
