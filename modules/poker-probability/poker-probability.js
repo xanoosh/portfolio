@@ -161,11 +161,10 @@ function resetAll() {
   updateCardList();
   pickedCards.forEach((card) => {
     card.textContent = '';
-    if (card.classList.contains('show')) {
-      card.classList.remove('show');
-      card.addEventListener('click', openList);
-      card.classList.add('active');
-    }
+    card.classList.remove('red');
+    card.classList.remove('show');
+    card.classList.add('active');
+    card.addEventListener('click', openList);
   });
   document.getElementById('player-one-win').textContent = '';
   document.getElementById('player-one-draw').textContent = '';
@@ -183,12 +182,9 @@ function resetAll() {
   const tableCards = table.querySelectorAll('.card-container');
   tableCards.forEach((card) => {
     card.textContent = '';
-    if (card.classList.contains('active')) {
-      card.classList.remove('active');
-    }
-    if (card.classList.contains('show')) {
-      card.classList.remove('show');
-    }
+    card.classList.remove('red');
+    card.classList.remove('active');
+    card.classList.remove('show');
     card.removeEventListener('click', openList);
   });
   if (!btnRun.classList.contains('hidden')) {
@@ -496,6 +492,9 @@ function symulation() {
 
   compareMultiple(result);
   // compareMultiple(testResult);
+}
+function toggleOff(el) {
+  el.classList.toggle('off');
 }
 
 function countprobability() {

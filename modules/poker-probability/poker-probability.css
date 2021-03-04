@@ -266,14 +266,16 @@ button {
 }
 
 button#run {
-  margin-bottom: 10vh;
-}
-button#run:hover {
   background: #242423;
   color: #fff;
+  margin-bottom: 10vh;
+}
+button#run.off {
+  pointer-events: none;
+  opacity: 0.8;
 }
 
 button.disabled {
-  opacity: 0.6;
+  opacity: 0.3;
   pointer-events: none;
 }
