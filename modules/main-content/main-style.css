@@ -18,10 +18,22 @@ section:first-of-type {
   border: 1px solid #000; */
 }
 
+nav.bg-dark {
+  background: #404f6f !important;
+}
+
+.navbar-toggler {
+  border: none;
+  color: transparent;
+}
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
 .tab-content .tab-pane:first-letter {
   font-size: 30px;
   font-weight: 600;
-  color: #0d6efd;
+  color: #404f6f;
   padding-right: 5px;
 }
 
@@ -41,4 +53,23 @@ section:first-of-type {
 
 .card-body .btn-container {
   margin-top: auto;
+}
+
+.list-group-item.active {
+  background: #404f6f;
+  border-color: #404f6f;
+  outline: #404f6f;
+}
+
+.btn-primary {
+  background: #404f6f;
+  border-color: #404f6f;
+  border-radius: 0;
+  min-width: 80px;
+  outline: none;
+}
+.btn-primary:hover {
+  background: #fff;
+  color: #404f6f;
+  border-color: #404f6f;
 }

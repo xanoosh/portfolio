@@ -1,4 +1,33 @@
 <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Challenge: Stopwatch</title>
+  </head>
+  <body>
+    <button id="stop-button" type="button">Stop</button>
+    <p><span id="seconds">0</span> seconds have gone by!</p>
+    <script>
+      // Make it count up on a timer, calling this function
+      var seconds = document.getElementById('seconds');
+      var countUp = function () {
+        let i = 0;
+        return setInterval(function () {
+          i++;
+          console.log(i);
+          seconds.innerText = i;
+        }, 1000);
+      };
+      countUp();
+      // How can you make it stop counting?
+      var stopCountUp = function () {};
+      var stopButton = document.getElementById('stop-button');
+      stopButton.addEventListener('click', stopCountUp);
+    </script>
+  </body>
+</html>
+
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,4 +59,4 @@
       );
     </script>
   </body>
-</html>
+</html> -->
