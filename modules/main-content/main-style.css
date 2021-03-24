@@ -112,3 +112,16 @@ div.img-container img:hover {
   opacity: 1;
   filter: grayscale(0);
 }
+
+.card {
+  border-radius: 0;
+}
+
+.tag {
+  font-size: 10px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  background: #d6d7d8;
+  color: #fff;
+  margin-right: 3px;
+}
