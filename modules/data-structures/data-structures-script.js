@@ -1,38 +1,35 @@
 class LinkedList {
   constructor() {
-    this.start = null;
-    this.end = null;
+    this.head = null; //first el
+    this.tail = null; //last el
   }
-  append(value) {
-    const newElement = {
-      value: value,
-      nextNode: null,
-    };
-    if (this.end) {
-      this.end.nextNode = newElement;
-    }
-    this.end = newElement;
-    if (!this.start) {
-      this.start = newElement;
-    }
+  append(val) {
+    const newNode = { value: val, next: null };
+    if (this.tail) this.tail.next = newNode;
+    this.tail = newNode;
+    if (!this.head) this.head = newNode;
+  }
+  prepend(val) {
+    //current head has to be linked here, or js garbage collector will ewentually delete it
+    const newNode = { value: val, next: this.head };
+    this.head = newNode;
+    if (!this.tail) this.tail = newNode;
   }
   toArray() {
-    const elements = [];
-    let element = this.start;
-    if (!element) return;
-    while (element) {
-      elements.push(element);
-      element = element.next;
+    const nodes = [];
+    let currentNode = this.head;
+    while (currentNode) {
+      nodes.push(currentNode);
+      currentNode = currentNode.next;
     }
+    return nodes;
   }
 }
 
-const myDataStructure = new LinkedList();
+const test = new LinkedList();
 
-myDataStructure.append('s');
-myDataStructure.append('u');
-myDataStructure.append('p');
-myDataStructure.append('e');
-myDataStructure.append('r');
-
-console.log(myDataStructure.toArray());
+test.append('test');
+test.append(true);
+test.append(777);
+test.prepend('First');
+console.table(test.toArray());
