@@ -22,14 +22,17 @@ class LinkedList {
       nodes.push(currentNode);
       currentNode = currentNode.next;
     }
-    return nodes;
+    //false if empty
+    return nodes.length > 0 && nodes;
   }
 }
 
 const test = new LinkedList();
 
+console.table(test.toArray());
 test.append('test');
 test.append(true);
 test.append(777);
+console.table(test.toArray());
 test.prepend('First');
 console.table(test.toArray());
