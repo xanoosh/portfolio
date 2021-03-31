@@ -4,16 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <!--css versioning using js random number-->
-    <script>
-      document.write(
-        ` <link rel="stylesheet" href="modules/dice-content/style.css?v=${
-          Math.trunc(Math.random() * 10000) + 1
-        }" />`
-      );
-    </script>
-    <!-- <link rel="stylesheet" href="modules/dice-content/style.css" /> -->
-    <title>Dice Game</title>
+    <link rel="stylesheet" href="../modules/dice-content/style.css" />
+    <title>Game od dice</title>
   </head>
   <body>
     <div class="overlay opacity">
@@ -63,6 +55,6 @@
       <button class="btn btn--hold">Hold</button>
       <button class="btn btn--how">How does it work?</button>
     </main>
-    <script src="modules/dice-content/script.js"></script>
+    <script src="../modules/dice-content/script.js"></script>
   </body>
 </html>
