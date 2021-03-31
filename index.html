@@ -13,13 +13,7 @@
       rel="stylesheet"
     />
     <!--css versioning using js random number-->
-    <script>
-      document.write(
-        ` <link rel="stylesheet" href="modules/main-content/main-style.css?v=${
-          Math.trunc(Math.random() * 10000) + 1
-        }" />`
-      );
-    </script>
+    <link rel="stylesheet" href="main/main-style.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
   <body>
@@ -50,7 +44,7 @@
               <a
                 class="nav-link"
                 target="_blank"
-                href="https://xanoosh.github.io/portfolio/quiz"
+                href="https://xanoosh.github.io/portfolio/quiz-api"
                 >Quiz</a
               >
             </li>
@@ -80,14 +74,16 @@
             <li class="nav-item">
               <a
                 class="nav-link"
-                href="https://xanoosh.github.io/portfolio/recipe-api.html"
+                target="_blank"
+                href="https://xanoosh.github.io/portfolio/recipe-api"
                 >What's in my fridge app</a
               >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link"
-                href="https://xanoosh.github.io/portfolio/poker-probability.html"
+                target="_blank"
+                href="https://xanoosh.github.io/portfolio/poker-probability"
                 >Texas Holdem Calculator</a
               >
             </li>
@@ -246,7 +242,8 @@
                     </p>
                     <div class="btn-container">
                       <a
-                        href="https://xanoosh.github.io/portfolio/recipe-api.html"
+                        href="https://xanoosh.github.io/portfolio/recipe-api"
+                        target="_blank"
                         class="btn btn-primary"
                         >Link</a
                       >
@@ -269,7 +266,8 @@
                     </p>
                     <div class="btn-container">
                       <a
-                        href="https://xanoosh.github.io/portfolio/poker-probability.html"
+                        href="https://xanoosh.github.io/portfolio/poker-probability"
+                        target="_blank"
                         class="btn btn-primary"
                         >Link</a
                       >
@@ -397,12 +395,6 @@
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      document.write(
-        `<script src="modules/main-content/main-script.js?v="${
-          Math.trunc(Math.random() * 10000) + 1
-        }"><\/script>`
-      );
-    </script>
+    <script src="main/main-script.js"></script>
   </body>
 </html>

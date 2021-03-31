@@ -201,12 +201,12 @@ function generate_map() {
   document.write('<div id="mapContainer">');
   let val = 9;
   const doubleit = val * 2;
-  const pathm = 'modules/terraforming-content/img/hexagonm.svg';
-  const pathn = 'modules/terraforming-content/img/hexagonn.svg';
-  const pathw = 'modules/terraforming-content/img/hexagonw.svg';
+  const pathm = 'img/hexagonm.svg';
+  const pathn = 'img/hexagonn.svg';
+  const pathw = 'img/hexagonw.svg';
 
   //determine needed image based on data type and content
-  const pathBase = 'modules/terraforming-content/img';
+  const pathBase = 'img';
   let name = '';
   let nameTwo = '';
   const imgResource = function (res) {

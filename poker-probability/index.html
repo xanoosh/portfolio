@@ -5,13 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!--css versioning using js random number-->
-    <script>
-      document.write(
-        `<link rel="stylesheet" href="modules/poker-probability/poker-probability.css?v=${
-          Math.trunc(Math.random() * 10000) + 1
-        }" />`
-      );
-    </script>
+    <link rel="stylesheet" href="poker-probability.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap"
       rel="stylesheet"
@@ -66,12 +60,6 @@
         <button id="run" class="hidden">Run</button>
       </div>
     </div>
-    <script>
-      document.write(
-        `<script src="modules/poker-probability/poker-probability.js?v="${
-          Math.trunc(Math.random() * 10000) + 1
-        }"><\/script>`
-      );
-    </script>
+    <script src="poker-probability.js"></script>
   </body>
 </html>
