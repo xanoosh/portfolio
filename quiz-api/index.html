@@ -7,14 +7,11 @@
     <style>
       @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
     </style>
-    <script>
-      document.write(
-        `<link rel="stylesheet" href="modules/quiz-api-content/quiz-api-style.css?v=${
-          Math.trunc(Math.random() * 10000) + 1
-        }" />`
-      );
-    </script>
-    <title>Quiz project</title>
+    <link
+      rel="stylesheet"
+      href="../modules/quiz-api-content/quiz-api-style.css"
+    />
+    <title>Quiz</title>
   </head>
   <body>
     <div id="quiz">
@@ -80,12 +77,6 @@
         <span id="questions-total">0/10</span>
       </h3>
     </div>
-    <script>
-      document.write(
-        `<script src="modules/quiz-api-content/quiz-api-script.js?v="${
-          Math.trunc(Math.random() * 10000) + 1
-        }"><\/script>`
-      );
-    </script>
+    <script src="../modules/quiz-api-content/quiz-api-script.js"></script>
   </body>
 </html>
