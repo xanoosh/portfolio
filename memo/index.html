@@ -7,15 +7,8 @@
     <style>
       @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
     </style>
-    <!--css versioning using js random number-->
-    <script>
-      document.write(
-        `<link rel="stylesheet" href="modules/memo-content/memo-style.css?v=${
-          Math.trunc(Math.random() * 10000) + 1
-        }" />`
-      );
-    </script>
-    <title>Memo game</title>
+    <link rel="stylesheet" href="../modules/memo-content/memo-style.css" />
+    <title>Memo</title>
   </head>
   <body>
     <div id="board">
@@ -24,12 +17,6 @@
         <button onclick="window.location.reload();">New game</button>
       </div>
     </div>
-    <script>
-      document.write(
-        `<script src="modules/memo-content/memo-script.js?v="${
-          Math.trunc(Math.random() * 10000) + 1
-        }"><\/script>`
-      );
-    </script>
+    <script src="../modules/memo-content/memo-script.js"></script>
   </body>
 </html>
