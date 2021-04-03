@@ -1,28 +1,65 @@
 'use strict';
-console.log('snake');
 
 const board = document.getElementById('board');
 const snakeSpeed = 2;
 //moves per second
-
-let snakePosition = [{ x: 17, y: 14 }];
 let loopEvent = '';
-
+//will contain snake movement
 const snake = {
-  position: [{ x: 17, y: 14 }],
-  move: function (keyCode) {
+  position: [
+    { x: 17, y: 14 },
+    { x: 18, y: 14 },
+  ],
+  prevPosition: { x: 0, y: 0 },
+  newPosition: { x: 0, y: 0 },
+
+  updatePosition: function () {
+    this.position.map((el) => {
+      // debugger;
+      this.prevPosition.x = el.x;
+      this.prevPosition.y = el.y;
+      el.x = this.newPosition.x;
+      el.y = this.newPosition.y;
+      this.newPosition.x = this.prevPosition.x;
+      this.newPosition.y = this.prevPosition.y;
+    });
+    console.table(this.position);
+  },
+
+  moveLoop: function (keyCode) {
     if (keyCode === 38) {
-      this.position[0].x -= 1;
+      this.newPosition = {
+        x: this.position[0].x - 1,
+        y: this.position[0].y,
+      };
+      this.updatePosition();
     }
     if (keyCode === 40) {
-      this.position[0].x += 1;
+      this.newPosition = {
+        x: this.position[0].x + 1,
+        y: this.position[0].y,
+      };
+      this.updatePosition();
     }
     if (keyCode === 39) {
-      this.position[0].y += 1;
+      this.newPosition = {
+        x: this.position[0].x,
+        y: this.position[0].y + 1,
+      };
+      this.updatePosition();
     }
     if (keyCode === 37) {
-      this.position[0].y -= 1;
+      this.newPosition = {
+        x: this.position[0].x,
+        y: this.position[0].y - 1,
+      };
+      this.updatePosition();
     }
+  },
+
+  move: function ({ keyCode }) {
+    window.clearInterval(loopEvent);
+    this.moveLoop(keyCode);
   },
 };
 const food = {
@@ -30,14 +67,13 @@ const food = {
 };
 
 const getPosition = () => {
-  // if (snakeElement !== undefined) {
-  //   snakeElement.remove();
-  // }
-  const snakeElement = document.createElement('div');
-  snakeElement.style.gridRowStart = snake.position[0].x;
-  snakeElement.style.gridColumnStart = snake.position[0].y;
-  snakeElement.classList.add('snake');
-  board.appendChild(snakeElement);
+  snake.position.forEach((el) => {
+    const snakeElement = document.createElement('div');
+    snakeElement.style.gridRowStart = el.x;
+    snakeElement.style.gridColumnStart = el.y;
+    snakeElement.classList.add('snake');
+    board.appendChild(snakeElement);
+  });
   const foodElement = document.createElement('div');
   foodElement.style.gridRowStart = food.position.x;
   foodElement.style.gridColumnStart = food.position.y;
@@ -47,26 +83,4 @@ const getPosition = () => {
 
 getPosition();
 
-const gameLoop = (e) => {
-  window.clearInterval(loopEvent);
-  snake.move(e.keyCode);
-  getPosition();
-  // snake.position;
-  if (e.keyCode === 38) {
-    console.log('up');
-    // loopEvent = window.setInterval(() => {
-    //   console.log('up');
-    // }, 1000 / snakeSpeed);
-  }
-  if (e.keyCode === 39) {
-    console.log('right');
-  }
-  if (e.keyCode === 40) {
-    console.log('down');
-  }
-  if (e.keyCode === 37) {
-    console.log('left');
-  }
-};
-
-document.addEventListener('keyup', (e) => gameLoop(e));
+document.addEventListener('keyup', (e) => snake.move(e));
