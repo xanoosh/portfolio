@@ -9,6 +9,9 @@ const snake = {
   position: [
     { x: 17, y: 14 },
     { x: 18, y: 14 },
+    { x: 19, y: 14 },
+    { x: 20, y: 14 },
+    { x: 20, y: 13 },
   ],
   prevPosition: { x: 0, y: 0 },
   newPosition: { x: 0, y: 0 },
@@ -23,7 +26,8 @@ const snake = {
       this.newPosition.x = this.prevPosition.x;
       this.newPosition.y = this.prevPosition.y;
     });
-    console.table(this.position);
+    // console.table(this.position);
+    renderSnake();
   },
 
   moveLoop: function (keyCode) {
@@ -66,7 +70,15 @@ const food = {
   position: { x: 10, y: 10 },
 };
 
-const getPosition = () => {
+const removeCurrentSnake = () => {
+  const currentSnakeSegments = document.querySelectorAll('.snake');
+  currentSnakeSegments.forEach((snake) => {
+    snake.remove();
+  });
+};
+
+const renderSnake = () => {
+  removeCurrentSnake();
   snake.position.forEach((el) => {
     const snakeElement = document.createElement('div');
     snakeElement.style.gridRowStart = el.x;
@@ -81,6 +93,6 @@ const getPosition = () => {
   board.appendChild(foodElement);
 };
 
-getPosition();
+renderSnake();
 
 document.addEventListener('keyup', (e) => snake.move(e));
