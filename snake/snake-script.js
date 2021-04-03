@@ -1,7 +1,7 @@
 'use strict';
 
 const board = document.getElementById('board');
-const snakeSpeed = 2;
+const snakeSpeed = 6;
 //moves per second
 let loopEvent = '';
 //will contain snake movement
@@ -32,32 +32,40 @@ const snake = {
 
   moveLoop: function (keyCode) {
     if (keyCode === 38) {
-      this.newPosition = {
-        x: this.position[0].x - 1,
-        y: this.position[0].y,
-      };
-      this.updatePosition();
+      loopEvent = setInterval(() => {
+        this.newPosition = {
+          x: this.position[0].x - 1,
+          y: this.position[0].y,
+        };
+        this.updatePosition();
+      }, 1000 / snakeSpeed);
     }
     if (keyCode === 40) {
-      this.newPosition = {
-        x: this.position[0].x + 1,
-        y: this.position[0].y,
-      };
-      this.updatePosition();
+      loopEvent = setInterval(() => {
+        this.newPosition = {
+          x: this.position[0].x + 1,
+          y: this.position[0].y,
+        };
+        this.updatePosition();
+      }, 1000 / snakeSpeed);
     }
     if (keyCode === 39) {
-      this.newPosition = {
-        x: this.position[0].x,
-        y: this.position[0].y + 1,
-      };
-      this.updatePosition();
+      loopEvent = setInterval(() => {
+        this.newPosition = {
+          x: this.position[0].x,
+          y: this.position[0].y + 1,
+        };
+        this.updatePosition();
+      }, 1000 / snakeSpeed);
     }
     if (keyCode === 37) {
-      this.newPosition = {
-        x: this.position[0].x,
-        y: this.position[0].y - 1,
-      };
-      this.updatePosition();
+      loopEvent = setInterval(() => {
+        this.newPosition = {
+          x: this.position[0].x,
+          y: this.position[0].y - 1,
+        };
+        this.updatePosition();
+      }, 1000 / snakeSpeed);
     }
   },
 
