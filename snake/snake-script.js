@@ -29,38 +29,54 @@ const snake = {
   moveLoop: function (keyCode) {
     if (keyCode === 38) {
       loopEvent = setInterval(() => {
+        if (this.gameLost) this.gameLost();
         this.newPosition = {
           x: this.position[0].x - 1,
           y: this.position[0].y,
         };
-        this.updatePosition();
+        this.gameLost();
+        if (!this.gameLost()) {
+          this.updatePosition();
+        }
       }, 1000 / snakeSpeed);
     }
     if (keyCode === 40) {
       loopEvent = setInterval(() => {
+        if (this.gameLost) this.gameLost();
         this.newPosition = {
           x: this.position[0].x + 1,
           y: this.position[0].y,
         };
-        this.updatePosition();
+        this.gameLost();
+        if (!this.gameLost()) {
+          this.updatePosition();
+        }
       }, 1000 / snakeSpeed);
     }
     if (keyCode === 39) {
       loopEvent = setInterval(() => {
+        if (this.gameLost) this.gameLost();
         this.newPosition = {
           x: this.position[0].x,
           y: this.position[0].y + 1,
         };
-        this.updatePosition();
+        this.gameLost();
+        if (!this.gameLost()) {
+          this.updatePosition();
+        }
       }, 1000 / snakeSpeed);
     }
     if (keyCode === 37) {
       loopEvent = setInterval(() => {
+        if (this.gameLost) this.gameLost();
         this.newPosition = {
           x: this.position[0].x,
           y: this.position[0].y - 1,
         };
-        this.updatePosition();
+
+        if (!this.gameLost()) {
+          this.updatePosition();
+        }
       }, 1000 / snakeSpeed);
     }
   },
@@ -69,9 +85,25 @@ const snake = {
     window.clearInterval(loopEvent);
     this.moveLoop(keyCode);
   },
+  gameLost: function () {
+    this.position.forEach((el) => {
+      if (
+        (el.x === this.newPosition.x && el.y === this.newPosition.y) ||
+        this.newPosition.y === 24 ||
+        this.newPosition.x === 24 ||
+        this.newPosition.x === -1 ||
+        this.newPosition.x === -1
+      ) {
+        console.log('game over');
+        window.clearInterval(loopEvent);
+        return true;
+      }
+      return false;
+    });
+  },
 };
 const food = {
-  position: { x: 14, y: 14 },
+  position: { x: 12, y: 12 },
 };
 
 const removeCurrentSnake = () => {
