@@ -1,7 +1,7 @@
 'use strict';
 
 const board = document.getElementById('board');
-const snakeSpeed = 6;
+const snakeSpeed = 4;
 //moves per second
 let loopEvent = '';
 //will contain snake movement
@@ -10,23 +10,19 @@ const snake = {
     { x: 17, y: 14 },
     { x: 18, y: 14 },
     { x: 19, y: 14 },
-    { x: 20, y: 14 },
-    { x: 20, y: 13 },
+    { x: 19, y: 13 },
+    { x: 19, y: 12 },
   ],
   prevPosition: { x: 0, y: 0 },
   newPosition: { x: 0, y: 0 },
 
   updatePosition: function () {
     this.position.map((el) => {
-      // debugger;
-      this.prevPosition.x = el.x;
-      this.prevPosition.y = el.y;
+      this.prevPosition = { ...el };
       el.x = this.newPosition.x;
       el.y = this.newPosition.y;
-      this.newPosition.x = this.prevPosition.x;
-      this.newPosition.y = this.prevPosition.y;
+      this.newPosition = { ...this.prevPosition };
     });
-    // console.table(this.position);
     renderSnake();
   },
 
@@ -75,7 +71,7 @@ const snake = {
   },
 };
 const food = {
-  position: { x: 10, y: 10 },
+  position: { x: 14, y: 14 },
 };
 
 const removeCurrentSnake = () => {

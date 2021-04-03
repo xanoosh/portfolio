@@ -21,8 +21,8 @@ body {
 #board {
   background: rgb(241, 241, 241);
   display: grid;
-  grid-template-rows: repeat(27, 1fr);
-  grid-template-columns: repeat(27, 1fr);
+  grid-template-rows: repeat(23, 1fr);
+  grid-template-columns: repeat(23, 1fr);
   width: 100vmin;
   height: 100vmin;
 }
