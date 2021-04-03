@@ -10,22 +10,34 @@
 body {
   overflow-x: hidden;
   height: 100vh;
+  width: 100vw;
   margin: 0;
-  /* background: #fff; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(255, 255, 255);
 }
 
 #board {
+  background: rgb(241, 241, 241);
   display: grid;
-  /* grid-auto-columns: 20px; */
-  grid-template-rows: 100px;
-  grid-auto-rows: 20px;
-  width: 100px;
-  height: 100px;
+  grid-template-rows: repeat(20, 1fr);
+  grid-template-columns: repeat(20, 1fr);
+  width: 100vmin;
+  height: 100vmin;
 }
-
+.snake {
+  background: rgb(60, 109, 201);
+  border: 0.25vmin solid #fff;
+}
+.food {
+  background: rgb(224, 79, 79);
+  border: 0.25vmin solid #fff;
+}
+/* 
 .cell {
   width: 20px;
   height: 20px;
   background: #000;
   border: 1px solid #fff;
-}
+} */
