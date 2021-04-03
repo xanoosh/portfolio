@@ -50,7 +50,6 @@ getPosition();
 const gameLoop = (e) => {
   window.clearInterval(loopEvent);
   snake.move(e.keyCode);
-  console.log(snake.position[0]);
   getPosition();
   // snake.position;
   if (e.keyCode === 38) {
