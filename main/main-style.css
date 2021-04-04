@@ -35,11 +35,17 @@ nav.bg-dark {
   box-shadow: none;
 }
 
-.tab-content .tab-pane:first-letter {
+.tab-content .tab-pane h2 {
   font-size: 30px;
   font-weight: 600;
   color: #404f6f;
   padding-right: 5px;
+}
+
+.tab-content .tab-pane a {
+  color: #404f6f;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .card-body {

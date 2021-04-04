@@ -12,8 +12,8 @@ document.querySelectorAll(`[data-aos='fade-up']`).forEach((el) => {
 const options = {
   strings: [
     'Hello there!^2000',
-    'I am a web developer from Warsaw^1500',
-    'Hope you enjoy my projects :)',
+    'I am a webDev from Warsaw^1500',
+    'See my projects below',
   ],
   typeSpeed: 60,
 };
