@@ -55,15 +55,14 @@ const snake = {
     }
     if (keyCode === 39) {
       loopEvent = setInterval(() => {
-        if (this.gameLost) this.gameLost();
         this.newPosition = {
           x: this.position[0].x,
           y: this.position[0].y + 1,
         };
         this.gameLost();
-        if (!this.gameLost()) {
-          this.updatePosition();
-        }
+        // if (!this.gameLost()) {
+        this.updatePosition();
+        // }
       }, 1000 / snakeSpeed);
     }
     if (keyCode === 37) {
@@ -92,11 +91,12 @@ const snake = {
         this.newPosition.y === 24 ||
         this.newPosition.x === 24 ||
         this.newPosition.x === -1 ||
-        this.newPosition.x === -1
+        this.newPosition.y === -1
       ) {
         console.log('game over');
         window.clearInterval(loopEvent);
-        return true;
+        this.newPosition = { ...this.prevPosition };
+        return;
       }
       return false;
     });
