@@ -278,3 +278,47 @@ main {
   color: #fff;
   font-weight: 700;
 }
+
+@media (max-width: 760px) {
+  main {
+    display: block;
+    height: 90vh;
+  }
+  main .player {
+    padding: 2rem;
+    height: 45vh;
+    display: flex;
+    justify-content: center;
+  }
+  main .player .name {
+    font-size: 24px;
+  }
+  main .player .score {
+    font-size: 55px;
+    margin-bottom: 0;
+  }
+  main .player .current {
+    padding: 1rem;
+  }
+  .dice {
+    /* height: 7rem; */
+    width: 12vw;
+    height: 12vw;
+    top: 41vh;
+    left: 44vw;
+  }
+  .btn.btn--roll {
+    top: 47%;
+    left: auto;
+    right: 20vw;
+    min-width: 100px;
+    width: 100px;
+  }
+  .btn.btn--hold {
+    top: 47%;
+    right: auto;
+    left: 20vw;
+    min-width: 100px;
+    width: 100px;
+  }
+}
