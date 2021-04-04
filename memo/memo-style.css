@@ -11,6 +11,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 #board {
@@ -20,13 +21,13 @@ body {
   width: 100vmin;
   height: 100vmin;
   flex-wrap: wrap;
-  position: relative;
+  /* position: relative; */
 }
 
 .memo {
   width: 25vmin;
   height: 25vmin;
-  border: 1px solid #fff;
+  border: 0.1vmin solid #fff;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   transition: all 0.3s ease-in-out;
   transform-style: preserve-3d;
