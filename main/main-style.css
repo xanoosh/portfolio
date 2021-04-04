@@ -85,17 +85,12 @@ nav.bg-dark {
   border-color: #404f6f;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 405px) {
   .display-3 {
-    min-height: 105px;
+    min-height: 95px;
   }
 }
-@media (min-width: 601px) {
-  .display-3 {
-    min-height: 135px;
-  }
-}
-@media (min-width: 1200px) {
+@media (min-width: 405.99) {
   .display-3 {
     min-height: auto;
   }
