@@ -310,15 +310,22 @@ main {
   .btn.btn--roll {
     top: 47%;
     left: auto;
-    right: 20vw;
+    right: -10px;
     min-width: 100px;
     width: 100px;
+  }
+  .btn.btn--roll span {
+    display: none;
   }
   .btn.btn--hold {
     top: 47%;
     right: auto;
-    left: 20vw;
+    left: 80px;
     min-width: 100px;
     width: 100px;
+  }
+  .btn .btn--how {
+    bottom: 0;
+    top: auto;
   }
 }
