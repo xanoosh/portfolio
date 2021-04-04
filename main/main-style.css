@@ -51,14 +51,14 @@ nav.bg-dark {
 .card-body {
   display: flex;
   flex-direction: column;
-  min-height: 230px;
+  min-height: 240px;
 }
 
 @media (min-width: 534px) and (max-width: 768px) {
   .card-body {
     display: flex;
     flex-direction: column;
-    min-height: 285px;
+    min-height: 300px;
   }
 }
 

@@ -8,21 +8,24 @@ body {
   height: 100vh;
   margin: 0;
   /* background: #fff; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #board {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
+  /* justify-content: space-around; */
+  /* align-items: center; */
+  width: 100vmin;
+  height: 100vmin;
   flex-wrap: wrap;
   position: relative;
 }
 
 .memo {
-  width: 25vw;
-  height: 25vh;
+  width: 25vmin;
+  height: 25vmin;
   border: 1px solid #fff;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
   transition: all 0.3s ease-in-out;
