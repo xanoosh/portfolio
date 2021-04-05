@@ -17,8 +17,7 @@ const snake = {
   prevPosition: { x: 0, y: 0 },
   newPosition: { x: 0, y: 0 },
   food: {
-    position: { x: 12, y: 12 },
-    placeFood: function () {},
+    position: { x: 0, y: 0 },
   },
 
   eat: function () {
@@ -26,14 +25,40 @@ const snake = {
       this.food.position.x === this.newPosition.x &&
       this.food.position.y === this.newPosition.y
     ) {
-      console.log('eat');
-
-      removeElements('food');
+      const eaten = document.querySelector('.food');
+      eaten.classList.add('eaten');
+      eaten.classList.remove('food');
       renderFood();
+    }
+  },
+  checkEaten: function () {
+    if (document.querySelector('.eaten')) {
+      // console.log('eaten');
+      const eaten = document.querySelector('.eaten');
+      const eatenX = Number(eaten.style.gridRowStart);
+      const eatenY = Number(eaten.style.gridColumnStart);
+      let i = 1;
+      this.position.forEach((segment) => {
+        if (segment.x !== eatenX && segment.y !== eatenY) {
+          i++;
+        }
+      });
+      const addSegment = i === this.position.length ? true : false;
+      // console.log(addSegment);
+      if (addSegment) {
+        //add new segment
+        console.log('eaten becomes segment');
+        this.position.push({
+          x: Number(eaten.style.gridRowStart),
+          y: Number(eaten.style.gridColumnStart),
+        });
+        eaten.classList.remove('eaten');
+      }
     }
   },
 
   updatePosition: function () {
+    this.checkEaten();
     this.position.map((el) => {
       this.prevPosition = { ...el };
       el.x = this.newPosition.x;
