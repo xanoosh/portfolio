@@ -30,11 +30,11 @@ body {
   background: rgb(60, 109, 201);
   border: 0.25vmin solid #fff;
 }
-#food {
+.food {
   background: rgb(224, 79, 79);
   border: 0.25vmin solid #fff;
 }
-#food.eaten {
+.food.eaten {
   background: rgb(60, 109, 201);
 }
 /* 

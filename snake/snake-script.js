@@ -1,7 +1,7 @@
 'use strict';
 
 const board = document.getElementById('board');
-let food = '';
+// let food = '';
 const snakeSpeed = 4;
 //moves per second
 let loopEvent = '';
@@ -26,12 +26,10 @@ const snake = {
       this.food.position.x === this.newPosition.x &&
       this.food.position.y === this.newPosition.y
     ) {
-      //eat that shit
-      food = document.getElementById('food');
-      console.log(food);
-      food.classList.add('eaten');
+      console.log('eat');
 
-      // eaten.classList.remove('.food');
+      removeElements('food');
+      renderFood();
     }
   },
 
@@ -124,15 +122,15 @@ const snake = {
   },
 };
 
-const removeCurrentSnake = () => {
-  const currentSnakeSegments = document.querySelectorAll('.snake');
-  currentSnakeSegments.forEach((snake) => {
-    snake.remove();
+const removeElements = (className) => {
+  const currentElements = document.querySelectorAll(`.${className}`);
+  currentElements.forEach((el) => {
+    el.remove();
   });
 };
 
 const renderSnake = () => {
-  removeCurrentSnake();
+  removeElements('snake');
   snake.position.forEach((el) => {
     const snakeElement = document.createElement('div');
     snakeElement.style.gridRowStart = el.x;
@@ -140,13 +138,26 @@ const renderSnake = () => {
     snakeElement.classList.add('snake');
     board.appendChild(snakeElement);
   });
+};
+
+const renderFood = () => {
+  //check if food renders inside current snake
+  let x = Math.floor(Math.random() * 23);
+  let y = Math.floor(Math.random() * 23);
+  while (x === snake.position.x && y === snake.position.y) {
+    x = Math.floor(Math.random() * 23);
+    y = Math.floor(Math.random() * 23);
+  }
+  snake.food.position.x = x;
+  snake.food.position.y = y;
   const foodElement = document.createElement('div');
   foodElement.style.gridRowStart = snake.food.position.x;
   foodElement.style.gridColumnStart = snake.food.position.y;
-  foodElement.id = 'food';
+  foodElement.classList.add('food');
   board.appendChild(foodElement);
 };
 
 renderSnake();
+renderFood();
 
 document.addEventListener('keyup', (e) => snake.move(e));
