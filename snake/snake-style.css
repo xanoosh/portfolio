@@ -25,6 +25,50 @@ body {
   grid-template-columns: repeat(23, 1fr);
   width: 100vmin;
   height: 100vmin;
+  position: relative;
+  transition: all 0.5s ease-in-out;
+}
+#board .overlay {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+  z-index: 5;
+}
+.game-over {
+  pointer-events: none;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.5s ease-in-out;
+  z-index: 10;
+}
+.game-over h2 {
+  text-transform: uppercase;
+  color: rgb(60, 109, 201);
+  margin-bottom: 10px;
+}
+.game-over button {
+  color: #fff;
+  background: rgb(224, 79, 79);
+  outline: 0;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 .snake {
   background: rgb(60, 109, 201);
@@ -40,17 +84,24 @@ body {
 .eaten::after {
   content: '';
   position: absolute;
-  top: 1.6vmin;
+  /* top: 1.6vmin;
   left: 1.6vmin;
   width: 1.3vmin;
-  height: 1.3vmin;
+  height: 1.3vmin; */
+  top: 1vmin;
+  left: 1vmin;
+  bottom: 1vmin;
+  right: 1vmin;
+
   background: rgb(224, 79, 79);
   /* border: 0.25vmin solid #000; */
 }
-/* 
-.cell {
-  width: 20px;
-  height: 20px;
-  background: #000;
-  border: 1px solid #fff;
-} */
+
+#board.lost .game-over {
+  pointer-events: all;
+  opacity: 1;
+}
+
+#board.lost .overlay {
+  opacity: 0.5;
+}

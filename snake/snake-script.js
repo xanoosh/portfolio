@@ -2,7 +2,7 @@
 
 const board = document.getElementById('board');
 // let food = '';
-const snakeSpeed = 4;
+let snakeSpeed = 5;
 //moves per second
 let loopEvent = '';
 //will contain snake movement
@@ -37,21 +37,24 @@ const snake = {
       console.log('eaten');
       const eaten = document.querySelectorAll('.eaten');
       eaten.forEach((eatenElement) => {
-        //this.prevPosition should be behind snake
+        // check when last snake segmet is on eaten el
         // debugger;
         if (
-          this.prevPosition.x === Number(eatenElement.style.gridRowStart) &&
-          this.prevPosition.y === Number(eatenElement.style.gridColumnStart)
+          this.position[this.position.length - 1].x ===
+            Number(eatenElement.style.gridRowStart) &&
+          this.position[this.position.length - 1].y ===
+            Number(eatenElement.style.gridColumnStart)
         ) {
           //add new segment
           // debugger;
-          console.log('eaten becomes segment');
           this.position.push({
             x: Number(eatenElement.style.gridRowStart),
             y: Number(eatenElement.style.gridColumnStart),
           });
           // eatenElement.classList.remove('eaten');
           eatenElement.remove();
+          //speed up :)
+          snakeSpeed += 0.5;
         }
       });
     }
@@ -83,9 +86,6 @@ const snake = {
         this.eat();
         this.gameLost();
         this.updatePosition();
-        // if (!this.gameLost()) {
-
-        // }
       }, 1000 / snakeSpeed);
     }
   },
@@ -103,9 +103,11 @@ const snake = {
         this.newPosition.x === -1 ||
         this.newPosition.y === -1
       ) {
-        console.log('game over');
         window.clearInterval(loopEvent);
-        this.newPosition = { ...this.prevPosition };
+        document.removeEventListener('keydown', handleKeyDown);
+        board.classList.add('lost');
+
+        this.newPosition = { ...this.position[this.position.length - 1] };
         return;
       }
       return false;
@@ -150,5 +152,5 @@ const renderFood = () => {
 
 renderSnake();
 renderFood();
-
-document.addEventListener('keyup', (e) => snake.move(e));
+const handleKeyDown = (e) => snake.move(e);
+document.addEventListener('keydown', handleKeyDown);
