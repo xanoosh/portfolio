@@ -27,12 +27,15 @@ const snake = {
   },
   possibleMoves: function (direction) {
     if (direction === 'init') {
+      console.log(direction);
       return new Set([38, 37, 39]);
     }
     if (direction === 38 || direction === 40) {
+      console.log(direction);
       return new Set([37, 39]);
     }
     if (direction === 37 || 39) {
+      console.log(direction);
       return new Set([38, 40]);
     }
   },
@@ -101,14 +104,10 @@ const snake = {
       this.gameLost();
       this.updatePosition();
     }, 1000 / snakeSpeed);
+    this.currentMoveDirection = keyCode;
   },
 
   move: function ({ keyCode }) {
-    // this.moveDirection = keyCode;
-    // const keySet = new Set([38, 40, 39, 37]);
-    // if (keySet.has(keyCode)) {
-
-    // }
     if (this.possibleMoves(this.currentMoveDirection).has(keyCode)) {
       window.clearInterval(loopEvent);
       this.moveLoop(keyCode);
