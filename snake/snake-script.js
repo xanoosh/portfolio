@@ -1,6 +1,7 @@
 'use strict';
 
 const board = document.getElementById('board');
+const restartBtn = document.getElementById('restart');
 // let food = '';
 let snakeSpeed = 5;
 //moves per second
@@ -8,11 +9,9 @@ let loopEvent = '';
 //will contain snake movement
 const snake = {
   position: [
-    { x: 17, y: 14 },
-    { x: 18, y: 14 },
-    { x: 19, y: 14 },
-    { x: 19, y: 13 },
-    { x: 19, y: 12 },
+    { x: 15, y: 12 },
+    { x: 16, y: 12 },
+    { x: 17, y: 12 },
   ],
   prevPosition: { x: 0, y: 0 },
   newPosition: { x: 0, y: 0 },
@@ -54,7 +53,7 @@ const snake = {
           // eatenElement.classList.remove('eaten');
           eatenElement.remove();
           //speed up :)
-          snakeSpeed += 0.5;
+          snakeSpeed += 0.2;
         }
       });
     }
@@ -154,3 +153,21 @@ renderSnake();
 renderFood();
 const handleKeyDown = (e) => snake.move(e);
 document.addEventListener('keydown', handleKeyDown);
+
+const handleClick = () => {
+  snake.position = [
+    { x: 15, y: 12 },
+    { x: 16, y: 12 },
+    { x: 17, y: 12 },
+  ];
+  snakeSpeed = 5;
+  board
+    .querySelectorAll('div:not(.game-over):not(.overlay)')
+    .forEach((el) => el.remove());
+  renderSnake();
+  renderFood();
+  board.classList.remove('lost');
+  document.addEventListener('keydown', handleKeyDown);
+};
+
+restartBtn.addEventListener('click', handleClick);
