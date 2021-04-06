@@ -15,22 +15,26 @@ const snake = {
   ],
   prevPosition: { x: 0, y: 0 },
   newPosition: { x: 0, y: 0 },
-  moveDirection: 'init',
+  currentMoveDirection: 'init',
   food: {
     position: { x: 0, y: 0 },
   },
-  oppositeDirection: {
-    38: 40,
-    40: 38,
-    39: 37,
-    37: 39,
+  directions: {
+    up: 38,
+    down: 40,
+    left: 37,
+    right: 39,
   },
-  canMove: function (direction) {
-    if (this.moveDirection === 'init' && direction !== 40) return true;
-    if (this.moveDirection === direction) return false;
-    debugger;
-    if (this.oppositeDirection[this.moveDirection] === direction) return false;
-    return true;
+  possibleMoves: function (direction) {
+    if (direction === 'init') {
+      return new Set([38, 37, 39]);
+    }
+    if (direction === 38 || direction === 40) {
+      return new Set([37, 39]);
+    }
+    if (direction === 37 || 39) {
+      return new Set([38, 40]);
+    }
   },
   eat: function () {
     if (
@@ -84,30 +88,31 @@ const snake = {
   },
 
   moveLoop: function (keyCode) {
-    if (this.canMove(keyCode)) {
-      this.moveDirection = keyCode;
-      const keySet = new Set([38, 40, 39, 37]);
-      if (keySet.has(keyCode)) {
-        loopEvent = setInterval(() => {
-          this.newPosition = {
-            x: this.position[0].x,
-            y: this.position[0].y,
-          };
-          if (keyCode === 38) this.newPosition.x -= 1;
-          if (keyCode === 40) this.newPosition.x += 1;
-          if (keyCode === 39) this.newPosition.y += 1;
-          if (keyCode === 37) this.newPosition.y -= 1;
-          this.eat();
-          this.gameLost();
-          this.updatePosition();
-        }, 1000 / snakeSpeed);
-      }
-    }
+    loopEvent = setInterval(() => {
+      this.newPosition = {
+        x: this.position[0].x,
+        y: this.position[0].y,
+      };
+      if (keyCode === 38) this.newPosition.x -= 1;
+      if (keyCode === 40) this.newPosition.x += 1;
+      if (keyCode === 39) this.newPosition.y += 1;
+      if (keyCode === 37) this.newPosition.y -= 1;
+      this.eat();
+      this.gameLost();
+      this.updatePosition();
+    }, 1000 / snakeSpeed);
   },
 
   move: function ({ keyCode }) {
-    window.clearInterval(loopEvent);
-    this.moveLoop(keyCode);
+    // this.moveDirection = keyCode;
+    // const keySet = new Set([38, 40, 39, 37]);
+    // if (keySet.has(keyCode)) {
+
+    // }
+    if (this.possibleMoves(this.currentMoveDirection).has(keyCode)) {
+      window.clearInterval(loopEvent);
+      this.moveLoop(keyCode);
+    }
   },
   gameLost: function () {
     this.position.forEach((el) => {
