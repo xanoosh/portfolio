@@ -95,8 +95,8 @@ const snake = {
       if (keyCode === 40) this.newPosition.x += 1;
       if (keyCode === 39) this.newPosition.y += 1;
       if (keyCode === 37) this.newPosition.y -= 1;
-      this.eat();
       this.gameLost();
+      this.eat();
       this.updatePosition(keyCode);
     }, 1000 / snakeSpeed);
   },
@@ -119,7 +119,6 @@ const snake = {
         window.clearInterval(loopEvent);
         document.removeEventListener('keydown', handleKeyDown);
         board.classList.add('lost');
-
         this.newPosition = { ...this.position[this.position.length - 1] };
         return;
       }

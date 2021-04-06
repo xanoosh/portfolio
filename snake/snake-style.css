@@ -84,15 +84,11 @@ body {
 .eaten::after {
   content: '';
   position: absolute;
-  /* top: 1.6vmin;
-  left: 1.6vmin;
-  width: 1.3vmin;
-  height: 1.3vmin; */
   top: 0.25vmin;
   left: 0.25vmin;
   bottom: 0.25vmin;
   right: 0.25vmin;
-  border: 2px solid rgb(224, 79, 79);
+  border: 0.35vmin solid rgb(224, 79, 79);
   /* background: rgb(224, 79, 79); */
   /* border: 0.25vmin solid #000; */
 }
