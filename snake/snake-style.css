@@ -34,9 +34,19 @@ body {
   background: rgb(224, 79, 79);
   border: 0.25vmin solid #fff;
 }
-/* .eaten {
-  background: black;
-} */
+.eaten {
+  position: relative;
+}
+.eaten::after {
+  content: '';
+  position: absolute;
+  top: 1.6vmin;
+  left: 1.6vmin;
+  width: 1.3vmin;
+  height: 1.3vmin;
+  background: rgb(224, 79, 79);
+  /* border: 0.25vmin solid #000; */
+}
 /* 
 .cell {
   width: 20px;

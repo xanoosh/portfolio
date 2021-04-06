@@ -50,7 +50,8 @@ const snake = {
             x: Number(eatenElement.style.gridRowStart),
             y: Number(eatenElement.style.gridColumnStart),
           });
-          eatenElement.classList.remove('eaten');
+          // eatenElement.classList.remove('eaten');
+          eatenElement.remove();
         }
       });
     }
