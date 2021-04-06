@@ -32,21 +32,27 @@ const snake = {
     }
   },
   checkEaten: function () {
-    if (document.querySelector('.eaten')) {
+    if (document.querySelectorAll('.eaten').length) {
+      // debugger;
       console.log('eaten');
-      const eaten = document.querySelector('.eaten');
-      const eatenX = Number(eaten.style.gridRowStart);
-      const eatenY = Number(eaten.style.gridColumnStart);
-      //this.prevPosition should be behind snake
-      if (this.prevPosition.x === eatenX && this.prevPosition.y === eatenY) {
-        //add new segment
-        console.log('eaten becomes segment');
-        this.position.push({
-          x: Number(eaten.style.gridRowStart),
-          y: Number(eaten.style.gridColumnStart),
-        });
-        eaten.classList.remove('eaten');
-      }
+      const eaten = document.querySelectorAll('.eaten');
+      eaten.forEach((eatenElement) => {
+        //this.prevPosition should be behind snake
+        // debugger;
+        if (
+          this.prevPosition.x === Number(eatenElement.style.gridRowStart) &&
+          this.prevPosition.y === Number(eatenElement.style.gridColumnStart)
+        ) {
+          //add new segment
+          // debugger;
+          console.log('eaten becomes segment');
+          this.position.push({
+            x: Number(eatenElement.style.gridRowStart),
+            y: Number(eatenElement.style.gridColumnStart),
+          });
+          eatenElement.classList.remove('eaten');
+        }
+      });
     }
   },
 
@@ -62,57 +68,23 @@ const snake = {
   },
 
   moveLoop: function (keyCode) {
-    if (keyCode === 38) {
-      loopEvent = setInterval(() => {
-        this.newPosition = {
-          x: this.position[0].x - 1,
-          y: this.position[0].y,
-        };
-        this.eat();
-        this.gameLost();
-        if (!this.gameLost()) {
-          this.updatePosition();
-        }
-      }, 1000 / snakeSpeed);
-    }
-    if (keyCode === 40) {
-      loopEvent = setInterval(() => {
-        this.newPosition = {
-          x: this.position[0].x + 1,
-          y: this.position[0].y,
-        };
-        this.eat();
-        this.gameLost();
-        if (!this.gameLost()) {
-          this.updatePosition();
-        }
-      }, 1000 / snakeSpeed);
-    }
-    if (keyCode === 39) {
+    const keySet = new Set([38, 40, 39, 37]);
+    if (keySet.has(keyCode)) {
       loopEvent = setInterval(() => {
         this.newPosition = {
           x: this.position[0].x,
-          y: this.position[0].y + 1,
+          y: this.position[0].y,
         };
+        if (keyCode === 38) this.newPosition.x -= 1;
+        if (keyCode === 40) this.newPosition.x += 1;
+        if (keyCode === 39) this.newPosition.y += 1;
+        if (keyCode === 37) this.newPosition.y -= 1;
         this.eat();
         this.gameLost();
-        if (!this.gameLost()) {
-          this.updatePosition();
-        }
+        this.updatePosition();
+        // if (!this.gameLost()) {
+
         // }
-      }, 1000 / snakeSpeed);
-    }
-    if (keyCode === 37) {
-      loopEvent = setInterval(() => {
-        this.newPosition = {
-          x: this.position[0].x,
-          y: this.position[0].y - 1,
-        };
-        this.eat();
-        this.gameLost();
-        if (!this.gameLost()) {
-          this.updatePosition();
-        }
       }, 1000 / snakeSpeed);
     }
   },
@@ -160,8 +132,8 @@ const renderSnake = () => {
 
 const renderFood = () => {
   //check if food renders inside current snake
-  let x = Math.floor(Math.random() * 23);
-  let y = Math.floor(Math.random() * 23);
+  let x = Math.floor(Math.random() * 21) + 2;
+  let y = Math.floor(Math.random() * 21) + 2;
   while (x === snake.position.x && y === snake.position.y) {
     x = Math.floor(Math.random() * 23);
     y = Math.floor(Math.random() * 23);
