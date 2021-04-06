@@ -33,19 +33,12 @@ const snake = {
   },
   checkEaten: function () {
     if (document.querySelector('.eaten')) {
-      // console.log('eaten');
+      console.log('eaten');
       const eaten = document.querySelector('.eaten');
       const eatenX = Number(eaten.style.gridRowStart);
       const eatenY = Number(eaten.style.gridColumnStart);
-      let i = 1;
-      this.position.forEach((segment) => {
-        if (segment.x !== eatenX && segment.y !== eatenY) {
-          i++;
-        }
-      });
-      const addSegment = i === this.position.length ? true : false;
-      // console.log(addSegment);
-      if (addSegment) {
+      //this.prevPosition should be behind snake
+      if (this.prevPosition.x === eatenX && this.prevPosition.y === eatenY) {
         //add new segment
         console.log('eaten becomes segment');
         this.position.push({
