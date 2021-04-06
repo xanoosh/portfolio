@@ -27,15 +27,12 @@ const snake = {
   },
   possibleMoves: function (direction) {
     if (direction === 'init') {
-      console.log(direction);
       return new Set([38, 37, 39]);
     }
     if (direction === 38 || direction === 40) {
-      console.log(direction);
       return new Set([37, 39]);
     }
     if (direction === 37 || 39) {
-      console.log(direction);
       return new Set([38, 40]);
     }
   },
@@ -53,7 +50,6 @@ const snake = {
   checkEaten: function () {
     if (document.querySelectorAll('.eaten').length) {
       // debugger;
-      console.log('eaten');
       const eaten = document.querySelectorAll('.eaten');
       eaten.forEach((eatenElement) => {
         // check when last snake segmet is on eaten el
@@ -65,12 +61,10 @@ const snake = {
             Number(eatenElement.style.gridColumnStart)
         ) {
           //add new segment
-          // debugger;
           this.position.push({
             x: Number(eatenElement.style.gridRowStart),
             y: Number(eatenElement.style.gridColumnStart),
           });
-          // eatenElement.classList.remove('eaten');
           eatenElement.remove();
           //speed up :)
           snakeSpeed += 0.2;
@@ -79,7 +73,7 @@ const snake = {
     }
   },
 
-  updatePosition: function () {
+  updatePosition: function (keyCode) {
     this.checkEaten();
     this.position.map((el) => {
       this.prevPosition = { ...el };
@@ -88,6 +82,7 @@ const snake = {
       this.newPosition = { ...this.prevPosition };
     });
     renderSnake();
+    this.currentMoveDirection = keyCode;
   },
 
   moveLoop: function (keyCode) {
@@ -102,9 +97,8 @@ const snake = {
       if (keyCode === 37) this.newPosition.y -= 1;
       this.eat();
       this.gameLost();
-      this.updatePosition();
+      this.updatePosition(keyCode);
     }, 1000 / snakeSpeed);
-    this.currentMoveDirection = keyCode;
   },
 
   move: function ({ keyCode }) {
@@ -184,6 +178,7 @@ const handleClick = () => {
   board
     .querySelectorAll('div:not(.game-over):not(.overlay)')
     .forEach((el) => el.remove());
+  snake.currentMoveDirection = 'init';
   renderSnake();
   renderFood();
   board.classList.remove('lost');
