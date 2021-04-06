@@ -15,10 +15,23 @@ const snake = {
   ],
   prevPosition: { x: 0, y: 0 },
   newPosition: { x: 0, y: 0 },
+  moveDirection: 'init',
   food: {
     position: { x: 0, y: 0 },
   },
-
+  oppositeDirection: {
+    38: 40,
+    40: 38,
+    39: 37,
+    37: 39,
+  },
+  canMove: function (direction) {
+    if (this.moveDirection === 'init' && direction !== 40) return true;
+    if (this.moveDirection === direction) return false;
+    debugger;
+    if (this.oppositeDirection[this.moveDirection] === direction) return false;
+    return true;
+  },
   eat: function () {
     if (
       this.food.position.x === this.newPosition.x &&
@@ -71,21 +84,24 @@ const snake = {
   },
 
   moveLoop: function (keyCode) {
-    const keySet = new Set([38, 40, 39, 37]);
-    if (keySet.has(keyCode)) {
-      loopEvent = setInterval(() => {
-        this.newPosition = {
-          x: this.position[0].x,
-          y: this.position[0].y,
-        };
-        if (keyCode === 38) this.newPosition.x -= 1;
-        if (keyCode === 40) this.newPosition.x += 1;
-        if (keyCode === 39) this.newPosition.y += 1;
-        if (keyCode === 37) this.newPosition.y -= 1;
-        this.eat();
-        this.gameLost();
-        this.updatePosition();
-      }, 1000 / snakeSpeed);
+    if (this.canMove(keyCode)) {
+      this.moveDirection = keyCode;
+      const keySet = new Set([38, 40, 39, 37]);
+      if (keySet.has(keyCode)) {
+        loopEvent = setInterval(() => {
+          this.newPosition = {
+            x: this.position[0].x,
+            y: this.position[0].y,
+          };
+          if (keyCode === 38) this.newPosition.x -= 1;
+          if (keyCode === 40) this.newPosition.x += 1;
+          if (keyCode === 39) this.newPosition.y += 1;
+          if (keyCode === 37) this.newPosition.y -= 1;
+          this.eat();
+          this.gameLost();
+          this.updatePosition();
+        }, 1000 / snakeSpeed);
+      }
     }
   },
 
