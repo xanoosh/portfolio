@@ -4,7 +4,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
+  font-family: 'Noto Sans', sans-serif;
 }
 
 body {
@@ -15,7 +16,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(255, 255, 255);
+  /* background: rgb(255, 255, 255); */
+  background: #202124;
+  /* background: #3c4043; */
 }
 
 #board {
@@ -59,8 +62,10 @@ body {
   text-transform: uppercase;
   color: rgb(60, 109, 201);
   margin-bottom: 10px;
+  font-weight: 700;
 }
 .game-over button {
+  font-weight: 400;
   color: #fff;
   background: rgb(224, 79, 79);
   outline: 0;
