@@ -122,7 +122,8 @@ div.img-container img:hover {
   font-size: 10px;
   padding: 4px 6px;
   border-radius: 3px;
-  background: #d6d7d8;
+  /* background: #d6d7d8; */
+  background: #a9b0be;
   color: #fff;
   margin-right: 3px;
 }
