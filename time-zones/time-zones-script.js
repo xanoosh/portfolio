@@ -2,7 +2,7 @@
 
 const timeCurrent = document.getElementById('time-current');
 const date = new Date();
-const inputNodes = document.querySelectorAll("input[type='hour']");
+const inputNodes = document.querySelectorAll("input[type='time']");
 const key = 'ed8962ccee5b4be0a8ed091664951800';
 function hourToString(date) {
   function addZero(num) {
@@ -16,8 +16,6 @@ function hourToString(date) {
 }
 function updateTime() {}
 // const timeInterval = document.setInterval();
-
-timeCurrent.value = hourToString(date);
 
 function getTime(node, location) {
   fetch(
@@ -37,4 +35,6 @@ function getTime(node, location) {
     });
 }
 
-getTime(timeCurrent, 'Tokio');
+inputNodes.forEach((node) => {
+  getTime(node, node.name);
+});
