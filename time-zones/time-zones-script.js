@@ -9,6 +9,19 @@ let berlinPrev;
 let delhiPrev;
 let newYorkPrev;
 
+function getPreviousValue(txt) {
+  if (txt === 'Tokio') return tokioPrev;
+  if (txt === 'Berlin') return berlinPrev;
+  if (txt === 'Delhi') return delhiPrev;
+  if (txt === 'New York') return newYorkPrev;
+}
+function updatePreviousValue(txt, val) {
+  if (txt === 'Tokio') tokioPrev = val;
+  if (txt === 'Berlin') berlinPrev = val;
+  if (txt === 'Delhi') delhiPrev = val;
+  if (txt === 'New York') newYorkPrev = val;
+}
+
 function hourToString(input) {
   const date = new Date(input);
   function addZero(num) {
@@ -56,14 +69,18 @@ inputNodes.forEach((node) => {
 function changeInput(node) {
   const [hours, minutes] = node.value.split(':');
   console.log('change');
+  getPreviousValue(node.name);
+  const [oldHours, oldMinutes] = getPreviousValue(node.name).split(':');
   //   if (node.name === 'Delhi') {
   //     const [hoursold, minutesold] = delhiPrev.split(':');
   //   }
-  //   const oldHour = new Date().setHours(hoursold, minutesold);
+  const oldHour = new Date().setHours(oldHours, oldMinutes);
   const newHour = new Date().setHours(hours, minutes);
 
-  //   console.log(hourToString(oldHour));
+  console.log(hourToString(oldHour));
+
   console.log(hourToString(newHour));
+  updatePreviousValue(node.name, node.value);
 }
 
 // inputNodes.forEach((node) => {
