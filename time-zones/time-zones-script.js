@@ -4,6 +4,8 @@ const timeCurrent = document.getElementById('time-current');
 const date = new Date();
 const inputNodes = document.querySelectorAll("input[type='time']");
 const key = 'ed8962ccee5b4be0a8ed091664951800';
+let tokioTime;
+
 function hourToString(date) {
   function addZero(num) {
     if (num < 10) return '0' + num;
@@ -16,6 +18,10 @@ function hourToString(date) {
 }
 function updateTime() {}
 // const timeInterval = document.setInterval();
+
+const addSecond = async (date) => {
+  date.setSeconds(date.getSeconds() + 20);
+};
 
 function getTime(node, location) {
   fetch(
@@ -30,11 +36,17 @@ function getTime(node, location) {
     .then((result) => {
       const time = result.time_24;
       console.log(time);
+      console.log(new Date(result.date_time_txt));
       node.value = time;
+      tokioTime = new Date(result.date_time_txt);
       return time + '';
     });
 }
 
 inputNodes.forEach((node) => {
-  getTime(node, node.name);
+  const date = getTime(node, node.name);
 });
+
+function changeInput() {
+  tokiotime = tokioTime.setSeconds(tokioTime.getSeconds() + 19);
+}
