@@ -6,9 +6,11 @@ const inputNodes = document.querySelectorAll("input[type='time']");
 const key = 'ed8962ccee5b4be0a8ed091664951800';
 let tokioPrev;
 let berlinPrev;
-let moscowPrev;
+let delhiPrev;
+let newYorkPrev;
 
-function hourToString(date) {
+function hourToString(input) {
+  const date = new Date(input);
   function addZero(num) {
     if (num < 10) return '0' + num;
     return num;
@@ -37,8 +39,8 @@ function getTime(node, location) {
       const time = result.time_24.slice(0, 5);
       if (node.name === 'Berlin') berlinPrev = time;
       if (node.name === 'Tokio') tokioPrev = time;
-      if (node.name === 'Moscow') moscowPrev = time;
-      const date = new Date(result.date_time_txt);
+      if (node.name === 'Delhi') delhiPrev = time;
+      if (node.name === 'New York') newYorkPrev = time;
       node.value = time;
       node.addEventListener('change', () => {
         changeInput(node);
@@ -54,9 +56,14 @@ inputNodes.forEach((node) => {
 function changeInput(node) {
   const [hours, minutes] = node.value.split(':');
   console.log('change');
-  if (node.name === 'Moscow');
+  //   if (node.name === 'Delhi') {
+  //     const [hoursold, minutesold] = delhiPrev.split(':');
+  //   }
+  //   const oldHour = new Date().setHours(hoursold, minutesold);
   const newHour = new Date().setHours(hours, minutes);
-  console.log(newHour);
+
+  //   console.log(hourToString(oldHour));
+  console.log(hourToString(newHour));
 }
 
 // inputNodes.forEach((node) => {
