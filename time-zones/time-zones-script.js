@@ -27,21 +27,29 @@ class TimeZone {
       })
       .then((res) => {
         const date = new Date(res.date_time_txt);
+        const dateplaceholder = new Date(res.date_time_txt);
         this.currentDate = date;
-        this.prevDate = date;
+        this.prevDate = dateplaceholder;
         this.displayTime();
         this.addOnChange();
       });
   }
   displayTime() {
+    // debugger;
     this.node.value = getHourFromDate(this.currentDate);
   }
   addOnChange() {
     this.node.addEventListener('change', (e) => {
       console.log(this.name);
       //value is seconds data from input
+      console.log(this.currentDate);
       this.currentDate = setDateFromInput(this.currentDate, e.target.value);
-      getDateDifference(this.prevDate, this.currentDate);
+      console.log(`set from input: `);
+      console.log('previous');
+      console.log(this.prevDate);
+      console.log('current');
+      console.log(this.currentDate);
+      // getDateDifference(this.prevDate, this.currentDate);
       calculateChange(
         this.name,
         getDateDifference(this.prevDate, this.currentDate)
@@ -74,6 +82,7 @@ const date2 = new Date('December 17, 1995 03:26:12');
 function calculateChange(name, difference) {
   cities.forEach((city) => {
     if (city.name !== name) {
+      console.log(city.name);
       city.prevDate = city.currentDate;
       city.currentDate = setDifferentDate(city.currentDate, difference);
       city.displayTime();
