@@ -21,19 +21,28 @@ class TimeZone {
       `https://api.ipgeolocation.io/timezone?apiKey=${key}&location=${this.name}`
     )
       .then((res) => {
-        if (!res.ok) throw Error('doopa');
+        if (!res.ok) throw Error(`didn't work.`);
         return res.json();
       })
       .then((res) => {
-        this.date = res.date_time_txt;
-        this.prevDate = res.date_time_txt;
+        const date = new Date(res.date_time_txt);
+        this.currentDate = date;
+        this.prevDate = date;
+        this.displayTime();
+        this.addOnChange();
       });
+  }
+  displayTime() {
+    const node = document.querySelector(`input[name='${this.name}']`);
+    node.value = getHourFromDate(this.currentDate);
   }
   addOnChange() {
     //adding event on the node to trigger date calculations and all that jazz
-    const node = document.querySelector(`input[name=${this.name}]`);
+    const node = document.querySelector(`input[name='${this.name}']`);
+    console.log(node);
     node.addEventListener('change', () => {
-      changeInput(node);
+      console.log(this.name);
+      // changeHour(node);
     });
   }
   calculateChange(val) {
@@ -41,42 +50,24 @@ class TimeZone {
   }
 }
 
-// function hourToString(input) {
-//   const date = new Date(input);
-//   function addZero(num) {
-//     if (num < 10) return '0' + num;
-//     return num;
-//   }
-//   const hours = addZero(date.getHours());
-//   const minutes = addZero(date.getMinutes());
-//   const seconds = addZero(date.getSeconds());
-//   return `${hours}:${minutes}:${seconds}`;
-// }
-
-// inputNodes.forEach((node) => {
-//   const obj = new TimeZone(node.name);
-//   obj.getTime();
-//   obj.displayTime();
-//   cities.add(obj);
-// });
-
-function changeInput(node) {
-  const [hours, minutes] = node.value.split(':');
-  console.log('change');
-  getPreviousValue(node.name);
-  const [oldHours, oldMinutes] = getPreviousValue(node.name).split(':');
-  //   if (node.name === 'Delhi') {
-  //     const [hoursold, minutesold] = delhiPrev.split(':');
-  //   }
-  const oldHour = new Date().setHours(oldHours, oldMinutes);
-  const newHour = new Date().setHours(hours, minutes);
-
-  console.log(hourToString(oldHour));
-
-  console.log(hourToString(newHour));
-  updatePreviousValue(node.name, node.value);
+function getHourFromDate(date) {
+  function addZero(num) {
+    if (num < 10) return '0' + num;
+    return num;
+  }
+  // debugger;
+  const hours = addZero(date.getHours());
+  const minutes = addZero(date.getMinutes());
+  return `${hours}:${minutes}`;
 }
 
-// inputNodes.forEach((node) => {
-//   const date = getTime(node, node.name);
-// });
+function changeHour(node) {
+  console.log(`${node.name} it targeted`);
+}
+
+//iterate through nodelist and construct objects calling methods
+inputNodes.forEach((node) => {
+  const obj = new TimeZone(node.name);
+  obj.getTime();
+  cities.add(obj);
+});
