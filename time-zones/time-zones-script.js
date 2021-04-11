@@ -4,10 +4,6 @@ const timeCurrent = document.getElementById('time-current');
 const cities = new Set([]);
 const inputNodes = document.querySelectorAll("input[type='time']");
 const key = 'ed8962ccee5b4be0a8ed091664951800';
-let tokioPrev;
-let berlinPrev;
-let delhiPrev;
-let newYorkPrev;
 
 class TimeZone {
   constructor(name) {
@@ -42,14 +38,14 @@ class TimeZone {
     this.node.addEventListener('change', (e) => {
       console.log(this.name);
       //value is seconds data from input
-      console.log(this.currentDate);
       this.currentDate = setDateFromInput(this.currentDate, e.target.value);
-      console.log(`set from input: `);
+
       console.log('previous');
       console.log(this.prevDate);
       console.log('current');
       console.log(this.currentDate);
       // getDateDifference(this.prevDate, this.currentDate);
+      console.log('calculate change init');
       calculateChange(
         this.name,
         getDateDifference(this.prevDate, this.currentDate)
@@ -82,6 +78,9 @@ const date2 = new Date('December 17, 1995 03:26:12');
 function calculateChange(name, difference) {
   cities.forEach((city) => {
     if (city.name !== name) {
+      // console.log(`${city.name} equals ${name}?`);
+      // console.log(city.name === name);
+      // console.log(difference);
       console.log(city.name);
       city.prevDate = city.currentDate;
       city.currentDate = setDifferentDate(city.currentDate, difference);
@@ -92,19 +91,21 @@ function calculateChange(name, difference) {
 
 function getDateDifference(previous, current) {
   const difference = (current.getTime() - previous.getTime()) / 1000;
-  console.log(difference);
+  // console.log(difference);
   return difference;
 }
 function setDifferentDate(date, val) {
   return date.setSeconds(date.getSeconds() + val);
 }
 
+//this below must be broken
+
 function setDateFromInput(date, val) {
   const [hours, minutes] = val.split(':');
-  console.log(`previous: ${date}`);
+  // console.log(`previous: ${date}`);
   date.setHours(hours);
   date.setMinutes(minutes);
-  console.log(`new: ${date}`);
+  // console.log(`new: ${date}`);
   return date;
 }
 
