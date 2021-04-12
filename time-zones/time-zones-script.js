@@ -51,13 +51,11 @@ class TimeZone {
       // console.log(this.prevDate);
       // console.log('current');
       // console.log(this.currentDate);
-      // getDateDifference(this.prevDate, this.currentDate);
+      const difference = getDateDifference(this.prevDate, this.currentDate);
+      console.log(difference);
       console.log('calculate change init');
-      debugger;
-      calculateChange(
-        this.name,
-        getDateDifference(this.prevDate, this.currentDate)
-      );
+      // debugger;
+      calculateChange(this.name, difference);
     });
   }
 }
@@ -86,13 +84,15 @@ const date2 = new Date('December 17, 1995 03:26:12');
 function calculateChange(name, difference) {
   cities.forEach((city) => {
     if (city.name !== name) {
-      // console.log(`${city.name} equals ${name}?`);
-      // console.log(city.name === name);
-      // console.log(difference);
-      console.log(city.name);
       city.prevDate = city.currentDate;
       city.currentDate = setDifferentDate(city.currentDate, difference);
-      city.displayTime();
+      console.log(`${city.name} current date:`);
+      console.log(city.currentDate);
+      console.log(`${city.name} previous date:`);
+      console.log(city.prevDate);
+
+      // debugger;
+      // city.displayTime();
     }
   });
 }
@@ -112,12 +112,6 @@ function setDateFromInput(date, val) {
   const [hours, minutes] = val.split(':');
   date.setHours(hours);
   date.setMinutes(minutes);
-  // const newDate = new Date(date.getTime());
-  // newDate.setHours(hours);
-  // newDate.setMinutes(minutes);
-  // // console.log('new');
-  // // console.log(date);
-  // return date;
 }
 
 // console.log(date1);
