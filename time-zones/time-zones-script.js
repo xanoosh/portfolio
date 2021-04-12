@@ -38,14 +38,22 @@ class TimeZone {
     this.node.addEventListener('change', (e) => {
       console.log(this.name);
       //value is seconds data from input
-      this.currentDate = setDateFromInput(this.currentDate, e.target.value);
-
-      console.log('previous');
-      console.log(this.prevDate);
-      console.log('current');
+      console.log(`time value from input: ${e.target.value}`);
+      // debugger;
+      console.log('date before mutation');
       console.log(this.currentDate);
+      setDateFromInput(this.currentDate, e.target.value);
+
+      // this.currentDate = dateFromInput;
+      console.log('date after mutation:');
+      console.log(this.currentDate);
+      // console.log('previous');
+      // console.log(this.prevDate);
+      // console.log('current');
+      // console.log(this.currentDate);
       // getDateDifference(this.prevDate, this.currentDate);
       console.log('calculate change init');
+      debugger;
       calculateChange(
         this.name,
         getDateDifference(this.prevDate, this.currentDate)
@@ -102,13 +110,17 @@ function setDifferentDate(date, val) {
 
 function setDateFromInput(date, val) {
   const [hours, minutes] = val.split(':');
-  // console.log(`previous: ${date}`);
   date.setHours(hours);
   date.setMinutes(minutes);
-  // console.log(`new: ${date}`);
-  return date;
+  // const newDate = new Date(date.getTime());
+  // newDate.setHours(hours);
+  // newDate.setMinutes(minutes);
+  // // console.log('new');
+  // // console.log(date);
+  // return date;
 }
 
-setDateFromInput(date1, '01:01');
+// console.log(date1);
+// setDateFromInput(date1, '01:01');
 
 // getDateDifference(date1, date2);
