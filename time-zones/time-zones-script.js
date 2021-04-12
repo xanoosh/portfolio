@@ -72,14 +72,14 @@ function getHourFromDate(date) {
 }
 
 // iterate through nodelist and construct objects calling methods
-inputNodes.forEach((node) => {
-  const obj = new TimeZone(node.name);
-  obj.getTime();
-  cities.add(obj);
-});
+// inputNodes.forEach((node) => {
+//   const obj = new TimeZone(node.name);
+//   obj.getTime();
+//   cities.add(obj);
+// });
 
-const date1 = new Date('December 17, 1995 03:24:00');
-const date2 = new Date('December 17, 1995 03:26:12');
+let date1 = new Date('December 17, 1995 03:24:00');
+let date2 = new Date('December 17, 1995 03:26:12');
 
 function calculateChange(name, difference) {
   cities.forEach((city) => {
@@ -103,7 +103,7 @@ function getDateDifference(previous, current) {
   return difference;
 }
 function setDifferentDate(date, val) {
-  return date.setSeconds(date.getSeconds() + val);
+  return new Date(date.setSeconds(date.getSeconds() + val));
 }
 
 //this below must be broken
@@ -115,6 +115,7 @@ function setDateFromInput(date, val) {
 }
 
 // console.log(date1);
-// setDateFromInput(date1, '01:01');
+// let dateNew = setDifferentDate(date1, 6120932);
+// console.log(dateNew);
 
 // getDateDifference(date1, date2);
