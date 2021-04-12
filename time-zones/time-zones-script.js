@@ -36,20 +36,11 @@ class TimeZone {
   }
   addOnChange() {
     this.node.addEventListener('change', (e) => {
-      console.log(this.name);
-      //value is seconds data from input
-      console.log(`time value from input: ${e.target.value}`);
-      // debugger;
-      console.log('date before mutation');
-      console.log(this.currentDate);
+      // console.log(this.name);
+      // console.log('date before mutation');
+      // console.log(this.currentDate);
       setDateFromInput(this.currentDate, e.target.value);
-
-      // this.currentDate = dateFromInput;
-      console.log('date after mutation:');
-      console.log(this.currentDate);
-      // console.log('previous');
-      // console.log(this.prevDate);
-      // console.log('current');
+      // console.log('date after mutation:');
       // console.log(this.currentDate);
       const difference = getDateDifference(this.prevDate, this.currentDate);
       console.log(difference);
@@ -72,11 +63,11 @@ function getHourFromDate(date) {
 }
 
 // iterate through nodelist and construct objects calling methods
-// inputNodes.forEach((node) => {
-//   const obj = new TimeZone(node.name);
-//   obj.getTime();
-//   cities.add(obj);
-// });
+inputNodes.forEach((node) => {
+  const obj = new TimeZone(node.name);
+  obj.getTime();
+  cities.add(obj);
+});
 
 let date1 = new Date('December 17, 1995 03:24:00');
 let date2 = new Date('December 17, 1995 03:26:12');
@@ -84,15 +75,15 @@ let date2 = new Date('December 17, 1995 03:26:12');
 function calculateChange(name, difference) {
   cities.forEach((city) => {
     if (city.name !== name) {
-      city.prevDate = city.currentDate;
-      city.currentDate = setDifferentDate(city.currentDate, difference);
-      console.log(`${city.name} current date:`);
-      console.log(city.currentDate);
-      console.log(`${city.name} previous date:`);
-      console.log(city.prevDate);
-
+      // city.currentDate = city.prevDate;
+      city.currentDate = setDifferentDate(city.prevDate, difference);
+      // console.log(`${city.name} current date:`);
+      // console.log(city.currentDate);
+      // console.log(`${city.name} previous date:`);
+      // console.log(city.prevDate);
+      // city.prevDate = city.currentDate;
       // debugger;
-      // city.displayTime();
+      city.displayTime();
     }
   });
 }
