@@ -11,6 +11,7 @@ class TimeZone {
     this.node = document.querySelector(`input[name='${this.name}']`);
     this.prevDate = '';
     this.currentDate = '';
+    this.startingDate = '';
   }
   getTime() {
     //fetch data to change time parameter
@@ -22,10 +23,9 @@ class TimeZone {
         return res.json();
       })
       .then((res) => {
-        const date = new Date(res.date_time_txt);
-        const dateplaceholder = new Date(res.date_time_txt);
-        this.currentDate = date;
-        this.prevDate = dateplaceholder;
+        this.currentDate = new Date(res.date_time_txt);
+        this.prevDate = new Date(res.date_time_txt);
+        this.startingDate = new Date(res.date_time_txt);
         this.displayTime();
         this.addOnChange();
       });
@@ -42,7 +42,7 @@ class TimeZone {
       setDateFromInput(this.currentDate, e.target.value);
       // console.log('date after mutation:');
       // console.log(this.currentDate);
-      const difference = getDateDifference(this.prevDate, this.currentDate);
+      const difference = getDateDifference(this.startingDate, this.currentDate);
       console.log(difference);
       console.log('calculate change init');
       // debugger;
@@ -75,12 +75,14 @@ let date2 = new Date('December 17, 1995 03:26:12');
 function calculateChange(name, difference) {
   cities.forEach((city) => {
     if (city.name !== name) {
-      // city.currentDate = city.prevDate;
-      city.currentDate = setDifferentDate(city.prevDate, difference);
-      // console.log(`${city.name} current date:`);
-      // console.log(city.currentDate);
-      // console.log(`${city.name} previous date:`);
-      // console.log(city.prevDate);
+      // city.prevDate = city.prevDate;
+      city.currentDate = setDifferentDate(city.startingDate, difference);
+      console.log(`${city.name} current date:`);
+      console.log(city.currentDate);
+      console.log(`${city.name} previous date:`);
+      console.log(city.prevDate);
+      console.log(`${city.name} starting date:`);
+      console.log(city.startingDate);
       // city.prevDate = city.currentDate;
       // debugger;
       city.displayTime();
@@ -94,7 +96,8 @@ function getDateDifference(previous, current) {
   return difference;
 }
 function setDifferentDate(date, val) {
-  return new Date(date.setSeconds(date.getSeconds() + val));
+  const test = new Date(date.getTime());
+  return new Date(test.setSeconds(test.getSeconds() + val));
 }
 
 //this below must be broken
