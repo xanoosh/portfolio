@@ -23,6 +23,8 @@ input[type='time'] {
   border: 1px solid #fff;
   margin-left: 10px;
   font-size: 19px;
+  max-width: 125px;
+  text-align: center;
 }
 
 label {
