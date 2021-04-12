@@ -65,6 +65,8 @@ function calculateChange(name, difference) {
 //extract input value to hours , minutes to mutate current Date object
 function setDateFromInput(date, val) {
   const [hours, minutes] = val.split(':');
+  if (hours === undefined || minutes === undefined) return;
+  // const newDate = new Date(date.getTime());
   date.setHours(hours);
   date.setMinutes(minutes);
 }
