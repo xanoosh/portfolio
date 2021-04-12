@@ -2,21 +2,37 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Roboto Mono', monospace;
+  background: #202124;
+  color: #fff;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 #container {
-  padding: 15px;
+  display: inline-block;
 }
 
 input[type='time'] {
-  padding: 5px 10px;
+  padding: 7px 12px;
+  border: 1px solid #fff;
+  margin-left: 10px;
 }
 
 label {
   display: block;
   margin-bottom: 20px;
+  display: flex;
+  /* align-items: flex-end; */
+  justify-content: space-between;
 }
 label span {
   display: inline-block;
-  width: 80px;
+  font-size: 25px;
+  width: auto;
 }

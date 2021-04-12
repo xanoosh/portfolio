@@ -14,7 +14,6 @@ class TimeZone {
     this.startingDate = '';
   }
   getTime() {
-    //fetch data to change time parameter
     fetch(
       `https://api.ipgeolocation.io/timezone?apiKey=${key}&location=${this.name}`
     )
@@ -31,21 +30,14 @@ class TimeZone {
       });
   }
   displayTime() {
-    // debugger;
     this.node.value = getHourFromDate(this.currentDate);
   }
   addOnChange() {
     this.node.addEventListener('change', (e) => {
-      // console.log(this.name);
-      // console.log('date before mutation');
-      // console.log(this.currentDate);
+      //mutate current date:
       setDateFromInput(this.currentDate, e.target.value);
-      // console.log('date after mutation:');
-      // console.log(this.currentDate);
       const difference = getDateDifference(this.startingDate, this.currentDate);
-      console.log(difference);
-      console.log('calculate change init');
-      // debugger;
+      //loop set and change values in DOM
       calculateChange(this.name, difference);
     });
   }
@@ -62,54 +54,35 @@ function getHourFromDate(date) {
   return `${hours}:${minutes}`;
 }
 
-// iterate through nodelist and construct objects calling methods
-inputNodes.forEach((node) => {
-  const obj = new TimeZone(node.name);
-  obj.getTime();
-  cities.add(obj);
-});
-
-let date1 = new Date('December 17, 1995 03:24:00');
-let date2 = new Date('December 17, 1995 03:26:12');
-
 function calculateChange(name, difference) {
   cities.forEach((city) => {
     if (city.name !== name) {
-      // city.prevDate = city.prevDate;
       city.currentDate = setDifferentDate(city.startingDate, difference);
-      console.log(`${city.name} current date:`);
-      console.log(city.currentDate);
-      console.log(`${city.name} previous date:`);
-      console.log(city.prevDate);
-      console.log(`${city.name} starting date:`);
-      console.log(city.startingDate);
-      // city.prevDate = city.currentDate;
-      // debugger;
       city.displayTime();
     }
   });
 }
-
-function getDateDifference(previous, current) {
-  const difference = (current.getTime() - previous.getTime()) / 1000;
-  // console.log(difference);
-  return difference;
-}
-function setDifferentDate(date, val) {
-  const test = new Date(date.getTime());
-  return new Date(test.setSeconds(test.getSeconds() + val));
-}
-
-//this below must be broken
-
+//extract input value to hours , minutes to mutate current Date object
 function setDateFromInput(date, val) {
   const [hours, minutes] = val.split(':');
   date.setHours(hours);
   date.setMinutes(minutes);
 }
+//get difference in seconds:
+function getDateDifference(previous, current) {
+  const difference = (current.getTime() - previous.getTime()) / 1000;
+  return difference;
+}
+//create new Date object with time added in seconds
+function setDifferentDate(date, val) {
+  const test = new Date(date.getTime());
+  return new Date(test.setSeconds(test.getSeconds() + val));
+}
 
-// console.log(date1);
-// let dateNew = setDifferentDate(date1, 6120932);
-// console.log(dateNew);
+// iterate through nodelist and construct objects calling methods
 
-// getDateDifference(date1, date2);
+inputNodes.forEach((node) => {
+  const obj = new TimeZone(node.name);
+  obj.getTime();
+  cities.add(obj);
+});
