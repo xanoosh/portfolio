@@ -22,6 +22,7 @@ input[type='time'] {
   padding: 7px 12px;
   border: 1px solid #fff;
   margin-left: 10px;
+  font-size: 19px;
 }
 
 label {
@@ -33,6 +34,6 @@ label {
 }
 label span {
   display: inline-block;
-  font-size: 25px;
+  font-size: 23px;
   width: auto;
 }
