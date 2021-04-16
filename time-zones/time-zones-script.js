@@ -3,7 +3,7 @@
 const form = document.getElementById('form');
 const timeCurrent = document.getElementById('time-current');
 const cities = new Set([]);
-const inputNodes = document.querySelectorAll("input[type='time']");
+let inputNodes = document.querySelectorAll("input[type='time']");
 const key = 'ed8962ccee5b4be0a8ed091664951800';
 
 class TimeZone {
@@ -88,6 +88,26 @@ form.addEventListener('submit', function (e) {
   e.preventDefault();
   const requestInput = `${this[0].value}/${this[1].value}`;
   console.log(requestInput);
+  if (requestInput !== '/') {
+    //add new dom element
+    const newLabel = document.createElement('label');
+    const newSpan = document.createElement('span');
+    newSpan.innerText = `${this[0].value}:`;
+    const newInput = document.createElement('input');
+    newInput.type = 'time';
+    newInput.name = requestInput;
+    container.appendChild(newLabel);
+    newLabel.appendChild(newSpan);
+    newLabel.appendChild(newInput);
+    //rewrite inputnodes and create objects based on them
+    cities.clear;
+    let inputNodes = document.querySelectorAll("input[type='time']");
+    inputNodes.forEach((node) => {
+      const obj = new TimeZone(node.name);
+      obj.getTime();
+      cities.add(obj);
+    });
+  }
 });
 
 // iterate through nodelist and construct objects calling methods
