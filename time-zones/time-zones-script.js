@@ -1,5 +1,6 @@
 'use strict';
 
+const form = document.getElementById('form');
 const timeCurrent = document.getElementById('time-current');
 const cities = new Set([]);
 const inputNodes = document.querySelectorAll("input[type='time']");

@@ -39,3 +39,18 @@ label span {
   font-size: 23px;
   width: auto;
 }
+
+form input[type='text'] {
+  display: block;
+  padding: 7px 12px;
+  border: 1px solid #fff;
+  font-size: 19px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+form input[type='submit'] {
+  padding: 7px 12px;
+  border: 1px solid #fff;
+  font-size: 19px;
+  margin-bottom: 15px;
+}
