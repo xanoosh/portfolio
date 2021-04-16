@@ -111,8 +111,8 @@ form.addEventListener('submit', function (e) {
 });
 
 // iterate through nodelist and construct objects calling methods
-// inputNodes.forEach((node) => {
-//   const obj = new TimeZone(node.name);
-//   obj.getTime();
-//   cities.add(obj);
-// });
+inputNodes.forEach((node) => {
+  const obj = new TimeZone(node.name);
+  obj.getTime();
+  cities.add(obj);
+});
