@@ -40,17 +40,25 @@ label span {
   width: auto;
 }
 
+form {
+  margin-top: 70px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
 form input[type='text'] {
   display: block;
   padding: 7px 12px;
   border: 1px solid #fff;
-  font-size: 19px;
+  font-size: 16px;
   margin-bottom: 15px;
   text-align: center;
 }
 form input[type='submit'] {
+  display: block;
   padding: 7px 12px;
   border: 1px solid #fff;
-  font-size: 19px;
+  font-size: 16px;
   margin-bottom: 15px;
 }
