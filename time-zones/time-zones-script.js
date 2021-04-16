@@ -82,10 +82,17 @@ function setDifferentDate(date, val) {
   return new Date(test.setSeconds(test.getSeconds() + val));
 }
 
-// iterate through nodelist and construct objects calling methods
+//form hander
 
-inputNodes.forEach((node) => {
-  const obj = new TimeZone(node.name);
-  obj.getTime();
-  cities.add(obj);
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const requestInput = `${this[0].value}/${this[1].value}`;
+  console.log(requestInput);
 });
+
+// iterate through nodelist and construct objects calling methods
+// inputNodes.forEach((node) => {
+//   const obj = new TimeZone(node.name);
+//   obj.getTime();
+//   cities.add(obj);
+// });
