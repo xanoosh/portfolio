@@ -12,7 +12,7 @@ const snake = {
     this.setDirection(keyCode);
   },
   //moves per second
-  speed: 3,
+  speed: 10,
   position: [{ x: 15, y: 15 }],
   newPosition: { x: 0, y: 0 },
   prevPosition: { x: 0, y: 0 },
@@ -33,6 +33,12 @@ const snake = {
       return new Set([38, 40]);
     }
   },
+  checkCollision: function () {
+    if (this.newPosition.x === -1) this.newPosition.x = 23;
+    if (this.newPosition.x === 24) this.newPosition.x = 0;
+    if (this.newPosition.y === -1) this.newPosition.y = 23;
+    if (this.newPosition.y === 24) this.newPosition.y = 0;
+  },
   setNewPosition: function () {
     this.newPosition = {
       x: this.position[0].x,
@@ -43,6 +49,7 @@ const snake = {
     if (key === 40) this.newPosition.x += 1;
     if (key === 39) this.newPosition.y += 1;
     if (key === 37) this.newPosition.y -= 1;
+    this.checkCollision();
   },
   setDirection: function (keyCode) {
     if (
