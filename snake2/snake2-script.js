@@ -13,7 +13,11 @@ const snake = {
   },
   //moves per second
   speed: 10,
-  position: [{ x: 15, y: 15 }],
+  position: [
+    { x: 12, y: 12 },
+    { x: 12, y: 13 },
+    { x: 12, y: 14 },
+  ],
   newPosition: { x: 0, y: 0 },
   prevPosition: { x: 0, y: 0 },
   direction: 0,
@@ -71,7 +75,32 @@ const snake = {
     renderSnake();
   },
 };
-const food = { position: { x: 0, y: 0 } };
+const food = {
+  position: { x: 0, y: 0 },
+  setRandomPosition: function () {
+    this.position.x = Math.floor(Math.random() * 21) + 2;
+    this.position.y = Math.floor(Math.random() * 21) + 2;
+  },
+  checkOverlap() {
+    for (const segment of snake.position) {
+      if (segment.x === this.position.x && segment.y === this.position.y) {
+        return true;
+      }
+      return false;
+    }
+  },
+  render: function () {
+    this.setRandomPosition();
+    while (this.checkOverlap()) {
+      this.setRandomPosition();
+    }
+    const foodElement = document.createElement('div');
+    foodElement.style.gridRowStart = this.position.x;
+    foodElement.style.gridColumnStart = this.position.y;
+    foodElement.classList.add('food');
+    board.appendChild(foodElement);
+  },
+};
 
 const renderSnake = () => {
   removeElements('snake');
@@ -100,13 +129,12 @@ function updateFrame(timeStamp) {
 
 function gameLoop(timeStamp) {
   if (updateFrame(timeStamp)) {
-    console.log('game loop');
     //game logic start
     snake.setDirection();
     snake.updatePosition();
     //game logic end
   }
-  if (timeStamp < 10000) {
+  if (timeStamp < 20000) {
     requestAnimationFrame(gameLoop);
   }
 }
@@ -116,7 +144,7 @@ document.addEventListener('keydown', handleKeyDown);
 
 //draw starter snake
 renderSnake();
-
+food.render();
 // const snake = {
 //   position: [
 //     { x: 15, y: 12 },
