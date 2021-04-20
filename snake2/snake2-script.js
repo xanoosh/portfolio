@@ -14,14 +14,7 @@ const snake = {
   },
   //moves per second
   speed: 10,
-  position: [
-    { x: 12, y: 12 },
-    { x: 12, y: 13 },
-    { x: 12, y: 14 },
-    { x: 12, y: 15 },
-    { x: 12, y: 16 },
-    { x: 12, y: 17 },
-  ],
+  position: [{ x: 12, y: 12 }],
   newPosition: { x: 0, y: 0 },
   prevPosition: { x: 0, y: 0 },
   direction: 0,
@@ -111,6 +104,40 @@ const food = {
       return false;
     }
   },
+  checkEaten: function () {
+    if (document.querySelectorAll('.eaten').length) {
+      const eaten = document.querySelectorAll('.eaten');
+      eaten.forEach((eatenElement) => {
+        if (
+          snake.position[snake.position.length - 1].x ===
+            Number(eatenElement.style.gridRowStart) &&
+          snake.position[snake.position.length - 1].y ===
+            Number(eatenElement.style.gridColumnStart)
+        ) {
+          //add new segment
+          snake.position.push({
+            x: Number(eatenElement.style.gridRowStart),
+            y: Number(eatenElement.style.gridColumnStart),
+          });
+          eatenElement.remove();
+          //speed up :)
+          snake.speed += 0.2;
+        }
+      });
+    }
+  },
+
+  eat: function () {
+    if (
+      this.position.x === snake.position[0].x &&
+      this.position.y === snake.position[0].y
+    ) {
+      const eaten = document.querySelector('.food');
+      eaten.classList.add('eaten');
+      eaten.classList.remove('food');
+      food.render();
+    }
+  },
   render: function () {
     this.setRandomPosition();
     while (this.checkOverlap()) {
@@ -153,6 +180,8 @@ function gameLoop(timeStamp) {
   if (updateFrame(timeStamp)) {
     //game logic start
     snake.setDirection();
+    food.eat();
+    food.checkEaten();
     snake.updatePosition();
     //game logic end
   }
