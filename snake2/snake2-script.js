@@ -13,7 +13,7 @@ const snake = {
     this.setDirection(keyCode);
   },
   //moves per second
-  speed: 1,
+  speed: 10,
   position: [
     { x: 12, y: 12 },
     { x: 12, y: 13 },
@@ -43,24 +43,13 @@ const snake = {
   },
   checkSelfCollision: function () {
     const positionSet = new Set([...this.position]);
-    positionSet.forEach((el) => {
+    for (const el of positionSet) {
       if (el.x === this.newPosition.x && el.y === this.newPosition.y) {
         console.log('collision!');
         return true;
       }
-      return false;
-    });
-    // for (const segment of this.position) {
-    //   // debugger;
-    //   if (
-    //     segment.x === this.newPosition.x &&
-    //     segment.y === this.newPosition.y
-    //   ) {
-    //     console.log('collision!');
-    //     return true;
-    //   }
-    //   return false;
-    // }
+    }
+    return false;
   },
   checkWallCollision: function () {
     if (this.newPosition.x === -1) this.newPosition.x = 23;
@@ -91,6 +80,7 @@ const snake = {
   updatePosition: function () {
     // this.checkEaten();
     this.setNewPosition();
+    console.log(this.checkSelfCollision());
     if (this.checkSelfCollision()) {
       console.log('collision!, in set position');
       gameLost = true;
@@ -113,7 +103,8 @@ const food = {
     this.position.y = Math.floor(Math.random() * 21) + 2;
   },
   checkOverlap() {
-    for (const segment of snake.position) {
+    const snakePositionSet = new Set([...snake.position]);
+    for (const segment of snakePositionSet) {
       if (segment.x === this.position.x && segment.y === this.position.y) {
         return true;
       }
@@ -343,3 +334,34 @@ food.render();
 // };
 
 // restartBtn.addEventListener('click', handleClick);
+// function solution(V) {
+//   // write your code in JavaScript (Node.js 8.9.4)
+//   // let V = parseInt(S, 2);
+//   let numberOfOperations = 0;
+//   while (V) {
+//     if (V % 2 === 0) {
+//       V /= 2;
+//       console.log('divide');
+//       console.log(V);
+//       numberOfOperations++;
+//     }
+//     if (V % 2 !== 0) {
+//       V--;
+//       console.log('substract');
+//       console.log(V);
+//       numberOfOperations++;
+//     }
+//   }
+
+//   return numberOfOperations;
+// }
+
+// function solution(S) {
+//   let V = parseInt(S, 2);
+//   let numberOfOperations = 0;
+//   while (V) {
+//     V % 2 === 0 ? (V /= 2) : V--;
+//     numberOfOperations++;
+//   }
+//   return numberOfOperations;
+// }
