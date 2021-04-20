@@ -2,26 +2,88 @@
 
 const board = document.getElementById('board');
 const restartBtn = document.getElementById('restart');
-
-// let snakeSpeed = 5;
+//value for timestamp calculation
 let lastTimeStamp = 0;
 const snake = {
+  move: function ({ keyCode }) {
+    //initialize loop...
+    this.startGameLoop();
+    //...or set another direction
+    this.setDirection(keyCode);
+  },
   //moves per second
   speed: 3,
   position: [{ x: 15, y: 15 }],
   newPosition: { x: 0, y: 0 },
+  prevPosition: { x: 0, y: 0 },
   direction: 0,
-  move: function ({ keyCode }) {
+  startGameLoop: function () {
     if (!this.direction) {
       window.requestAnimationFrame(gameLoop);
     }
-    this.direction = keyCode;
-    console.log(keyCode);
+  },
+  possibleMoves: function () {
+    if (this.direction === 0) {
+      return new Set([38, 37, 39, 40]);
+    }
+    if (this.direction === 38 || this.direction === 40) {
+      return new Set([37, 39]);
+    }
+    if (this.direction === 37 || this.direction === 39) {
+      return new Set([38, 40]);
+    }
+  },
+  setNewPosition: function () {
+    this.newPosition = {
+      x: this.position[0].x,
+      y: this.position[0].y,
+    };
+    const key = this.direction;
+    if (key === 38) this.newPosition.x -= 1;
+    if (key === 40) this.newPosition.x += 1;
+    if (key === 39) this.newPosition.y += 1;
+    if (key === 37) this.newPosition.y -= 1;
+  },
+  setDirection: function (keyCode) {
+    if (
+      this.direction !== keyCode &&
+      this.possibleMoves(this.direction).has(keyCode)
+    ) {
+      this.direction = keyCode;
+    }
+  },
+  updatePosition: function () {
+    // this.checkEaten();
+    this.setNewPosition();
+    this.position.map((el) => {
+      this.prevPosition = { ...el };
+      el.x = this.newPosition.x;
+      el.y = this.newPosition.y;
+      this.newPosition = { ...this.prevPosition };
+    });
+    renderSnake();
   },
 };
 const food = { position: { x: 0, y: 0 } };
 
-function checkInterval(timeStamp) {
+const renderSnake = () => {
+  removeElements('snake');
+  snake.position.forEach((el) => {
+    const snakeElement = document.createElement('div');
+    snakeElement.style.gridRowStart = el.x;
+    snakeElement.style.gridColumnStart = el.y;
+    snakeElement.classList.add('snake');
+    board.appendChild(snakeElement);
+  });
+};
+const removeElements = (className) => {
+  const currentElements = document.querySelectorAll(`.${className}`);
+  currentElements.forEach((el) => {
+    el.remove();
+  });
+};
+
+function updateFrame(timeStamp) {
   if (timeStamp - lastTimeStamp >= 1000 / snake.speed) {
     lastTimeStamp = timeStamp;
     return true;
@@ -30,16 +92,23 @@ function checkInterval(timeStamp) {
 }
 
 function gameLoop(timeStamp) {
-  if (checkInterval(timeStamp)) {
+  if (updateFrame(timeStamp)) {
     console.log('game loop');
+    //game logic start
+    snake.setDirection();
+    snake.updatePosition();
+    //game logic end
   }
-  if (timeStamp < 4000) {
+  if (timeStamp < 10000) {
     requestAnimationFrame(gameLoop);
   }
 }
 
 const handleKeyDown = (e) => snake.move(e);
 document.addEventListener('keydown', handleKeyDown);
+
+//draw starter snake
+renderSnake();
 
 // const snake = {
 //   position: [
@@ -165,17 +234,6 @@ document.addEventListener('keydown', handleKeyDown);
 //   const currentElements = document.querySelectorAll(`.${className}`);
 //   currentElements.forEach((el) => {
 //     el.remove();
-//   });
-// };
-
-// const renderSnake = () => {
-//   removeElements('snake');
-//   snake.position.forEach((el) => {
-//     const snakeElement = document.createElement('div');
-//     snakeElement.style.gridRowStart = el.x;
-//     snakeElement.style.gridColumnStart = el.y;
-//     snakeElement.classList.add('snake');
-//     board.appendChild(snakeElement);
 //   });
 // };
 
