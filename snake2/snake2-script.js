@@ -3,29 +3,43 @@
 const board = document.getElementById('board');
 const restartBtn = document.getElementById('restart');
 
-let snakeSpeed = 5;
+// let snakeSpeed = 5;
 let lastTimeStamp = 0;
 const snake = {
-  position: [{ x: 15, y: 15 }],
-  direction: '',
   //moves per second
-  speed: 2,
+  speed: 3,
+  position: [{ x: 15, y: 15 }],
+  newPosition: { x: 0, y: 0 },
+  direction: 0,
+  move: function ({ keyCode }) {
+    if (!this.direction) {
+      window.requestAnimationFrame(gameLoop);
+    }
+    this.direction = keyCode;
+    console.log(keyCode);
+  },
 };
 const food = { position: { x: 0, y: 0 } };
 
-function gameLoop(timeStamp) {
-  if (!lastTimeStamp || timeStamp - lastTimeStamp >= 1000 / snake.speed) {
-    console.log('game loop');
-    console.log(timeStamp);
+function checkInterval(timeStamp) {
+  if (timeStamp - lastTimeStamp >= 1000 / snake.speed) {
     lastTimeStamp = timeStamp;
+    return true;
   }
-  if (timeStamp < 2000) {
+  return false;
+}
+
+function gameLoop(timeStamp) {
+  if (checkInterval(timeStamp)) {
+    console.log('game loop');
+  }
+  if (timeStamp < 4000) {
     requestAnimationFrame(gameLoop);
   }
 }
 
-//initial call
-window.requestAnimationFrame(gameLoop);
+const handleKeyDown = (e) => snake.move(e);
+document.addEventListener('keydown', handleKeyDown);
 
 // const snake = {
 //   position: [
