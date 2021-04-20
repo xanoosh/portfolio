@@ -4,6 +4,7 @@ const board = document.getElementById('board');
 const restartBtn = document.getElementById('restart');
 //value for timestamp calculation
 let lastTimeStamp = 0;
+let gameLost = false;
 const snake = {
   move: function ({ keyCode }) {
     //initialize loop...
@@ -12,11 +13,14 @@ const snake = {
     this.setDirection(keyCode);
   },
   //moves per second
-  speed: 10,
+  speed: 1,
   position: [
     { x: 12, y: 12 },
     { x: 12, y: 13 },
     { x: 12, y: 14 },
+    { x: 12, y: 15 },
+    { x: 12, y: 16 },
+    { x: 12, y: 17 },
   ],
   newPosition: { x: 0, y: 0 },
   prevPosition: { x: 0, y: 0 },
@@ -37,7 +41,28 @@ const snake = {
       return new Set([38, 40]);
     }
   },
-  checkCollision: function () {
+  checkSelfCollision: function () {
+    const positionSet = new Set([...this.position]);
+    positionSet.forEach((el) => {
+      if (el.x === this.newPosition.x && el.y === this.newPosition.y) {
+        console.log('collision!');
+        return true;
+      }
+      return false;
+    });
+    // for (const segment of this.position) {
+    //   // debugger;
+    //   if (
+    //     segment.x === this.newPosition.x &&
+    //     segment.y === this.newPosition.y
+    //   ) {
+    //     console.log('collision!');
+    //     return true;
+    //   }
+    //   return false;
+    // }
+  },
+  checkWallCollision: function () {
     if (this.newPosition.x === -1) this.newPosition.x = 23;
     if (this.newPosition.x === 24) this.newPosition.x = 0;
     if (this.newPosition.y === -1) this.newPosition.y = 23;
@@ -53,7 +78,7 @@ const snake = {
     if (key === 40) this.newPosition.x += 1;
     if (key === 39) this.newPosition.y += 1;
     if (key === 37) this.newPosition.y -= 1;
-    this.checkCollision();
+    this.checkWallCollision();
   },
   setDirection: function (keyCode) {
     if (
@@ -66,10 +91,16 @@ const snake = {
   updatePosition: function () {
     // this.checkEaten();
     this.setNewPosition();
+    if (this.checkSelfCollision()) {
+      console.log('collision!, in set position');
+      gameLost = true;
+      return;
+    }
     this.position.map((el) => {
       this.prevPosition = { ...el };
       el.x = this.newPosition.x;
       el.y = this.newPosition.y;
+
       this.newPosition = { ...this.prevPosition };
     });
     renderSnake();
@@ -134,7 +165,7 @@ function gameLoop(timeStamp) {
     snake.updatePosition();
     //game logic end
   }
-  if (timeStamp < 20000) {
+  if (!gameLost) {
     requestAnimationFrame(gameLoop);
   }
 }
