@@ -125,6 +125,7 @@ const snake = {
     this.position = [{ x: 12, y: 12 }];
     this.newPosition.x = 0;
     this.newPosition.y = 0;
+    this.canChangeDirection = true;
   },
 };
 
