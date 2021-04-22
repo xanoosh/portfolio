@@ -31,18 +31,18 @@ const score = {
   },
 };
 const snake = {
+  position: [{ x: 12, y: 12 }],
+  newPosition: { x: 0, y: 0 },
+  prevPosition: { x: 0, y: 0 },
+  //moves per second
+  speed: 8.2,
+  direction: 0,
   move: function ({ keyCode }) {
     //initialize loop...
     this.startGameLoop(keyCode);
     //...or set another direction
     this.setDirection(keyCode);
   },
-  //moves per second
-  speed: 8.2,
-  position: [{ x: 12, y: 12 }],
-  newPosition: { x: 0, y: 0 },
-  prevPosition: { x: 0, y: 0 },
-  direction: 0,
   startGameLoop: function (keyCode) {
     const possibleMoves = new Set([38, 37, 39, 40]);
     if (!this.direction && possibleMoves.has(keyCode)) {
@@ -59,6 +59,12 @@ const snake = {
     if (this.direction === 37 || this.direction === 39) {
       return new Set([38, 40]);
     }
+  },
+  walkThroughWall: function () {
+    if (this.newPosition.x === 0) this.newPosition.x = 23;
+    if (this.newPosition.x === 24) this.newPosition.x = 1;
+    if (this.newPosition.y === 0) this.newPosition.y = 23;
+    if (this.newPosition.y === 24) this.newPosition.y = 1;
   },
   checkSelfCollision: function () {
     const position = [...this.position];
@@ -78,12 +84,6 @@ const snake = {
     }
     return false;
   },
-  checkWallCollision: function () {
-    if (this.newPosition.x === 0) this.newPosition.x = 23;
-    if (this.newPosition.x === 24) this.newPosition.x = 1;
-    if (this.newPosition.y === 0) this.newPosition.y = 23;
-    if (this.newPosition.y === 24) this.newPosition.y = 1;
-  },
   setNewPosition: function () {
     const key = this.direction;
     this.newPosition = { ...this.position[0] };
@@ -91,7 +91,7 @@ const snake = {
     if (key === 40) this.newPosition.x += 1;
     if (key === 39) this.newPosition.y += 1;
     if (key === 37) this.newPosition.y -= 1;
-    this.checkWallCollision();
+    this.walkThroughWall();
   },
   setDirection: function (keyCode) {
     if (
