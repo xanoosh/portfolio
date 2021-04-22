@@ -16,9 +16,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: rgb(255, 255, 255); */
   background: #202124;
-  /* background: #3c4043; */
 }
 
 #board {
@@ -35,12 +33,12 @@ body {
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: 10px;
-  font-size: 30px;
+  padding: 3vmin;
+  font-size: 6vmin;
   font-weight: bold;
   opacity: 0.3;
-  min-height: 10vmin;
-  min-width: 10vmin;
+  min-height: 12vmin;
+  min-width: 12vmin;
 }
 #board .overlay {
   content: '';
@@ -66,24 +64,21 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  text-align: center;
   transition: all 0.5s ease-in-out;
   z-index: 10;
 }
-.game-over h2 {
-  text-transform: uppercase;
-  color: #6c6f7d;
-  margin-bottom: 20px;
-  font-weight: 700;
-  font-size: 50px;
-}
+
 .game-over button {
   font-weight: 400;
   color: #fff;
-  background: rgb(224, 79, 79);
+  /* background: rgb(224, 79, 79); */
+  background: rgb(60, 109, 201);
+  opacity: 0.8;
   outline: 0;
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 3vmin 5vmin;
+  font-size: 4vmin;
   text-transform: uppercase;
   cursor: pointer;
 }
