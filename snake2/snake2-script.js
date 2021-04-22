@@ -63,9 +63,18 @@ const snake = {
     }
   },
   checkSelfCollision: function () {
-    const positionSet = new Set([...this.position]);
+    const position = [...this.position];
+    position.pop();
+    position.shift();
+    const positionSet = new Set([...position]);
     for (const el of positionSet) {
-      if (el.x === this.newPosition.x && el.y === this.newPosition.y) {
+      if (el.x === this.position[0].x && el.y === this.position[0].y) {
+        return true;
+      }
+      if (
+        this.position[0].x === this.position[this.position.length - 1].x &&
+        this.position[0].y === this.position[this.position.length - 1].y
+      ) {
         return true;
       }
     }
@@ -98,12 +107,12 @@ const snake = {
   },
   canChangeDirection: true,
   updatePosition: function () {
-    this.setNewPosition();
     if (this.checkSelfCollision()) {
       console.log('collision!');
       gameLost = true;
       return;
     }
+    this.setNewPosition();
     const positionSet = new Set([...this.position]);
     positionSet.forEach((el) => {
       this.prevPosition = { ...el };
@@ -113,6 +122,7 @@ const snake = {
     });
     this.position = [...positionSet];
     this.canChangeDirection = true;
+    food.eat();
     this.render();
   },
   render: function () {
@@ -217,7 +227,7 @@ function updateFrame(timeStamp) {
 function gameLoop(timeStamp) {
   if (updateFrame(timeStamp)) {
     snake.setDirection();
-    food.eat();
+    // food.eat();
     food.checkEaten();
     snake.updatePosition();
   }
