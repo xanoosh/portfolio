@@ -31,6 +31,13 @@ body {
   position: relative;
   transition: all 0.5s ease-in-out;
 }
+#score {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px;
+  font-size: 20px;
+}
 #board .overlay {
   content: '';
   position: absolute;

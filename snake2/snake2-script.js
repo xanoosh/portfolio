@@ -5,6 +5,18 @@ const restartBtn = document.getElementById('restart');
 //value for timestamp calculation
 let lastTimeStamp = 0;
 let gameLost = false;
+
+function gameEnd() {
+  board.classList.add('lost');
+}
+
+const score = {
+  value: 0,
+  node: document.getElementById('score'),
+  update: function () {
+    this.node.innerText = this.value;
+  },
+};
 const snake = {
   move: function ({ keyCode }) {
     //initialize loop...
@@ -128,8 +140,6 @@ const food = {
             y: Number(eatenElement.style.gridColumnStart),
           });
           eatenElement.remove();
-          //speed up :)
-          snake.speed += 0.2;
         }
       });
     }
@@ -140,6 +150,10 @@ const food = {
       this.position.x === snake.position[0].x &&
       this.position.y === snake.position[0].y
     ) {
+      //speed up, add score
+      snake.speed += 0.2;
+      score.value++;
+      score.update();
       const eaten = document.querySelector('.food');
       eaten.classList.add('eaten');
       eaten.classList.remove('food');
@@ -194,9 +208,8 @@ function gameLoop(timeStamp) {
     snake.updatePosition();
     //game logic end
   }
-  if (!gameLost) {
-    requestAnimationFrame(gameLoop);
-  }
+  if (gameLost) gameEnd();
+  if (!gameLost) requestAnimationFrame(gameLoop);
 }
 
 const handleKeyDown = (e) => snake.move(e);
