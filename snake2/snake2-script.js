@@ -9,6 +9,7 @@ let gameLost = false;
 const gameEnd = () => board.classList.add('lost');
 const gameRestart = () => {
   snake.reset();
+  score.reset();
   removeElements('snake');
   removeElements('food');
   removeElements('eaten');
@@ -25,6 +26,10 @@ const score = {
   node: document.getElementById('score'),
   update: function () {
     this.node.innerText = this.value;
+  },
+  reset: function () {
+    this.value = 0;
+    this.update();
   },
 };
 const snake = {
