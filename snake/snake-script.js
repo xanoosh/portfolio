@@ -10,9 +10,7 @@ const gameEnd = () => board.classList.add('lost');
 const gameRestart = () => {
   snake.reset();
   score.reset();
-  removeElements('snake');
-  removeElements('food');
-  removeElements('eaten');
+  removeElements(['snake', 'food', 'eaten']);
   board.classList.remove('lost');
   gameLost = false;
   snake.render();
@@ -209,11 +207,21 @@ const food = {
     board.appendChild(foodElement);
   },
 };
-const removeElements = (className) => {
-  const currentElements = document.querySelectorAll(`.${className}`);
-  currentElements.forEach((el) => {
-    el.remove();
-  });
+const removeElements = (arrayOrString) => {
+  if (typeof arrayOrString === 'string') {
+    const currentElements = document.querySelectorAll(`.${arrayOrString}`);
+    currentElements.forEach((node) => {
+      node.remove();
+    });
+  }
+  if (typeof arrayOrString !== 'string') {
+    arrayOrString.forEach((string) => {
+      const currentElements = document.querySelectorAll(`.${string}`);
+      currentElements.forEach((node) => {
+        node.remove();
+      });
+    });
+  }
 };
 
 function updateFrame(timeStamp) {
