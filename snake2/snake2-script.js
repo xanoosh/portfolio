@@ -40,7 +40,7 @@ const snake = {
     this.setDirection(keyCode);
   },
   //moves per second
-  speed: 7,
+  speed: 8.2,
   position: [{ x: 12, y: 12 }],
   newPosition: { x: 0, y: 0 },
   prevPosition: { x: 0, y: 0 },
@@ -178,7 +178,7 @@ const food = {
       this.position.y === snake.position[0].y
     ) {
       //speed up, add score
-      snake.speed += 0.4;
+      snake.speed += 0.2;
       score.value++;
       score.update();
       const eaten = document.querySelector('.food');
