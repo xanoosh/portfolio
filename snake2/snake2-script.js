@@ -173,7 +173,7 @@ const food = {
       this.position.y === snake.position[0].y
     ) {
       //speed up, add score
-      snake.speed += 0.2;
+      snake.speed += 0.4;
       score.value++;
       score.update();
       const eaten = document.querySelector('.food');

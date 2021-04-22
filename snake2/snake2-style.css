@@ -36,7 +36,9 @@ body {
   bottom: 0;
   right: 0;
   padding: 10px;
-  font-size: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  opacity: 0.3;
 }
 #board .overlay {
   content: '';
