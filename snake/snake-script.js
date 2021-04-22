@@ -158,8 +158,8 @@ const food = {
       if (segment.x === this.position.x && segment.y === this.position.y) {
         return true;
       }
-      return false;
     }
+    return false;
   },
   checkEaten: function () {
     if (document.querySelectorAll('.eaten').length) {
