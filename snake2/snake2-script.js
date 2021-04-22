@@ -13,7 +13,7 @@ const snake = {
     this.setDirection(keyCode);
   },
   //moves per second
-  speed: 2,
+  speed: 10,
   position: [
     { x: 12, y: 12 },
     { x: 12, y: 11 },
@@ -53,10 +53,10 @@ const snake = {
     return false;
   },
   checkWallCollision: function () {
-    if (this.newPosition.x === -1) this.newPosition.x = 23;
-    if (this.newPosition.x === 24) this.newPosition.x = 0;
-    if (this.newPosition.y === -1) this.newPosition.y = 23;
-    if (this.newPosition.y === 24) this.newPosition.y = 0;
+    if (this.newPosition.x === 0) this.newPosition.x = 23;
+    if (this.newPosition.x === 24) this.newPosition.x = 1;
+    if (this.newPosition.y === 0) this.newPosition.y = 23;
+    if (this.newPosition.y === 24) this.newPosition.y = 1;
   },
   setNewPosition: function () {
     const key = this.direction;
@@ -85,14 +85,14 @@ const snake = {
       gameLost = true;
       return;
     }
-    this.position.map((el) => {
+    const positionSet = new Set([...this.position]);
+    positionSet.forEach((el) => {
       this.prevPosition = { ...el };
       el.x = Number(this.newPosition.x);
       el.y = Number(this.newPosition.y);
-      // console.log(el);
       this.newPosition = { ...this.prevPosition };
     });
-    // console.log(this.position);
+    this.position = [...positionSet];
     this.canChangeDirection = true;
     renderSnake();
   },
@@ -164,8 +164,8 @@ const renderSnake = () => {
   const snakeSet = new Set([...snake.position]);
   snakeSet.forEach((el) => {
     const snakeElement = document.createElement('div');
-    snakeElement.style.gridRowStart = el.x;
-    snakeElement.style.gridColumnStart = el.y;
+    snakeElement.style.gridRowStart = Number(el.x);
+    snakeElement.style.gridColumnStart = Number(el.y);
     snakeElement.classList.add('snake');
     board.appendChild(snakeElement);
   });
