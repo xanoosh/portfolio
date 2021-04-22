@@ -30,7 +30,7 @@ const score = {
 const snake = {
   move: function ({ keyCode }) {
     //initialize loop...
-    this.startGameLoop();
+    this.startGameLoop(keyCode);
     //...or set another direction
     this.setDirection(keyCode);
   },
@@ -40,8 +40,9 @@ const snake = {
   newPosition: { x: 0, y: 0 },
   prevPosition: { x: 0, y: 0 },
   direction: 0,
-  startGameLoop: function () {
-    if (!this.direction) {
+  startGameLoop: function (keyCode) {
+    const possibleMoves = new Set([38, 37, 39, 40]);
+    if (!this.direction && possibleMoves.has(keyCode)) {
       window.requestAnimationFrame(gameLoop);
     }
   },
@@ -126,6 +127,7 @@ const snake = {
     this.newPosition.x = 0;
     this.newPosition.y = 0;
     this.canChangeDirection = true;
+    this.speed = 7;
   },
 };
 
