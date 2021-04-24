@@ -22,3 +22,14 @@ const typed = new Typed('.type-it', options);
 // get some tinytyper / typer.js - typing animation
 //...or write your own
 //try to write your own animate on scroll :)
+
+function anagrams(word, words) {
+  const sorted = (txt) => txt.split('').sort().join('');
+  const results = [];
+  words.forEach((el) => {
+    if (sorted(el) === sorted(word)) {
+      results.push(el);
+    }
+  });
+  return results;
+}
