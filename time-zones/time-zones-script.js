@@ -18,7 +18,15 @@ class TimeZone {
     this.currentDate = '';
     this.startingDate = '';
   }
-  getTime() {
+  getTimeTest() {
+    const someVal = 1619486469146;
+    this.currentDate = new Date(someVal);
+    this.prevDate = new Date(someVal);
+    this.startingDate = new Date(someVal);
+    this.displayTime();
+    this.addOnChange();
+  }
+  getTimeData() {
     fetch(
       `https://api.ipgeolocation.io/timezone?apiKey=${key}&location=${this.name}`
     )
@@ -109,8 +117,6 @@ const addErrMessage = (node) => {
 };
 
 const formValidated = ([city, country, ,]) => {
-  console.log(city.value);
-  console.log(country.value);
   let result = false;
   if (city.value.length === 0) addErrMessage(city);
   if (country.value.length === 0) addErrMessage(country);
@@ -139,14 +145,19 @@ form.addEventListener('submit', function (e) {
     newLabel.appendChild(newSpan);
     newLabel.appendChild(newInput);
     //rewrite inputnodes and create objects based on them
-    cities.clear;
+    cities.clear();
     let inputNodes = document.querySelectorAll("input[type='time']");
+    console.log(inputNodes);
+
     inputNodes.forEach((node) => {
       const obj = new TimeZone(node.name);
-      obj.getTime();
+      obj.getTimeData();
+      // obj.getTimeTest();
       cities.add(obj);
     });
-    //hide form
+    //clear and hide form
+    e.target[0].value = '';
+    e.target[1].value = '';
     overlay.classList.toggle('hidden');
   }
 });
@@ -154,7 +165,8 @@ form.addEventListener('submit', function (e) {
 // iterate through nodelist and construct objects calling methods
 inputNodes.forEach((node) => {
   const obj = new TimeZone(node.name);
-  obj.getTime();
+  obj.getTimeData();
+  // obj.getTimeTest();
   cities.add(obj);
 });
 

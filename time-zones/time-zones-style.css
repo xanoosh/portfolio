@@ -1,4 +1,8 @@
-* {
+*,
+*::after,
+*::before,
+*:focus {
+  outline: 0;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -25,7 +29,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
   flex-direction: column;
   position: relative;
   background: var(--main-bg);
@@ -46,7 +50,7 @@ body {
 
 #container {
   display: inline-block;
-  max-height: 70vh;
+  max-height: 75vh;
   overflow-y: auto;
   padding: 0 5px;
 }
@@ -124,7 +128,7 @@ input[type='time'] {
   padding: 7px 12px;
   border: 1px solid #fff;
   margin-left: 10px;
-  font-size: 19px;
+  font-size: 17px;
   max-width: 150px;
   text-align: center;
   background: transparent;
