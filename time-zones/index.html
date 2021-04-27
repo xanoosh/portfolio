@@ -13,8 +13,7 @@
   </head>
   <body>
     <button id="form-toggler">Add timezone</button>
-    <!-- add class hidden to overlay -->
-    <div id="overlay" class="">
+    <div id="overlay" class="hidden">
       <div class="form-container">
         <div id="close">&times;</div>
         <form id="form">
@@ -30,9 +29,17 @@
       </div>
     </div>
     <div id="container">
-      <label for="time-new-york">
-        <span>New York:</span>
-        <input type="time" id="time-new-york" name="New York" />
+      <label for="time-tokyo">
+        <span>Tokyo:</span>
+        <input type="time" id="time-tokyo" name="Tokyo/Japan" />
+      </label>
+      <label for="time-bejing">
+        <span>Bejing:</span>
+        <input type="time" id="time-bejing" name="Bejing/China" />
+      </label>
+      <label for="time-singapore">
+        <span>Singapore:</span>
+        <input type="time" id="time-singapore" name="Singapore" />
       </label>
       <label for="time-delhi">
         <span>Delhi:</span>
@@ -42,9 +49,13 @@
         <span>Berlin:</span>
         <input type="time" id="time-berlin" name="Berlin" />
       </label>
-      <label for="time-tokio">
-        <span>Tokio:</span>
-        <input type="time" id="time-tokio" name="Tokio/Japan" />
+      <label for="time-boston">
+        <span>Boston:</span>
+        <input type="time" id="time-boston" name="Boston/usa" />
+      </label>
+      <label for="time-seattle">
+        <span>Seattle:</span>
+        <input type="time" id="time-seattle" name="Seattle/usa" />
       </label>
     </div>
     <script src="time-zones-script.js"></script>
