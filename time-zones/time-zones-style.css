@@ -31,7 +31,7 @@ body {
   background: var(--main-bg);
 }
 
-.overlay {
+#overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -81,7 +81,7 @@ label span {
   align-items: center;
 }
 
-.form-btn {
+#form-toggler {
   position: absolute;
   display: block;
   padding: 7px 12px;

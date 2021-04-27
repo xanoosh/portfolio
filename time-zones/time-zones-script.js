@@ -1,5 +1,9 @@
 'use strict';
 
+const overlay = document.getElementById('overlay');
+const formToggler = document.getElementById('form-toggler');
+const formClose = document.getElementById('close');
+
 const form = document.getElementById('form');
 const timeCurrent = document.getElementById('time-current');
 const cities = new Set([]);
@@ -115,4 +119,11 @@ inputNodes.forEach((node) => {
   const obj = new TimeZone(node.name);
   obj.getTime();
   cities.add(obj);
+});
+
+//toggle from
+[formToggler, formClose].forEach((node) => {
+  node.addEventListener('click', () => {
+    overlay.classList.toggle('hidden');
+  });
 });
