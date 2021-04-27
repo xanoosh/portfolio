@@ -111,7 +111,7 @@ const addErrMessage = (node) => {
 const formValidated = ([city, country, ,]) => {
   console.log(city.value);
   console.log(country.value);
-  const result = false;
+  let result = false;
   if (city.value.length === 0) addErrMessage(city);
   if (country.value.length === 0) addErrMessage(country);
   if (city.value.length !== 0) removeErrMessage(city);
@@ -122,13 +122,12 @@ const formValidated = ([city, country, ,]) => {
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
-  console.log(e.target);
   formValidated(e.target);
-  return;
   //create request input
-  const requestInput = `${this[0].value}/${this[1].value}`;
-  console.log(requestInput);
-  if (formValidated()) {
+
+  if (formValidated(e.target)) {
+    const requestInput = `${this[0].value}/${this[1].value}`;
+    console.log(requestInput);
     //add new dom element
     const newLabel = document.createElement('label');
     const newSpan = document.createElement('span');
@@ -147,6 +146,8 @@ form.addEventListener('submit', function (e) {
       obj.getTime();
       cities.add(obj);
     });
+    //hide form
+    overlay.classList.toggle('hidden');
   }
 });
 
