@@ -88,11 +88,47 @@ function setDifferentDate(date, val) {
 
 //form hander
 
+const removeErrMessage = (node) => {
+  const hasErrMessage =
+    node.parentNode.querySelectorAll('.errmsg').length !== 0;
+  if (hasErrMessage) {
+    node.parentNode.querySelectorAll('.errmsg').forEach((el) => {
+      el.remove();
+    });
+  }
+};
+
+const addErrMessage = (node) => {
+  const hasErrMessage =
+    node.parentNode.querySelectorAll('.errmsg').length !== 0;
+  if (hasErrMessage) return;
+  const errMessage = document.createElement('div');
+  errMessage.classList.add('errmsg');
+  errMessage.innerText = 'field cannot be empty';
+  node.parentNode.appendChild(errMessage);
+};
+
+const formValidated = ([city, country, ,]) => {
+  console.log(city.value);
+  console.log(country.value);
+  const result = false;
+  if (city.value.length === 0) addErrMessage(city);
+  if (country.value.length === 0) addErrMessage(country);
+  if (city.value.length !== 0) removeErrMessage(city);
+  if (country.value.length !== 0) removeErrMessage(country);
+  if (city.value.length && country.value.length) result = true;
+  return result;
+};
+
 form.addEventListener('submit', function (e) {
   e.preventDefault();
+  console.log(e.target);
+  formValidated(e.target);
+  return;
+  //create request input
   const requestInput = `${this[0].value}/${this[1].value}`;
   console.log(requestInput);
-  if (requestInput !== '/') {
+  if (formValidated()) {
     //add new dom element
     const newLabel = document.createElement('label');
     const newSpan = document.createElement('span');

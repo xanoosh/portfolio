@@ -8,7 +8,7 @@
 
 :root {
   --main-bg: rgb(32, 33, 36);
-  --bg-opacity: rgba(32, 33, 36, 0.5);
+  --bg-opacity: rgba(32, 33, 36, 0.7);
 }
 
 .hidden {
@@ -41,7 +41,7 @@ body {
   justify-content: center;
   align-items: center;
   background: var(--bg-opacity);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 #container {
@@ -59,6 +59,24 @@ label span {
   display: inline-block;
   font-size: 22px;
   width: auto;
+}
+
+form label {
+  position: relative;
+  padding-bottom: 14px;
+  margin-bottom: 12px;
+}
+form label .errmsg {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: rgb(170, 59, 59);
+  color: #fff;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 2px 7px;
 }
 
 .form-container {
@@ -79,6 +97,7 @@ label span {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 #form-toggler {
@@ -95,6 +114,7 @@ label span {
 form {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 input[type='time'] {
@@ -115,6 +135,7 @@ form input[type='text'] {
   margin-bottom: 15px;
   text-align: center;
   background: transparent;
+  width: 100%;
 }
 form input[type='submit'] {
   display: block;
