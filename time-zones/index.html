@@ -12,6 +12,17 @@
     <title>Time zones</title>
   </head>
   <body>
+    <button class="form-btn">Add timezone</button>
+    <div class="overlay hidden">
+      <div class="form-container">
+        <div id="close">&times;</div>
+        <form id="form">
+          <input type="text" placeholder="type city" />
+          <input type="text" placeholder="type country" />
+          <input type="submit" value="Add new timezone" />
+        </form>
+      </div>
+    </div>
     <div id="container">
       <label for="time-new-york">
         <span>New York:</span>
@@ -30,11 +41,6 @@
         <input type="time" id="time-tokio" name="Tokio/Japan" />
       </label>
     </div>
-    <form id="form">
-      <input type="text" placeholder="type city" />
-      <input type="text" placeholder="type country" />
-      <input type="submit" value="Add new timezone" />
-    </form>
     <script src="time-zones-script.js"></script>
   </body>
 </html>

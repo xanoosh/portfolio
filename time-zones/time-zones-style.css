@@ -3,8 +3,22 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto Mono', monospace;
-  background: #202124;
   color: #fff;
+}
+
+:root {
+  --main-bg: rgb(32, 33, 36);
+  --bg-opacity: rgba(32, 33, 36, 0.5);
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+input,
+button {
+  cursor: pointer;
 }
 
 body {
@@ -13,19 +27,25 @@ body {
   align-items: center;
   min-height: 100vh;
   flex-direction: column;
+  position: relative;
+  background: var(--main-bg);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-opacity);
+  transition: all 0.2s ease-in-out;
 }
 
 #container {
   display: inline-block;
-}
-
-input[type='time'] {
-  padding: 7px 12px;
-  border: 1px solid #fff;
-  margin-left: 10px;
-  font-size: 19px;
-  max-width: 125px;
-  text-align: center;
 }
 
 label {
@@ -37,15 +57,54 @@ label {
 }
 label span {
   display: inline-block;
-  font-size: 23px;
+  font-size: 22px;
   width: auto;
 }
 
+.form-container {
+  position: relative;
+  z-index: 2;
+  background: var(--main-bg);
+  padding: 40px;
+  min-width: 70vw;
+}
+.form-container #close {
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #fff;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-btn {
+  position: absolute;
+  display: block;
+  padding: 7px 12px;
+  border: 1px solid #fff;
+  font-size: 14px;
+  top: 20px;
+  right: 30px;
+  background: transparent;
+}
+
 form {
-  margin-top: 70px;
-  width: 80%;
   display: flex;
   flex-direction: column;
+}
+
+input[type='time'] {
+  padding: 7px 12px;
+  border: 1px solid #fff;
+  margin-left: 10px;
+  font-size: 19px;
+  max-width: 150px;
+  text-align: center;
+  background: transparent;
 }
 
 form input[type='text'] {
@@ -55,6 +114,7 @@ form input[type='text'] {
   font-size: 16px;
   margin-bottom: 15px;
   text-align: center;
+  background: transparent;
 }
 form input[type='submit'] {
   display: block;
@@ -62,4 +122,5 @@ form input[type='submit'] {
   border: 1px solid #fff;
   font-size: 16px;
   margin-bottom: 15px;
+  background: transparent;
 }
