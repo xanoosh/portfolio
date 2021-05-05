@@ -2,6 +2,7 @@
 
 const overlay = document.getElementById('overlay');
 const formToggler = document.getElementById('form-toggler');
+const findOptimalTime = document.getElementById('find-optimal-time');
 const formClose = document.getElementById('close');
 
 const form = document.getElementById('form');
@@ -26,6 +27,8 @@ class TimeZone {
     this.displayTime();
     this.addOnChange();
   }
+
+  //https://api.ipgeolocation.io/timezone?apiKey=ed8962ccee5b4be0a8ed091664951800&location=
   getTimeData() {
     fetch(
       `https://api.ipgeolocation.io/timezone?apiKey=${key}&location=${this.name}`
@@ -151,8 +154,8 @@ form.addEventListener('submit', function (e) {
 
     inputNodes.forEach((node) => {
       const obj = new TimeZone(node.name);
-      obj.getTimeData();
-      // obj.getTimeTest();
+      // obj.getTimeData();
+      obj.getTimeTest();
       cities.add(obj);
     });
     //clear and hide form
@@ -165,8 +168,8 @@ form.addEventListener('submit', function (e) {
 // iterate through nodelist and construct objects calling methods
 inputNodes.forEach((node) => {
   const obj = new TimeZone(node.name);
-  obj.getTimeData();
-  // obj.getTimeTest();
+  // obj.getTimeData();
+  obj.getTimeTest();
   cities.add(obj);
 });
 
@@ -176,3 +179,57 @@ inputNodes.forEach((node) => {
     overlay.classList.toggle('hidden');
   });
 });
+
+//algorithm - find optimal hours for all
+
+// 1. loop through all timezones
+// 2. calculate distance between range to avoid (0-3 am)
+// (hour - 0am || hour - 3 <= chose SMALLER range between those)
+// 3. filter through all and output the SMALLEST distance with city name
+// 4. loop 24 times (for 24 hours)
+// 5. get the BIGGEST value from output array of 24 elements
+// 6. get key (name) and value (as date) from it
+// 7. insert date in dom and on currentDate property
+// 8. call addOnChange() method to update
+
+const myResultsArr = [];
+
+const calculateOptimalTime = () => {
+  //step 1 - timezone loop
+  cities.forEach((city) => {
+    //step 2 - calculation
+    // console.log(city);
+    myResultsArr.push(compareHours(city));
+    compareHours(city);
+  });
+  console.table(myResultsArr);
+};
+//call function onclick
+findOptimalTime.addEventListener('click', calculateOptimalTime);
+
+const compareHours = ({ name, currentDate }) => {
+  //compareHours, return miliseconds from lower value
+  const difference = calculateDistanceFromTimeRange(currentDate);
+  return { name, difference };
+};
+
+const calculateDistanceFromTimeRange = (initialDate) => {
+  const firstVal = new Date(initialDate.getTime());
+  firstVal.setHours(0);
+  console.log('initial');
+  console.log(initialDate.getTime());
+  console.log('first');
+  console.log(firstVal.getTime());
+  const secondVal = new Date(initialDate.getTime());
+  secondVal.setHours(3);
+  console.log('second');
+  console.log(secondVal.getTime());
+  const firstRange = Math.abs(initialDate.getTime() - firstVal.getTime());
+  console.log('firstRange');
+  console.log(firstRange);
+  const secondRange = Math.abs(initialDate.getTime() - secondVal.getTime());
+  console.log('secondRange');
+  console.log(secondRange);
+  const result = firstRange < secondRange ? firstRange : secondRange;
+  return result;
+};
