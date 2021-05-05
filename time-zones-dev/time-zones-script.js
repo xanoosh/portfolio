@@ -278,6 +278,13 @@ findOptimalTime.addEventListener('click', calculateOptimalTime);
 // EXAMPLE : 23.59 should be 1 minute (60 000 ms)
 // but it goes back and calculates 23.59 distance
 
+//SOLUTION (MAYBE)
+// if var.gethours() === 12 && var.getminutes() > 0
+// or var.gethours() > 12
+// add one day to initial for more precise range calutation
+// like that:
+// var.setDate(var.getDate() + 1)
+
 //DEVELOPMENT:
 // later will create input for number (hour to avoid on front end)
 // make it customizable without too much effort
