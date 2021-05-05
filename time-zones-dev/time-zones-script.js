@@ -221,19 +221,22 @@ const calculateDistanceFromTimeRange = (initialDate, differentHour) => {
 const getOptimalTimeDistance = (arr) => {
   const lowestDistanceArray = [];
   arr.forEach((arrElements) => {
-    arrElements.filter();
-    const smallestVal = Math.min(...arrElements((el) => el.difference));
+    const smallestVal = Math.min(...arrElements.map((el) => el.difference));
     const lowestObj = arrElements.filter((el) => el.difference === smallestVal);
-    lowestDistanceArray.push(lowestObj);
+    lowestDistanceArray.push(lowestObj[0]);
   });
+  // console.log('lowestDistanceArray');
+  // console.log(lowestDistanceArray);
   // filter array
-  const biggestVal = Math.max(...lowestDistanceArray((el) => el.difference));
+  const biggestVal = Math.max(
+    ...lowestDistanceArray.map((el) => el.difference)
+  );
   const result = lowestDistanceArray.filter(
     (el) => el.difference === biggestVal
   );
   //return obj with highest distance
-  console.log(result);
-  return result;
+  console.log(result[0]);
+  return result[0];
 };
 
 const calculateOptimalTime = () => {
