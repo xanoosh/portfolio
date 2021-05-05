@@ -8,7 +8,6 @@ const form = document.getElementById('form');
 const timeCurrent = document.getElementById('time-current');
 const cities = new Set([]);
 let hoursToAvoid = 1;
-let minutesToAvoid = 30;
 const hours = document.getElementById('hours');
 const minutes = document.getElementById('minutes');
 let inputNodes = document.querySelectorAll("input[type='time']");
@@ -35,8 +34,6 @@ function addValue() {
       hoursToAvoid
     );
   }
-  // hoursToAvoid++;
-  // this.parentNode.querySelector('.avoid-value').innerText = hoursToAvoid;
   if (this.parentNode.id === 'hours' && hoursToAvoid === 24) {
     hoursToAvoid = 0;
     this.parentNode.querySelector('.avoid-value').innerText = addZero(
@@ -45,7 +42,22 @@ function addValue() {
   }
 }
 function subtractValue() {
-  console.log(this.parentNode.id);
+  function addZero(num) {
+    if (num < 10) return '0' + num;
+    return num;
+  }
+  if (this.parentNode.id === 'hours' && hoursToAvoid >= 1) {
+    hoursToAvoid--;
+    this.parentNode.querySelector('.avoid-value').innerText = addZero(
+      hoursToAvoid
+    );
+  }
+  if (this.parentNode.id === 'hours' && hoursToAvoid === 0) {
+    hoursToAvoid = 23;
+    this.parentNode.querySelector('.avoid-value').innerText = addZero(
+      hoursToAvoid
+    );
+  }
 }
 class TimeZone {
   constructor(name) {
@@ -244,7 +256,7 @@ const calculateDistanceFromTimeRange = (initialDate, differentHour) => {
   const initial = new Date(initialDate.getTime() + differentHour * 3600000);
   const dateToAvoid = new Date(initial.getTime());
   changeDayAfterMidday(dateToAvoid);
-  dateToAvoid.setHours(hoursToAvoid, minutesToAvoid, 0);
+  dateToAvoid.setHours(hoursToAvoid, 0, 0);
   const range = Math.abs(initial.getTime() - dateToAvoid.getTime());
   return range;
 };
