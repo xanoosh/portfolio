@@ -15,17 +15,6 @@
   --bg-opacity: rgba(32, 33, 36, 0.7);
 }
 
-button {
-  /* width: 150px;
-  position: absolute;
-  padding: 7px 12px;
-  border: 1px solid #fff;
-  font-size: 14px;
-  display: block;
-  left: calc(50% - 75px);
-  background: transparent; */
-}
-
 .hidden {
   opacity: 0;
   pointer-events: none;
@@ -174,4 +163,39 @@ form input[type='submit'] {
   font-size: 16px;
   margin-bottom: 15px;
   background: transparent;
+}
+
+/* avoid segment */
+
+.avoid {
+  display: block;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#hours,
+#minutes {
+  display: inline-block;
+  padding: 20px;
+  font-size: 18px;
+  position: relative;
+}
+.add,
+.substract {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  cursor: pointer;
+}
+.add {
+  top: 3px;
+  border-bottom: 6px solid #fff;
+}
+.substract {
+  bottom: 3px;
+  border-top: 6px solid #fff;
 }

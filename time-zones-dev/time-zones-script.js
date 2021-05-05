@@ -7,11 +7,46 @@ const formClose = document.getElementById('close');
 const form = document.getElementById('form');
 const timeCurrent = document.getElementById('time-current');
 const cities = new Set([]);
-const hoursToAvoid = 1;
-const minutesToAvoid = 30;
+let hoursToAvoid = 1;
+let minutesToAvoid = 30;
+const hours = document.getElementById('hours');
+const minutes = document.getElementById('minutes');
 let inputNodes = document.querySelectorAll("input[type='time']");
 const key = 'ed8962ccee5b4be0a8ed091664951800';
 
+// avoid hour function:
+const setHourtoAvoid = () => {
+  document.querySelectorAll('.add').forEach((node) => {
+    node.addEventListener('click', addValue);
+  });
+  document.querySelectorAll('.substract').forEach((node) => {
+    node.addEventListener('click', subtractValue);
+  });
+};
+setHourtoAvoid();
+function addValue() {
+  function addZero(num) {
+    if (num < 10) return '0' + num;
+    return num;
+  }
+  if (this.parentNode.id === 'hours' && hoursToAvoid <= 23) {
+    hoursToAvoid++;
+    this.parentNode.querySelector('.avoid-value').innerText = addZero(
+      hoursToAvoid
+    );
+  }
+  // hoursToAvoid++;
+  // this.parentNode.querySelector('.avoid-value').innerText = hoursToAvoid;
+  if (this.parentNode.id === 'hours' && hoursToAvoid === 24) {
+    hoursToAvoid = 0;
+    this.parentNode.querySelector('.avoid-value').innerText = addZero(
+      hoursToAvoid
+    );
+  }
+}
+function subtractValue() {
+  console.log(this.parentNode.id);
+}
 class TimeZone {
   constructor(name) {
     this.name = name;
