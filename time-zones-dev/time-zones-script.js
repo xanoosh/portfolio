@@ -4,10 +4,11 @@ const overlay = document.getElementById('overlay');
 const formToggler = document.getElementById('form-toggler');
 const findOptimalTime = document.getElementById('find-optimal-time');
 const formClose = document.getElementById('close');
-
 const form = document.getElementById('form');
 const timeCurrent = document.getElementById('time-current');
 const cities = new Set([]);
+const hoursToAvoid = 1;
+const minutesToAvoid = 30;
 let inputNodes = document.querySelectorAll("input[type='time']");
 const key = 'ed8962ccee5b4be0a8ed091664951800';
 
@@ -189,17 +190,6 @@ inputNodes.forEach((node) => {
 });
 
 //algorithm - find optimal hours for all
-
-// 1. loop through all timezones
-// 2. calculate distance between range to avoid (0-3 am)
-// (hour - 0am || hour - 3 <= chose SMALLER range between those)
-// 3. filter through all and output the SMALLEST distance with city name
-// 4. loop 24 times (for 24 hours)
-// 5. get the BIGGEST value from output array of 24 elements
-// 6. get key (name) and value (as date) from it
-// 7. insert date in dom and on currentDate property
-// 8. call addOnChange() method to update
-
 //get array of timezones:
 const getArrayForSpecificHour = (differentHour) => {
   const arr = [];
@@ -218,9 +208,19 @@ const compareHours = ({ name, currentDate }, differentHour) => {
 const calculateDistanceFromTimeRange = (initialDate, differentHour) => {
   const initial = new Date(initialDate.getTime() + differentHour * 3600000);
   const dateToAvoid = new Date(initial.getTime());
-  dateToAvoid.setHours(1, 0, 0);
+  changeDayAfterMidday(dateToAvoid);
+  dateToAvoid.setHours(hoursToAvoid, minutesToAvoid, 0);
   const range = Math.abs(initial.getTime() - dateToAvoid.getTime());
   return range;
+};
+//change day if hour is 12+
+const changeDayAfterMidday = (dateToAvoid) => {
+  if (dateToAvoid.getHours() === 12 && dateToAvoid.getMinutes() > 0) {
+    dateToAvoid.setDate(dateToAvoid.getDate() + 1);
+  }
+  if (dateToAvoid.getHours() >= 13) {
+    dateToAvoid.setDate(dateToAvoid.getDate() + 1);
+  }
 };
 
 // get optimal result (highest possible distance from lowest distance array)

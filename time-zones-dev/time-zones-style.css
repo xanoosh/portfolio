@@ -16,14 +16,14 @@
 }
 
 button {
-  width: 150px;
+  /* width: 150px;
   position: absolute;
   padding: 7px 12px;
   border: 1px solid #fff;
   font-size: 14px;
   display: block;
   left: calc(50% - 75px);
-  background: transparent;
+  background: transparent; */
 }
 
 .hidden {
@@ -119,9 +119,25 @@ form label .errmsg {
 }
 
 #form-toggler {
+  width: 150px;
+  position: absolute;
+  padding: 7px 12px;
+  border: 1px solid #fff;
+  font-size: 14px;
+  display: block;
+  left: calc(50% - 75px);
+  background: transparent;
   top: 30px;
 }
 #find-optimal-time {
+  width: 150px;
+  position: absolute;
+  padding: 7px 12px;
+  border: 1px solid #fff;
+  font-size: 14px;
+  display: block;
+  left: calc(50% - 75px);
+  background: transparent;
   bottom: 30px;
 }
 

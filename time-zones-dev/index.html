@@ -13,7 +13,7 @@
   </head>
   <body>
     <button id="form-toggler">Add timezone</button>
-    <button id="find-optimal-time">Optimal time</button>
+    <button id="find-optimal-time">Find Optimal time</button>
     <div id="overlay" class="hidden">
       <div class="form-container">
         <div id="close">&times;</div>
@@ -58,6 +58,19 @@
         <span>Seattle:</span>
         <input type="time" id="time-seattle" name="Seattle/usa" />
       </label>
+    </div>
+    <div class="avoid">
+      <div class="hours">
+        <div id="hours-to-avoid">1</div>
+        <div class="add"></div>
+        <div class="substract"></div>
+      </div>
+      :
+      <div class="minutes">
+        <div id="minutes-to-avoid">30</div>
+        <div class="add"></div>
+        <div class="substract"></div>
+      </div>
     </div>
     <script src="time-zones-script.js"></script>
   </body>
