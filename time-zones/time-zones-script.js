@@ -201,7 +201,6 @@ const calculateOptimalTime = () => {
     //step 2 - calculation
     // console.log(city);
     myResultsArr.push(compareHours(city));
-    compareHours(city);
   });
   console.table(myResultsArr);
 };
