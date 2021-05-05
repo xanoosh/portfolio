@@ -50,14 +50,14 @@ body {
 
 #container {
   display: inline-block;
-  max-height: 75vh;
+  max-height: 60vh;
   overflow-y: auto;
   padding: 0 5px;
 }
 
 label {
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   display: flex;
   /* align-items: flex-end; */
   justify-content: space-between;
@@ -116,7 +116,7 @@ form label .errmsg {
   display: block;
   left: calc(50% - 75px);
   background: transparent;
-  top: 30px;
+  top: 25px;
 }
 #find-optimal-time {
   width: 150px;
@@ -127,7 +127,7 @@ form label .errmsg {
   display: block;
   left: calc(50% - 75px);
   background: transparent;
-  bottom: 30px;
+  bottom: 25px;
 }
 
 form {
