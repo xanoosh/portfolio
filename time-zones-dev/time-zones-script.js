@@ -191,38 +191,64 @@ inputNodes.forEach((node) => {
 // 7. insert date in dom and on currentDate property
 // 8. call addOnChange() method to update
 
-let myResultsArr = [];
-
-const calculateOptimalTime = () => {
-  //step 1 - timezone loop
-  myResultsArr = [];
+//get array of timezones:
+const getArrayForSpecificHour = (differentHour) => {
+  const arr = [];
   cities.forEach((city) => {
-    //step 2 - calculation
-    // console.log(city);
-    myResultsArr.push(compareHours(city));
+    arr.push(compareHours(city, differentHour));
   });
-  console.table(myResultsArr);
+  return arr;
 };
-//call function onclick
-findOptimalTime.addEventListener('click', calculateOptimalTime);
-
-const compareHours = ({ name, currentDate }) => {
-  //compareHours, return miliseconds from lower value
-  const difference = calculateDistanceFromTimeRange(currentDate);
-  return { name, difference };
+// get object with name, date and difference from desired range in miliseconds:
+const compareHours = ({ name, currentDate }, differentHour) => {
+  const date = new Date(currentDate.getTime() + differentHour * 3600000);
+  const difference = calculateDistanceFromTimeRange(currentDate, differentHour);
+  return { name, difference, date };
 };
-
-const calculateDistanceFromTimeRange = (initialDate) => {
-  const firstVal = new Date(initialDate.getTime());
+// calculate difference in miliseconds between specific date and time range
+const calculateDistanceFromTimeRange = (initialDate, differentHour) => {
+  const initial = new Date(initialDate.getTime() + differentHour * 3600000);
+  const firstVal = new Date(initial.getTime());
   firstVal.setHours(0, 0, 0);
-  const secondVal = new Date(initialDate.getTime());
+  const secondVal = new Date(initial.getTime());
   secondVal.setHours(3, 0, 0);
-  const firstRange = Math.abs(initialDate.getTime() - firstVal.getTime());
-  const secondRange = Math.abs(initialDate.getTime() - secondVal.getTime());
-  const result = firstRange < secondRange ? firstRange : secondRange;
-  console.log(`result: ${result}`);
+  const firstRange = Math.abs(initial.getTime() - firstVal.getTime());
+  const secondRange = Math.abs(initial.getTime() - secondVal.getTime());
+  return firstRange < secondRange ? firstRange : secondRange;
+};
+
+// get optimal result (highest possible distance from lowest distance array)
+const getOptimalTimeDistance = (arr) => {
+  const lowestDistanceArray = [];
+  arr.forEach((arrElements) => {
+    arrElements.filter();
+    const smallestVal = Math.min(...arrElements((el) => el.difference));
+    const lowestObj = arrElements.filter((el) => el.difference === smallestVal);
+    lowestDistanceArray.push(lowestObj);
+  });
+  // filter array
+  const biggestVal = Math.max(...lowestDistanceArray((el) => el.difference));
+  const result = lowestDistanceArray.filter(
+    (el) => el.difference === biggestVal
+  );
+  //return obj with highest distance
+  console.log(result);
   return result;
 };
+
+const calculateOptimalTime = () => {
+  //array for all 24 results
+  let resultsArr = [];
+  for (let i = -11; i <= 12; i++) {
+    //push city values
+    resultsArr.push(getArrayForSpecificHour(i));
+  }
+  console.log(resultsArr);
+  getOptimalTimeDistance(resultsArr);
+};
+
+//call function onclick
+findOptimalTime.addEventListener('click', calculateOptimalTime);
 
 //get 24 arrays (increment hours 12 and deccrement 12 ?) of all timezones
 // (returned object has to have {name, newDate, (distance between new and initial date)})
