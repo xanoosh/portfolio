@@ -15,6 +15,17 @@
   --bg-opacity: rgba(32, 33, 36, 0.7);
 }
 
+button {
+  width: 150px;
+  position: absolute;
+  padding: 7px 12px;
+  border: 1px solid #fff;
+  font-size: 14px;
+  display: block;
+  left: calc(50% - 75px);
+  background: transparent;
+}
+
 .hidden {
   opacity: 0;
   pointer-events: none;
@@ -108,24 +119,10 @@ form label .errmsg {
 }
 
 #form-toggler {
-  position: absolute;
-  display: block;
-  padding: 7px 12px;
-  border: 1px solid #fff;
-  font-size: 14px;
-  top: 20px;
-  right: 30px;
-  background: transparent;
+  top: 30px;
 }
 #find-optimal-time {
-  position: absolute;
-  display: block;
-  padding: 7px 12px;
-  border: 1px solid #fff;
-  font-size: 14px;
-  bottom: 20px;
-  right: 30px;
-  background: transparent;
+  bottom: 30px;
 }
 
 form {
