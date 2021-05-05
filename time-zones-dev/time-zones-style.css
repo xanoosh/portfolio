@@ -119,7 +119,6 @@ form label .errmsg {
 }
 #find-optimal-time {
   position: absolute;
-  opacity: 0.5;
   display: block;
   padding: 7px 12px;
   border: 1px solid #fff;
@@ -127,7 +126,6 @@ form label .errmsg {
   bottom: 20px;
   right: 30px;
   background: transparent;
-  pointer-events: none;
 }
 
 form {

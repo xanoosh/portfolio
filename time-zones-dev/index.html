@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="time-zones-style.css" />
+    <title>Time zones</title>
+  </head>
+  <body>
+    <button id="form-toggler">Add timezone</button>
+    <button id="find-optimal-time">Optimal time</button>
+    <div id="overlay" class="hidden">
+      <div class="form-container">
+        <div id="close">&times;</div>
+        <form id="form">
+          <label>
+            <input type="text" placeholder="type city" />
+          </label>
+          <label>
+            <input type="text" placeholder="type country" />
+          </label>
+
+          <input type="submit" value="Add" />
+        </form>
+      </div>
+    </div>
+    <div id="container">
+      <label for="time-tokyo">
+        <span>Tokyo:</span>
+        <input type="time" id="time-tokyo" name="Tokyo/Japan" />
+      </label>
+      <label for="time-bejing">
+        <span>Bejing:</span>
+        <input type="time" id="time-bejing" name="Bejing/China" />
+      </label>
+      <label for="time-singapore">
+        <span>Singapore:</span>
+        <input type="time" id="time-singapore" name="Singapore" />
+      </label>
+      <label for="time-delhi">
+        <span>Delhi:</span>
+        <input type="time" id="time-delhi" name="Delhi" />
+      </label>
+      <label for="time-berlin">
+        <span>Berlin:</span>
+        <input type="time" id="time-berlin" name="Berlin" />
+      </label>
+      <label for="time-boston">
+        <span>Boston:</span>
+        <input type="time" id="time-boston" name="Boston/usa" />
+      </label>
+      <label for="time-seattle">
+        <span>Seattle:</span>
+        <input type="time" id="time-seattle" name="Seattle/usa" />
+      </label>
+    </div>
+    <script src="time-zones-script.js"></script>
+  </body>
+</html>
