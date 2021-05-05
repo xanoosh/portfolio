@@ -108,26 +108,26 @@ form label .errmsg {
 }
 
 #form-toggler {
-  width: 150px;
   position: absolute;
+  display: block;
   padding: 7px 12px;
   border: 1px solid #fff;
   font-size: 14px;
-  display: block;
-  left: calc(50% - 75px);
+  top: 20px;
+  right: 30px;
   background: transparent;
-  top: 30px;
 }
 #find-optimal-time {
-  width: 150px;
   position: absolute;
+  opacity: 0.5;
+  display: block;
   padding: 7px 12px;
   border: 1px solid #fff;
   font-size: 14px;
-  display: block;
-  left: calc(50% - 75px);
+  bottom: 20px;
+  right: 30px;
   background: transparent;
-  bottom: 30px;
+  pointer-events: none;
 }
 
 form {
@@ -163,39 +163,4 @@ form input[type='submit'] {
   font-size: 16px;
   margin-bottom: 15px;
   background: transparent;
-}
-
-/* avoid segment */
-
-.avoid {
-  display: block;
-  width: 100%;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#hours {
-  display: inline-block;
-  padding: 20px;
-  font-size: 18px;
-  position: relative;
-}
-.add,
-.substract {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border: 8px solid transparent;
-  cursor: pointer;
-  left: 22px;
-}
-.add {
-  top: 0;
-  border-bottom: 8px solid #fff;
-}
-.substract {
-  bottom: 0;
-  border-top: 8px solid #fff;
 }
