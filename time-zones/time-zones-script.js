@@ -154,8 +154,8 @@ form.addEventListener('submit', function (e) {
 
     inputNodes.forEach((node) => {
       const obj = new TimeZone(node.name);
-      // obj.getTimeData();
-      obj.getTimeTest();
+      obj.getTimeData();
+      // obj.getTimeTest();
       cities.add(obj);
     });
     //clear and hide form
@@ -168,8 +168,8 @@ form.addEventListener('submit', function (e) {
 // iterate through nodelist and construct objects calling methods
 inputNodes.forEach((node) => {
   const obj = new TimeZone(node.name);
-  // obj.getTimeData();
-  obj.getTimeTest();
+  obj.getTimeData();
+  // obj.getTimeTest();
   cities.add(obj);
 });
 
@@ -192,10 +192,11 @@ inputNodes.forEach((node) => {
 // 7. insert date in dom and on currentDate property
 // 8. call addOnChange() method to update
 
-const myResultsArr = [];
+let myResultsArr = [];
 
 const calculateOptimalTime = () => {
   //step 1 - timezone loop
+  myResultsArr = [];
   cities.forEach((city) => {
     //step 2 - calculation
     // console.log(city);
@@ -215,21 +216,12 @@ const compareHours = ({ name, currentDate }) => {
 
 const calculateDistanceFromTimeRange = (initialDate) => {
   const firstVal = new Date(initialDate.getTime());
-  firstVal.setHours(0);
-  console.log('initial');
-  console.log(initialDate.getTime());
-  console.log('first');
-  console.log(firstVal.getTime());
+  firstVal.setHours(0, 0, 0);
   const secondVal = new Date(initialDate.getTime());
-  secondVal.setHours(3);
-  console.log('second');
-  console.log(secondVal.getTime());
+  secondVal.setHours(3, 0, 0);
   const firstRange = Math.abs(initialDate.getTime() - firstVal.getTime());
-  console.log('firstRange');
-  console.log(firstRange);
   const secondRange = Math.abs(initialDate.getTime() - secondVal.getTime());
-  console.log('secondRange');
-  console.log(secondRange);
   const result = firstRange < secondRange ? firstRange : secondRange;
+  console.log(`result: ${result}`);
   return result;
 };
