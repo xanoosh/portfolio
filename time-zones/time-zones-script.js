@@ -255,18 +255,24 @@ const compareHours = ({ name, currentDate }, differentHour) => {
 const calculateDistanceFromTimeRange = (initialDate, differentHour) => {
   const initial = new Date(initialDate.getTime() + differentHour * 3600000);
   const dateToAvoid = new Date(initial.getTime());
-  changeDayAfterMidday(dateToAvoid);
   dateToAvoid.setHours(hoursToAvoid, 0, 0);
+  //prevent range over 12h:
+  preventRangeOverHalfADay(initial, dateToAvoid);
   const range = Math.abs(initial.getTime() - dateToAvoid.getTime());
   return range;
 };
+
 //change day if hour is 12+
-const changeDayAfterMidday = (dateToAvoid) => {
-  if (dateToAvoid.getHours() === 12 && dateToAvoid.getMinutes() > 0) {
+const preventRangeOverHalfADay = (initial, dateToAvoid) => {
+  const range = Math.abs(initial.getTime() - dateToAvoid.getTime());
+  if (range > 43200000) {
+    //add day
     dateToAvoid.setDate(dateToAvoid.getDate() + 1);
-  }
-  if (dateToAvoid.getHours() >= 13) {
-    dateToAvoid.setDate(dateToAvoid.getDate() + 1);
+    const rangeUpdate = Math.abs(initial.getTime() - dateToAvoid.getTime());
+    if (rangeUpdate > 43200000) {
+      //go back 2 days
+      dateToAvoid.setDate(dateToAvoid.getDate() - 2);
+    }
   }
 };
 
@@ -306,7 +312,7 @@ const setOptimalTime = (obj) => {
 const calculateOptimalTime = () => {
   //array for all 24 results
   let resultsArr = [];
-  for (let i = -6; i <= 6; i++) {
+  for (let i = -12; i <= 12; i++) {
     //push city values
     resultsArr.push(getArrayForSpecificHour(i));
   }
