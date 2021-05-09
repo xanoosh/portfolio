@@ -9,13 +9,14 @@
       @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300&display=swap');
     </style>
     <!--css versioning using js random number-->
-    <script>
+    <link rel="stylesheet" href="modules/quiz-content/style.css" />
+    <!-- <script>
       document.write(
         `<link rel="stylesheet" href="modules/quiz-content/style.css?v=${
           Math.trunc(Math.random() * 10000) + 1
         }" />`
       );
-    </script>
+    </script> -->
     <!-- <link rel="stylesheet" href="modules/quiz-content/style.css?v=1" /> -->
     <title>Quiz</title>
   </head>
@@ -24,24 +25,19 @@
       <div class="starter">
         <div class="boxes">
           <div>
-            <input type="checkbox" class="check" name="pierscionki" checked />
+            <input type="checkbox" class="check" name="pierscionki" />
             <label for="pierscionki">Pierścionki</label>
           </div>
           <div>
-            <input type="checkbox" class="check" name="kolczyki" checked />
+            <input type="checkbox" class="check" name="kolczyki" />
             <label for="kolczyki">Kolczyki</label>
           </div>
           <div>
-            <input type="checkbox" class="check" name="elementy" checked />
+            <input type="checkbox" class="check" name="elementy" />
             <label for="elementy">Elementy</label>
           </div>
           <div>
-            <input
-              type="checkbox"
-              class="check"
-              name="bransoletkiskora"
-              checked
-            />
+            <input type="checkbox" class="check" name="bransoletkiskora" />
             <label for="bransoletkiskora">Bransoletki skórzane</label>
           </div>
 
@@ -56,12 +52,7 @@
           </div>
 
           <div>
-            <input
-              type="checkbox"
-              class="check"
-              name="bransoletkisztywne"
-              checked
-            />
+            <input type="checkbox" class="check" name="bransoletkisztywne" />
             <label for="bransoletkisztywne">Bransolety sztywne</label>
           </div>
           <div>
@@ -69,7 +60,6 @@
               type="checkbox"
               class="check"
               name="bransoletkilancuszkowe"
-              checked
             />
             <label for="bransoletkilancuszkowe">Bransoletki łańcuszkowe</label>
           </div>

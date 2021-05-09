@@ -529,10 +529,30 @@ const dataBransoletkiSkora = [
   { name: 'medalik kryształ BORDO', code: 'BR/1/KR/BORDO' },
 ];
 const dataBransoletkiZmini = [
-  { name: 'bransoletka gwiazdka ażur', code: 'AZUR/MINI/26/BR' },
-  { name: 'bransoletka koniczyna ażur', code: 'AZUR/MINI/4/BR' },
-  { name: 'bransoletka złączone serca', code: 'AZUR/MINI/47/BR' },
-  { name: 'bransoletka z lilijką', code: 'AZUR/MINI/48/BR' },
+  {
+    name: 'bransoletka gwiazdka ażur',
+    code: 'AZUR/MINI/26/BR',
+    url:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Vladimir_Putin_%282020-02-20%29.jpg/254px-Vladimir_Putin_%282020-02-20%29.jpg',
+  },
+  {
+    name: 'bransoletka koniczyna ażur',
+    code: 'AZUR/MINI/4/BR',
+    url:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Vladimir_Putin_%282020-02-20%29.jpg/254px-Vladimir_Putin_%282020-02-20%29.jpg',
+  },
+  {
+    name: 'bransoletka złączone serca',
+    code: 'AZUR/MINI/47/BR',
+    url:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Vladimir_Putin_%282020-02-20%29.jpg/254px-Vladimir_Putin_%282020-02-20%29.jpg',
+  },
+  {
+    name: 'bransoletka z lilijką',
+    code: 'AZUR/MINI/48/BR',
+    url:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Vladimir_Putin_%282020-02-20%29.jpg/254px-Vladimir_Putin_%282020-02-20%29.jpg',
+  },
 ];
 const dataBransoletkiSztywne = [
   { name: 'bransoletka eternity', code: 'BRANS/110' },
@@ -605,6 +625,10 @@ const putNewVals = (array) => {
   //append html from threValArr
   const heading = document.createElement('h2');
   heading.innerHTML = `${array[0].code}`;
+  const image = document.createElement('img');
+  image.classList.add('image');
+  image.classList.add('hidden');
+  image.src = array[0].url;
   shuffleArray(array);
   const answerBox = document.createElement('div');
   const checkName = (name) => (heading.innerHTML === name ? true : false);
@@ -622,6 +646,7 @@ const putNewVals = (array) => {
     array[3].name
   }</button>`;
   answerBox.classList.add('answer-box');
+  quizContainer.appendChild(image);
   quizContainer.appendChild(heading);
   quizContainer.appendChild(answerBox);
 };
@@ -657,6 +682,7 @@ const addClickEvents = () => {
         makeBorderOnCorrect();
         makeBtnUnclickable();
       }
+      document.querySelector('img').classList.remove('hidden');
     });
   }
 };
@@ -666,6 +692,7 @@ const resetQuiz = () => {
   const current = [
     document.querySelector('#quiz h2'),
     document.querySelector('.answer-box'),
+    document.querySelector('img'),
   ];
   if (current[0] === null || current[0] === undefined) {
     getFourVals();
@@ -689,6 +716,7 @@ const resetQuiz = () => {
     ).innerText = `${myScore}/${maxScore}`;
     current[0].remove();
     current[1].remove();
+    current[2].remove();
     getFourVals();
     putNewVals(fourValArr);
     addClickEvents();

@@ -107,7 +107,7 @@ html body #quiz #winning-screen.bg {
 #create,
 #restart {
   position: absolute;
-  bottom: 50px;
+  bottom: 30px;
   width: 100px;
   margin-top: 7px;
   padding: 12px 20px;
@@ -147,6 +147,12 @@ html body #quiz #winning-screen.bg {
   #quiz .answer {
     font-size: 12px;
   }
+}
+
+.image {
+  height: 150px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease-in-out;
 }
 
 .answer-box {
