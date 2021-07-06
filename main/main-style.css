@@ -65,6 +65,10 @@ nav.bg-dark {
 .card-body .btn-container {
   margin-top: auto;
 }
+.btn-container{
+  display: flex;
+  justify-content: space-between;
+}
 
 .list-group-item.active {
   background: #404f6f;
@@ -116,6 +120,7 @@ div.img-container img:hover {
 
 .card {
   border-radius: 0;
+  height: 100%;
 }
 
 .tag {
