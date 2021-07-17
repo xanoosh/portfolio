@@ -1,3 +1,9 @@
+/* *,
+*:before,
+*::after {
+  outline: 0 !important;
+} */
+
 body {
   overflow-x: hidden;
 }
@@ -65,7 +71,7 @@ nav.bg-dark {
 .card-body .btn-container {
   margin-top: auto;
 }
-.btn-container{
+.btn-container {
   display: flex;
   justify-content: space-between;
 }
@@ -81,9 +87,10 @@ nav.bg-dark {
   border-color: #404f6f;
   border-radius: 0;
   min-width: 80px;
-  outline: none;
+  outline: 0;
 }
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:focus {
   background: #fff;
   color: #404f6f;
   border-color: #404f6f;
