@@ -94,6 +94,8 @@ nav.bg-dark {
   background: #fff;
   color: #404f6f;
   border-color: #404f6f;
+  outline: 0 !important;
+  box-shadow: none !important;
 }
 
 @media (max-width: 405px) {
